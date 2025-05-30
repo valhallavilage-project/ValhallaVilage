@@ -1,0 +1,19 @@
+{
+    "name": "CrossProject.Ui.Implementations",
+    "rootNamespace": "CrossProject.Ui.Implementations",
+    "references": [
+        "GUID:e952d5572bb4746b78fd0e332131ddab",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
+        "GUID:ba3d232eb13d74dc58639a52e4a2037b",
+        "GUID:b0214a6008ed146ff8f122a6a9c2f6cc"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
