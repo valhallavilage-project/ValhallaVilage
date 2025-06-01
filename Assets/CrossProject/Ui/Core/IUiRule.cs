@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 
 namespace CrossProject.Ui.Core
@@ -7,12 +8,12 @@ namespace CrossProject.Ui.Core
     {
         bool CanApply(UiModel model);
         bool CanApply(IUiView view);
-        bool CanOpen(UiModel model);
 
-        UniTask<IUiView> TryOpen(UiModel model);
+        UniTask<IUiView> Open(UiModel model);
         void Close(IUiView view);
-        IUiView Hide();
-        IUiView Reveal();
-        IUiView Get<TUiModel>(Func<IUiView, bool> predicate = null) where TUiModel : UiModel;
+        IUiView Hide(IUiView view);
+        IUiView Reveal(IUiView view);
+        IEnumerable<IUiView> Get<TUiModel>(Func<IUiView, bool> predicate = null) where TUiModel : UiModel;
+        IUiView GetFirst<TUiModel>(Func<IUiView, bool> predicate = null) where TUiModel : UiModel;
     }
 }

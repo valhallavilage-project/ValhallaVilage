@@ -92,12 +92,12 @@ namespace CrossProject.Ui.Core
 
         public IUiView Get<TUiModel>(UiModel model, Func<IUiView, bool> predicate = null) where TUiModel : UiModel
         {
-            return GetRule(model).Get<TUiModel>(predicate);
+            return GetRule(model).GetFirst<TUiModel>(predicate);
         }
 
         public async UniTask<IUiView> TryOpen(UiModel model)
         {
-            return await GetRule(model).TryOpen(model);
+            return await GetRule(model).Open(model);
         }
 
         public void Close(IUiView view)

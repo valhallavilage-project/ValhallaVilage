@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using CrossProject.Core;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -6,8 +8,8 @@ namespace CrossProject.Ui.Core
 {
     public abstract class UiRule<TUiModel, TUiView> : IUiRule where TUiModel : UiModel where TUiView : class, IUiView
     {
-        protected readonly RectTransform root;
-        protected readonly UiService uiService;
+        protected readonly RectTransform _root;
+        protected readonly AddressablesManager _addressablesManager;
 
         public abstract event Action<IUiView> OnOpen;
         public abstract event Action<IUiView> OnClose;
@@ -16,10 +18,10 @@ namespace CrossProject.Ui.Core
 
         public UiRule(
             RectTransform root,
-            UiService uiService)
+            AddressablesManager addressablesManager)
         {
-            this.root = root;
-            this.uiService = uiService;
+            _root = root;
+            _addressablesManager = addressablesManager;
 
             var type = typeof(TUiModel);
             if (!type.IsAbstract)
@@ -28,12 +30,13 @@ namespace CrossProject.Ui.Core
 
         public bool CanApply(UiModel model) => model is TUiModel;
         public bool CanApply(IUiView view) => view is TUiView;
-        public abstract bool CanOpen(UiModel model);
 
-        public abstract UniTask<IUiView> TryOpen(UiModel model);
+        public abstract UniTask<IUiView> Open(UiModel model);
         public abstract void Close(IUiView view);
-        public abstract IUiView Hide();
-        public abstract IUiView Reveal();
-        public abstract IUiView Get<TUiModel1>(Func<IUiView, bool> predicate = null) where TUiModel1 : UiModel;
+        public abstract IUiView Hide(IUiView view);
+        public abstract IUiView Reveal(IUiView view);
+
+        public abstract IEnumerable<IUiView> Get<TUiModel1>(Func<IUiView, bool> predicate = null) where TUiModel1 : TUiModel;
+        public abstract IUiView GetFirst<TUiModel1>(Func<IUiView, bool> predicate = null) where TUiModel1 : TUiModel;
     }
 }
