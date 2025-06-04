@@ -36,7 +36,7 @@ namespace CrossProject.Ui.Core
         public abstract IUiView Hide(IUiView view);
         public abstract IUiView Reveal(IUiView view);
 
-        public abstract IEnumerable<IUiView> Get<TUiModel1>(Func<IUiView, bool> predicate = null) where TUiModel1 : TUiModel;
-        public abstract IUiView GetFirst<TUiModel1>(Func<IUiView, bool> predicate = null) where TUiModel1 : TUiModel;
+        public abstract IEnumerable<IUiView> Get<TUiModel1>(Func<IUiView, bool> predicate = null) where TUiModel1 : UiModel;
+        public abstract IUiView GetFirst<TUiModel1>(Func<IUiView, bool> predicate = null) where TUiModel1 : UiModel;
     }
 }

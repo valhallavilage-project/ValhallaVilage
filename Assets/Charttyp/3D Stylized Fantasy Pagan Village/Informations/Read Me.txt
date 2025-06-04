@@ -1,0 +1,22 @@
+This is pack of drag and drop prefabs.
+
+There are some hanging objects like lantern_hanging, torch_hanging, leafs, ropes or 
+decorations objects and because of that pivot points of these objects is not in bottom center.
+
+Roofs don't have pivot points in bottom center too, because thakns to that it's easier to connect them with walls.
+
+Wall_dirt have pivot point in their center because thaks to that it's easier to put them on the walls.
+
+There are objects like rope_tide, fence_picket, fence_branches, fence_branches_pole. I made this objects 
+as a separate, single meshes to be used in other 3D software like Blender. Thanks to that You have
+prepared meshes to make Your own objects.
+
+I would appreciate if you would rate and comment my work and if you have any questions or suggestions 
+feel free to maile me or visit my discord.
+
+charttyp@gmail.com
+https://discord.gg/wJAH4zqpNw
+
+Hope you like it.
+
+Charttyp
