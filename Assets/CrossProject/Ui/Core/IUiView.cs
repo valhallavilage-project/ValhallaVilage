@@ -8,7 +8,7 @@ namespace CrossProject.Ui.Core
         Type ModelType { get; }
         GameObject AddressablesInstance { get; }
         void BindModel(UiModel model);
-        void OnShow();
+        void OnOpen();
         void OnClose();
     }
 }

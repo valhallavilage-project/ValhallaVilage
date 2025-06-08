@@ -9,7 +9,7 @@ namespace CrossProject.Ui.Implementations
         //TODO : VM : spinner
         [SerializeField] private RectTransform fill;
 
-        public override void OnShow()
+        public override void OnOpen()
         {
             //TODO : VM : get tasks
             //TODO : VM : calculate percentage

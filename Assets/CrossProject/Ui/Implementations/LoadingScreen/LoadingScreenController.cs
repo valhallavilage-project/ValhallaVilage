@@ -16,13 +16,14 @@ namespace CrossProject.Ui.Implementations
 
         public async void Open()
         {
-            // var model = new LoadingScreenModel
-            // {
-            //     //TODO : VM : create ModelFactory, that will do this automatically
-            //     Close = () => _uiService.Close(_view)
-            // };
-            //
-            // _view = await _uiService.TryOpen(model) as LoadingScreen;
+            var model = new LoadingScreenModel
+            {
+                //TODO : VM : create ModelFactory, that will do this automatically
+                //TODO : VM : consider next API -> _uiService.Close(UiModel model)
+                Close = () => _uiService.Close(_view)
+            };
+            
+            _view = await _uiService.TryOpen(model) as LoadingScreen;
         }
 
         public void Initialize()

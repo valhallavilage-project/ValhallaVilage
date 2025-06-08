@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using CrossProject.Core;
 using Cysharp.Threading.Tasks;
+using Sirenix.Utilities;
 using UnityEngine;
 
 namespace CrossProject.Ui.Core
@@ -28,7 +29,12 @@ namespace CrossProject.Ui.Core
                 throw new Exception("Create rules for abstract only models!");
         }
 
-        public bool CanApply(Type modelType) => modelType == typeof(TUiModel);
+        public bool CanApply(Type modelType) => modelType.InheritsFrom(typeof(TUiModel));
+
+        protected async UniTask<GameObject> GetPrefab(string key)
+        {
+            return await _addressablesManager.LoadAssetAsync<GameObject>(key);
+        }
 
         public abstract UniTask<IUiView> Open(UiModel model);
         public abstract void Close(IUiView view);

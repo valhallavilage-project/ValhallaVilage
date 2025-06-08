@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using CrossProject.Core;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace CrossProject.Ui.Core
 {
@@ -23,9 +24,19 @@ namespace CrossProject.Ui.Core
         private async Task<IUiView> OpenInternal(UiModel model)
         {
             _isLoading = true;
-            //TODO : VM : remove recursion
-            //_current = await uiService.TryOpen(model) as TUiView;
+
+            var key = string.IsNullOrEmpty(model.AssetOverride)
+                ? model.GetType().Name[..^5]
+                : model.AssetOverride;
+            var prefab = await GetPrefab(key);
+            var instance = Object.Instantiate(prefab, _root);
+            instance.name = key;
+            _current = instance.GetComponent<IUiView>();
+
             _isLoading = false;
+
+            _current.BindModel(model);
+            _current.OnOpen();
             OnOpen?.Invoke(_current);
             return _current;
         }
@@ -35,7 +46,8 @@ namespace CrossProject.Ui.Core
             if (_queue.Count <= 0)
                 return null;
 
-            return await OpenInternal(_queue.Dequeue());
+            var model = _queue.Dequeue();
+            return await OpenInternal(model);
         }
 
         public override async UniTask<IUiView> Open(UiModel model)
@@ -56,24 +68,25 @@ namespace CrossProject.Ui.Core
         {
             OnClose?.Invoke(_current);
             _current.OnClose();
-            //uiService.Close(_current);
             _current = null;
             TryOpenFromQueue().Forget();
         }
 
-        public override IUiView Hide(IUiView _)
+        public override IUiView Hide(IUiView view)
         {
-            throw new System.NotImplementedException();
+            OnHide?.Invoke(view);
+            return view;
         }
 
-        public override IUiView Reveal(IUiView _)
+        public override IUiView Reveal(IUiView view)
         {
-            throw new System.NotImplementedException();
+            OnReveal?.Invoke(view);
+            return view;
         }
 
         public override IEnumerable<IUiView> Get<TUiModel1>(Func<IUiView, bool> predicate = null)
         {
-            throw new NotImplementedException();
+            return new[] { _current };
         }
 
         public override IUiView GetFirst<TUiModel1>(Func<IUiView, bool> predicate = null)

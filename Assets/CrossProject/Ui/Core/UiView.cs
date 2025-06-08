@@ -19,7 +19,7 @@ namespace CrossProject.Ui.Core
         }
 
         protected virtual void OnBind() { }
-        public virtual void OnShow() { }
+        public virtual void OnOpen() { }
         public virtual void OnClose() { }
     }
 }

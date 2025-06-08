@@ -66,7 +66,7 @@ namespace CrossProject.Ui.Core
             _rules.Add(rule);
         }
 
-        private IUiRule GetRule(Type modelType)
+        public IUiRule GetRule(Type modelType)
         {
             var rule = _rules.FirstOrDefault(x => x.CanApply(modelType));
 
@@ -76,19 +76,12 @@ namespace CrossProject.Ui.Core
             return rule;
         }
 
-        private async UniTask<IUiView> Open(UiModel model, RectTransform root)
+        public IEnumerable<IUiView> Get<TUiModel>(Func<IUiView, bool> predicate = null) where TUiModel : UiModel
         {
-            string key = model.GetType().Name[..^5];
-            var prefab = await _addressablesManager.LoadAssetAsync<GameObject>(key);
-            var instance = Instantiate(prefab, root);
-            instance.name = key;
-            var uiView = instance.GetComponent<IUiView>();
-            uiView.BindModel(model);
-            uiView.OnShow();
-            return uiView;
+            return GetRule(typeof(TUiModel)).Get<TUiModel>(predicate);
         }
 
-        public IUiView Get<TUiModel>(UiModel model, Func<IUiView, bool> predicate = null) where TUiModel : UiModel
+        public IUiView GetFirst<TUiModel>(Func<IUiView, bool> predicate = null) where TUiModel : UiModel
         {
             return GetRule(typeof(TUiModel)).GetFirst<TUiModel>(predicate);
         }
@@ -106,13 +99,11 @@ namespace CrossProject.Ui.Core
 
         public void RevealHudElement<THudElementModel>(Func<IUiView, bool> predicate = null) where THudElementModel : HudElementModel
         {
-            //OnHudElementReveal?.Invoke(null);
             //TODO : VM : alpha one
         }
 
         public void HideHudElement<THudElementModel>(Func<IUiView, bool> predicate = null) where THudElementModel : HudElementModel
         {
-            //OnHudElementHide?.Invoke(null);
             //TODO : VM : alpha zero
         }
     }
