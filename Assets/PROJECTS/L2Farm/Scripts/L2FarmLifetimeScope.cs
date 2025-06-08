@@ -18,6 +18,9 @@ namespace RUNNER.PROJECTS.L2Farm.Scripts
 
         protected override void Configure(IContainerBuilder builder)
         {
+            builder.Register<NoInternetScreenController>(Lifetime.Singleton)
+                .AsSelf();
+
             //TODO : VM : GameState
             //TODO : VM : Remote Config
             //TODO : VM : GameMigrate

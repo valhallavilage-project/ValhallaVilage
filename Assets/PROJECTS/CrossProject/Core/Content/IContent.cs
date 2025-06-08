@@ -1,7 +1,4 @@
 namespace CrossProject.Core.Content
 {
-    public interface IContent
-    {
-        
-    }
+    public interface IContent { }
 }
