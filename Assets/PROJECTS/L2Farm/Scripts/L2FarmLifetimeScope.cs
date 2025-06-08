@@ -16,6 +16,9 @@ namespace RUNNER.PROJECTS.L2Farm.Scripts
             builder.RegisterEntryPoint<AddressablesManager>()
                 .AsSelf();
 
+            builder.Register<ScenesService>(Lifetime.Singleton)
+                .AsSelf();
+
             builder.RegisterComponentInNewPrefab(uiServicePrefab, Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();

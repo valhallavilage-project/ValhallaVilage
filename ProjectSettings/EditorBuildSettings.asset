@@ -6,11 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/PROJECTS/BrainRotRunner/Scenes/BrainRotRunnerPreloader.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/PROJECTS/L2Farm/Scenes/L2Farm_Level_0.unity
+    guid: aa0d8924e315a423498ad0d14b52231f
   - enabled: 1
-    path: Assets/PROJECTS/BrainRotRunner/Scenes/Levels/Level_Test.unity
-    guid: 95d7f1911ef864cc087e90e71d895af6
+    path: Assets/PROJECTS/L2Farm/Scenes/L2Farm_Preloader.unity
+    guid: 7c783a32f2c68458fad4d1d5c154d46b
   m_configObjects:
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: d2054302e433a4b9da6827efb6e5aa57, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 34de964e8a23840699549228e073de3f, type: 2}
     com.unity.addressableassets: {fileID: 11400000, guid: f92d3ddb1e8ff475dbc59f24857cb7a5, type: 2}
