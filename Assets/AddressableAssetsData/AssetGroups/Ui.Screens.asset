@@ -17,6 +17,11 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 8a37376f8d428423286b753c543f866b
   m_SerializeEntries:
+  - m_GUID: 832b1ecbf2a854682a6486d901b73a29
+    m_Address: L2Farm_LoadingScreen
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f2941698882374db4b0cd41b452d64d9
     m_Address: LoadingScreen
     m_ReadOnly: 0

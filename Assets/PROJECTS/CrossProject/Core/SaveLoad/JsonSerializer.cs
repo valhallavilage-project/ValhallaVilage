@@ -1,6 +1,6 @@
 using System;
 using System.Runtime.Serialization;
-using Unity.Plastic.Newtonsoft.Json;
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace CrossProject.Core.SaveLoad
