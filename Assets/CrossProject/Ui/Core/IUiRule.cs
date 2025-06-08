@@ -6,8 +6,7 @@ namespace CrossProject.Ui.Core
 {
     public interface IUiRule
     {
-        bool CanApply(UiModel model);
-        bool CanApply(IUiView view);
+        bool CanApply(Type modelType);
 
         UniTask<IUiView> Open(UiModel model);
         void Close(IUiView view);

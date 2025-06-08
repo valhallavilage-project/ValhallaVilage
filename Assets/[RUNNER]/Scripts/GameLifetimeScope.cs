@@ -15,7 +15,8 @@ public class GameLifetimeScope : LifetimeScope
             .AsSelf();
 
         builder.RegisterComponentInNewPrefab(uiServicePrefab, Lifetime.Singleton)
-            .AsSelf();
+            .AsSelf()
+            .AsImplementedInterfaces();
 
         builder.Register<LoadingScreenController>(Lifetime.Singleton)
             .AsSelf()

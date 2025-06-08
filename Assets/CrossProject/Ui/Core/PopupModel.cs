@@ -1,6 +1,6 @@
 namespace CrossProject.Ui.Core
 {
-    public class PopupModel : UiModel
+    public abstract class PopupModel : UiModel
     {
         
     }

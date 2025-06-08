@@ -1,6 +1,6 @@
 namespace CrossProject.Ui.Core
 {
-    public class HudElementModel : UiModel
+    public abstract class HudElementModel : UiModel
     {
         
     }

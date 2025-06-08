@@ -7,10 +7,10 @@ using UnityEngine;
 
 namespace CrossProject.Ui.Core
 {
-    public class UiQueue<TUiModel, TUiView> : UiRule<TUiModel, TUiView> where TUiModel : UiModel where TUiView : class, IUiView
+    public class UiQueue<TUiModel> : UiRule<TUiModel> where TUiModel : UiModel
     {
         private readonly Queue<UiModel> _queue = new();
-        private TUiView _current;
+        private IUiView _current;
         private bool _isLoading;
 
         public override event Action<IUiView> OnOpen;

@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace CrossProject.Ui.Core
 {
-    public class UiDictionary<TUiModel, TUiView> : UiRule<TUiModel, TUiView> where TUiModel : UiModel where TUiView : MonoBehaviour, IUiView
+    public class UiDictionary<TUiModel> : UiRule<TUiModel> where TUiModel : UiModel
     {
         private readonly Dictionary<Type, List<IUiView>> _dictionary = new();
 
@@ -49,7 +49,13 @@ namespace CrossProject.Ui.Core
 
         public override IEnumerable<IUiView> Get<TUiModel1>(Func<IUiView, bool> predicate = null)
         {
-            throw new NotImplementedException();
+            var type = typeof(TUiModel1);
+            if (!_dictionary.TryGetValue(type, out var views))
+                return null;
+
+            return predicate == null
+                ? views
+                : views.Where(predicate);
         }
 
         public override IUiView GetFirst<TUiModel1>(Func<IUiView, bool> predicate = null)

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace CrossProject.Ui.Core
 {
-    public abstract class UiRule<TUiModel, TUiView> : IUiRule where TUiModel : UiModel where TUiView : class, IUiView
+    public abstract class UiRule<TUiModel> : IUiRule where TUiModel : UiModel
     {
         protected readonly RectTransform _root;
         protected readonly AddressablesManager _addressablesManager;
@@ -28,8 +28,7 @@ namespace CrossProject.Ui.Core
                 throw new Exception("Create rules for abstract only models!");
         }
 
-        public bool CanApply(UiModel model) => model is TUiModel;
-        public bool CanApply(IUiView view) => view is TUiView;
+        public bool CanApply(Type modelType) => modelType == typeof(TUiModel);
 
         public abstract UniTask<IUiView> Open(UiModel model);
         public abstract void Close(IUiView view);

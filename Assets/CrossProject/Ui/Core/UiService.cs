@@ -5,10 +5,11 @@ using CrossProject.Core;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
+using VContainer.Unity;
 
 namespace CrossProject.Ui.Core
 {
-    public class UiService : MonoBehaviour
+    public class UiService : MonoBehaviour, IInitializable
     {
         [SerializeField] private RectTransform hudRoot;
         [SerializeField] private RectTransform screenRoot;
@@ -23,6 +24,12 @@ namespace CrossProject.Ui.Core
         public RectTransform ScreenRoot => screenRoot;
         public RectTransform PopupRoot => popupRoot;
 
+        [Inject]
+        private void Construct(AddressablesManager addressablesManager)
+        {
+            _addressablesManager = addressablesManager;
+        }
+
         private void Awake()
         {
             DontDestroyOnLoad(this);
@@ -30,10 +37,11 @@ namespace CrossProject.Ui.Core
             ApplySafeAreaTo(popupRoot);
         }
 
-        [Inject]
-        private void Construct(AddressablesManager addressablesManager)
+        public void Initialize()
         {
-            _addressablesManager = addressablesManager;
+            AddRule(new UiQueue<ScreenModel>(ScreenRoot, _addressablesManager));
+            AddRule(new UiQueue<PopupModel>(PopupRoot, _addressablesManager));
+            AddRule(new UiDictionary<HudElementModel>(HudRoot, _addressablesManager));
         }
 
         public void ApplySafeAreaTo(RectTransform rectTransform, bool left = true, bool top = true, bool right = true, bool bottom = true)
@@ -58,12 +66,12 @@ namespace CrossProject.Ui.Core
             _rules.Add(rule);
         }
 
-        private IUiRule GetRule(UiModel model)
+        private IUiRule GetRule(Type modelType)
         {
-            var rule = _rules.FirstOrDefault(x => x.CanApply(model));
+            var rule = _rules.FirstOrDefault(x => x.CanApply(modelType));
 
             if (rule == null)
-                throw new Exception($"Can't find UiRule for : {model.GetType().Name}. Check parent for model and add new rule if needed.");
+                throw new Exception($"Can't find UiRule for : {modelType.Name}. Check parent for model and add new rule if needed.");
 
             return rule;
         }
@@ -80,29 +88,19 @@ namespace CrossProject.Ui.Core
             return uiView;
         }
 
-        private IUiRule GetRule(IUiView view)
-        {
-            var rule = _rules.FirstOrDefault(x => x.CanApply(view));
-
-            if (rule == null)
-                throw new Exception($"Can't find UiRule for : {view.GetType().Name}. Check parent for view and add new rule if needed.");
-
-            return rule;
-        }
-
         public IUiView Get<TUiModel>(UiModel model, Func<IUiView, bool> predicate = null) where TUiModel : UiModel
         {
-            return GetRule(model).GetFirst<TUiModel>(predicate);
+            return GetRule(typeof(TUiModel)).GetFirst<TUiModel>(predicate);
         }
 
         public async UniTask<IUiView> TryOpen(UiModel model)
         {
-            return await GetRule(model).Open(model);
+            return await GetRule(model.GetType()).Open(model);
         }
 
         public void Close(IUiView view)
         {
-            GetRule(view).Close(view);
+            GetRule(view.ModelType).Close(view);
             _addressablesManager.ReleaseInstance(view.AddressablesInstance);
         }
 
