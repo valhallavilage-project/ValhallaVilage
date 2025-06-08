@@ -15,7 +15,6 @@ namespace CrossProject.Core
             await Addressables.InitializeAsync();
             var asyncOperationHandle = Addressables.LoadAssetAsync<T>(addressableName);
             var preloaded = _map.ContainsKey(addressableName);
-            Debug.Log($"Is {addressableName} preloaded? : {preloaded}; {_map.Count}");
             if (!preloaded)
                 _map.Add(addressableName, asyncOperationHandle);
             else

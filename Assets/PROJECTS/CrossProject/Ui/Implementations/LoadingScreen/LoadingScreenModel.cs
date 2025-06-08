@@ -2,8 +2,5 @@
 
 namespace CrossProject.Ui.Implementations
 {
-    public class LoadingScreenModel : ScreenModel
-    {
-        
-    }
+    public class LoadingScreenModel : ScreenModel { }
 }

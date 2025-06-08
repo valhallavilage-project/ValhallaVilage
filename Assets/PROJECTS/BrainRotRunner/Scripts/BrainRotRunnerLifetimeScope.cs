@@ -5,7 +5,7 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-public class GameLifetimeScope : LifetimeScope
+public class BrainRotRunnerLifetimeScope : LifetimeScope
 {
     [SerializeField] private UiService uiServicePrefab;
 

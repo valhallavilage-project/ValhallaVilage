@@ -1,9 +1,11 @@
-﻿using CrossProject.Ui.Core;
-using VContainer.Unity;
+﻿using System.Collections.Generic;
+using CrossProject.Ui.Core;
+using Cysharp.Threading.Tasks;
+using UnityEngine.Assertions;
 
 namespace CrossProject.Ui.Implementations
 {
-    public class LoadingScreenController : IInitializable
+    public class LoadingScreenController
     {
         private readonly UiService _uiService;
 
@@ -14,22 +16,34 @@ namespace CrossProject.Ui.Implementations
             _uiService = uiService;
         }
 
-        public async void Open()
+        private LoadingScreenModel GetModel()
         {
-            var model = new LoadingScreenModel
+            return new LoadingScreenModel
             {
                 //TODO : VM : create ModelFactory, that will do this automatically
                 //TODO : VM : consider next API -> _uiService.Close(UiModel model)
                 Close = () => _uiService.Close(_view),
+                //TODO : VM : config for assets overrides per project
                 AssetOverride = "L2Farm_LoadingScreen"
             };
-            
-            _view = await _uiService.TryOpen(model) as LoadingScreen;
         }
 
-        public void Initialize()
+        public async void Load(IReadOnlyList<UniTask> tasks)
         {
-            Open();
+            _view = await _uiService.TryOpen(GetModel()) as LoadingScreen;
+            Assert.IsNotNull(_view);
+
+            if (tasks.Count > 0)
+            {
+                for (int i = 0; i < tasks.Count; i++)
+                {
+                    _view.UpdateProgress(i / (float)tasks.Count).Forget();
+                    await tasks[i];
+                }
+                await _view.UpdateProgress(1);
+            }
+
+            _uiService.Close(_view);
         }
     }
 }
