@@ -12,4 +12,5 @@ EditorBuildSettings:
     path: Assets/[RUNNER]/Scenes/Levels/Level_Test.unity
     guid: 95d7f1911ef864cc087e90e71d895af6
   m_configObjects:
+    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 34de964e8a23840699549228e073de3f, type: 2}
     com.unity.addressableassets: {fileID: 11400000, guid: f92d3ddb1e8ff475dbc59f24857cb7a5, type: 2}
