@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CrossProject.Ui.Core;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace CrossProject.Ui.Implementations
@@ -28,7 +30,7 @@ namespace CrossProject.Ui.Implementations
             };
         }
 
-        public async void Load(IReadOnlyList<UniTask> tasks)
+        public async UniTask Load(IReadOnlyList<UniTask> tasks)
         {
             _view = await _uiService.TryOpen(GetModel()) as LoadingScreen;
             Assert.IsNotNull(_view);
@@ -37,7 +39,8 @@ namespace CrossProject.Ui.Implementations
             {
                 for (int i = 0; i < tasks.Count; i++)
                 {
-                    _view.UpdateProgress(i / (float)tasks.Count).Forget();
+                    var progressValue = i / (float)tasks.Count;
+                    await _view.UpdateProgress(progressValue);
                     await tasks[i];
                 }
                 await _view.UpdateProgress(1);

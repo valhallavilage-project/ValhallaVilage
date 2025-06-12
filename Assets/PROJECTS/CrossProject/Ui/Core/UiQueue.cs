@@ -67,7 +67,7 @@ namespace CrossProject.Ui.Core
         public override void Close(IUiView _)
         {
             OnClose?.Invoke(_current);
-            _current.OnClose();
+            _current?.OnClose();
             _current = null;
             TryOpenFromQueue().Forget();
         }

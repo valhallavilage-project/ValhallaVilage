@@ -53,7 +53,6 @@ namespace CrossProject.Ui.Implementations
             await DOTween.Sequence()
                 .Append(fill.DOScaleX(progress, 0.5f).SetEase(Ease.OutCubic))
                 .AppendInterval(0.2f)
-                .AppendCallback(Model.Close.Invoke)
                 .SetId(ProgressSequenceId)
                 .ToUniTask();
         }

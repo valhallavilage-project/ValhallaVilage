@@ -23,7 +23,6 @@ namespace CrossProject.Ui.Implementations
 
         private async UniTask Routine(CancellationToken cancellationToken)
         {
-            Debug.Log("W: Start Routine");
             while (true)
             {
                 if (cancellationToken.IsCancellationRequested)
@@ -37,7 +36,6 @@ namespace CrossProject.Ui.Implementations
                 }
 
                 await UniTask.Delay(_delay);
-                Debug.Log($"W: local : {_hasInternet}; application : {Application.internetReachability != NetworkReachability.NotReachable}");
 
                 if (!_hasInternet && Application.internetReachability != NetworkReachability.NotReachable)
                 {

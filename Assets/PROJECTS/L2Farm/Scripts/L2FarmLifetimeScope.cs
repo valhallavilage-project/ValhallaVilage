@@ -6,13 +6,8 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace RUNNER.PROJECTS.L2Farm.Scripts
+namespace L2Farm.Scripts
 {
-    /// <summary>
-    /// This is an EntryPoint for L2Farm project
-    /// This code should init all DoNotDestroyOnLoad or OneTimeCall scripts
-    /// After all initializations - next scene should be loaded
-    /// </summary>
     public class L2FarmLifetimeScope : LifetimeScope
     {
         [SerializeField] private UiService uiServicePrefab;
@@ -45,6 +40,10 @@ namespace RUNNER.PROJECTS.L2Farm.Scripts
                 .AsImplementedInterfaces();
 
             builder.Register<LoadingScreenController>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+
+            builder.Register<L2FarmGameLoader>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
         }
