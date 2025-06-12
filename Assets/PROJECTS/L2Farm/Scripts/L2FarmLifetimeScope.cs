@@ -1,4 +1,5 @@
 using CrossProject.Core;
+using CrossProject.Core.SaveLoad;
 using CrossProject.Ui.Core;
 using CrossProject.Ui.Implementations;
 using UnityEngine;
@@ -18,18 +19,23 @@ namespace RUNNER.PROJECTS.L2Farm.Scripts
 
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.Register<NoInternetScreenController>(Lifetime.Singleton)
+            builder.RegisterEntryPoint<AddressablesManager>()
                 .AsSelf();
 
-            //TODO : VM : GameState
+            builder.Register<NoInternetScreenController>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+
             //TODO : VM : Remote Config
-            //TODO : VM : GameMigrate
+            //TODO : VM : GameMigrate - prepare here, on gamestate load/create - migrate
+
+            //TODO : VM : GameState
+            builder.Register<GameStateManager>(Lifetime.Singleton)
+                .AsSelf();
+
             //TODO : VM : InApp
             //TODO : VM : Ads
             //TODO : VM : ContentService
-
-            builder.RegisterEntryPoint<AddressablesManager>()
-                .AsSelf();
 
             builder.Register<ScenesService>(Lifetime.Singleton)
                 .AsSelf();

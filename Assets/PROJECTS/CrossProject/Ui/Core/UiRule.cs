@@ -38,8 +38,18 @@ namespace CrossProject.Ui.Core
 
         public abstract UniTask<IUiView> Open(UiModel model);
         public abstract void Close(IUiView view);
-        public abstract IUiView Hide(IUiView view);
-        public abstract IUiView Reveal(IUiView view);
+
+        public virtual IUiView Hide(IUiView view)
+        {
+            view.OnHide();
+            return view;
+        }
+
+        public virtual IUiView Reveal(IUiView view)
+        {
+            view.OnReveal();
+            return view;
+        }
 
         public abstract IEnumerable<IUiView> Get<TUiModel1>(Func<IUiView, bool> predicate = null) where TUiModel1 : UiModel;
         public abstract IUiView GetFirst<TUiModel1>(Func<IUiView, bool> predicate = null) where TUiModel1 : UiModel;

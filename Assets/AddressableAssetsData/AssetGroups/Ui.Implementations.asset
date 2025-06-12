@@ -10,15 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Ui.Screens
+  m_Name: Ui.Implementations
   m_EditorClassIdentifier: 
-  m_GroupName: Ui.Screens
+  m_GroupName: Ui.Implementations
   m_Data:
     m_SerializedData: []
   m_GUID: 8a37376f8d428423286b753c543f866b
   m_SerializeEntries:
   - m_GUID: 832b1ecbf2a854682a6486d901b73a29
     m_Address: L2Farm_LoadingScreen
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a67e2c4db06434032a171a3fd285964a
+    m_Address: NoInternetScreen
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

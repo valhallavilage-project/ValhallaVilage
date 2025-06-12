@@ -10,5 +10,7 @@ namespace CrossProject.Ui.Core
         void BindModel(UiModel model);
         void OnOpen();
         void OnClose();
+        void OnHide();
+        void OnReveal();
     }
 }

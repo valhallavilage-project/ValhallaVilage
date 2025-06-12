@@ -12,12 +12,18 @@ namespace CrossProject.Ui.Implementations
         private readonly UiService _uiService;
 
         private IUiView _view;
-        private bool _hasInternet;
-        private CancellationTokenSource _cancellationTokenSource;
+        private bool _hasInternet = true;
+        private readonly CancellationTokenSource _cancellationTokenSource = new ();
         private readonly TimeSpan _delay = TimeSpan.FromSeconds(5);
+
+        public NoInternetScreenController(UiService uiService)
+        {
+            _uiService = uiService;
+        }
 
         private async UniTask Routine(CancellationToken cancellationToken)
         {
+            Debug.Log("W: Start Routine");
             while (true)
             {
                 if (cancellationToken.IsCancellationRequested)
@@ -27,9 +33,11 @@ namespace CrossProject.Ui.Implementations
                 {
                     _hasInternet = false;
                     _view = await _uiService.TryOpen(new NoInternetScreenModel());
+                    //TODO : VM : Request pause
                 }
 
                 await UniTask.Delay(_delay);
+                Debug.Log($"W: local : {_hasInternet}; application : {Application.internetReachability != NetworkReachability.NotReachable}");
 
                 if (!_hasInternet && Application.internetReachability != NetworkReachability.NotReachable)
                 {

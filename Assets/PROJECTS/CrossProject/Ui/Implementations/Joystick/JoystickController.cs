@@ -23,6 +23,8 @@ namespace CrossProject.Ui.Implementations
         {
             _uiService = uiService;
             _addressablesManager = addressablesManager;
+
+            OpenJoystick();
         }
 
         public void RequestBlock(object blockRequester)
@@ -41,7 +43,7 @@ namespace CrossProject.Ui.Implementations
                 _uiService.RevealHudElement<JoystickModel>();
         }
 
-        public async void OpenJoystick()
+        private async void OpenJoystick()
         {
             var config = await _addressablesManager.LoadAssetAsync<JoystickConfig>(nameof(JoystickConfig));
             _view ??= await _uiService.TryOpen(JoystickModel.From(config)) as Joystick;
