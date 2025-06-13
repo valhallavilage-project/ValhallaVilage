@@ -4,6 +4,7 @@ using System.Linq;
 using CrossProject.Core;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace CrossProject.Ui.Core
 {
@@ -20,15 +21,22 @@ namespace CrossProject.Ui.Core
 
         public override async UniTask<IUiView> Open(UiModel model)
         {
-            //TODO : Remove recursion
-            // var view = await uiService.TryOpen(model) as TUiView;
-            // var type = view.GetComponent<IUiView>().GetType();
-            // if (_dictionary.ContainsKey(type))
-            //     _dictionary[type].Add(view);
-            // else
-            //     _dictionary.Add(type, new List<IUiView>{ view });
-            // return view;
-            return null;
+            var key = string.IsNullOrEmpty(model.AssetOverride)
+                ? model.GetType().Name[..^5]
+                : model.AssetOverride;
+            var prefab = await GetPrefab(key);
+            var instance = Object.Instantiate(prefab, _root);
+            instance.name = key;
+
+            var view = instance.GetComponent<IUiView>();
+            view.BindModel(model);
+            var type = view.GetType();
+
+            if (_dictionary.ContainsKey(type))
+                _dictionary[type].Add(view);
+            else
+                _dictionary.Add(type, new List<IUiView>{ view });
+            return view;
         }
 
         public override void Close(IUiView view)
@@ -39,12 +47,14 @@ namespace CrossProject.Ui.Core
 
         public override IUiView Hide(IUiView view)
         {
-            throw new NotImplementedException();
+            OnHide?.Invoke(view);
+            return view;
         }
 
         public override IUiView Reveal(IUiView view)
         {
-            throw new NotImplementedException();
+            OnReveal?.Invoke(view);
+            return view;
         }
 
         public override IEnumerable<IUiView> Get<TUiModel1>(Func<IUiView, bool> predicate = null)

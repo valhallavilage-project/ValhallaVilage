@@ -58,7 +58,7 @@ namespace CrossProject.Ui.Implementations
         public void EndDrag()
         {
             background.anchoredPosition = Vector2.zero;
-            stick.position = Vector3.zero;
+            stick.anchoredPosition = Vector3.zero;
             NormalizedValue = Vector2.zero;
         }
     }

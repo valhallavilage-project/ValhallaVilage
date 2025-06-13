@@ -6,7 +6,7 @@ using VContainer.Unity;
 
 namespace CrossProject.Ui.Implementations
 {
-    public class JoystickController : ITickable, IBlocksManager
+    public class JoystickController : IInitializable, ITickable, IBlocksManager
     {
         private readonly UiService _uiService;
         private readonly AddressablesManager _addressablesManager;
@@ -23,8 +23,6 @@ namespace CrossProject.Ui.Implementations
         {
             _uiService = uiService;
             _addressablesManager = addressablesManager;
-
-            OpenJoystick();
         }
 
         public void RequestBlock(object blockRequester)
@@ -47,6 +45,11 @@ namespace CrossProject.Ui.Implementations
         {
             var config = await _addressablesManager.LoadAssetAsync<JoystickConfig>(nameof(JoystickConfig));
             _view ??= await _uiService.TryOpen(JoystickModel.From(config)) as Joystick;
+        }
+
+        public void Initialize()
+        {
+            OpenJoystick();
         }
 
         public void Tick()

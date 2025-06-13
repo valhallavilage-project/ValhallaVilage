@@ -75,12 +75,14 @@ namespace CrossProject.Ui.Core
         public override IUiView Hide(IUiView view)
         {
             OnHide?.Invoke(view);
+            view.OnHide();
             return view;
         }
 
         public override IUiView Reveal(IUiView view)
         {
             OnReveal?.Invoke(view);
+            view.OnReveal();
             return view;
         }
 

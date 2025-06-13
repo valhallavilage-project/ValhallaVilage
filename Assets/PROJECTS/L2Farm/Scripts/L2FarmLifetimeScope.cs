@@ -46,6 +46,10 @@ namespace L2Farm.Scripts
             builder.Register<L2FarmGameLoader>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
+
+            builder.Register<JoystickController>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
         }
     }
 }
