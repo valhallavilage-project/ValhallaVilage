@@ -21,6 +21,11 @@ namespace CrossProject.Ui.Implementations.DebugCameraSliders
             _cameraService = cameraService;
         }
 
+        private void InvertCameraXRotation(float value)
+        {
+            _cameraService.SetXRotation(value * -1);
+        }
+
         public void Initialize()
         {
             _uiService.TryOpen(new DebugCameraSlidersModel
@@ -30,16 +35,20 @@ namespace CrossProject.Ui.Implementations.DebugCameraSliders
                     new()
                     {
                         OnSliderChange = _cameraService.SetYRotation,
-                        MaxValue = 360
+                        MaxValue = 360,
+                        WholeNumbers = true
                     },
                     new()
                     {
-                        OnSliderChange = _cameraService.SetXRotation,
-                        MaxValue = 360
+                        OnSliderChange = InvertCameraXRotation,
+                        MinValue = -360,
+                        MaxValue = 0,
+                        WholeNumbers = true
                     },
                     new()
                     {
-                        OnSliderChange = _cameraService.SetZoom
+                        OnSliderChange = _cameraService.SetZoom,
+                        WholeNumbers = true
                     }
                 }
             }).Forget();
