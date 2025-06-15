@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using CrossProject.Core;
+using CrossProject.Core.SimpleMovement;
 using CrossProject.Ui.Core;
 using UnityEngine;
 using VContainer.Unity;
@@ -17,6 +18,7 @@ namespace CrossProject.Ui.Implementations
 
         public bool IsBlocked => _blockers.Count > 0;
         public Vector2 NormalizedValue => _view.NormalizedValue;
+        public Vector3 NormalizedValueProjectOnPlane => new (NormalizedValue.x, 0, NormalizedValue.y);
 
         public JoystickController(
             UiService uiService,
