@@ -12,6 +12,7 @@ namespace CrossProject.Ui.Implementations
         private readonly AddressablesManager _addressablesManager;
 
         private Joystick _view;
+        private bool _isDragActive;
         private readonly List<object> _blockers = new();
 
         public bool IsBlocked => _blockers.Count > 0;
@@ -63,13 +64,21 @@ namespace CrossProject.Ui.Implementations
             }
 
             if (Input.GetMouseButtonDown(0) && _view.IsTouchInZone)
+            {
+                _isDragActive = true;
                 _view.StartDrag();
-            
-            if (Input.GetMouseButton(0))
+            }
+
+            if (Input.GetMouseButton(0) && _isDragActive)
+            {
                 _view.ProcessDrag();
-            
+            }
+
             if (Input.GetMouseButtonUp(0))
+            {
                 _view.EndDrag();
+                _isDragActive = false;
+            }
         }
     }
 }

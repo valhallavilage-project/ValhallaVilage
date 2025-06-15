@@ -1,8 +1,9 @@
 using CrossProject.Core;
+using CrossProject.Core.Camera;
 using CrossProject.Core.SaveLoad;
 using CrossProject.Ui.Core;
 using CrossProject.Ui.Implementations;
-using UnityEngine;
+using CrossProject.Ui.Implementations.DebugCameraSliders;
 using VContainer;
 using VContainer.Unity;
 
@@ -10,8 +11,6 @@ namespace L2Farm.Scripts
 {
     public class L2FarmLifetimeScope : LifetimeScope
     {
-        [SerializeField] private UiService uiServicePrefab;
-
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterEntryPoint<AddressablesManager>()
@@ -35,7 +34,11 @@ namespace L2Farm.Scripts
             builder.Register<ScenesService>(Lifetime.Singleton)
                 .AsSelf();
 
-            builder.RegisterComponentInNewPrefab(uiServicePrefab, Lifetime.Singleton)
+            builder.RegisterComponentInHierarchy<CameraService>()
+                .AsSelf()
+                .AsImplementedInterfaces();
+
+            builder.RegisterComponentInHierarchy<UiService>()
                 .AsSelf()
                 .AsImplementedInterfaces();
 
@@ -48,6 +51,10 @@ namespace L2Farm.Scripts
                 .AsImplementedInterfaces();
 
             builder.Register<JoystickController>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+
+            builder.Register<DebugCameraSlidersController>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
         }

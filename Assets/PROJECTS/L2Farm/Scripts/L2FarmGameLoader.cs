@@ -10,10 +10,14 @@ namespace L2Farm.Scripts
     public class L2FarmGameLoader : AbstractGameLoader, IInitializable
     {
         private readonly LoadingScreenController _loadingScreenController;
+        private readonly ScenesService _scenesService;
 
-        public L2FarmGameLoader(LoadingScreenController loadingScreenController)
+        public L2FarmGameLoader(
+            LoadingScreenController loadingScreenController,
+            ScenesService scenesService)
         {
             _loadingScreenController = loadingScreenController;
+            _scenesService = scenesService;
         }
 
         public override List<UniTask> PrepareGameLoad()
@@ -25,6 +29,7 @@ namespace L2Farm.Scripts
                 UniTask.Create(async () => await UniTask.Delay(TimeSpan.FromSeconds(3))),
                 UniTask.Create(async () => await UniTask.Delay(TimeSpan.FromSeconds(4))),
                 UniTask.Create(async () => await UniTask.Delay(TimeSpan.FromSeconds(5))),
+                _scenesService.LoadScene("L2Farm_FirstTown")
             };
         }
 

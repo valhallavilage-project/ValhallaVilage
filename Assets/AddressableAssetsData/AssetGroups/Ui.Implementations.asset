@@ -17,6 +17,11 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 8a37376f8d428423286b753c543f866b
   m_SerializeEntries:
+  - m_GUID: 4203fee3a80d7453880f3e07a1f47214
+    m_Address: DebugCameraSliders
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6fed3b1ceea69454a92da15194a881c5
     m_Address: Joystick
     m_ReadOnly: 0
@@ -24,6 +29,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 832b1ecbf2a854682a6486d901b73a29
     m_Address: L2Farm_LoadingScreen
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8fcbadfc4aab34903a222ee5b9f6e0aa
+    m_Address: Slider
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
