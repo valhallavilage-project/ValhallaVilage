@@ -24,7 +24,7 @@ namespace CrossProject.Ui.Implementations.Slider
             slider.wholeNumbers = Model.WholeNumbers;
             slider.interactable = Model.Interactable;
             slider.onValueChanged.AddListener(OnSliderChange);
-            slider.value = Model.MinValue;
+            slider.value = Model.DefaultValue;
         }
 
         public override void OnClose()

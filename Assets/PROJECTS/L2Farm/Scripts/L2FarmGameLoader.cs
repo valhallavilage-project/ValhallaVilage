@@ -27,8 +27,6 @@ namespace L2Farm.Scripts
                 UniTask.Create(async () => await UniTask.Delay(TimeSpan.FromSeconds(1))),
                 UniTask.Create(async () => await UniTask.Delay(TimeSpan.FromSeconds(2))),
                 UniTask.Create(async () => await UniTask.Delay(TimeSpan.FromSeconds(3))),
-                UniTask.Create(async () => await UniTask.Delay(TimeSpan.FromSeconds(4))),
-                UniTask.Create(async () => await UniTask.Delay(TimeSpan.FromSeconds(5))),
                 _scenesService.LoadScene("L2Farm_FirstTown")
             };
         }

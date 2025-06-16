@@ -4,7 +4,7 @@ namespace CrossProject.Core.SimpleMovement
 {
     public interface IJoystickValueProvider
     {
-        Vector2 NormalizedValue { get; }
-        Vector3 NormalizedValueProjectOnPlane { get; }
+        Vector2 NormalizedVector2 { get; }
+        Vector3 NormalizedVector3 { get; }
     }
 }

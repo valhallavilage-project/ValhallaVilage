@@ -1,6 +1,7 @@
 using CrossProject.Core;
 using CrossProject.Core.Camera;
 using CrossProject.Core.SaveLoad;
+using CrossProject.Core.SimpleMovement;
 using CrossProject.Ui.Core;
 using CrossProject.Ui.Implementations;
 using CrossProject.Ui.Implementations.DebugCameraSliders;
@@ -51,6 +52,10 @@ namespace L2Farm.Scripts
                 .AsImplementedInterfaces();
 
             builder.Register<JoystickController>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+
+            builder.RegisterComponentInHierarchy<SimpleMovementController>()
                 .AsSelf()
                 .AsImplementedInterfaces();
 

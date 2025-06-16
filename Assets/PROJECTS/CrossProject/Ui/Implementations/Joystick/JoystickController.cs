@@ -17,8 +17,20 @@ namespace CrossProject.Ui.Implementations
         private readonly List<object> _blockers = new();
 
         public bool IsBlocked => _blockers.Count > 0;
-        public Vector2 NormalizedValue => _view.NormalizedValue;
-        public Vector3 NormalizedValueProjectOnPlane => new (NormalizedValue.x, 0, NormalizedValue.y);
+
+        public Vector2 NormalizedVector2 => _view == null ? Vector2.zero : _view.NormalizedValue;
+
+        public Vector3 NormalizedVector3
+        {
+            get
+            {
+                if (_view == null)
+                    return Vector3.zero;
+
+                var value = _view.NormalizedValue;
+                return new Vector3(value.x, 0, value.y);
+            }
+        }
 
         public JoystickController(
             UiService uiService,

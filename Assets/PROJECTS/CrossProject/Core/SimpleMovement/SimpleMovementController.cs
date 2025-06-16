@@ -1,41 +1,73 @@
 using CrossProject.Core.Camera;
+using CrossProject.Core.Skins;
 using UnityEngine;
 using UnityEngine.AI;
+using VContainer;
 using VContainer.Unity;
 
 namespace CrossProject.Core.SimpleMovement
 {
     [RequireComponent(typeof(NavMeshAgent))]
-    public class SimpleMovementController : MonoBehaviour, IPostInitializable, ITickable
+    public class SimpleMovementController : MonoBehaviour, ITickable, IPostInitializable
     {
-        private readonly CameraService _cameraService;
-        private readonly IJoystickValueProvider _joystick;
+        private CameraService _cameraService;
+        private IJoystickValueProvider _joystick;
 
-        private Transform _playerRoot;
+        [SerializeField] private Skin defaultSkinPrefab;
+
         private NavMeshAgent _playerNavMeshAgent;
+        private Vector3 _direction;
+        private Skin _currentSkin;
 
-        public SimpleMovementController(
-            CameraService cameraService,
-            IJoystickValueProvider joystick)
-        {
-            _cameraService = cameraService;
-            _joystick = joystick;
-        }
+        private static readonly int Speed = Animator.StringToHash("Speed");
 
         private void Awake()
         {
-            _playerRoot = transform;
             _playerNavMeshAgent = GetComponent<NavMeshAgent>();
+            DontDestroyOnLoad(this);
+            SetSkin(defaultSkinPrefab);
         }
 
-        public void PostInitialize()
+        [Inject]
+        private void Construct(
+            CameraService cameraService,
+            IJoystickValueProvider joystickValueProvider)
         {
-            _cameraService.SetTarget(_playerRoot);
+            _cameraService = cameraService;
+            _joystick = joystickValueProvider;
+        }
+
+        public void SetSkin(Skin skinPrefab)
+        {
+            var count = transform.childCount;
+            if (count > 0)
+                for (int i = count; i >= 0; i--)
+                    Destroy(transform.GetChild(i).gameObject);
+
+            _currentSkin = Instantiate(skinPrefab, transform);
         }
 
         public void Tick()
         {
-            _playerNavMeshAgent.SetDestination(_playerRoot.position + _joystick.NormalizedValueProjectOnPlane);
+            _direction = _cameraService.CamDirectionOnPlane.normalized;
+            _direction.z *= _joystick.NormalizedVector2.y;
+            _direction.x += -_joystick.NormalizedVector2.x;
+            _playerNavMeshAgent.SetDestination(transform.position + _direction);
+            if (_currentSkin != null && _currentSkin.Animator != null)
+                _currentSkin.Animator.SetFloat(Speed, _playerNavMeshAgent.speed * _direction.sqrMagnitude);
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawSphere(transform.position, 1);
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawSphere(transform.position + _direction, 1);
+        }
+
+        public void PostInitialize()
+        {
+            _cameraService.SetTarget(transform);
         }
     }
 }

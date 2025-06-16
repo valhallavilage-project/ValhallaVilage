@@ -5,14 +5,31 @@ namespace CrossProject.Core.Camera
 {
     public class CameraService : MonoBehaviour, IInitializable, IPostLateTickable
     {
-        private Transform _transform;
         private Transform _target;
 
         [SerializeField] private Transform zoomHandle;
 
+        public Vector3 CamDirectionOnPlane
+        {
+            get
+            {
+                var direction = transform.position - zoomHandle.position;
+                direction.y = 0;
+                return direction;
+            }
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawSphere(zoomHandle.position, 1);
+            Gizmos.DrawLine(zoomHandle.position, zoomHandle.position + CamDirectionOnPlane);
+            Gizmos.color = Color.white;
+            Gizmos.DrawSphere(zoomHandle.position + CamDirectionOnPlane, 1);
+        }
+
         public void Initialize()
         {
-            _transform = transform;
             DontDestroyOnLoad(gameObject);
         }
 
@@ -21,7 +38,7 @@ namespace CrossProject.Core.Camera
             if (_target == null)
                 return;
 
-            _transform.position = _target.position;
+            transform.position = _target.position;
         }
 
         public void SetTarget(Transform target)
@@ -36,12 +53,14 @@ namespace CrossProject.Core.Camera
 
         public void SetYRotation(float angle)
         {
-            _transform.rotation = Quaternion.Euler(0, angle, 0);
+            var euler = transform.rotation.eulerAngles;
+            transform.rotation = Quaternion.Euler(euler.x, angle, euler.z);
         }
 
         public void SetXRotation(float angle)
         {
-            _transform.rotation = Quaternion.Euler(angle, 0, 0);
+            var euler = transform.rotation.eulerAngles;
+            transform.rotation = Quaternion.Euler(angle, euler.y, euler.z);
         }
     }
 }

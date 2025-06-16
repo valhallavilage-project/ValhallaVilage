@@ -36,13 +36,15 @@ namespace CrossProject.Ui.Implementations.DebugCameraSliders
                     {
                         OnSliderChange = _cameraService.SetYRotation,
                         MaxValue = 360,
+                        DefaultValue = 0,
                         WholeNumbers = true
                     },
                     new()
                     {
                         OnSliderChange = InvertCameraXRotation,
                         MinValue = -360,
-                        MaxValue = 0,
+                        MaxValue = -270,
+                        DefaultValue = -315,
                         WholeNumbers = true
                     },
                     new()

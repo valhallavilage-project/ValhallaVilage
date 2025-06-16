@@ -7,6 +7,7 @@ namespace CrossProject.Ui.Implementations.Slider
     {
         public float MinValue = 0;
         public float MaxValue = 100;
+        public float DefaultValue = 50;
         public bool WholeNumbers = false;
         public bool Interactable = true;
         public Action<float> OnSliderChange;
