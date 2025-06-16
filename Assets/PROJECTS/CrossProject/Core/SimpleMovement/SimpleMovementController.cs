@@ -13,6 +13,7 @@ namespace CrossProject.Core.SimpleMovement
         private CameraService _cameraService;
         private IJoystickValueProvider _joystick;
 
+        [SerializeField] private Transform skinRoot;
         [SerializeField] private Skin defaultSkinPrefab;
 
         private NavMeshAgent _playerNavMeshAgent;
@@ -39,10 +40,10 @@ namespace CrossProject.Core.SimpleMovement
 
         public void SetSkin(Skin skinPrefab)
         {
-            var count = transform.childCount;
+            var count = skinRoot.childCount;
             if (count > 0)
-                for (int i = count; i >= 0; i--)
-                    Destroy(transform.GetChild(i).gameObject);
+                for (int i = count - 1; i >= 0; i--)
+                    Destroy(skinRoot.GetChild(i).gameObject);
 
             _currentSkin = Instantiate(skinPrefab, transform);
         }
