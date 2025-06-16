@@ -8,9 +8,11 @@ namespace CrossProject.Ui.Implementations
         public Vector2 zoneAnchorMin;
         public Vector2 zoneAnchorMax;
         public float backgroundRadius;
-        public float backgroundAlpha;
+        public float backgroundAlphaInactive;
+        public float backgroundAlphaActive;
         public float stickRadius;
-        public float stickAlpha;
+        public float stickAlphaInactive;
+        public float stickAlphaActive;
         public float deadZoneRadius;
         public float maxZoneRadius;
     }

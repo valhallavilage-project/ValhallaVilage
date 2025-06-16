@@ -8,9 +8,11 @@ namespace CrossProject.Ui.Implementations
         public Vector2 zoneAnchorMin;
         public Vector2 zoneAnchorMax;
         public float backgroundRadius;
-        public float backgroundAlpha;
+        public float backgroundAlphaInactive;
+        public float backgroundAlphaActive;
         public float stickRadius;
-        public float stickAlpha;
+        public float stickAlphaInactive;
+        public float stickAlphaActive;
         public float deadZoneRadius;
         public float maxZoneRadius;
 
@@ -23,9 +25,11 @@ namespace CrossProject.Ui.Implementations
                 zoneAnchorMin = config.zoneAnchorMin,
                 zoneAnchorMax = config.zoneAnchorMax,
                 backgroundRadius = config.backgroundRadius,
-                backgroundAlpha = config.backgroundAlpha,
+                backgroundAlphaInactive = config.backgroundAlphaInactive,
+                backgroundAlphaActive = config.backgroundAlphaActive,
                 stickRadius = config.stickRadius,
-                stickAlpha = config.stickAlpha,
+                stickAlphaInactive = config.stickAlphaInactive,
+                stickAlphaActive = config.stickAlphaActive,
                 deadZoneRadius = config.deadZoneRadius,
                 maxZoneRadius = config.maxZoneRadius
             };

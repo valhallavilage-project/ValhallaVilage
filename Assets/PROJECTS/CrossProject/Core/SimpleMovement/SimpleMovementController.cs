@@ -51,7 +51,7 @@ namespace CrossProject.Core.SimpleMovement
         {
             _direction = _cameraService.CamDirectionOnPlane.normalized;
             _direction.z *= _joystick.NormalizedVector2.y;
-            _direction.x += -_joystick.NormalizedVector2.x;
+            _direction.x *= _joystick.NormalizedVector2.x;
             _playerNavMeshAgent.SetDestination(transform.position + _direction);
             if (_currentSkin != null && _currentSkin.Animator != null)
                 _currentSkin.Animator.SetFloat(Speed, _playerNavMeshAgent.speed * _direction.sqrMagnitude);

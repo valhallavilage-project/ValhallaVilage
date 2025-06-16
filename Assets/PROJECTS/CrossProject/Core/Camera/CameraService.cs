@@ -8,6 +8,7 @@ namespace CrossProject.Core.Camera
         private Transform _target;
 
         [SerializeField] private Transform zoomHandle;
+        [SerializeField] private CameraConfig cameraConfig;
 
         public Vector3 CamDirectionOnPlane
         {
@@ -31,6 +32,9 @@ namespace CrossProject.Core.Camera
         public void Initialize()
         {
             DontDestroyOnLoad(gameObject);
+            SetXRotation(cameraConfig.xRotationAngle);
+            SetYRotation(cameraConfig.yRotationAngle);
+            SetZoom(cameraConfig.zoomDistance);
         }
 
         public void PostLateTick()

@@ -9,6 +9,8 @@ namespace CrossProject.Ui.Implementations
         [SerializeField] private RectTransform background;
         [SerializeField] private RectTransform stick;
 
+        private CanvasGroup _backgroundCanvasGroup;
+        private CanvasGroup _stickCanvasGroup;
         private float _sqrMaxZoneRadius;
         private float _sqrDeadZoneRadius;
 
@@ -27,12 +29,12 @@ namespace CrossProject.Ui.Implementations
 
             background.anchoredPosition = Vector2.zero;
             background.sizeDelta = new Vector2(Model.backgroundRadius, Model.backgroundRadius);
-            if (background.TryGetComponent<CanvasGroup>(out var backgroundCanvasGroup))
-                backgroundCanvasGroup.alpha = Model.backgroundAlpha;
+            if (background.TryGetComponent(out _backgroundCanvasGroup))
+                _backgroundCanvasGroup.alpha = Model.backgroundAlphaInactive;
 
             stick.sizeDelta = new Vector2(Model.stickRadius, Model.stickRadius);
-            if (stick.TryGetComponent<CanvasGroup>(out var stickCanvasGroup))
-                stickCanvasGroup.alpha = Model.stickAlpha;
+            if (stick.TryGetComponent(out _stickCanvasGroup))
+                _stickCanvasGroup.alpha = Model.stickAlphaInactive;
 
             _sqrDeadZoneRadius = Model.deadZoneRadius * Model.deadZoneRadius;
             _sqrMaxZoneRadius = Model.maxZoneRadius * Model.maxZoneRadius;
@@ -45,6 +47,8 @@ namespace CrossProject.Ui.Implementations
 
         public void ProcessDrag()
         {
+            _backgroundCanvasGroup.alpha = Model.backgroundAlphaActive;
+            _stickCanvasGroup.alpha = Model.stickAlphaActive;
             stick.position = Input.mousePosition;
             var sqrMagnitude = stick.anchoredPosition.sqrMagnitude;
             if (sqrMagnitude > _sqrMaxZoneRadius)

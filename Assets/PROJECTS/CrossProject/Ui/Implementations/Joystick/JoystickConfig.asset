@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zoneAnchorMin: {x: 0, y: 0}
   zoneAnchorMax: {x: 0.4, y: 1}
-  backgroundRadius: 300
-  backgroundAlpha: 0.5
-  stickRadius: 100
-  stickAlpha: 1
+  backgroundRadius: 200
+  backgroundAlphaInactive: 0.1
+  backgroundAlphaActive: 0.5
+  stickRadius: 75
+  stickAlphaInactive: 0.2
+  stickAlphaActive: 1
   deadZoneRadius: 0
-  maxZoneRadius: 150
+  maxZoneRadius: 100
