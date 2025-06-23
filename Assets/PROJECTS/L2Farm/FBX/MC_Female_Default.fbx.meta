@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 882081323285a4bd0b902ab79b06f65f
+guid: 9c296ebaac7651345bc0bcac7eec3d0f
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,18 +7,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: MC_Male_Armor_Base.003
-    second: {fileID: 2100000, guid: 5324f5e18d43a416faecffb6ffb13cb6, type: 2}
+      name: MC_Female_Body
+    second: {fileID: 2100000, guid: 921aaf218aba9944a8748793e7454b22, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: MC_Male_Head.003
-    second: {fileID: 2100000, guid: a8a955edc5efc477096908e72093eb14, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: material_0.001
-    second: {fileID: 2100000, guid: 70180f603264b4fd6b76315c5f22f477, type: 2}
+      name: MC_Female_Head
+    second: {fileID: 2100000, guid: 05c984b84b8b1d644ac38b1e755816e4, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
