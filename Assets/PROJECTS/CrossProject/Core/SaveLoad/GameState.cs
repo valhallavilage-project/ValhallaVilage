@@ -6,21 +6,25 @@ namespace CrossProject.Core.SaveLoad
 {
     public class GameState
     {
-        // public string ClientVersion { get; set; }
-        // public string DeviceId { get; set; }
-        // public DateTime CreatedAt { get; set; }
-
         [JsonProperty]
         private Dictionary<Type, IGameStatePart> _partsMap = new();
 
-        public TGameStatePart Get<TGameStatePart>() where TGameStatePart : class, IGameStatePart
+        public bool TryGet<TGameStatePart>(out TGameStatePart part) where TGameStatePart : class, IGameStatePart
         {
-            return null;
+            var type = typeof(TGameStatePart);
+            if (_partsMap.ContainsKey(type))
+            {
+                part = _partsMap[type] as TGameStatePart;
+                return true;
+            }
+
+            part = null;
+            return false;
         }
 
         public void Set<TGameStatePart>(TGameStatePart part) where TGameStatePart : class, IGameStatePart
         {
-            
+            _partsMap[typeof(TGameStatePart)] = part;
         }
     }
 }
