@@ -25,8 +25,6 @@ namespace L2Farm.Scripts
             //TODO : VM : GameMigrate - prepare here, on gamestate load/create - migrate
 
             //TODO : VM : GameState
-            builder.Register<GameStateManager>(Lifetime.Singleton)
-                .AsSelf();
 
             //TODO : VM : InApp
             //TODO : VM : Ads

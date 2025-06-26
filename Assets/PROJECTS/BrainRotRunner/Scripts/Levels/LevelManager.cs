@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace RUNNER.Scripts.Core.Levels
 {
-    public class LevelManager : MonoSingleton<LevelManager>
+    public class LevelManager
     {
         private int _currentLevel;
 
@@ -34,11 +34,10 @@ namespace RUNNER.Scripts.Core.Levels
 
         public void CompleteCurrentLevel()
         {
-            GameStateManager.Instance.Save();
+            //GameStateManager.Instance.Save();
             //TODO : Effects
             //TODO : Try Show Interstitial
             //TODO : Destroy current level
-            
         }
     }
 }

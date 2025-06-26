@@ -6,7 +6,7 @@ using Sabresaurus.PlayerPrefsUtilities;
 
 namespace CrossProject.Core.SaveLoad
 {
-    public class GameStateManager : MonoSingleton<GameStateManager>
+    public abstract class GameStateManager
     {
         private const string GameStatePrefsKey = nameof(GameStatePrefsKey);
 
@@ -44,15 +44,6 @@ namespace CrossProject.Core.SaveLoad
             return true;
         }
 
-        public GameState Get()
-        {
-            if (_gameState == null)
-                if (!TryLoadSavedData())
-                    CreateEmptyState();
-
-            return _gameState;
-        }
-
         private async UniTask SaveTask()
         {
             if (_gameState == null)
@@ -60,6 +51,14 @@ namespace CrossProject.Core.SaveLoad
 
             await UniTask.Yield(PlayerLoopTiming.PostLateUpdate);
             PlayerPrefsUtility.SetEncryptedString(GameStatePrefsKey, _serializer.Serialize(_gameState));
+        }
+
+        public GameState Get()
+        {
+            if (_gameState == null && !TryLoadSavedData())
+                CreateEmptyState();
+
+            return _gameState;
         }
 
         public void Save()

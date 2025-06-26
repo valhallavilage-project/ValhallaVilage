@@ -2,12 +2,11 @@ using UnityEngine;
 
 namespace CrossProject.Core.Audio
 {
-    [RequireComponent(typeof(AudioSource))]
-    public class AudioManager : MonoSingleton<AudioManager>
+    public class AudioManager : MonoBehaviour
     {
         private AudioSourcePool _pool;
 
-        protected override void OnAwake()
+        private void Awake()
         {
             var poolPrefab = Resources.Load<AudioSourcePool>($"Pools/{nameof(AudioSourcePool)}");
             _pool = Instantiate(poolPrefab);
