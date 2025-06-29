@@ -59,7 +59,7 @@ namespace CrossProject.Ui.Implementations
         private async void OpenJoystick()
         {
             var config = await _addressablesManager.LoadAssetAsync<JoystickConfig>(nameof(JoystickConfig));
-            _view ??= await _uiService.TryOpen(JoystickModel.From(config)) as Joystick;
+            _view = await _uiService.TryOpen(JoystickModel.From(config)) as Joystick;
         }
 
         public void Initialize()
