@@ -8,7 +8,7 @@ using Object = UnityEngine.Object;
 
 namespace CrossProject.Ui.Core
 {
-    public class UiQueue<TUiModel> : UiRule<TUiModel> where TUiModel : UiModel
+    public class UiQueueRule<TUiModel> : UiRule<TUiModel> where TUiModel : UiModel
     {
         private readonly Queue<UiModel> _queue = new();
         private IUiView _current;
@@ -19,7 +19,7 @@ namespace CrossProject.Ui.Core
         public override event Action<IUiView> OnHide;
         public override event Action<IUiView> OnReveal;
 
-        public UiQueue(RectTransform root, AddressablesManager addressablesManager) : base(root, addressablesManager) {}
+        public UiQueueRule(RectTransform root, AddressablesManager addressablesManager) : base(root, addressablesManager) {}
 
         private async Task<IUiView> OpenInternal(UiModel model)
         {

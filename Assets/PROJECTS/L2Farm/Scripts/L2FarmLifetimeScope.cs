@@ -1,10 +1,8 @@
 using CrossProject.Core;
 using CrossProject.Core.Camera;
-using CrossProject.Core.SaveLoad;
 using CrossProject.Core.SimpleMovement;
 using CrossProject.Ui.Core;
 using CrossProject.Ui.Implementations;
-using CrossProject.Ui.Implementations.DebugCameraSliders;
 using VContainer;
 using VContainer.Unity;
 
@@ -41,10 +39,6 @@ namespace L2Farm.Scripts
                 .AsSelf()
                 .AsImplementedInterfaces();
 
-            builder.Register<LoadingScreenController>(Lifetime.Singleton)
-                .AsSelf()
-                .AsImplementedInterfaces();
-
             builder.Register<L2FarmGameLoader>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
@@ -56,10 +50,6 @@ namespace L2Farm.Scripts
             builder.RegisterComponentInHierarchy<SimpleMovementController>()
                 .AsSelf()
                 .AsImplementedInterfaces();
-
-            // builder.Register<DebugCameraSlidersController>(Lifetime.Singleton)
-            //     .AsSelf()
-            //     .AsImplementedInterfaces();
         }
     }
 }

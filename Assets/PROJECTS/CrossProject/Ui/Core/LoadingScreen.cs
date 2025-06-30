@@ -1,10 +1,9 @@
-using CrossProject.Ui.Core;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
-namespace CrossProject.Ui.Implementations
+namespace CrossProject.Ui.Core
 {
     public class LoadingScreen : ScreenView<LoadingScreenModel>
     {

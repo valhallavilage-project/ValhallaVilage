@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using CrossProject.Core;
+using CrossProject.Ui.Core;
 using CrossProject.Ui.Implementations;
 using Cysharp.Threading.Tasks;
 using VContainer.Unity;
@@ -9,14 +10,14 @@ namespace L2Farm.Scripts
 {
     public class L2FarmGameLoader : AbstractGameLoader, IInitializable
     {
-        private readonly LoadingScreenController _loadingScreenController;
+        private readonly UiService _uiService;
         private readonly ScenesService _scenesService;
 
         public L2FarmGameLoader(
-            LoadingScreenController loadingScreenController,
+            UiService uiService,
             ScenesService scenesService)
         {
-            _loadingScreenController = loadingScreenController;
+            _uiService = uiService;
             _scenesService = scenesService;
         }
 
@@ -33,7 +34,7 @@ namespace L2Farm.Scripts
 
         public void Initialize()
         {
-            _loadingScreenController.Load(PrepareGameLoad()).Forget();
+            _uiService.Load(PrepareGameLoad()).Forget();
         }
     }
 }

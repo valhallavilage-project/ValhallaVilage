@@ -18,8 +18,5 @@ public class BrainRotRunnerLifetimeScope : LifetimeScope
             .AsSelf()
             .AsImplementedInterfaces();
 
-        builder.Register<LoadingScreenController>(Lifetime.Singleton)
-            .AsSelf()
-            .AsImplementedInterfaces();
     }
 }

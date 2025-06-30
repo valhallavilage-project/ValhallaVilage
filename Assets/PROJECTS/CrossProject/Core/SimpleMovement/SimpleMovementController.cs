@@ -45,7 +45,7 @@ namespace CrossProject.Core.SimpleMovement
                 for (int i = count - 1; i >= 0; i--)
                     Destroy(skinRoot.GetChild(i).gameObject);
 
-            _currentSkin = Instantiate(skinPrefab, transform);
+            _currentSkin = Instantiate(skinPrefab, skinRoot);
         }
 
         public void Tick()

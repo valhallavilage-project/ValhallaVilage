@@ -8,7 +8,7 @@ using Object = UnityEngine.Object;
 
 namespace CrossProject.Ui.Core
 {
-    public class UiDictionary<TUiModel> : UiRule<TUiModel> where TUiModel : UiModel
+    public class UiDictionaryRule<TUiModel> : UiRule<TUiModel> where TUiModel : UiModel
     {
         private readonly Dictionary<Type, List<IUiView>> _dictionary = new();
 
@@ -17,7 +17,7 @@ namespace CrossProject.Ui.Core
         public override event Action<IUiView> OnHide;
         public override event Action<IUiView> OnReveal;
 
-        public UiDictionary(RectTransform root, AddressablesManager addressablesManager) : base(root, addressablesManager) {}
+        public UiDictionaryRule(RectTransform root, AddressablesManager addressablesManager) : base(root, addressablesManager) {}
 
         public override async UniTask<IUiView> Open(UiModel model)
         {

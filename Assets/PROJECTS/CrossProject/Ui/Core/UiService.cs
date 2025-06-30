@@ -14,6 +14,7 @@ namespace CrossProject.Ui.Core
         [SerializeField] private RectTransform hudRoot;
         [SerializeField] private RectTransform screenRoot;
         [SerializeField] private RectTransform popupRoot;
+        [SerializeField] private LoadingScreen loadingScreen;
 
         private AddressablesManager _addressablesManager;
 
@@ -39,9 +40,9 @@ namespace CrossProject.Ui.Core
 
         public void Initialize()
         {
-            AddRule(new UiQueue<ScreenModel>(ScreenRoot, _addressablesManager));
-            AddRule(new UiQueue<PopupModel>(PopupRoot, _addressablesManager));
-            AddRule(new UiDictionary<HudElementModel>(HudRoot, _addressablesManager));
+            AddRule(new UiQueueRule<ScreenModel>(ScreenRoot, _addressablesManager));
+            AddRule(new UiQueueRule<PopupModel>(PopupRoot, _addressablesManager));
+            AddRule(new UiDictionaryRule<HudElementModel>(HudRoot, _addressablesManager));
         }
 
         public void ApplySafeAreaTo(RectTransform rectTransform, bool left = true, bool top = true, bool right = true, bool bottom = true)
@@ -100,11 +101,29 @@ namespace CrossProject.Ui.Core
         public void RevealHudElement<THudElementModel>(Func<IUiView, bool> predicate = null) where THudElementModel : HudElementModel
         {
             //TODO : VM : alpha one
+            var rule = GetRule(typeof(THudElementModel));
         }
 
         public void HideHudElement<THudElementModel>(Func<IUiView, bool> predicate = null) where THudElementModel : HudElementModel
         {
             //TODO : VM : alpha zero
+            var rule = GetRule(typeof(THudElementModel));
+        }
+
+        public async UniTask Load(IReadOnlyList<UniTask> tasks)
+        {
+            loadingScreen.gameObject.SetActive(true);
+            if (tasks.Count > 0)
+            {
+                for (int i = 0; i < tasks.Count; i++)
+                {
+                    var progressValue = i / (float)tasks.Count;
+                    await loadingScreen.UpdateProgress(progressValue);
+                    await tasks[i];
+                }
+                await loadingScreen.UpdateProgress(1);
+            }
+            loadingScreen.gameObject.SetActive(false);
         }
     }
 }
