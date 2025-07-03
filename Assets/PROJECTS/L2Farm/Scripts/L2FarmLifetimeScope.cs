@@ -52,9 +52,9 @@ namespace L2Farm.Scripts
                 .AsSelf()
                 .AsImplementedInterfaces();
 
-            // builder.Register<DebugCameraSlidersController>(Lifetime.Singleton)
-            //     .AsSelf()
-            //     .AsImplementedInterfaces();
+            builder.Register<DebugCameraSlidersController>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
         }
     }
 }
