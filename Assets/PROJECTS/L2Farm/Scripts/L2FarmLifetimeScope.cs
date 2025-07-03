@@ -3,6 +3,7 @@ using CrossProject.Core.Camera;
 using CrossProject.Core.SimpleMovement;
 using CrossProject.Ui.Core;
 using CrossProject.Ui.Implementations;
+using CrossProject.Ui.Implementations.DebugCameraSliders;
 using VContainer;
 using VContainer.Unity;
 
@@ -48,6 +49,10 @@ namespace L2Farm.Scripts
                 .AsImplementedInterfaces();
 
             builder.RegisterComponentInHierarchy<SimpleMovementController>()
+                .AsSelf()
+                .AsImplementedInterfaces();
+
+            builder.Register<DebugCameraSlidersController>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
         }
