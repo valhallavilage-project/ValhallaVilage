@@ -17,11 +17,6 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 8a37376f8d428423286b753c543f866b
   m_SerializeEntries:
-  - m_GUID: 4203fee3a80d7453880f3e07a1f47214
-    m_Address: DebugCameraSliders
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6fed3b1ceea69454a92da15194a881c5
     m_Address: Joystick
     m_ReadOnly: 0

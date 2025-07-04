@@ -310,6 +310,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6023722294774535479, guid: f773308a547904a1c85ddcd54574f82f, type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6023722294774535479, guid: f773308a547904a1c85ddcd54574f82f, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 4f8e653bf1c0b054680c13a05741c202, type: 3}
@@ -325,6 +329,18 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6023722294774535479, guid: f773308a547904a1c85ddcd54574f82f, type: 3}
+      propertyPath: m_FillAmount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6023722294774535479, guid: f773308a547904a1c85ddcd54574f82f, type: 3}
+      propertyPath: m_FillMethod
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6027397644342078700, guid: f773308a547904a1c85ddcd54574f82f, type: 3}
+      propertyPath: fillImage
+      value: 
+      objectReference: {fileID: 1027721231}
     - target: {fileID: 7427926290075818896, guid: f773308a547904a1c85ddcd54574f82f, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.7
@@ -339,7 +355,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7427926290075818896, guid: f773308a547904a1c85ddcd54574f82f, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7427926290075818896, guid: f773308a547904a1c85ddcd54574f82f, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -426,6 +442,17 @@ MonoBehaviour:
     TypeName: 
   autoRun: 1
   autoInjectGameObjects: []
+--- !u!114 &1027721231 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6023722294774535479, guid: f773308a547904a1c85ddcd54574f82f, type: 3}
+  m_PrefabInstance: {fileID: 352345885}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4500383462472240215
 PrefabInstance:
   m_ObjectHideFlags: 0

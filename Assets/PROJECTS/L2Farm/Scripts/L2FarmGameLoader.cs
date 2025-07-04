@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
 using CrossProject.Core;
+using CrossProject.Core.Cheats;
 using CrossProject.Ui.Core;
 using CrossProject.Ui.Implementations;
 using Cysharp.Threading.Tasks;
+using Sirenix.Utilities;
+using VContainer;
 using VContainer.Unity;
 
 namespace L2Farm.Scripts
@@ -12,13 +15,16 @@ namespace L2Farm.Scripts
     {
         private readonly UiService _uiService;
         private readonly ScenesService _scenesService;
+        private readonly IObjectResolver _resolver;
 
         public L2FarmGameLoader(
             UiService uiService,
-            ScenesService scenesService)
+            ScenesService scenesService,
+            IObjectResolver resolver)
         {
             _uiService = uiService;
             _scenesService = scenesService;
+            _resolver = resolver;
         }
 
         public override List<UniTask> PrepareGameLoad()
@@ -34,6 +40,12 @@ namespace L2Farm.Scripts
 
         public void Initialize()
         {
+            #if !DISABLE_SRDEBUGGER
+            _resolver
+                .Resolve<IEnumerable<ICheatOption>>()
+                .ForEach(x => SRDebug.Instance.AddOptionContainer(x));
+            #endif
+
             _uiService.Load(PrepareGameLoad()).Forget();
         }
     }

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: CameraConfig
   m_EditorClassIdentifier: 
   yRotationAngle: 215
-  xRotationAngle: -60
-  zoomDistance: 30
+  xRotationAngle: 300
+  zoomDistance: 20

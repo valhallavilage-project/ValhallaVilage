@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace RUNNER.Scripts
 {
-    public class CameraHandle : CustomBehaviour, IBlocksManager
+    public class CameraHandle : CustomBehaviour, IBlockable
     {
         [SerializeField] private Transform target;
         [SerializeField] private bool followY = true;

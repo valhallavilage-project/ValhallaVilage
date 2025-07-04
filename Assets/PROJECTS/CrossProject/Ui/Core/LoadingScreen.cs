@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace CrossProject.Ui.Core
 {
@@ -12,6 +13,7 @@ namespace CrossProject.Ui.Core
 
         [SerializeField] private RectTransform spinner;
         [SerializeField] private RectTransform fill;
+        [SerializeField] private Image fillImage;
         [SerializeField] private TMP_Text flavourTextLabel;
 
         private string FlavourText
@@ -49,11 +51,28 @@ namespace CrossProject.Ui.Core
             FlavourText = flavourText;
 
             DOTween.Kill(ProgressSequenceId);
-            await DOTween.Sequence()
-                .Append(fill.DOScaleX(progress, 0.5f).SetEase(Ease.OutCubic))
-                .AppendInterval(0.2f)
-                .SetId(ProgressSequenceId)
-                .ToUniTask();
+
+            if (fillImage == null)
+            {
+                await DOTween.Sequence()
+                    .Append(fill.DOScaleX(progress, 0.5f).SetEase(Ease.OutCubic))
+                    .AppendInterval(0.2f)
+                    .SetId(ProgressSequenceId)
+                    .ToUniTask();
+            }
+            else
+            {
+                await DOTween.Sequence()
+                    .Append(DOTween.To(
+                        () => fillImage.fillAmount,
+                        x => fillImage.fillAmount = x,
+                        progress,
+                        0.5f)
+                            .SetEase(Ease.OutCubic))
+                    .AppendInterval(0.2f)
+                    .SetId(ProgressSequenceId)
+                    .ToUniTask();
+            }
         }
     }
 }

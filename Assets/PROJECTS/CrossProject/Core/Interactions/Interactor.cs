@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using R3;
 using UnityEngine;
 
 namespace CrossProject.Core.Interactions
@@ -9,12 +10,22 @@ namespace CrossProject.Core.Interactions
         private readonly List<InteractiveObject> _objects = new();
 
         private SphereCollider _collider;
-        private InteractiveObject _closest;
+        private Transform _selectIndicator;
+
+        [SerializeField]
+        private GameObject selectIndicatorPrefab;
+
+        public ReactiveProperty<InteractiveObject> Closest { get; } = new ();
 
         private void Awake()
         {
             _collider = GetComponent<SphereCollider>();
             _collider.isTrigger = true;
+            if (_selectIndicator != null)
+            {
+                _selectIndicator = Instantiate(selectIndicatorPrefab, Vector3.zero, Quaternion.identity, transform).transform;
+                _selectIndicator.gameObject.SetActive(false);
+            }
         }
 
         private void OnTriggerEnter(Collider other)
@@ -30,7 +41,7 @@ namespace CrossProject.Core.Interactions
             {
                 _objects.Remove(interactableObject);
                 if (_objects.Count == 0)
-                    _closest = null;
+                    Closest.Value = null;
             }
         }
 
@@ -41,6 +52,7 @@ namespace CrossProject.Core.Interactions
             foreach (var interactableObject in _objects)
             {
                 float distance = (interactableObject.transform.position - transform.position).sqrMagnitude;
+
                 if (closest == null)
                 {
                     closest = interactableObject;
@@ -55,10 +67,20 @@ namespace CrossProject.Core.Interactions
                 }
             }
 
-            if (_closest != closest && closest != null)
+            if (Closest.Value != closest && closest != null)
             {
-                _closest = closest;
-                _closest.Select();
+                Closest.Value.Deselect();
+
+                Closest.Value = closest;
+                Closest.Value.Select();
+
+                if (_selectIndicator != null)
+                {
+                    if (!_selectIndicator.gameObject.activeSelf)
+                        _selectIndicator.gameObject.SetActive(true);
+                    _selectIndicator.position = Closest.Value.transform.position;
+                    _selectIndicator.localScale = Vector3.one * Closest.Value.selectorScale;
+                }
             }
         }
     }

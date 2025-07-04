@@ -1,5 +1,8 @@
+using System;
+using System.Collections.Generic;
 using CrossProject.Core.Camera;
 using CrossProject.Core.Skins;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
 using VContainer;
@@ -8,7 +11,7 @@ using VContainer.Unity;
 namespace CrossProject.Core.SimpleMovement
 {
     [RequireComponent(typeof(NavMeshAgent))]
-    public class SimpleMovementController : MonoBehaviour, ITickable, IPostInitializable
+    public class SimpleMovementController : MonoBehaviour, ITickable, IPostInitializable, IBlockable
     {
         private CameraService _cameraService;
         private IJoystickValueProvider _joystick;
@@ -21,6 +24,19 @@ namespace CrossProject.Core.SimpleMovement
         private Skin _currentSkin;
 
         private static readonly int Speed = Animator.StringToHash("Speed");
+        private readonly HashSet<Type> _blockers = new();
+
+        public bool IsBlocked => _blockers.Count > 0;
+
+        public void RequestBlock(object blockRequester)
+        {
+            _blockers.Add(blockRequester.GetType());
+        }
+
+        public void ReleaseBlock(object blockRequester)
+        {
+            _blockers.Remove(blockRequester.GetType());
+        }
 
         private void Awake()
         {
@@ -50,12 +66,22 @@ namespace CrossProject.Core.SimpleMovement
 
         public void Tick()
         {
-            _direction = _cameraService.CamDirectionOnPlane.normalized;
-            _direction.z *= _joystick.NormalizedVector2.y;
-            _direction.x *= _joystick.NormalizedVector2.x;
-            _playerNavMeshAgent.SetDestination(transform.position + _direction);
+            if (!IsBlocked)
+            {
+                _direction = _cameraService.CamDirectionOnPlane.normalized;
+                _direction.z *= _joystick.NormalizedVector2.y;
+                _direction.x *= _joystick.NormalizedVector2.x;
+                _playerNavMeshAgent.SetDestination(transform.position + _direction);
+            }
+
             if (_currentSkin != null && _currentSkin.Animator != null)
-                _currentSkin.Animator.SetFloat(Speed, _playerNavMeshAgent.speed * _direction.sqrMagnitude);
+                _currentSkin.Animator.SetFloat(Speed, Mathf.InverseLerp(0, Mathf.Pow(_playerNavMeshAgent.speed, 2), _playerNavMeshAgent.velocity.sqrMagnitude));
+        }
+
+        public async UniTask MoveTo(Vector3 target, float sqrTargetDistance = 1)
+        {
+            _playerNavMeshAgent.SetDestination(target);
+            await UniTask.WaitUntil(() => (_playerNavMeshAgent.transform.position - target).sqrMagnitude <= sqrTargetDistance);
         }
 
         private void OnDrawGizmosSelected()

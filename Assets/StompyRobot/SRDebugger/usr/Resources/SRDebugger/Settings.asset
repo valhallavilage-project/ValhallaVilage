@@ -34,9 +34,9 @@ MonoBehaviour:
     Shift: 1
   - Action: 3
     Alt: 0
-    Control: 1
-    Key: 284
-    Shift: 1
+    Control: 0
+    Key: 112
+    Shift: 0
   - Action: 4
     Alt: 0
     Control: 1

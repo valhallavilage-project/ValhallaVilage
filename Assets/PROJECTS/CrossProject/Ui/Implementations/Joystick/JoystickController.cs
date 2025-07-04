@@ -7,7 +7,7 @@ using VContainer.Unity;
 
 namespace CrossProject.Ui.Implementations
 {
-    public class JoystickController : IInitializable, ITickable, IBlocksManager, IJoystickValueProvider
+    public class JoystickController : IInitializable, ITickable, IBlockable, IJoystickValueProvider
     {
         private readonly UiService _uiService;
         private readonly AddressablesManager _addressablesManager;

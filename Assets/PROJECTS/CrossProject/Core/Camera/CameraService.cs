@@ -10,6 +10,32 @@ namespace CrossProject.Core.Camera
         [SerializeField] private Transform zoomHandle;
         [SerializeField] private CameraConfig cameraConfig;
 
+        public float XRotation
+        {
+            get => transform.rotation.eulerAngles.x;
+            set
+            {
+                var euler = transform.rotation.eulerAngles;
+                transform.rotation = Quaternion.Euler(value, euler.y, euler.z);
+            }
+        }
+
+        public float YRotation
+        {
+            get => transform.rotation.eulerAngles.y;
+            set
+            {
+                var euler = transform.rotation.eulerAngles;
+                transform.rotation = Quaternion.Euler(euler.x, value, euler.z);
+            }
+        }
+
+        public float Zoom
+        {
+            get => zoomHandle.localPosition.z;
+            set => zoomHandle.localPosition = new Vector3(0, 0, value);
+        }
+
         public Vector3 CamDirectionOnPlane
         {
             get
@@ -32,9 +58,9 @@ namespace CrossProject.Core.Camera
         public void Initialize()
         {
             DontDestroyOnLoad(gameObject);
-            SetXRotation(cameraConfig.xRotationAngle);
-            SetYRotation(cameraConfig.yRotationAngle);
-            SetZoom(cameraConfig.zoomDistance);
+            YRotation = cameraConfig.yRotationAngle;
+            XRotation = cameraConfig.xRotationAngle;
+            Zoom = cameraConfig.zoomDistance;
         }
 
         public void PostLateTick()
@@ -48,23 +74,6 @@ namespace CrossProject.Core.Camera
         public void SetTarget(Transform target)
         {
             _target = target;
-        }
-
-        public void SetZoom(float distance)
-        {
-            zoomHandle.localPosition = new Vector3(0, 0, distance);
-        }
-
-        public void SetYRotation(float angle)
-        {
-            var euler = transform.rotation.eulerAngles;
-            transform.rotation = Quaternion.Euler(euler.x, angle, euler.z);
-        }
-
-        public void SetXRotation(float angle)
-        {
-            var euler = transform.rotation.eulerAngles;
-            transform.rotation = Quaternion.Euler(angle, euler.y, euler.z);
         }
     }
 }
