@@ -11,7 +11,7 @@ using VContainer.Unity;
 namespace CrossProject.Core.SimpleMovement
 {
     [RequireComponent(typeof(NavMeshAgent))]
-    public class SimpleMovementController : MonoBehaviour, ITickable, IPostInitializable, IBlockable
+    public class SimpleMovementController : MonoBehaviour, ITickable, IPostInitializable, IBlockable, IPlayerVelocityProvider
     {
         private CameraService _cameraService;
         private IJoystickValueProvider _joystick;
@@ -28,6 +28,8 @@ namespace CrossProject.Core.SimpleMovement
         private readonly HashSet<Type> _blockers = new();
 
         public bool IsBlocked => _blockers.Count > 0;
+        public Vector3 Velocity => _playerNavMeshAgent.velocity;
+        public Vector3 Direction => _direction;
 
         public void RequestBlock(object blockRequester)
         {
@@ -42,6 +44,7 @@ namespace CrossProject.Core.SimpleMovement
         private void Awake()
         {
             _playerNavMeshAgent = GetComponent<NavMeshAgent>();
+            _playerNavMeshAgent.updateRotation = true;
             DontDestroyOnLoad(this);
             SetSkin(defaultSkinPrefab);
         }
@@ -71,13 +74,13 @@ namespace CrossProject.Core.SimpleMovement
             if (!IsBlocked)
             {
                 _direction = _cameraService.CamDirectionOnPlane.normalized;
-                _direction.z *= _joystick.NormalizedVector2.y;
                 _direction.x *= _joystick.NormalizedVector2.x;
+                _direction.z *= _joystick.NormalizedVector2.y;
                 _playerNavMeshAgent.SetDestination(transform.position + _direction);
             }
 
             if (_currentSkin != null && _currentSkin.Animator != null)
-                _currentSkin.Animator.SetFloat(Speed, Mathf.InverseLerp(0, Mathf.Pow(_playerNavMeshAgent.speed, 2), _playerNavMeshAgent.velocity.sqrMagnitude));
+                _currentSkin.Animator.SetFloat(Speed, _joystick.NormalizedVector2.sqrMagnitude > 0 ? 1 : 0);
         }
 
         public async UniTask MoveTo(Vector3 target, float sqrTargetDistance = 1)

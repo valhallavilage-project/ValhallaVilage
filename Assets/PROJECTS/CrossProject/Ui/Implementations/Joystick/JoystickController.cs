@@ -20,7 +20,7 @@ namespace CrossProject.Ui.Implementations
 
         public Vector2 NormalizedVector2 => _view == null ? Vector2.zero : _view.NormalizedValue;
 
-        public Vector3 NormalizedVector3
+        public Vector3 NormalizedVector3OnPlain
         {
             get
             {

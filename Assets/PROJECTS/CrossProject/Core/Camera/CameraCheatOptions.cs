@@ -3,7 +3,7 @@ using CrossProject.Core.Cheats;
 
 namespace CrossProject.Core.Camera
 {
-    public class CameraCheatOptions : ICheatOption
+    public class CameraCheatOptions : ICheatOptions
     {
         private readonly CameraService _cameraService;
 
@@ -34,6 +34,20 @@ namespace CrossProject.Core.Camera
         {
             get => _cameraService.Zoom;
             set => _cameraService.Zoom = value;
+        }
+
+        [Category("Camera")]
+        [DisplayName("On Plain X")]
+        public float OnPlainX
+        {
+            get => _cameraService.CamDirectionOnPlane.x;
+        }
+
+        [Category("Camera")]
+        [DisplayName("On Plain Z")]
+        public float OnPlainZ
+        {
+            get => _cameraService.CamDirectionOnPlane.z;
         }
     }
 }

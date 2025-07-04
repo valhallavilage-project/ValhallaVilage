@@ -18,6 +18,12 @@ namespace L2Farm.Scripts
             builder.Register<CameraCheatOptions>(Lifetime.Singleton)
                 .AsImplementedInterfaces();
 
+            builder.Register<JoystickCheatOptions>(Lifetime.Singleton)
+                .AsImplementedInterfaces();
+
+            builder.Register<SimpleMovementCheatOptions>(Lifetime.Singleton)
+                .AsImplementedInterfaces();
+
             builder.Register<BlockableCheatPanelReaction>(Lifetime.Singleton)
                 .AsImplementedInterfaces();
         }

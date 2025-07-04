@@ -42,7 +42,7 @@ namespace L2Farm.Scripts
         {
             #if !DISABLE_SRDEBUGGER
             _resolver
-                .Resolve<IEnumerable<ICheatOption>>()
+                .Resolve<IEnumerable<ICheatOptions>>()
                 .ForEach(x => SRDebug.Instance.AddOptionContainer(x));
             #endif
 
