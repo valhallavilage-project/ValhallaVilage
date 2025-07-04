@@ -3,10 +3,11 @@ using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Sabresaurus.PlayerPrefsUtilities;
+using UnityEngine;
 
 namespace CrossProject.Core.SaveLoad
 {
-    public abstract class GameStateManager
+    public class GameStateManager
     {
         private const string GameStatePrefsKey = nameof(GameStatePrefsKey);
 
@@ -38,7 +39,10 @@ namespace CrossProject.Core.SaveLoad
         {
             var json = PlayerPrefsUtility.GetEncryptedString(GameStatePrefsKey, null);
             if (json == null)
+            {
+                CreateEmptyState();
                 return false;
+            }
 
             _gameState = _serializer.Deserialize<GameState>(json);
             return true;
@@ -47,10 +51,14 @@ namespace CrossProject.Core.SaveLoad
         private async UniTask SaveTask()
         {
             if (_gameState == null)
-                return;
+            {
+                CreateEmptyState();
+            }
 
             await UniTask.Yield(PlayerLoopTiming.PostLateUpdate);
-            PlayerPrefsUtility.SetEncryptedString(GameStatePrefsKey, _serializer.Serialize(_gameState));
+            var json = _serializer.Serialize(_gameState);
+            PlayerPrefsUtility.SetEncryptedString(GameStatePrefsKey, json);
+            Debug.Log(json);
         }
 
         public GameState Get()

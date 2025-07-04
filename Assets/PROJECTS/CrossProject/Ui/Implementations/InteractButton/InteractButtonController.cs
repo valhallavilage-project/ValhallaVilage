@@ -5,6 +5,7 @@ using CrossProject.Core.SimpleMovement;
 using CrossProject.Ui.Core;
 using Cysharp.Threading.Tasks;
 using R3;
+using VContainer;
 using VContainer.Unity;
 
 namespace CrossProject.Ui.Implementations.InteractButton
@@ -15,6 +16,7 @@ namespace CrossProject.Ui.Implementations.InteractButton
         private readonly Interactor _interactor;
         private readonly JoystickController _joystickController;
         private readonly SimpleMovementController _simpleMovementController;
+        private readonly IObjectResolver _objectResolver;
         private readonly List<IDisposable> _disposables = new();
 
         private InteractButton _view;
@@ -23,16 +25,20 @@ namespace CrossProject.Ui.Implementations.InteractButton
             UiService uiService,
             Interactor interactor,
             JoystickController joystickController,
-            SimpleMovementController simpleMovementController)
+            SimpleMovementController simpleMovementController,
+            IObjectResolver objectResolver)
         {
             _uiService = uiService;
             _interactor = interactor;
             _joystickController = joystickController;
             _simpleMovementController = simpleMovementController;
+            _objectResolver = objectResolver;
         }
 
         private async UniTask GetInteraction(InteractiveObject interactiveObject)
         {
+            _objectResolver.Inject(interactiveObject);
+
             _joystickController.RequestBlock(this);
             _simpleMovementController.RequestBlock(this);
             await _simpleMovementController.MoveTo(interactiveObject.transform.position);
