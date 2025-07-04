@@ -16,6 +16,7 @@ namespace CrossProject.Core.SimpleMovement
         private CameraService _cameraService;
         private IJoystickValueProvider _joystick;
 
+        //TODO : VM : move to skin controller
         [SerializeField] private Transform skinRoot;
         [SerializeField] private Skin defaultSkinPrefab;
 
@@ -54,6 +55,7 @@ namespace CrossProject.Core.SimpleMovement
             _joystick = joystickValueProvider;
         }
 
+        //TODO : VM : move to skin controller
         public void SetSkin(Skin skinPrefab)
         {
             var count = skinRoot.childCount;
@@ -82,14 +84,6 @@ namespace CrossProject.Core.SimpleMovement
         {
             _playerNavMeshAgent.SetDestination(target);
             await UniTask.WaitUntil(() => (_playerNavMeshAgent.transform.position - target).sqrMagnitude <= sqrTargetDistance);
-        }
-
-        private void OnDrawGizmosSelected()
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawSphere(transform.position, 1);
-            Gizmos.color = Color.magenta;
-            Gizmos.DrawSphere(transform.position + _direction, 1);
         }
 
         public void PostInitialize()
