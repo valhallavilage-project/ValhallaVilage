@@ -2,6 +2,7 @@ using CrossProject.Core;
 using CrossProject.Core.Camera;
 using CrossProject.Core.Cheats;
 using CrossProject.Core.Interactions;
+using CrossProject.Core.SaveLoad;
 using CrossProject.Core.SimpleMovement;
 using CrossProject.Ui.Core;
 using CrossProject.Ui.Implementations;
@@ -40,7 +41,9 @@ namespace L2Farm.Scripts
             //TODO : VM : Remote Config
             //TODO : VM : GameMigrate - prepare here, on gamestate load/create - migrate
 
-            //TODO : VM : GameState
+            builder.Register<GameState>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
 
             //TODO : VM : InApp
             //TODO : VM : Ads
@@ -73,9 +76,9 @@ namespace L2Farm.Scripts
                 .AsSelf()
                 .AsImplementedInterfaces();
 
-            // builder.Register<InteractButtonController>(Lifetime.Singleton)
-            //     .AsSelf()
-            //     .AsImplementedInterfaces();
+            builder.Register<InteractButtonController>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
 
             RegisterCheats(builder);
         }

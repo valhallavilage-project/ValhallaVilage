@@ -75,6 +75,8 @@ namespace CrossProject.Core.SimpleMovement
             {
                 _direction = _cameraService.CamDirectionOnPlane.normalized;
                 _direction.x *= _joystick.NormalizedVector2.x;
+                //TODO : VM : fix later
+                _direction.x *= 1.5f;
                 _direction.z *= _joystick.NormalizedVector2.y;
                 _playerNavMeshAgent.SetDestination(transform.position + _direction);
             }

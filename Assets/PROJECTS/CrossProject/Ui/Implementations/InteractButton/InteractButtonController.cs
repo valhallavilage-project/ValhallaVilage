@@ -43,6 +43,9 @@ namespace CrossProject.Ui.Implementations.InteractButton
 
         private void UpdateButtonModel(InteractiveObject interactiveObject)
         {
+            if (interactiveObject == null)
+                return;
+
             _view.BindModel(new InteractButtonModel(interactiveObject.buttonSprite, () => GetInteraction(interactiveObject).Forget()));
         }
 

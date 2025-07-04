@@ -15,5 +15,6 @@ namespace CrossProject.Ui.Implementations
         public float stickAlphaActive;
         public float deadZoneRadius;
         public float maxZoneRadius;
+        public string assetOverride;
     }
 }

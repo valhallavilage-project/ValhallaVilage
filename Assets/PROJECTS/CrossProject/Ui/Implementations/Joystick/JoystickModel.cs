@@ -31,7 +31,8 @@ namespace CrossProject.Ui.Implementations
                 stickAlphaInactive = config.stickAlphaInactive,
                 stickAlphaActive = config.stickAlphaActive,
                 deadZoneRadius = config.deadZoneRadius,
-                maxZoneRadius = config.maxZoneRadius
+                maxZoneRadius = config.maxZoneRadius,
+                AssetOverride = config.assetOverride
             };
         }
     }

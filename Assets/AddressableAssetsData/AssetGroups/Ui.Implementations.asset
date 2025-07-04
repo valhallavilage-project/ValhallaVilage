@@ -22,11 +22,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 832b1ecbf2a854682a6486d901b73a29
-    m_Address: L2Farm_LoadingScreen
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8fcbadfc4aab34903a222ee5b9f6e0aa
     m_Address: Slider
     m_ReadOnly: 0
@@ -34,6 +29,16 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a67e2c4db06434032a171a3fd285964a
     m_Address: NoInternetScreen
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c280f40aa18e341d6bee2401b9f16824
+    m_Address: L2Farm_Joystick
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d39253945e6784aae9c17a26e23e619a
+    m_Address: InteractButton
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

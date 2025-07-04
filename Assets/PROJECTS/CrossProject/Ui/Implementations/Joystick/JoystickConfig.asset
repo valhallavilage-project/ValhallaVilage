@@ -22,3 +22,4 @@ MonoBehaviour:
   stickAlphaActive: 1
   deadZoneRadius: 0
   maxZoneRadius: 100
+  assetOverride: L2Farm_Joystick

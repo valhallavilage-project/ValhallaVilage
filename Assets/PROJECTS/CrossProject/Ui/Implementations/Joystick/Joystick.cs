@@ -43,12 +43,12 @@ namespace CrossProject.Ui.Implementations
         public void StartDrag()
         {
             background.position = Input.mousePosition;
+            _backgroundCanvasGroup.alpha = Model.backgroundAlphaActive;
+            _stickCanvasGroup.alpha = Model.stickAlphaActive;
         }
 
         public void ProcessDrag()
         {
-            _backgroundCanvasGroup.alpha = Model.backgroundAlphaActive;
-            _stickCanvasGroup.alpha = Model.stickAlphaActive;
             stick.position = Input.mousePosition;
             var sqrMagnitude = stick.anchoredPosition.sqrMagnitude;
             if (sqrMagnitude > _sqrMaxZoneRadius)
@@ -62,7 +62,9 @@ namespace CrossProject.Ui.Implementations
         public void EndDrag()
         {
             background.anchoredPosition = Vector2.zero;
+            _backgroundCanvasGroup.alpha = Model.backgroundAlphaInactive;
             stick.anchoredPosition = Vector3.zero;
+            _stickCanvasGroup.alpha = Model.stickAlphaInactive;
             NormalizedValue = Vector2.zero;
         }
     }
