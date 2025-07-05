@@ -1,5 +1,6 @@
 using CrossProject.Core.SaveLoad;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using VContainer;
 
 namespace CrossProject.Core.Interactions
@@ -14,10 +15,19 @@ namespace CrossProject.Core.Interactions
             _gameStateManager = gameStateManager;
         }
 
-        public override async UniTask Interact()
+        public override async UniTask Interaction()
         {
             await UniTask.WaitForSeconds(interactionDuration);
-            Destroy(gameObject);
+            Respawn().Forget();
+        }
+
+        private async UniTask Respawn()
+        {
+            viewRoot.SetActive(false);
+            CanInteract = false;
+            await UniTask.WaitForSeconds(15);
+            viewRoot.SetActive(true);
+            CanInteract = true;
         }
     }
 }

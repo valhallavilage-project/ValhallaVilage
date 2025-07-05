@@ -31,12 +31,12 @@ namespace CrossProject.Core.SimpleMovement
         public Vector3 Velocity => _playerNavMeshAgent.velocity;
         public Vector3 Direction => _direction;
 
-        public void RequestBlock(object blockRequester)
+        public void AddBlock(object blockRequester)
         {
             _blockers.Add(blockRequester.GetType());
         }
 
-        public void ReleaseBlock(object blockRequester)
+        public void RemoveBlock(object blockRequester)
         {
             _blockers.Remove(blockRequester.GetType());
         }
@@ -71,25 +71,26 @@ namespace CrossProject.Core.SimpleMovement
 
         public void Tick()
         {
-            if (!IsBlocked)
-            {
-                _direction = _cameraService.CamDirectionOnPlane.normalized;
-                _direction.x *= _joystick.NormalizedVector2.x;
-                //TODO : VM : fix later
-                _direction.x *= 1.5f;
-                _direction.z *= _joystick.NormalizedVector2.y;
-                _playerNavMeshAgent.SetDestination(transform.position + _direction);
-            }
+            if (IsBlocked)
+                return;
+
+            _direction = _cameraService.CamDirectionOnPlane.normalized;
+            _direction.x *= _joystick.NormalizedVector2.x;
+            //TODO : VM : fix later
+            _direction.x *= 1.5f;
+            _direction.z *= _joystick.NormalizedVector2.y;
+            _playerNavMeshAgent.isStopped = false;
+            _playerNavMeshAgent.SetDestination(transform.position + _direction);
 
             if (_currentSkin != null && _currentSkin.Animator != null)
                 _currentSkin.Animator.SetFloat(Speed, _joystick.NormalizedVector2.sqrMagnitude > 0 ? 1 : 0);
         }
 
-        public async UniTask MoveTo(Vector3 target, float sqrTargetDistance = 1)
+        public async UniTask MoveTo(Vector3 target, float targetDistance = 1)
         {
             _playerNavMeshAgent.SetDestination(target);
-            _currentSkin.Animator.SetFloat(Speed, 1);
-            await UniTask.WaitUntil(() => (_playerNavMeshAgent.transform.position - target).sqrMagnitude <= sqrTargetDistance);
+            _currentSkin.Animator.SetFloat(Speed, 100);
+            await UniTask.WaitUntil(() => (transform.position - target).sqrMagnitude <= targetDistance * targetDistance);
             _currentSkin.Animator.SetFloat(Speed, 0);
             _playerNavMeshAgent.isStopped = true;
         }

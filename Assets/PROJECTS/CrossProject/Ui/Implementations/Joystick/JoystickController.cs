@@ -40,7 +40,7 @@ namespace CrossProject.Ui.Implementations
             _addressablesManager = addressablesManager;
         }
 
-        public void RequestBlock(object blockRequester)
+        public void AddBlock(object blockRequester)
         {
             if (_blockers.Count == 0)
                 _uiService.HideHudElement<JoystickModel>();
@@ -48,7 +48,7 @@ namespace CrossProject.Ui.Implementations
             _blockers.Add(blockRequester);
         }
 
-        public void ReleaseBlock(object blockRequester)
+        public void RemoveBlock(object blockRequester)
         {
             _blockers.Remove(blockRequester);
 

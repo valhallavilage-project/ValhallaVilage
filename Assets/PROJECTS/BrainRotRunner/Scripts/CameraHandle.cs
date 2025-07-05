@@ -88,12 +88,12 @@ namespace RUNNER.Scripts
                 ChangeVerticalAngle();
         }
 
-        public void RequestBlock(object blockRequester)
+        public void AddBlock(object blockRequester)
         {
             _blockers.Add(blockRequester.GetType());
         }
 
-        public void ReleaseBlock(object blockRequester)
+        public void RemoveBlock(object blockRequester)
         {
             _blockers.Remove(blockRequester.GetType());
         }
