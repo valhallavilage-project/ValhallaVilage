@@ -41,7 +41,7 @@ namespace L2Farm.Scripts
             //TODO : VM : Remote Config
             //TODO : VM : GameMigrate - prepare here, on gamestate load/create - migrate
 
-            builder.Register<GameState>(Lifetime.Singleton)
+            builder.Register<GameStateManager>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
 

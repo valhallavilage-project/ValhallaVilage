@@ -6,7 +6,7 @@ using Sabresaurus.PlayerPrefsUtilities;
 
 namespace CrossProject.Core.SaveLoad
 {
-    public abstract class GameStateManager
+    public class GameStateManager
     {
         private const string GameStatePrefsKey = nameof(GameStatePrefsKey);
 

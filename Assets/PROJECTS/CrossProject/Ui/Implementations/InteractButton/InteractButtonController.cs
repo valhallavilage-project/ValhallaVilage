@@ -5,6 +5,7 @@ using CrossProject.Core.SimpleMovement;
 using CrossProject.Ui.Core;
 using Cysharp.Threading.Tasks;
 using R3;
+using UnityEngine;
 using VContainer.Unity;
 
 namespace CrossProject.Ui.Implementations.InteractButton
@@ -35,10 +36,10 @@ namespace CrossProject.Ui.Implementations.InteractButton
         {
             _joystickController.RequestBlock(this);
             _simpleMovementController.RequestBlock(this);
-            await _simpleMovementController.MoveTo(interactiveObject.transform.position);
+            await _simpleMovementController.MoveTo(interactiveObject.transform.position, interactiveObject.interactionDistance * interactiveObject.interactionDistance);
             await interactiveObject.Interact();
             _joystickController.ReleaseBlock(this);
-            _simpleMovementController.RequestBlock(this);
+            _simpleMovementController.ReleaseBlock(this);
         }
 
         private void UpdateButtonModel(InteractiveObject interactiveObject)
@@ -46,7 +47,11 @@ namespace CrossProject.Ui.Implementations.InteractButton
             if (interactiveObject == null)
                 return;
 
-            _view.BindModel(new InteractButtonModel(interactiveObject.buttonSprite, () => GetInteraction(interactiveObject).Forget()));
+            var model = new InteractButtonModel(interactiveObject.buttonSprite, () => GetInteraction(interactiveObject).Forget());
+            model.anchorMin = new Vector2(0.7f, 0.3f);
+            model.anchorMax = new Vector2(0.7f, 0.3f);
+            model.sizeDelta = new Vector2(150, 150);
+            _view.BindModel(model);
         }
 
         public async void Initialize()

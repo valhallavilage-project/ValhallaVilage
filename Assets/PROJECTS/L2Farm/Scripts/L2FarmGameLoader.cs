@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using CrossProject.Core;
 using CrossProject.Core.Cheats;
+using CrossProject.Core.SaveLoad;
 using CrossProject.Ui.Core;
-using CrossProject.Ui.Implementations;
 using Cysharp.Threading.Tasks;
 using Sirenix.Utilities;
 using VContainer;
@@ -47,6 +47,18 @@ namespace L2Farm.Scripts
             #endif
 
             _uiService.Load(PrepareGameLoad()).Forget();
+
+            InitGameState();
+        }
+
+        private void InitGameState()
+        {
+            var gameStateManger = _resolver.Resolve<GameStateManager>();
+            var gameState = gameStateManger.Get();
+            if (!gameState.TryGet<ResourcesPart>(out _))
+            {
+                gameState.Set(new ResourcesPart());
+            }
         }
     }
 }

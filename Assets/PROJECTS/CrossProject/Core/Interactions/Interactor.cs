@@ -51,6 +51,9 @@ namespace CrossProject.Core.Interactions
             InteractiveObject closest = null;
             foreach (var interactableObject in _objects)
             {
+                if (interactableObject == null)
+                    continue;
+
                 float distance = (interactableObject.transform.position - transform.position).sqrMagnitude;
 
                 if (closest == null)
@@ -69,7 +72,7 @@ namespace CrossProject.Core.Interactions
 
             if (Closest.Value != closest && closest != null)
             {
-                Closest.Value.Deselect();
+                Closest.Value?.Deselect();
 
                 Closest.Value = closest;
                 Closest.Value.Select();

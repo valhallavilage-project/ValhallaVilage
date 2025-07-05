@@ -88,7 +88,10 @@ namespace CrossProject.Core.SimpleMovement
         public async UniTask MoveTo(Vector3 target, float sqrTargetDistance = 1)
         {
             _playerNavMeshAgent.SetDestination(target);
+            _currentSkin.Animator.SetFloat(Speed, 1);
             await UniTask.WaitUntil(() => (_playerNavMeshAgent.transform.position - target).sqrMagnitude <= sqrTargetDistance);
+            _currentSkin.Animator.SetFloat(Speed, 0);
+            _playerNavMeshAgent.isStopped = true;
         }
 
         public void PostInitialize()
