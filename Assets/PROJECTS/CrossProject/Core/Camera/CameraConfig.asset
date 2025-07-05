@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yRotationAngle: 215
   xRotationAngle: 300
-  zoomDistance: 20
+  zoomDistance: 25

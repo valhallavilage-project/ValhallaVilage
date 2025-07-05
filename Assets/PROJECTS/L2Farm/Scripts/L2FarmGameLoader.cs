@@ -47,7 +47,18 @@ namespace L2Farm.Scripts
             #endif
 
             _uiService.Load(PrepareGameLoad()).Forget();
-            _resolver.Resolve<GameStateManager>().Save();
+
+            InitGameState();
+        }
+
+        private void InitGameState()
+        {
+            var gameStateManger = _resolver.Resolve<GameStateManager>();
+            var gameState = gameStateManger.Get();
+            if (!gameState.TryGet<ResourcesPart>(out _))
+            {
+                gameState.Set(new ResourcesPart());
+            }
         }
     }
 }

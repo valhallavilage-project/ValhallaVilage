@@ -35,30 +35,38 @@ namespace CrossProject.Ui.Implementations.InteractButton
             _objectResolver = objectResolver;
         }
 
-        private async UniTask GetInteraction(InteractiveObject interactiveObject)
+        private async UniTask GetInteraction()
         {
-            _objectResolver.Inject(interactiveObject);
 
-            _joystickController.RequestBlock(this);
-            _simpleMovementController.RequestBlock(this);
-            await _simpleMovementController.MoveTo(interactiveObject.transform.position);
-            await interactiveObject.Interact();
-            _joystickController.ReleaseBlock(this);
-            _simpleMovementController.RequestBlock(this);
+            _joystickController.AddBlock(this);
+            _simpleMovementController.AddBlock(this);
+            await _simpleMovementController.MoveTo(_interactor.Closest.Value.transform.position, _interactor.Closest.Value.interactionDistance);
+            await _interactor.Interact();
+            _joystickController.RemoveBlock(this);
+            _simpleMovementController.RemoveBlock(this);
         }
 
-        private void UpdateButtonModel(InteractiveObject interactiveObject)
+        private void UpdateButtonModel()
         {
-            if (interactiveObject == null)
+            if (_interactor.Closest.Value == null)
+            {
+                _view.BindModel(new InteractButtonModel(null, null));
                 return;
+            }
 
-            _view.BindModel(new InteractButtonModel(interactiveObject.buttonSprite, () => GetInteraction(interactiveObject).Forget()));
+            var model = new InteractButtonModel(_interactor.Closest.Value.buttonSprite, () => GetInteraction().Forget())
+                {
+                    anchorMin = new Vector2(0.7f, 0.3f),
+                    anchorMax = new Vector2(0.7f, 0.3f),
+                    sizeDelta = new Vector2(150, 150)
+                };
+            _view.BindModel(model);
         }
 
         public async void Initialize()
         {
             _view = await _uiService.TryOpen(new InteractButtonModel(null, null)) as InteractButton;
-            _disposables.Add(_interactor.Closest.Subscribe(UpdateButtonModel));
+            _disposables.Add(_interactor.Closest.Subscribe(_ => UpdateButtonModel()));
         }
 
         public void Dispose()
