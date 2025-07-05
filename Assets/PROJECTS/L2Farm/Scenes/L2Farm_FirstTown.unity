@@ -3968,6 +3968,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
       value: 8
@@ -4580,6 +4584,10 @@ PrefabInstance:
     - target: {fileID: 4227187414129679084, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
@@ -5768,6 +5776,10 @@ PrefabInstance:
     - target: {fileID: 4227187414129679084, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
@@ -7084,6 +7096,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
       value: 8
@@ -7376,6 +7392,10 @@ PrefabInstance:
     - target: {fileID: 4227187414129679084, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
@@ -8177,6 +8197,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
       value: 8
@@ -8871,6 +8895,10 @@ PrefabInstance:
     - target: {fileID: 4227187414129679084, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
@@ -10910,6 +10938,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
       value: 8
@@ -12015,6 +12047,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
       value: 8
@@ -12568,6 +12604,10 @@ PrefabInstance:
     - target: {fileID: 4227187414129679084, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
@@ -18760,6 +18800,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
       value: 8
@@ -19351,6 +19395,10 @@ PrefabInstance:
     - target: {fileID: 4227187414129679084, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
@@ -20938,6 +20986,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
       value: 8
@@ -21658,6 +21710,10 @@ PrefabInstance:
     - target: {fileID: 4227187414129679084, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
@@ -23589,6 +23645,10 @@ PrefabInstance:
     - target: {fileID: 4227187414129679084, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
@@ -26254,6 +26314,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
       value: 8
@@ -28389,6 +28453,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
       value: 8
@@ -30113,6 +30181,10 @@ PrefabInstance:
     - target: {fileID: 4227187414129679084, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
@@ -32204,6 +32276,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
       value: 8
@@ -32865,6 +32941,10 @@ PrefabInstance:
     - target: {fileID: 4227187414129679084, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
@@ -35535,6 +35615,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
       value: 8
@@ -36117,6 +36201,10 @@ PrefabInstance:
     - target: {fileID: 4227187414129679084, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
@@ -37830,6 +37918,10 @@ PrefabInstance:
     - target: {fileID: 4227187414129679084, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
@@ -39761,6 +39853,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
       value: 8
@@ -41124,6 +41220,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
       value: 8
@@ -41308,6 +41408,10 @@ PrefabInstance:
     - target: {fileID: 4227187414129679084, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
@@ -41856,6 +41960,10 @@ PrefabInstance:
     - target: {fileID: 4227187414129679084, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
@@ -43167,6 +43275,10 @@ PrefabInstance:
     - target: {fileID: 4227187414129679084, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
@@ -47097,6 +47209,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
       value: 8
@@ -47418,6 +47534,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
       value: 8
@@ -47680,6 +47800,10 @@ PrefabInstance:
     - target: {fileID: 4227187414129679084, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
@@ -49127,6 +49251,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
       value: 8
@@ -49633,6 +49761,10 @@ PrefabInstance:
     - target: {fileID: 4227187414129679084, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
@@ -56443,6 +56575,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
       value: 8
@@ -57121,6 +57257,10 @@ PrefabInstance:
     - target: {fileID: 4227187414129679084, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
@@ -58925,6 +59065,10 @@ PrefabInstance:
     - target: {fileID: 4227187414129679084, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
@@ -63352,6 +63496,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
       value: 8
@@ -65550,6 +65698,10 @@ PrefabInstance:
     - target: {fileID: 4227187414129679084, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
@@ -69698,6 +69850,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
       value: 8
@@ -72738,6 +72894,10 @@ PrefabInstance:
     - target: {fileID: 4227187414129679084, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
@@ -77670,6 +77830,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
       value: 8
@@ -78922,6 +79086,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
       value: 8
@@ -79003,6 +79171,10 @@ PrefabInstance:
     - target: {fileID: 4227187414129679084, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
@@ -82374,6 +82546,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
       value: 8
@@ -82884,6 +83060,10 @@ PrefabInstance:
     - target: {fileID: 4227187414129679084, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
@@ -89695,6 +89875,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
       value: 8
@@ -90400,6 +90584,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
       value: 8
@@ -90793,6 +90981,10 @@ PrefabInstance:
     - target: {fileID: 4227187414129679084, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
@@ -95508,6 +95700,10 @@ PrefabInstance:
     - target: {fileID: 4227187414129679084, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
@@ -105296,6 +105492,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
       value: 8
@@ -106285,6 +106485,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
       value: 8
@@ -106440,6 +106644,10 @@ PrefabInstance:
     - target: {fileID: 4227187414129679084, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: interactionDistance
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8300417568750100406, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_Radius
