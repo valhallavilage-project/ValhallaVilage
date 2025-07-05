@@ -6,6 +6,7 @@ using CrossProject.Ui.Core;
 using Cysharp.Threading.Tasks;
 using R3;
 using VContainer;
+using UnityEngine;
 using VContainer.Unity;
 
 namespace CrossProject.Ui.Implementations.InteractButton
