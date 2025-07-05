@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using R3;
 using UnityEngine;
 
@@ -30,7 +31,7 @@ namespace CrossProject.Core.Interactions
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent<InteractiveObject>(out var interactableObject))
+            if (other.TryGetComponent<InteractiveObject>(out var interactableObject) && interactableObject.CanInteract)
                 _objects.Add(interactableObject);
         }
 
@@ -52,6 +53,9 @@ namespace CrossProject.Core.Interactions
             foreach (var interactableObject in _objects)
             {
                 if (interactableObject == null)
+                    continue;
+
+                if (!interactableObject.CanInteract)
                     continue;
 
                 float distance = (interactableObject.transform.position - transform.position).sqrMagnitude;
@@ -85,6 +89,11 @@ namespace CrossProject.Core.Interactions
                     _selectIndicator.localScale = Vector3.one * Closest.Value.selectorScale;
                 }
             }
+        }
+
+        public async UniTask Interact()
+        {
+            await Closest.Value.Interaction();
         }
     }
 }

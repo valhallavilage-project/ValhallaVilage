@@ -157,6 +157,7 @@ MonoBehaviour:
   selectorScale: 1
   buttonSprite: {fileID: 21300000, guid: f507f03eb80bcbf49bb458bd6a54bd9a, type: 3}
   animation: 0
+  viewRoot: {fileID: 6399536857068040373}
   highLight: {fileID: 768522420164875505}
 --- !u!208 &4636542201718646812
 NavMeshObstacle:

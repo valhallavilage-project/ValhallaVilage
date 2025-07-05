@@ -12,9 +12,12 @@ namespace CrossProject.Core.Interactions
         public Sprite buttonSprite;
         public InteractionAnimation animation;
 
+        [SerializeField] protected GameObject viewRoot;
         [SerializeField] private GameObject highLight;
 
         private SphereCollider _collider;
+
+        public bool CanInteract { get; protected set; } = true;
 
         private void Awake()
         {
@@ -35,6 +38,6 @@ namespace CrossProject.Core.Interactions
             Debug.Log($"Deselect - {gameObject.name}");
         }
 
-        public abstract UniTask Interact();
+        public abstract UniTask Interaction();
     }
 }
