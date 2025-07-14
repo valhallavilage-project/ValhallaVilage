@@ -17,7 +17,6 @@ namespace CrossProject.Ui.Implementations.InteractButton
         private readonly Interactor _interactor;
         private readonly JoystickController _joystickController;
         private readonly SimpleMovementController _simpleMovementController;
-        private readonly IObjectResolver _objectResolver;
         private readonly List<IDisposable> _disposables = new();
 
         private InteractButton _view;
@@ -26,19 +25,16 @@ namespace CrossProject.Ui.Implementations.InteractButton
             UiService uiService,
             Interactor interactor,
             JoystickController joystickController,
-            SimpleMovementController simpleMovementController,
-            IObjectResolver objectResolver)
+            SimpleMovementController simpleMovementController)
         {
             _uiService = uiService;
             _interactor = interactor;
             _joystickController = joystickController;
             _simpleMovementController = simpleMovementController;
-            _objectResolver = objectResolver;
         }
 
         private async UniTask GetInteraction()
         {
-
             _joystickController.AddBlock(this);
             _simpleMovementController.AddBlock(this);
             await _simpleMovementController.MoveTo(_interactor.Closest.Value.transform.position, _interactor.Closest.Value.interactionDistance);

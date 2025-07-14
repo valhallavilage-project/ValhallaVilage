@@ -7,6 +7,7 @@ using CrossProject.Core.SimpleMovement;
 using CrossProject.Ui.Core;
 using CrossProject.Ui.Implementations;
 using CrossProject.Ui.Implementations.InteractButton;
+using CrossProject.Ui.Implementations.SettingsPopup;
 using VContainer;
 using VContainer.Unity;
 
@@ -61,6 +62,10 @@ namespace L2Farm.Scripts
                 .AsImplementedInterfaces();
 
             builder.Register<L2FarmGameLoader>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+
+            builder.Register<SettingsPopupController>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
 

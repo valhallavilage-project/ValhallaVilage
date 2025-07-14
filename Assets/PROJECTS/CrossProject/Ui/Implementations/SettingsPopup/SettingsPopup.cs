@@ -2,37 +2,41 @@
 using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
-using R3;
 
 namespace CrossProject.Ui.Implementations.SettingsPopup
 {
     public class SettingsPopup : PopupView<SettingsPopupModel>
     {
         [SerializeField]
-        private Button _musicButton;
+        private Button closePanel;
 
         [SerializeField]
-        private Button _sfxButton;
+        private Button musicButton;
 
         [SerializeField]
-        private TMP_Dropdown _languageSelect;
+        private Button sfxButton;
 
         [SerializeField]
-        private Button _discordButton;
+        private TMP_Dropdown languageSelect;
 
         [SerializeField]
-        private Button _youtubeButton;
+        private Button discordButton;
 
         [SerializeField]
-        private Button _vkButton;
+        private Button youtubeButton;
 
-        private void Awake()
+        [SerializeField]
+        private Button vkButton;
+
+        protected override void OnBind()
         {
-            _musicButton.onClick.AddListener(() => { Debug.Log("ToggleMusic"); });
-            _sfxButton.onClick.AddListener(() => { Debug.Log("ToggleSFX"); });
-            _discordButton.onClick.AddListener(() => { Debug.Log("ToggleDiscord"); });
-            _youtubeButton.onClick.AddListener(() => { Debug.Log("ToggleYouTube"); });
-            _vkButton.onClick.AddListener(() => { Debug.Log("ToggleVK"); });
+            closePanel.onClick.AddListener(() => { Model.Close?.Invoke(); });
+            musicButton.onClick.AddListener(() => { Debug.Log("ToggleMusic"); });
+            sfxButton.onClick.AddListener(() => { Debug.Log("ToggleSFX"); });
+            languageSelect.onValueChanged.AddListener(x => { Debug.Log($"Selected option : {x}"); });
+            discordButton.onClick.AddListener(() => Application.OpenURL("https://discord.gg"));
+            youtubeButton.onClick.AddListener(() => Application.OpenURL("https://youtube.com"));
+            vkButton.onClick.AddListener(() => Application.OpenURL("https://vk.com"));
         }
     }
 }

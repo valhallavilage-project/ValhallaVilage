@@ -15,6 +15,7 @@ namespace CrossProject.Ui.Implementations.InteractButton
             rectTransform.anchorMin = Model.anchorMin;
             rectTransform.anchorMax = Model.anchorMax;
             rectTransform.sizeDelta = Model.sizeDelta;
+            rectTransform.anchoredPosition = Vector2.zero;
 
             icon.gameObject.SetActive(Model.InteractionIcon != null);
             if (Model.InteractionIcon != null)

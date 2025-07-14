@@ -17,6 +17,11 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 8a37376f8d428423286b753c543f866b
   m_SerializeEntries:
+  - m_GUID: 411eaeda2ab5c4e43a5b612872e2698e
+    m_Address: SettingsHudElement
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6fed3b1ceea69454a92da15194a881c5
     m_Address: Joystick
     m_ReadOnly: 0
@@ -39,6 +44,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d39253945e6784aae9c17a26e23e619a
     m_Address: InteractButton
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d7ef62703f971fb4fac25f405afcf65c
+    m_Address: SettingsPopup
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

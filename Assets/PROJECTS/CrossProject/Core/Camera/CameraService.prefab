@@ -58,6 +58,7 @@ GameObject:
   - component: {fileID: 2274457467994452515}
   - component: {fileID: 8641571181393404290}
   - component: {fileID: 4918174743493862750}
+  - component: {fileID: 2360060036567074899}
   m_Layer: 0
   m_Name: ZoomHandle
   m_TagString: Untagged
@@ -175,3 +176,11 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!81 &2360060036567074899
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6995593363932096197}
+  m_Enabled: 1

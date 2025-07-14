@@ -29,7 +29,7 @@ namespace CrossProject.Ui.Core
                 throw new Exception("Create rules for abstract only models!");
         }
 
-        public bool CanApply(Type modelType) => modelType.InheritsFrom(typeof(TUiModel));
+        public bool CanApply(Type modelType) => modelType.InheritsFrom(typeof(TUiModel)) || modelType == typeof(TUiModel);
 
         protected async UniTask<GameObject> GetPrefab(string key)
         {

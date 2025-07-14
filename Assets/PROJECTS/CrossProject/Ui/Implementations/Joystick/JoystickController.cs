@@ -65,6 +65,14 @@ namespace CrossProject.Ui.Implementations
         public void Initialize()
         {
             OpenJoystick();
+
+            var screenRule = _uiService.GetRule(typeof(ScreenModel));
+            screenRule.OnOpen += AddBlock;
+            screenRule.OnClose += RemoveBlock;
+
+            var popupRule = _uiService.GetRule(typeof(PopupModel));
+            popupRule.OnOpen += AddBlock;
+            popupRule.OnClose += RemoveBlock;
         }
 
         public void Tick()

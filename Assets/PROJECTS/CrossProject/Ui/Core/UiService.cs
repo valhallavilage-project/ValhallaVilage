@@ -35,7 +35,6 @@ namespace CrossProject.Ui.Core
         {
             DontDestroyOnLoad(this);
             ApplySafeAreaTo(hudRoot);
-            ApplySafeAreaTo(popupRoot);
         }
 
         public void Initialize()
