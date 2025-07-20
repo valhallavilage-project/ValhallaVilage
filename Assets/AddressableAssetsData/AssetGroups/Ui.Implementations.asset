@@ -17,6 +17,11 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 8a37376f8d428423286b753c543f866b
   m_SerializeEntries:
+  - m_GUID: 0301ccbaaf72f26448af580b40eb0813
+    m_Address: CharacterSelectScreen
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 411eaeda2ab5c4e43a5b612872e2698e
     m_Address: SettingsHudElement
     m_ReadOnly: 0

@@ -1,17 +1,17 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using CrossProject.Core.Interactions;
 using CrossProject.Core.SimpleMovement;
 using CrossProject.Ui.Core;
 using Cysharp.Threading.Tasks;
 using R3;
-using VContainer;
 using UnityEngine;
 using VContainer.Unity;
 
 namespace CrossProject.Ui.Implementations.InteractButton
 {
-    public class InteractButtonController : IInitializable, IDisposable
+    public class InteractButtonController : IAsyncStartable, IDisposable
     {
         private readonly UiService _uiService;
         private readonly Interactor _interactor;
@@ -31,6 +31,12 @@ namespace CrossProject.Ui.Implementations.InteractButton
             _interactor = interactor;
             _joystickController = joystickController;
             _simpleMovementController = simpleMovementController;
+        }
+
+        public async UniTask StartAsync(CancellationToken cancellation = default)
+        {
+            _view = await _uiService.TryOpen(new InteractButtonModel(null, null)) as InteractButton;
+            _disposables.Add(_interactor.Closest.Subscribe(_ => UpdateButtonModel()));
         }
 
         private async UniTask GetInteraction()
@@ -58,12 +64,6 @@ namespace CrossProject.Ui.Implementations.InteractButton
                     sizeDelta = new Vector2(150, 150)
                 };
             _view.BindModel(model);
-        }
-
-        public async void Initialize()
-        {
-            _view = await _uiService.TryOpen(new InteractButtonModel(null, null)) as InteractButton;
-            _disposables.Add(_interactor.Closest.Subscribe(_ => UpdateButtonModel()));
         }
 
         public void Dispose()

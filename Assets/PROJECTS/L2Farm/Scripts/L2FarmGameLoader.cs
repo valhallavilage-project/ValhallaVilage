@@ -54,7 +54,7 @@ namespace L2Farm.Scripts
         private void InitGameState()
         {
             var gameStateManger = _resolver.Resolve<GameStateManager>();
-            var gameState = gameStateManger.Get();
+            var gameState = gameStateManger.State;
             if (!gameState.TryGet<ResourcesPart>(out _))
             {
                 gameState.Set(new ResourcesPart());

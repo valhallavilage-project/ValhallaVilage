@@ -4,10 +4,11 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Sabresaurus.PlayerPrefsUtilities;
 using UnityEngine;
+using VContainer.Unity;
 
 namespace CrossProject.Core.SaveLoad
 {
-    public class GameStateManager
+    public class GameStateManager : IInitializable
     {
         private const string GameStatePrefsKey = nameof(GameStatePrefsKey);
 
@@ -30,22 +31,30 @@ namespace CrossProject.Core.SaveLoad
         private GameState _gameState;
         private UniTask _saveTask;
 
+        public GameState State
+        {
+            get
+            {
+                if (_gameState == null)
+                    LoadOrCreateSavedData();
+
+                return _gameState;
+            }
+        }
+
         private void CreateEmptyState()
         {
             _gameState = new GameState();
         }
 
-        private bool TryLoadSavedData()
+        private void LoadOrCreateSavedData()
         {
             var json = PlayerPrefsUtility.GetEncryptedString(GameStatePrefsKey, null);
-            if (json == null)
-            {
-                CreateEmptyState();
-                return false;
-            }
 
-            _gameState = _serializer.Deserialize<GameState>(json);
-            return true;
+            if (json == null)
+                CreateEmptyState();
+            else
+                _gameState = _serializer.Deserialize<GameState>(json);
         }
 
         private async UniTask SaveTask()
@@ -61,18 +70,15 @@ namespace CrossProject.Core.SaveLoad
             Debug.Log(json);
         }
 
-        public GameState Get()
-        {
-            if (_gameState == null && !TryLoadSavedData())
-                CreateEmptyState();
-
-            return _gameState;
-        }
-
         public void Save()
         {
             if (_saveTask.Status != UniTaskStatus.Pending)
                 _saveTask = SaveTask();
+        }
+
+        public void Initialize()
+        {
+            LoadOrCreateSavedData();
         }
     }
 }

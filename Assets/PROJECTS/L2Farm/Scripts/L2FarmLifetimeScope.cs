@@ -1,13 +1,16 @@
 using CrossProject.Core;
 using CrossProject.Core.Camera;
+using CrossProject.Core.Characters;
 using CrossProject.Core.Cheats;
 using CrossProject.Core.Interactions;
 using CrossProject.Core.SaveLoad;
 using CrossProject.Core.SimpleMovement;
+using CrossProject.Core.Skins;
 using CrossProject.Ui.Core;
 using CrossProject.Ui.Implementations;
 using CrossProject.Ui.Implementations.InteractButton;
 using CrossProject.Ui.Implementations.SettingsPopup;
+using PROJECTS.L2Farm.Scripts.CharacterSkinSelect;
 using VContainer;
 using VContainer.Unity;
 
@@ -82,6 +85,18 @@ namespace L2Farm.Scripts
                 .AsImplementedInterfaces();
 
             builder.Register<InteractButtonController>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+
+            builder.Register<SkinService>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+
+            builder.Register<CharactersService>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+
+            builder.Register<CharacterSkinSelectScreenController>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
 

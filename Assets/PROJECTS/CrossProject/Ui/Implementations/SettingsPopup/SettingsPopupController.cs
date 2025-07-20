@@ -1,11 +1,13 @@
 ﻿using System;
+using System.Threading;
 using CrossProject.Ui.Core;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer.Unity;
 
 namespace CrossProject.Ui.Implementations.SettingsPopup
 {
-    public class SettingsPopupController : IInitializable
+    public class SettingsPopupController : IAsyncStartable
     {
         private readonly UiService _uiService;
 
@@ -17,7 +19,7 @@ namespace CrossProject.Ui.Implementations.SettingsPopup
             _uiService = uiService;
         }
 
-        public async void Initialize()
+        public async UniTask StartAsync(CancellationToken cancellation = default)
         {
             var hudElementModel = new SettingsHudElementModel()
             {

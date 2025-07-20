@@ -77,6 +77,11 @@ namespace CrossProject.Ui.Implementations
 
         public void Tick()
         {
+            if (_view == null)
+            {
+                return;
+            }
+
             if (IsBlocked)
             {
                 if (_view.NormalizedValue != Vector2.zero)
