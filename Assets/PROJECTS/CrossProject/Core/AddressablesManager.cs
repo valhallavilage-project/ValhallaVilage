@@ -2,6 +2,7 @@ using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using Object = UnityEngine.Object;
 
 namespace CrossProject.Core
 {
@@ -21,6 +22,7 @@ namespace CrossProject.Core
         public void ReleaseInstance(GameObject instance)
         {
             Addressables.ReleaseInstance(instance);
+            Object.Destroy(instance);
         }
     }
 }

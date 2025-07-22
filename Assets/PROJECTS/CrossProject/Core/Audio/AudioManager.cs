@@ -4,13 +4,11 @@ namespace CrossProject.Core.Audio
 {
     public class AudioManager : MonoBehaviour
     {
-        private AudioSourcePool _pool;
+        [SerializeField]
+        private AudioSource _bgm;
 
-        private void Awake()
-        {
-            var poolPrefab = Resources.Load<AudioSourcePool>($"Pools/{nameof(AudioSourcePool)}");
-            _pool = Instantiate(poolPrefab);
-        }
+        [SerializeField]
+        private AudioSourcePool _pool;
 
         private void RepositionAudioSource(Transform source, Transform parent)
         {
@@ -28,15 +26,21 @@ namespace CrossProject.Core.Audio
             element.Source.PlayOneShot(clip, volume);
         }
 
-        public void PlayLooped(AudioClip clip, Transform parent = null)
+        public void PlayBGM(AudioClip clip = null)
         {
-            var element = _pool.Get();
-            if (parent != null)
-                RepositionAudioSource(element.transform, parent);
+            if (clip != null)
+                _bgm.clip = clip;
+            _bgm.Play();
+        }
 
-            element.Source.loop = true;
-            element.Source.clip = clip;
-            element.Source.Play();
+        public void ToggleSFX()
+        {
+            _pool.ToggleMute();
+        }
+
+        public void ToggleBGM()
+        {
+            _bgm.mute = !_bgm.mute;
         }
     }
 }

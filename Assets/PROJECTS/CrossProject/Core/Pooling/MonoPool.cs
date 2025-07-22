@@ -19,6 +19,8 @@ namespace CrossProject.Core.Pooling
         private Transform _t;
         private readonly LinkedList<T> _activeElements = new ();
 
+        public LinkedList<T> ActiveElements => _activeElements;
+
         private T Create(bool active)
         {
             var result = Instantiate(prefab, _t);

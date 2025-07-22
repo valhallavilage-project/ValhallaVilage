@@ -59,7 +59,7 @@ namespace PROJECTS.L2Farm.Scripts.CharacterSkinSelect
             var result = new CharacterSelectScreenModel
             {
                 OnCharacterSelected = OnCharacterSelected,
-                Close = () => _uiService.Close(_view)
+                Close = OnClose
             };
 
             return result;
@@ -70,6 +70,11 @@ namespace PROJECTS.L2Farm.Scripts.CharacterSkinSelect
             _charactersService.Obtain(characterId);
             var defaultSkinId = _characterSetConfig.items.First(x => x.id == characterId).defaultSkinId;
             _skinService.Select(defaultSkinId);
+        }
+
+        private void OnClose()
+        {
+            _uiService.Close(_view);
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Threading;
+using CrossProject.Core.Audio;
+using CrossProject.Core.Camera;
 using CrossProject.Ui.Core;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -10,23 +12,29 @@ namespace CrossProject.Ui.Implementations.SettingsPopup
     public class SettingsPopupController : IAsyncStartable
     {
         private readonly UiService _uiService;
+        private readonly CameraService _cameraService;
+        private readonly AudioManager _audioManager;
 
         private SettingsHudElement _settingsHudElement;
         private SettingsPopup _popupView;
 
-        public SettingsPopupController(UiService uiService)
+        public SettingsPopupController(
+            UiService uiService,
+            CameraService cameraService,
+            AudioManager audioManager)
         {
             _uiService = uiService;
+            _cameraService = cameraService;
+            _audioManager = audioManager;
         }
 
         public async UniTask StartAsync(CancellationToken cancellation = default)
         {
-            var hudElementModel = new SettingsHudElementModel()
+            var hudElementModel = new SettingsHudElementModel
             {
                 anchorMin = Vector2.one,
                 anchorMax = Vector2.one,
                 pivot = Vector2.one,
-                
             };
             _settingsHudElement = await _uiService.TryOpen(hudElementModel) as SettingsHudElement;
             if (_settingsHudElement == null)
@@ -38,7 +46,10 @@ namespace CrossProject.Ui.Implementations.SettingsPopup
         {
             var result = new SettingsPopupModel
             {
-                Close = () => _uiService.Close(_popupView)
+                Close = () => _uiService.Close(_popupView),
+                SetZoom = x => _cameraService.Zoom = x,
+                ToggleBGM = _audioManager.ToggleBGM,
+                ToggleSFX = _audioManager.ToggleSFX
             };
             return result;
         }

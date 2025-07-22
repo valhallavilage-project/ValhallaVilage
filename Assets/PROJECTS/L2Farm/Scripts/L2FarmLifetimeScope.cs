@@ -1,4 +1,5 @@
 using CrossProject.Core;
+using CrossProject.Core.Audio;
 using CrossProject.Core.Camera;
 using CrossProject.Core.Characters;
 using CrossProject.Core.Cheats;
@@ -61,6 +62,10 @@ namespace L2Farm.Scripts
                 .AsImplementedInterfaces();
 
             builder.RegisterComponentInHierarchy<UiService>()
+                .AsSelf()
+                .AsImplementedInterfaces();
+
+            builder.RegisterComponentInHierarchy<AudioManager>()
                 .AsSelf()
                 .AsImplementedInterfaces();
 

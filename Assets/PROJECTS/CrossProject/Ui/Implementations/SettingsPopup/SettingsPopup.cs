@@ -14,6 +14,15 @@ namespace CrossProject.Ui.Implementations.SettingsPopup
         private Button musicButton;
 
         [SerializeField]
+        private Button zoom20;
+
+        [SerializeField]
+        private Button zoom25;
+
+        [SerializeField]
+        private Button zoom30;
+
+        [SerializeField]
         private Button sfxButton;
 
         [SerializeField]
@@ -31,8 +40,11 @@ namespace CrossProject.Ui.Implementations.SettingsPopup
         protected override void OnBind()
         {
             closePanel.onClick.AddListener(() => { Model.Close?.Invoke(); });
-            musicButton.onClick.AddListener(() => { Debug.Log("ToggleMusic"); });
-            sfxButton.onClick.AddListener(() => { Debug.Log("ToggleSFX"); });
+            musicButton.onClick.AddListener(() => { Model.ToggleBGM?.Invoke(); });
+            sfxButton.onClick.AddListener(() => { Model.ToggleSFX?.Invoke(); });
+            zoom20.onClick.AddListener(() => Model.SetZoom?.Invoke(20));
+            zoom25.onClick.AddListener(() => Model.SetZoom?.Invoke(25));
+            zoom30.onClick.AddListener(() => Model.SetZoom?.Invoke(30));
             languageSelect.onValueChanged.AddListener(x => { Debug.Log($"Selected option : {x}"); });
             discordButton.onClick.AddListener(() => Application.OpenURL("https://discord.gg"));
             youtubeButton.onClick.AddListener(() => Application.OpenURL("https://youtube.com"));
