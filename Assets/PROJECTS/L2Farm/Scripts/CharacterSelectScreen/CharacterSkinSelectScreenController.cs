@@ -6,7 +6,6 @@ using CrossProject.Core.SaveLoad;
 using CrossProject.Core.Skins;
 using CrossProject.Ui.Core;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 using VContainer.Unity;
 
 namespace PROJECTS.L2Farm.Scripts.CharacterSkinSelect
