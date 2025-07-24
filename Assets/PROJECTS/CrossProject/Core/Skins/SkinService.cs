@@ -38,12 +38,14 @@ namespace CrossProject.Core.Skins
         public void Obtain(SkinId skinId)
         {
             if (!_gameStateManager.State.TryGet<ObtainedSkinsPart>(out var part))
-                return;
+                part = _gameStateManager.State.Set(new ObtainedSkinsPart());
 
             if (part.IsObtained(skinId))
                 return;
 
             var characterId = _characterSetConfig.GetOwnerOf(skinId);
+            if (!part.obtainedSkins.ContainsKey(characterId))
+                part.obtainedSkins.Add(characterId, new CharacterSkinState());
             part.obtainedSkins[characterId].ids.Add(skinId);
             part.obtainedSkins[characterId].currentSkinId = skinId;
             OnSkinObtained?.Invoke(skinId);
@@ -59,6 +61,7 @@ namespace CrossProject.Core.Skins
 
             var skinPrefab = await _addressablesManager.LoadAssetAsync<GameObject>(skinId.ToString());
             Object.Instantiate(skinPrefab, skinRoot);
+            _gameStateManager.Save();
             OnSkinSelected?.Invoke(skinId);
         }
     }

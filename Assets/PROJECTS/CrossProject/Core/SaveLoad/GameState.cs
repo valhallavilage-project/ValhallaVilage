@@ -22,9 +22,10 @@ namespace CrossProject.Core.SaveLoad
             return false;
         }
 
-        public void Set<TGameStatePart>(TGameStatePart part) where TGameStatePart : class, IGameStatePart
+        public TGameStatePart Set<TGameStatePart>(TGameStatePart part) where TGameStatePart : class, IGameStatePart
         {
             _partsMap[typeof(TGameStatePart)] = part;
+            return part;
         }
     }
 }

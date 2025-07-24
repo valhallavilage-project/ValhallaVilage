@@ -1,0 +1,18 @@
+{
+    "name": "CrossProject.Tests.EditMode",
+    "rootNamespace": "",
+    "references": [
+        "GUID:ba3d232eb13d74dc58639a52e4a2037b"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -9,9 +9,9 @@ namespace CrossProject.Core.SaveLoad
     {
         private readonly JsonSerializerSettings serializerSettings;
 
-        public JsonSerializer(JsonSerializerSettings serializerSettings)
+        public JsonSerializer()
         {
-            this.serializerSettings = serializerSettings;
+            serializerSettings = JsonSerializerSettingsProvider.DefaultSettings;
         }
 
         public T Deserialize<T>(string serializedData)

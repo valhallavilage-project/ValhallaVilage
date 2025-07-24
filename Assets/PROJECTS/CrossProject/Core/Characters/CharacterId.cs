@@ -1,5 +1,6 @@
 using System;
 using CrossProject.Core.OdinEntities;
+using Newtonsoft.Json;
 
 namespace CrossProject.Core.Characters
 {
@@ -17,5 +18,13 @@ namespace CrossProject.Core.Characters
         public static bool operator ==(CharacterId a, CharacterId b) => a?.Value == b?.Value;
 
         public static bool operator !=(CharacterId a, CharacterId b) => !(a == b);
+    }
+
+    public class CharacterIdConverter : JsonConverter<CharacterId>
+    {
+        public override void WriteJson(JsonWriter writer, CharacterId value, JsonSerializer serializer) =>
+            writer.WriteValue(value.ToString());
+        public override CharacterId ReadJson(JsonReader reader, Type objectType, CharacterId existingValue, bool hasExistingValue, JsonSerializer serializer) =>
+            (CharacterId)(string)reader.Value;
     }
 }

@@ -3,10 +3,11 @@ using CrossProject.Core.SaveLoad;
 
 namespace CrossProject.Core.Characters
 {
+    [System.Serializable]
     public class ObtainedCharactersPart : IGameStatePart
     {
-        public CharacterId currentCharacterId;
+        public CharacterId CurrentCharacterId { get; set; }
 
-        public readonly List<CharacterId> obtainedCharacters = new ();
+        public List<CharacterId> ObtainedCharacters { get; set; } = new();
     }
 }

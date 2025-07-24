@@ -37,14 +37,18 @@ namespace CrossProject.Core.Characters
         public void Obtain(CharacterId characterId)
         {
             if (!_gameStateManager.State.TryGet<ObtainedCharactersPart>(out var part))
+                part = _gameStateManager.State.Set(new ObtainedCharactersPart());
+
+            if (part.ObtainedCharacters.Contains(characterId))
                 return;
 
-            if (part.obtainedCharacters.Contains(characterId))
-                return;
-
-            part.obtainedCharacters.Add(characterId);
+            if (part.ObtainedCharacters.Count == 0)
+                part.CurrentCharacterId = characterId;
+            part.ObtainedCharacters.Add(characterId);
+            _gameStateManager.State.Set(part);
             var defaultSkinId = _characterSetConfig.items.First(x => x.id == characterId).defaultSkinId;
             _skinService.Obtain(defaultSkinId);
+            _gameStateManager.Save();
             OnCharacterObtained?.Invoke(characterId);
         }
 
@@ -53,17 +57,17 @@ namespace CrossProject.Core.Characters
             if (!_gameStateManager.State.TryGet<ObtainedCharactersPart>(out var part))
                 return false;
 
-            if (!part.obtainedCharacters.Contains(characterId))
+            if (!part.ObtainedCharacters.Contains(characterId))
                 return false;
 
-            part.currentCharacterId = characterId;
+            part.CurrentCharacterId = characterId;
             OnCharacterSelected?.Invoke(characterId);
             return true;
         }
 
         public bool IsObtained(CharacterId characterId)
         {
-            return _gameStateManager.State.TryGet<ObtainedCharactersPart>(out var part) && part.obtainedCharacters.Contains(characterId);
+            return _gameStateManager.State.TryGet<ObtainedCharactersPart>(out var part) && part.ObtainedCharacters.Contains(characterId);
         }
 
         //TODO : VM : remove

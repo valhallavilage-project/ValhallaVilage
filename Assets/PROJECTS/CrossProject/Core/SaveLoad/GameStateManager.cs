@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using CrossProject.Core.Characters;
+using CrossProject.Core.Skins;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -12,21 +14,7 @@ namespace CrossProject.Core.SaveLoad
     {
         private const string GameStatePrefsKey = nameof(GameStatePrefsKey);
 
-        private readonly JsonSerializer _serializer = new (new JsonSerializerSettings
-        {
-            TypeNameHandling = TypeNameHandling.Auto,
-            PreserveReferencesHandling = PreserveReferencesHandling.None,
-            NullValueHandling = NullValueHandling.Ignore,
-            DefaultValueHandling = DefaultValueHandling.Populate,
-            ObjectCreationHandling = ObjectCreationHandling.Replace,
-            ContractResolver = CanWritePropertiesResolver.Instance,
-            ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor,
-
-            Converters = new List<JsonConverter>
-            {
-                 new VersionConverter(),
-            }
-        });
+        private readonly JsonSerializer _serializer = new ();
 
         private GameState _gameState;
         private UniTask _saveTask;
@@ -50,7 +38,6 @@ namespace CrossProject.Core.SaveLoad
         private void LoadOrCreateSavedData()
         {
             var json = PlayerPrefsUtility.GetEncryptedString(GameStatePrefsKey, null);
-
             if (json == null)
                 CreateEmptyState();
             else
@@ -65,7 +52,7 @@ namespace CrossProject.Core.SaveLoad
             }
 
             await UniTask.Yield(PlayerLoopTiming.PostLateUpdate);
-            var json = _serializer.Serialize(_gameState);
+            var json = _serializer.Serialize(_gameState, Formatting.Indented);
             PlayerPrefsUtility.SetEncryptedString(GameStatePrefsKey, json);
             Debug.Log(json);
         }

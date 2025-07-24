@@ -4,6 +4,7 @@ using CrossProject.Core.SaveLoad;
 
 namespace CrossProject.Core.Skins
 {
+    [System.Serializable]
     public class ObtainedSkinsPart : IGameStatePart
     {
         public Dictionary<CharacterId, CharacterSkinState> obtainedSkins = new ();

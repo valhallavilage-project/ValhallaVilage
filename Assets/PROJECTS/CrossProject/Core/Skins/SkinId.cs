@@ -1,5 +1,6 @@
 using System;
 using CrossProject.Core.OdinEntities;
+using Newtonsoft.Json;
 
 namespace CrossProject.Core.Skins
 {
@@ -17,5 +18,13 @@ namespace CrossProject.Core.Skins
         public static bool operator ==(SkinId a, SkinId b) => a?.Value == b?.Value;
 
         public static bool operator !=(SkinId a, SkinId b) => !(a == b);
+    }
+
+    public class SkinIdConverter : JsonConverter<SkinId>
+    {
+        public override void WriteJson(JsonWriter writer, SkinId value, JsonSerializer serializer) =>
+            writer.WriteValue(value.ToString());
+        public override SkinId ReadJson(JsonReader reader, Type objectType, SkinId existingValue, bool hasExistingValue, JsonSerializer serializer) =>
+            (SkinId)(string)reader.Value;
     }
 }

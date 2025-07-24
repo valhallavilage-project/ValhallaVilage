@@ -6,6 +6,7 @@ using CrossProject.Core.SaveLoad;
 using CrossProject.Core.Skins;
 using CrossProject.Ui.Core;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using VContainer.Unity;
 
 namespace PROJECTS.L2Farm.Scripts.CharacterSkinSelect
@@ -39,9 +40,10 @@ namespace PROJECTS.L2Farm.Scripts.CharacterSkinSelect
         {
             _characterSetConfig = await _addressablesManager.LoadAssetAsync<CharacterSetConfig>();
 
-            if (_gameStateManager.State.TryGet<ObtainedCharactersPart>(out var obtainedCharactersPart) && obtainedCharactersPart.obtainedCharacters.Count > 0)
+            bool hasState = _gameStateManager.State.TryGet<ObtainedCharactersPart>(out var obtainedCharactersPart) && obtainedCharactersPart.ObtainedCharacters.Count > 0;
+            if (hasState)
             {
-                var currentCharacter = obtainedCharactersPart.currentCharacterId;
+                var currentCharacter = obtainedCharactersPart.CurrentCharacterId;
                 _charactersService.Select(currentCharacter);
 
                 _gameStateManager.State.TryGet<ObtainedSkinsPart>(out var obtainedSkinsPart);
