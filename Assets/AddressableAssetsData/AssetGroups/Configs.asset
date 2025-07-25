@@ -17,6 +17,11 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: f0cda9746db524148957a11d56e174a8
   m_SerializeEntries:
+  - m_GUID: 39d72b3e167104093b6ba16bd4393d2c
+    m_Address: SkinSetConfig
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 83ed54e7301604fe0bdc7dab32fa2e95
     m_Address: JoystickConfig
     m_ReadOnly: 0

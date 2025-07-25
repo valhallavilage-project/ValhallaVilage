@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace CrossProject.Editor.OdinEntities
 {
-        public abstract class AbstractOdinDropdownSelector<T> : LazyOdinValueDrawer<T>, IDefinesGenericMenuItems
+    public abstract class AbstractOdinDropdownSelector<T> : LazyOdinValueDrawer<T>, IDefinesGenericMenuItems
     {
         protected abstract string PropertyName { get; }
 

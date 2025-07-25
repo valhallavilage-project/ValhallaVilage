@@ -6,7 +6,6 @@ using CrossProject.Core.SaveLoad;
 using CrossProject.Core.Skins;
 using CrossProject.Ui.Core;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 using VContainer.Unity;
 
 namespace PROJECTS.L2Farm.Scripts.CharacterSkinSelect
@@ -19,7 +18,6 @@ namespace PROJECTS.L2Farm.Scripts.CharacterSkinSelect
         private readonly CharactersService _charactersService;
         private readonly SkinService _skinService;
 
-        private CharacterSetConfig _characterSetConfig;
         private CharacterSelectScreen _view;
 
         public CharacterSkinSelectScreenController(
@@ -38,8 +36,6 @@ namespace PROJECTS.L2Farm.Scripts.CharacterSkinSelect
 
         public async UniTask StartAsync(CancellationToken cancellation = default)
         {
-            _characterSetConfig = await _addressablesManager.LoadAssetAsync<CharacterSetConfig>();
-
             bool hasState = _gameStateManager.State.TryGet<ObtainedCharactersPart>(out var obtainedCharactersPart) && obtainedCharactersPart.ObtainedCharacters.Count > 0;
             if (hasState)
             {
@@ -69,8 +65,7 @@ namespace PROJECTS.L2Farm.Scripts.CharacterSkinSelect
         private void OnCharacterSelected(CharacterId characterId)
         {
             _charactersService.Obtain(characterId);
-            var defaultSkinId = _characterSetConfig.items.First(x => x.id == characterId).defaultSkinId;
-            _skinService.Select(defaultSkinId);
+            _skinService.Select(_skinService.GetDefaultSkinFor(characterId));
         }
 
         private void OnClose()

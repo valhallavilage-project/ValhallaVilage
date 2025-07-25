@@ -54,7 +54,6 @@ namespace CrossProject.Core.SaveLoad
             await UniTask.Yield(PlayerLoopTiming.PostLateUpdate);
             var json = _serializer.Serialize(_gameState, Formatting.Indented);
             PlayerPrefsUtility.SetEncryptedString(GameStatePrefsKey, json);
-            Debug.Log(json);
         }
 
         public void Save()

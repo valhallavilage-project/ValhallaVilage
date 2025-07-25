@@ -13,13 +13,7 @@ MonoBehaviour:
   m_Name: CharacterSetConfig
   m_EditorClassIdentifier: 
   items:
-  - id:
-      value: MC_Female
-    defaultSkinId:
-      value: MC_Female_Default
-    otherSkinIds: []
-  - id:
-      value: MC_Male
-    defaultSkinId:
-      value: MC_Male_Default
-    otherSkinIds: []
+  - id: MC_Female
+    portrait: {fileID: 21300000, guid: 02f9b5e27ebe72d42bc5f8721323f194, type: 3}
+  - id: MC_Male
+    portrait: {fileID: 21300000, guid: 005808e350337dd4c9715c0b03ad25b4, type: 3}

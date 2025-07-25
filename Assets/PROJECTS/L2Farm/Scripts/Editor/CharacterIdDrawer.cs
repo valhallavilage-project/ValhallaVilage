@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.Linq;
 using CrossProject.Core.Characters;
 using CrossProject.Editor.OdinEntities;
+using UnityEditor;
 
 namespace PROJECTS.L2Farm.Editor
 {
@@ -10,11 +12,12 @@ namespace PROJECTS.L2Farm.Editor
 
         protected override IEnumerable<string> GetNamesArray()
         {
-            return new List<string>
-            {
-                "MC_Female",
-                "MC_Male"
-            };
+            string[] assetUIDs = AssetDatabase.FindAssets($"t:{nameof(CharacterSetConfig)}");
+            return assetUIDs
+                .Select(AssetDatabase.GUIDToAssetPath)
+                .Select(AssetDatabase.LoadAssetAtPath<CharacterSetConfig>)
+                .SelectMany(x => x.items)
+                .Select(x => x.id);
         }
     }
 }

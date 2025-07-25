@@ -46,8 +46,7 @@ namespace CrossProject.Core.Characters
                 part.CurrentCharacterId = characterId;
             part.ObtainedCharacters.Add(characterId);
             _gameStateManager.State.Set(part);
-            var defaultSkinId = _characterSetConfig.items.First(x => x.id == characterId).defaultSkinId;
-            _skinService.Obtain(defaultSkinId);
+            _skinService.Obtain(_skinService.GetDefaultSkinFor(characterId));
             _gameStateManager.Save();
             OnCharacterObtained?.Invoke(characterId);
         }
@@ -68,6 +67,11 @@ namespace CrossProject.Core.Characters
         public bool IsObtained(CharacterId characterId)
         {
             return _gameStateManager.State.TryGet<ObtainedCharactersPart>(out var part) && part.ObtainedCharacters.Contains(characterId);
+        }
+
+        public CharacterConfig GetConfigFor(CharacterId characterId)
+        {
+            return _characterSetConfig.items.FirstOrDefault(x => new CharacterId(x.id) == characterId);
         }
 
         //TODO : VM : remove

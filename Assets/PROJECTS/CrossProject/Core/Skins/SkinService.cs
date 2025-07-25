@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading;
 using CrossProject.Core.Characters;
 using CrossProject.Core.SaveLoad;
@@ -15,7 +16,7 @@ namespace CrossProject.Core.Skins
         private readonly GameStateManager _gameStateManager;
         private readonly AddressablesManager _addressablesManager;
 
-        private CharacterSetConfig _characterSetConfig;
+        private SkinSetConfig _skinSetConfig;
 
         public event Action<SkinId> OnSkinObtained;
         public event Action<SkinId> OnSkinSelected;
@@ -32,7 +33,7 @@ namespace CrossProject.Core.Skins
 
         public async UniTask StartAsync(CancellationToken cancellation = default)
         {
-            _characterSetConfig = await _addressablesManager.LoadAssetAsync<CharacterSetConfig>();
+            _skinSetConfig = await _addressablesManager.LoadAssetAsync<SkinSetConfig>();
         }
 
         public void Obtain(SkinId skinId)
@@ -43,11 +44,11 @@ namespace CrossProject.Core.Skins
             if (part.IsObtained(skinId))
                 return;
 
-            var characterId = _characterSetConfig.GetOwnerOf(skinId);
-            if (!part.obtainedSkins.ContainsKey(characterId))
-                part.obtainedSkins.Add(characterId, new CharacterSkinState());
-            part.obtainedSkins[characterId].ids.Add(skinId);
-            part.obtainedSkins[characterId].currentSkinId = skinId;
+            var config = _skinSetConfig.items.First(x => new SkinId(x.id) == skinId);
+            if (!part.obtainedSkins.ContainsKey(config.owner))
+                part.obtainedSkins.Add(config.owner, new CharacterSkinState());
+            part.obtainedSkins[config.owner].ids.Add(skinId);
+            part.obtainedSkins[config.owner].currentSkinId = skinId;
             OnSkinObtained?.Invoke(skinId);
         }
 
@@ -63,6 +64,11 @@ namespace CrossProject.Core.Skins
             Object.Instantiate(skinPrefab, skinRoot);
             _gameStateManager.Save();
             OnSkinSelected?.Invoke(skinId);
+        }
+
+        public SkinId GetDefaultSkinFor(CharacterId characterId)
+        {
+            return new SkinId(_skinSetConfig.GetDefaultSkinFor(characterId).id);
         }
     }
 }

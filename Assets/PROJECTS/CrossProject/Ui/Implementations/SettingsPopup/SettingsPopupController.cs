@@ -30,12 +30,7 @@ namespace CrossProject.Ui.Implementations.SettingsPopup
 
         public async UniTask StartAsync(CancellationToken cancellation = default)
         {
-            var hudElementModel = new SettingsHudElementModel
-            {
-                anchorMin = Vector2.one,
-                anchorMax = Vector2.one,
-                pivot = Vector2.one,
-            };
+            var hudElementModel = new SettingsHudElementModel();
             _settingsHudElement = await _uiService.TryOpen(hudElementModel) as SettingsHudElement;
             if (_settingsHudElement == null)
                 throw new Exception($"Something went wrong while opening {nameof(SettingsHudElement)}");
