@@ -11,7 +11,7 @@ namespace CrossProject.Core.Skins
 
         public bool Equals(SkinId other) => Value.Equals(other?.Value);
 
-        public override bool Equals(object obj) => obj is SkinId skinId && Equals(skinId);
+        public override bool Equals(object obj) => obj is SkinId id && Equals(id);
 
         public static explicit operator SkinId(string value) => new (value);
 

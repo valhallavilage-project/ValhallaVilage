@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using CrossProject.Core.Characters;
+using CrossProject.Core.PROJECTS.CrossProject.Core.InGameResources;
 using CrossProject.Core.Skins;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -24,6 +25,7 @@ namespace CrossProject.Core.SaveLoad
                 new VersionConverter(),
                 new CharacterIdConverter(),
                 new SkinIdConverter(),
+                new ResourceIdConverter(),
             }
         };
     }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using CrossProject.Core.Characters;
+using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using UnityEngine;
 
@@ -19,9 +20,14 @@ namespace CrossProject.Core.Skins
     [Serializable]
     public class SkinConfig
     {
+        [FoldoutGroup("$id")]
         public string id;
-        [OdinSerialize] public CharacterId owner;
-        public Skin skin;
+
+        [FoldoutGroup("$id")]
+        [OdinSerialize]
+        public CharacterId owner;
+
+        [FoldoutGroup("$id")]
         public bool isDefaultSkin;
     }
 }

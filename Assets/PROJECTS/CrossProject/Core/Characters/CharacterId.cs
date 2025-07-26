@@ -11,7 +11,7 @@ namespace CrossProject.Core.Characters
 
         public bool Equals(CharacterId other) => Value.Equals(other?.Value);
 
-        public override bool Equals(object obj) => obj is CharacterId characterId && Equals(characterId);
+        public override bool Equals(object obj) => obj is CharacterId id && Equals(id);
 
         public static explicit operator CharacterId(string value) => new (value);
 

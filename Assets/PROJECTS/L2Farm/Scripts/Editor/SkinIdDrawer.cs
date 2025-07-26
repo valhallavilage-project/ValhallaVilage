@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using CrossProject.Editor.OdinEntities;
 using CrossProject.Core.Skins;
 
-namespace PROJECTS.CrossProject.Editor
+namespace PROJECTS.L2Farm.Editor
 {
     public class SkinIdDrawer : AbstractOdinDropdownSelector<SkinId>
     {

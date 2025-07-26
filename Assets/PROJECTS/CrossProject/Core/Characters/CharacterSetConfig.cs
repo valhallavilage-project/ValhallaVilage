@@ -14,7 +14,11 @@ namespace CrossProject.Core.Characters
     [Serializable]
     public class CharacterConfig
     {
+        [FoldoutGroup("$id")]
         public string id;
-        [PreviewField(128f, ObjectFieldAlignment.Right)] public Sprite portrait;
+
+        [FoldoutGroup("$id")]
+        [PreviewField(128f, ObjectFieldAlignment.Right)]
+        public Sprite portrait;
     }
 }

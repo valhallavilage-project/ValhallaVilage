@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d7d27e4a7694e3da101e21b804deace, type: 3}
+  m_Name: ResourceSetConfig
+  m_EditorClassIdentifier: 
+  items:
+  - id: Resource_Bread
+    icon: {fileID: 21300000, guid: fbb91ff0a5a304ca6b8b5592fb760bd0, type: 3}
+    isUnique: 0
+    maxStackCapacity: 64
+  - id: Resource_Flour
+    icon: {fileID: 21300000, guid: deb920dffba604dd7af79ceac7d4407e, type: 3}
+    isUnique: 0
+    maxStackCapacity: 64
+  - id: Resource_Ingot_Copper
+    icon: {fileID: 21300000, guid: a9fc71c947a45430fbb661fab404cf19, type: 3}
+    isUnique: 0
+    maxStackCapacity: 64
+  - id: Resource_Ingot_Gold
+    icon: {fileID: 21300000, guid: 0dd9c60a1d12c446c84332db74591532, type: 3}
+    isUnique: 0
+    maxStackCapacity: 64
+  - id: Resource_Ingot_Silver
+    icon: {fileID: 21300000, guid: 3e266bf2f51d14493944ca6a5182dce1, type: 3}
+    isUnique: 0
+    maxStackCapacity: 64
+  - id: Resource_Meat
+    icon: {fileID: 21300000, guid: 11511e60c13864d79a68ffaf9c859351, type: 3}
+    isUnique: 0
+    maxStackCapacity: 64
+  - id: Resource_Ore_Copper
+    icon: {fileID: 21300000, guid: 2884ec9d800724bf2b17802df6374d1d, type: 3}
+    isUnique: 0
+    maxStackCapacity: 64
+  - id: Resource_Ore_Gold
+    icon: {fileID: 21300000, guid: e7dd3cdddcfc948f6859ebef3f71e2e6, type: 3}
+    isUnique: 0
+    maxStackCapacity: 64
+  - id: Resource_Ore_Silver
+    icon: {fileID: 21300000, guid: a514f4c6b63a44b4f9c8b57fd8668f25, type: 3}
+    isUnique: 0
+    maxStackCapacity: 64
+  - id: Resource_Planks
+    icon: {fileID: 21300000, guid: 77842288ffa294810b89d96db12ce31c, type: 3}
+    isUnique: 0
+    maxStackCapacity: 64
+  - id: Resource_Seeds
+    icon: {fileID: 21300000, guid: 5284a9ae894c44fd5997727e91a0b7cb, type: 3}
+    isUnique: 0
+    maxStackCapacity: 64
+  - id: Resource_Stone
+    icon: {fileID: 21300000, guid: 0bb1cb91ac6e64646a0309a2dd43366e, type: 3}
+    isUnique: 0
+    maxStackCapacity: 64
+  - id: Resource_Veg
+    icon: {fileID: 21300000, guid: 3937c5d97f8fd4282b5c2dbbc7fee096, type: 3}
+    isUnique: 0
+    maxStackCapacity: 64
+  - id: Resource_Wheat
+    icon: {fileID: 21300000, guid: e5cf9015bce7544d1a143d5cac0cffa8, type: 3}
+    isUnique: 0
+    maxStackCapacity: 64
+  - id: Resource_Wood
+    icon: {fileID: 21300000, guid: 6b4cc51f1a6c04a4d93bfb57ed1f705e, type: 3}
+    isUnique: 0
+    maxStackCapacity: 64

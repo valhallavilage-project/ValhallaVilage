@@ -31,6 +31,7 @@ namespace CrossProject.Core.Interactions
             if (other.TryGetComponent<InteractiveObject>(out var interactableObject)
                 && _objects.Contains(interactableObject))
             {
+                interactableObject.Deselect();
                 _objects.Remove(interactableObject);
                 if (_objects.Count == 0)
                     Closest.Value = null;
@@ -77,6 +78,7 @@ namespace CrossProject.Core.Interactions
         public async UniTask Interact()
         {
             await Closest.Value.Interaction();
+            Closest.Value.Deselect();
         }
     }
 }

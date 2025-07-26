@@ -8,7 +8,6 @@ namespace CrossProject.Core.Interactions
     {
         public float interactionDistance = 1;
         public float interactionDuration;
-        public float selectorScale = 1;
         public Sprite buttonSprite;
         public InteractionAnimation animation;
 
@@ -29,13 +28,11 @@ namespace CrossProject.Core.Interactions
         public virtual void Select()
         {
             highLight.SetActive(true);
-            Debug.Log($"Select - {gameObject.name}");
         }
 
         public virtual void Deselect()
         {
             highLight.SetActive(false);
-            Debug.Log($"Deselect - {gameObject.name}");
         }
 
         public abstract UniTask Interaction();

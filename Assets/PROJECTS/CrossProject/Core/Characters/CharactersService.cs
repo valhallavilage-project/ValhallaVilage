@@ -33,7 +33,6 @@ namespace CrossProject.Core.Characters
 
         public async UniTask Initialize()
         {
-            Debug.Log("CharacterService - Init");
             _characterSetConfig = await _addressablesManager.LoadAssetAsync<CharacterSetConfig>();
         }
 
