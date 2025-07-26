@@ -57,12 +57,7 @@ namespace CrossProject.Ui.Implementations.InteractButton
                 return;
             }
 
-            var model = new InteractButtonModel(_interactor.Closest.Value.buttonSprite, () => GetInteraction().Forget())
-                {
-                    anchorMin = new Vector2(0.7f, 0.3f),
-                    anchorMax = new Vector2(0.7f, 0.3f),
-                    sizeDelta = new Vector2(150, 150)
-                };
+            var model = new InteractButtonModel(_interactor.Closest.Value.buttonSprite, () => GetInteraction().Forget());
             _view.BindModel(model);
         }
 

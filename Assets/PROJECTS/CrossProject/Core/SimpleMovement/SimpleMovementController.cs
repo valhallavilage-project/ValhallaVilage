@@ -30,7 +30,7 @@ namespace CrossProject.Core.SimpleMovement
         public Vector3 Direction => _direction;
         public Transform PlayerSkinRoot => skinRoot;
 
-        public Skin CurrentSkin => _skin ??= skinRoot.GetComponentInChildren<Skin>();
+        private Skin CurrentSkin => _skin ??= skinRoot.GetComponentInChildren<Skin>();
 
         public void AddBlock(object blockRequester)
         {

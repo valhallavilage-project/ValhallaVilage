@@ -27,6 +27,8 @@ namespace CrossProject.Core.Interactions
         {
             _obstacle.enabled = false;
             _interactSound.Play();
+            //TODO : VM : add animation
+            
             await transform.DOShakeScale(0.2f, new Vector3(0.25f, 0.5f, 0.25f));
             await UniTask.WaitForSeconds(interactionDuration);
             Respawn().Forget();

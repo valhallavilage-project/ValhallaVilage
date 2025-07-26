@@ -31,8 +31,6 @@ namespace L2Farm.Scripts
             return new List<UniTask>
             {
                 UniTask.Create(async () => await UniTask.Delay(TimeSpan.FromSeconds(1))),
-                UniTask.Create(async () => await UniTask.Delay(TimeSpan.FromSeconds(2))),
-                UniTask.Create(async () => await UniTask.Delay(TimeSpan.FromSeconds(3))),
                 _scenesService.LoadScene("L2Farm_FirstTown")
             };
         }

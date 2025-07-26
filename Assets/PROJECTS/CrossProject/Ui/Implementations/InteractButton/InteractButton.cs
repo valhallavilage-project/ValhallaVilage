@@ -12,9 +12,6 @@ namespace CrossProject.Ui.Implementations.InteractButton
 
         protected override void OnBind()
         {
-            rectTransform.anchorMin = Model.anchorMin;
-            rectTransform.anchorMax = Model.anchorMax;
-            rectTransform.sizeDelta = Model.sizeDelta;
             rectTransform.anchoredPosition = Vector2.zero;
 
             icon.gameObject.SetActive(Model.InteractionIcon != null);
