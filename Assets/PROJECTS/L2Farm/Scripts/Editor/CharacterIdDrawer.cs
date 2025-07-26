@@ -4,7 +4,7 @@ using CrossProject.Core.Characters;
 using CrossProject.Editor.OdinEntities;
 using UnityEditor;
 
-namespace PROJECTS.L2Farm.Editor
+namespace PROJECTS.CrossProject.Editor
 {
     public class CharacterIdDrawer : AbstractOdinDropdownSelector<CharacterId>
     {
