@@ -6,7 +6,6 @@ using CrossProject.Core.SimpleMovement;
 using CrossProject.Ui.Core;
 using Cysharp.Threading.Tasks;
 using R3;
-using UnityEngine;
 using VContainer.Unity;
 
 namespace CrossProject.Ui.Implementations.InteractButton
@@ -20,6 +19,7 @@ namespace CrossProject.Ui.Implementations.InteractButton
         private readonly List<IDisposable> _disposables = new();
 
         private InteractButton _view;
+        private CancellationTokenSource _cts;
 
         public InteractButtonController(
             UiService uiService,
@@ -39,11 +39,11 @@ namespace CrossProject.Ui.Implementations.InteractButton
             _disposables.Add(_interactor.Closest.Subscribe(_ => UpdateButtonModel()));
         }
 
-        private async UniTask GetInteraction()
+        private async UniTask GetInteraction(CancellationToken cancellationToken)
         {
             _joystickController.AddBlock(this);
             _simpleMovementController.AddBlock(this);
-            await _simpleMovementController.MoveTo(_interactor.Closest.Value.transform.position, _interactor.Closest.Value.interactionDistance);
+            await _simpleMovementController.MoveTo(_interactor.Closest.Value.transform.position, cancellationToken, _interactor.Closest.Value.interactionDistance);
             await _interactor.Interact();
             _joystickController.RemoveBlock(this);
             _simpleMovementController.RemoveBlock(this);
@@ -57,7 +57,7 @@ namespace CrossProject.Ui.Implementations.InteractButton
                 return;
             }
 
-            var model = new InteractButtonModel(_interactor.Closest.Value.buttonSprite, () => GetInteraction().Forget());
+            var model = new InteractButtonModel(_interactor.Closest.Value.buttonSprite, () => GetInteraction(_cts.Token).Forget());
             _view.BindModel(model);
         }
 

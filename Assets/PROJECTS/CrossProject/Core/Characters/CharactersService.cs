@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using System.Threading;
 using CrossProject.Core.SaveLoad;
 using CrossProject.Core.Skins;
 using Cysharp.Threading.Tasks;
@@ -63,7 +62,6 @@ namespace CrossProject.Core.Characters
 
             part.CurrentCharacterId = characterId;
             OnCharacterSelected?.Invoke(characterId);
-            Debug.Log("CharacterService - Event Call");
             return true;
         }
 

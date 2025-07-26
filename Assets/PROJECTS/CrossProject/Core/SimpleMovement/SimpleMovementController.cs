@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using CrossProject.Core.Camera;
 using CrossProject.Core.Skins;
 using Cysharp.Threading.Tasks;
@@ -75,11 +76,11 @@ namespace CrossProject.Core.SimpleMovement
                 CurrentSkin.Animator.SetFloat(Speed, _joystick.NormalizedVector2.sqrMagnitude > 0 ? 1 : 0);
         }
 
-        public async UniTask MoveTo(Vector3 target, float targetDistance = 1)
+        public async UniTask MoveTo(Vector3 target, CancellationToken cancellationToken, float targetDistance = 1)
         {
             _playerNavMeshAgent.SetDestination(target);
             CurrentSkin.Animator.SetFloat(Speed, 100);
-            await UniTask.WaitUntil(() => (transform.position - target).sqrMagnitude <= targetDistance * targetDistance);
+            await UniTask.WaitUntil(() => (transform.position - target).sqrMagnitude <= targetDistance * targetDistance, PlayerLoopTiming.Update, cancellationToken);
             CurrentSkin.Animator.SetFloat(Speed, 0);
             _playerNavMeshAgent.isStopped = true;
         }
