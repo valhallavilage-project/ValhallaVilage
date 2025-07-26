@@ -73,6 +73,10 @@ namespace CrossProject.Core.Interactions
                 Closest.Value = closest;
                 Closest.Value.Select();
             }
+            else if (closest == null)
+            {
+                Closest.Value = null;
+            }
         }
 
         public async UniTask Interact()

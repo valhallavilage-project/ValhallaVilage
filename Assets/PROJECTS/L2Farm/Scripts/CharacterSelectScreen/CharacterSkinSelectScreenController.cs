@@ -62,6 +62,7 @@ namespace PROJECTS.L2Farm.Scripts.CharacterSkinSelect
         private void OnCharacterSelected(CharacterId characterId)
         {
             _charactersService.Obtain(characterId);
+            _charactersService.Select(characterId);
             _skinService.Select(_skinService.GetDefaultSkinFor(characterId));
         }
 
