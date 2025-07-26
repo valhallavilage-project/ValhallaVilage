@@ -9,7 +9,7 @@ using VContainer.Unity;
 
 namespace CrossProject.Ui.Implementations.SettingsPopup
 {
-    public class SettingsPopupController : IAsyncStartable
+    public class SettingsPopupController : IInitializable
     {
         private readonly UiService _uiService;
         private readonly CameraService _cameraService;
@@ -28,7 +28,7 @@ namespace CrossProject.Ui.Implementations.SettingsPopup
             _audioManager = audioManager;
         }
 
-        public async UniTask StartAsync(CancellationToken cancellation = default)
+        public async UniTask Initialize()
         {
             var hudElementModel = new SettingsHudElementModel();
             _settingsHudElement = await _uiService.TryOpen(hudElementModel) as SettingsHudElement;

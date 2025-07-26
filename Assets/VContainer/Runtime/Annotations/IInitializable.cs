@@ -1,7 +1,9 @@
+using Cysharp.Threading.Tasks;
+
 namespace VContainer.Unity
 {
     public interface IInitializable
     {
-        void Initialize();
+        UniTask Initialize();
     }
 }

@@ -126,6 +126,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b91c16fbd6714fbdbb71854cd49dd0db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  portrait: {fileID: 2903507805091137213}
+  healthBarFill: {fileID: 3741931558862487345}
+  manaBarFill: {fileID: 8223610182722300355}
+  frame: {fileID: 1261017839355825107}
+  premiumFrame: {fileID: 21300000, guid: af8b0d7a4ae3e4b13b7fb78fd1b03996, type: 3}
 --- !u!1 &3248955871029558456
 GameObject:
   m_ObjectHideFlags: 0

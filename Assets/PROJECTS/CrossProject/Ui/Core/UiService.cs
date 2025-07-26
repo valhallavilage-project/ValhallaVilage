@@ -37,7 +37,7 @@ namespace CrossProject.Ui.Core
             ApplySafeAreaTo(hudRoot);
         }
 
-        public void Initialize()
+        public async UniTask Initialize()
         {
             AddRule(new UiQueueRule<ScreenModel>(ScreenRoot, _addressablesManager));
             AddRule(new UiQueueRule<PopupModel>(PopupRoot, _addressablesManager));

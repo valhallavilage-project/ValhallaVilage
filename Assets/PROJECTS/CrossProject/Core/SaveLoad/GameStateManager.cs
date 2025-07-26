@@ -1,9 +1,5 @@
-using System.Collections.Generic;
-using CrossProject.Core.Characters;
-using CrossProject.Core.Skins;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using Sabresaurus.PlayerPrefsUtilities;
 using UnityEngine;
 using VContainer.Unity;
@@ -39,9 +35,14 @@ namespace CrossProject.Core.SaveLoad
         {
             var json = PlayerPrefsUtility.GetEncryptedString(GameStatePrefsKey, null);
             if (json == null)
+            {
                 CreateEmptyState();
+            }
             else
+            {
                 _gameState = _serializer.Deserialize<GameState>(json);
+                Debug.Log(json);
+            }
         }
 
         private async UniTask SaveTask()
@@ -62,7 +63,7 @@ namespace CrossProject.Core.SaveLoad
                 _saveTask = SaveTask();
         }
 
-        public void Initialize()
+        public async UniTask Initialize()
         {
             LoadOrCreateSavedData();
         }

@@ -11,7 +11,7 @@ using VContainer.Unity;
 
 namespace CrossProject.Ui.Implementations.InteractButton
 {
-    public class InteractButtonController : IAsyncStartable, IDisposable
+    public class InteractButtonController : IInitializable, IDisposable
     {
         private readonly UiService _uiService;
         private readonly Interactor _interactor;
@@ -33,7 +33,7 @@ namespace CrossProject.Ui.Implementations.InteractButton
             _simpleMovementController = simpleMovementController;
         }
 
-        public async UniTask StartAsync(CancellationToken cancellation = default)
+        public async UniTask Initialize()
         {
             _view = await _uiService.TryOpen(new InteractButtonModel(null, null)) as InteractButton;
             _disposables.Add(_interactor.Closest.Subscribe(_ => UpdateButtonModel()));

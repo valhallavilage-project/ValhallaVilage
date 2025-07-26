@@ -4,11 +4,13 @@ using System.Threading;
 using CrossProject.Core.SaveLoad;
 using CrossProject.Core.Skins;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using VContainer.Unity;
 
 namespace CrossProject.Core.Characters
 {
-    public class CharactersService : IAsyncStartable
+    [DefaultExecutionOrder(-998)]
+    public class CharactersService : IInitializable
     {
         private readonly GameStateManager _gameStateManager;
         private readonly AddressablesManager _addressablesManager;
@@ -29,8 +31,9 @@ namespace CrossProject.Core.Characters
             _skinService = skinService;
         }
 
-        public async UniTask StartAsync(CancellationToken cancellation = default)
+        public async UniTask Initialize()
         {
+            Debug.Log("CharacterService - Init");
             _characterSetConfig = await _addressablesManager.LoadAssetAsync<CharacterSetConfig>();
         }
 
@@ -61,6 +64,7 @@ namespace CrossProject.Core.Characters
 
             part.CurrentCharacterId = characterId;
             OnCharacterSelected?.Invoke(characterId);
+            Debug.Log("CharacterService - Event Call");
             return true;
         }
 

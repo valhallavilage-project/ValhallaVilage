@@ -46,7 +46,7 @@ namespace CrossProject.Ui.Implementations
             // ReSharper disable once FunctionNeverReturns
         }
 
-        public void Initialize()
+        public async UniTask Initialize()
         {
             Routine(_cancellationTokenSource.Token).Forget();
         }

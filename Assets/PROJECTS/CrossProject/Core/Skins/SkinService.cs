@@ -10,7 +10,8 @@ using Object = UnityEngine.Object;
 
 namespace CrossProject.Core.Skins
 {
-    public class SkinService : IAsyncStartable
+    [DefaultExecutionOrder(-998)]
+    public class SkinService : IInitializable
     {
         private readonly IPlayerSkinProvider _playerSkinProvider;
         private readonly GameStateManager _gameStateManager;
@@ -31,7 +32,7 @@ namespace CrossProject.Core.Skins
             _addressablesManager = addressablesManager;
         }
 
-        public async UniTask StartAsync(CancellationToken cancellation = default)
+        public async UniTask Initialize()
         {
             _skinSetConfig = await _addressablesManager.LoadAssetAsync<SkinSetConfig>();
         }

@@ -2,6 +2,7 @@
 using CrossProject.Core;
 using CrossProject.Core.SimpleMovement;
 using CrossProject.Ui.Core;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer.Unity;
 
@@ -62,7 +63,7 @@ namespace CrossProject.Ui.Implementations
             _view = await _uiService.TryOpen(JoystickModel.From(config)) as Joystick;
         }
 
-        public void Initialize()
+        public async UniTask Initialize()
         {
             OpenJoystick();
 

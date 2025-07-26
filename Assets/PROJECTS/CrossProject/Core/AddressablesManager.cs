@@ -2,11 +2,13 @@ using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using VContainer.Unity;
 using Object = UnityEngine.Object;
 
 namespace CrossProject.Core
 {
-    public class AddressablesManager
+    [DefaultExecutionOrder(-1000)]
+    public class AddressablesManager : IInitializable
     {
         public async UniTask<T> LoadAssetAsync<T>(string addressableName = null) where T : class
         {
@@ -23,6 +25,16 @@ namespace CrossProject.Core
         {
             Addressables.ReleaseInstance(instance);
             Object.Destroy(instance);
+        }
+
+        public static async UniTask Prewarm()
+        {
+            await Addressables.LoadAssetsAsync<object>("prewarm", null);
+            Debug.Log("Prewarmed");
+        }
+        public async UniTask Initialize()
+        {
+            await Prewarm();
         }
     }
 }

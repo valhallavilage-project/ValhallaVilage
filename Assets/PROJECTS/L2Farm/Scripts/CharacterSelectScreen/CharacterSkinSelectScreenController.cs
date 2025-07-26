@@ -10,9 +10,8 @@ using VContainer.Unity;
 
 namespace PROJECTS.L2Farm.Scripts.CharacterSkinSelect
 {
-    public class CharacterSkinSelectScreenController: IAsyncStartable
+    public class CharacterSkinSelectScreenController: IInitializable
     {
-        private readonly AddressablesManager _addressablesManager;
         private readonly GameStateManager _gameStateManager;
         private readonly UiService _uiService;
         private readonly CharactersService _charactersService;
@@ -21,20 +20,18 @@ namespace PROJECTS.L2Farm.Scripts.CharacterSkinSelect
         private CharacterSelectScreen _view;
 
         public CharacterSkinSelectScreenController(
-            AddressablesManager addressablesManager,
             GameStateManager gameStateManager,
             UiService uiService,
             CharactersService charactersService,
             SkinService skinService)
         {
-            _addressablesManager = addressablesManager;
             _gameStateManager = gameStateManager;
             _uiService = uiService;
             _charactersService = charactersService;
             _skinService = skinService;
         }
 
-        public async UniTask StartAsync(CancellationToken cancellation = default)
+        public async UniTask Initialize()
         {
             bool hasState = _gameStateManager.State.TryGet<ObtainedCharactersPart>(out var obtainedCharactersPart) && obtainedCharactersPart.ObtainedCharacters.Count > 0;
             if (hasState)

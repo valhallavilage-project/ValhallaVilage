@@ -1,25 +1,50 @@
 using CrossProject.Core.Characters;
+using CrossProject.Core.SaveLoad;
+using CrossProject.Ui.Core;
+using Cysharp.Threading.Tasks;
+using UnityEngine;
 using VContainer.Unity;
 
 namespace L2Farm.Scripts.CharacterHudElement
 {
     public class CharacterHudElementController : IInitializable
     {
+        private readonly UiService _uiService;
         private readonly CharactersService _charactersService;
+        private readonly GameStateManager _gameStateManager;
 
-        public CharacterHudElementController(CharactersService charactersService)
+        private CharacterHudElement _view;
+
+        public CharacterHudElementController(
+            UiService uiService,
+            CharactersService charactersService,
+            GameStateManager gameStateManager)
         {
+            _uiService = uiService;
             _charactersService = charactersService;
+            _gameStateManager = gameStateManager;
         }
 
-        public void Initialize()
+        public async UniTask Initialize()
         {
-            _charactersService.OnCharacterSelected += OnCharacterSelected;
+            Debug.Log("CharacterHUDController : Init");
+            _view = await _uiService.TryOpen(new CharacterHudElementModel()) as CharacterHudElement;
+            if (_gameStateManager.State.TryGet<ObtainedCharactersPart>(out var part))
+            {
+                var config = _charactersService.GetConfigFor(part.CurrentCharacterId);
+                _view.SetPortrait(config.portrait);
+            }
+            else
+            {
+                _charactersService.OnCharacterSelected += OnCharacterSelected;
+            }
         }
 
         private void OnCharacterSelected(CharacterId characterId)
         {
-            
+            Debug.Log($"OnCharacterSelected : {characterId}");
+            var config = _charactersService.GetConfigFor(characterId);
+            _view.SetPortrait(config.portrait);
         }
     }
 }

@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer.Unity;
 
@@ -55,7 +56,7 @@ namespace CrossProject.Core.Camera
             Gizmos.DrawSphere(zoomHandle.position + CamDirectionOnPlane, 1);
         }
 
-        public void Initialize()
+        public async UniTask Initialize()
         {
             DontDestroyOnLoad(gameObject);
             YRotation = cameraConfig.yRotationAngle;

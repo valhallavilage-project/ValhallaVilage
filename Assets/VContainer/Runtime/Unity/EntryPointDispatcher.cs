@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 using VContainer.Internal;
 #if VCONTAINER_ECS_INTEGRATION
 using Unity.Entities;
@@ -18,7 +19,7 @@ namespace VContainer.Unity
             this.container = container;
         }
 
-        public void Dispatch()
+        public async void Dispatch()
         {
             PlayerLoopHelper.EnsureInitialized();
 
@@ -29,7 +30,8 @@ namespace VContainer.Unity
             {
                 try
                 {
-                    initializables[i].Initialize();
+                    await initializables[i].Initialize();
+                    Debug.Log($"{initializables[i].GetType().Name} was Initialized");
                 }
                 catch (Exception ex)
                 {

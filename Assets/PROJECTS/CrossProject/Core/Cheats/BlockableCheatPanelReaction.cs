@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using VContainer.Unity;
 
 namespace CrossProject.Core.Cheats
@@ -13,7 +14,7 @@ namespace CrossProject.Core.Cheats
             _blockables = blockables;
         }
 
-        public void Initialize()
+        public async UniTask Initialize()
         {
             foreach (var blockable in _blockables)
             {

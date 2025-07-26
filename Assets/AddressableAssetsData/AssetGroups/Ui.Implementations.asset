@@ -22,6 +22,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 036caa5bbc4ef4379a79151c69ce51fa
+    m_Address: CharacterHudElement
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 411eaeda2ab5c4e43a5b612872e2698e
     m_Address: SettingsHudElement
     m_ReadOnly: 0

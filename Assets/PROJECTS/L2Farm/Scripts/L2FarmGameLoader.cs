@@ -38,7 +38,7 @@ namespace L2Farm.Scripts
             };
         }
 
-        public void Initialize()
+        public async UniTask Initialize()
         {
             #if !DISABLE_SRDEBUGGER
             _resolver
