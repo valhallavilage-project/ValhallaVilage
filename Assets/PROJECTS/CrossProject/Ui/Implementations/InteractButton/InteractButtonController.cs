@@ -19,7 +19,7 @@ namespace CrossProject.Ui.Implementations.InteractButton
         private readonly List<IDisposable> _disposables = new();
 
         private InteractButton _view;
-        private CancellationTokenSource _cts;
+        private CancellationTokenSource _cts = new ();
 
         public InteractButtonController(
             UiService uiService,

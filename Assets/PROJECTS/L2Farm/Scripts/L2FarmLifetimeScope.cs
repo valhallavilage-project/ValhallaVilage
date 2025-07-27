@@ -42,6 +42,9 @@ namespace L2Farm.Scripts
             builder.RegisterEntryPoint<EmptyEntryPoint>()
                 .AsSelf();
 
+            builder.RegisterComponentInHierarchy<ManualPrefabInjector>()
+                .AsSelf();
+
             builder.Register<AddressablesManager>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();

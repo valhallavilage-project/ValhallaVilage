@@ -16,7 +16,7 @@ namespace L2Farm.Scripts.AutoLootButton
         private readonly SimpleMovementController _simpleMovementController;
 
         private AutoLootButton _view;
-        private CancellationTokenSource _cts;
+        private CancellationTokenSource _cts = new ();
 
         public AutoLootButtonController(
             UiService uiService,
