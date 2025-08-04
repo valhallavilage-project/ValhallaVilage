@@ -1,11 +1,13 @@
 using System.Collections;
+using CrossProject.Core.Interactions;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
 namespace L2Farm.Scripts.Mobs
 {
-    public class Mob : MonoBehaviour
+    public class Mob : InteractiveObject
     {
         public float minRadius = 5f;
         public float maxRadius = 15f;
@@ -120,6 +122,11 @@ namespace L2Farm.Scripts.Mobs
                 StopCoroutine(_walkCoroutine);
         
             _walkCoroutine = StartCoroutine(WalkRoutine());
+        }
+        public override async UniTask Interaction()
+        {
+            Debug.Log("Attack Enemy");
+            await UniTask.CompletedTask;
         }
     }
 }

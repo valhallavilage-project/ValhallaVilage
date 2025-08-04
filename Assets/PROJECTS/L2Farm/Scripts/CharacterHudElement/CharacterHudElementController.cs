@@ -4,7 +4,6 @@ using CrossProject.Core.SaveLoad;
 using CrossProject.Ui.Core;
 using Cysharp.Threading.Tasks;
 using CrossProject.Core.Energy;
-using UnityEngine;
 using VContainer.Unity;
 
 namespace L2Farm.Scripts.CharacterHudElement

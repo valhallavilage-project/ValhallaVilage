@@ -1878,6 +1878,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wolf
       objectReference: {fileID: 0}
+    - target: {fileID: 6019216532538934344, guid: e418237ad198b46ce8b69add9a802e08, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6489754502753368715, guid: e418237ad198b46ce8b69add9a802e08, type: 3}
       propertyPath: animator
       value: 

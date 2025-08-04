@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: JoystickConfig
   m_EditorClassIdentifier: 
   zoneAnchorMin: {x: 0, y: 0}
-  zoneAnchorMax: {x: 0.4, y: 1}
+  zoneAnchorMax: {x: 0.35, y: 0.5}
   backgroundRadius: 200
-  backgroundAlphaInactive: 0.1
-  backgroundAlphaActive: 0.5
+  backgroundAlphaInactive: 0.6
+  backgroundAlphaActive: 0.8
   stickRadius: 75
-  stickAlphaInactive: 0.2
+  stickAlphaInactive: 0.8
   stickAlphaActive: 1
   deadZoneRadius: 0
   maxZoneRadius: 100
