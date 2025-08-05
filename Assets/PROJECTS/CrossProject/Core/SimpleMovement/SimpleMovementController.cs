@@ -73,7 +73,11 @@ namespace CrossProject.Core.SimpleMovement
             _playerNavMeshAgent.SetDestination(transform.position + _direction);
 
             if (CurrentSkin != null && CurrentSkin.Animator != null)
-                CurrentSkin.Animator.SetFloat(Speed, _joystick.NormalizedVector2.sqrMagnitude > 0 ? 1 : 0);
+            {
+                var velocity = _playerNavMeshAgent.velocity.magnitude;
+                var animSpeed = Mathf.InverseLerp(0, _playerNavMeshAgent.speed, velocity);
+                CurrentSkin.Animator.SetFloat(Speed, animSpeed);
+            }
         }
 
         public async UniTask MoveTo(Vector3 target, CancellationToken cancellationToken, float targetDistance = 1)

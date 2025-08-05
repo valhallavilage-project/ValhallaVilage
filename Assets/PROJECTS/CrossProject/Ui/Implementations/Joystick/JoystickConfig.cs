@@ -7,6 +7,7 @@ namespace CrossProject.Ui.Implementations
     {
         public Vector2 zoneAnchorMin;
         public Vector2 zoneAnchorMax;
+        public Vector2 desiredPercentagePosition;
         public float backgroundRadius;
         public float backgroundAlphaInactive;
         public float backgroundAlphaActive;

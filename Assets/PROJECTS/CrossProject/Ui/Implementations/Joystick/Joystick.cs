@@ -42,6 +42,7 @@ namespace CrossProject.Ui.Implementations
 
         public void StartDrag()
         {
+            background.anchorMin = background.anchorMax = new Vector2(0.5f, 0.5f);
             background.position = Input.mousePosition;
             _backgroundCanvasGroup.alpha = Model.backgroundAlphaActive;
             _stickCanvasGroup.alpha = Model.stickAlphaActive;
@@ -61,7 +62,13 @@ namespace CrossProject.Ui.Implementations
 
         public void EndDrag()
         {
-            background.anchoredPosition = Vector2.zero;
+            var parentRect = transform.parent.GetComponent<RectTransform>().sizeDelta;
+            background.anchorMin = background.anchorMax = Vector2.zero;
+            var desiredPosition =
+                new Vector2(
+                    parentRect.x * Model.desiredPercentagePosition.x,
+                    parentRect.y * Model.desiredPercentagePosition.y);
+            background.anchoredPosition = desiredPosition;
             _backgroundCanvasGroup.alpha = Model.backgroundAlphaInactive;
             stick.anchoredPosition = Vector3.zero;
             _stickCanvasGroup.alpha = Model.stickAlphaInactive;

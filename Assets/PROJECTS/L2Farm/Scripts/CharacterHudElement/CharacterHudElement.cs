@@ -6,6 +6,8 @@ namespace L2Farm.Scripts.CharacterHudElement
 {
     public class CharacterHudElement : HudElementView<CharacterHudElementModel>
     {
+        private static readonly int FillAmount = Shader.PropertyToID("_FillAmount");
+
         [SerializeField]
         private Image portrait;
 
@@ -23,9 +25,9 @@ namespace L2Farm.Scripts.CharacterHudElement
 
         public void SetPortrait(Sprite sprite) => portrait.sprite = sprite;
 
-        public void SetHealth(float value01) => healthBarFill.fillAmount = value01;
+        public void SetHealth(float value01) => healthBarFill.material.SetFloat(FillAmount, value01);
 
-        public void SetMana(float value01) => manaBarFill.fillAmount = value01;
+        public void SetMana(float value01) => manaBarFill.material.SetFloat(FillAmount, value01);
 
         public void SetPremium(bool value)
         {

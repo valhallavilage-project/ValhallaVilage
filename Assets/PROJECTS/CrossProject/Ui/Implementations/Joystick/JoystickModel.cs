@@ -7,6 +7,7 @@ namespace CrossProject.Ui.Implementations
     {
         public Vector2 zoneAnchorMin;
         public Vector2 zoneAnchorMax;
+        public Vector2 desiredPercentagePosition;
         public float backgroundRadius;
         public float backgroundAlphaInactive;
         public float backgroundAlphaActive;
@@ -24,6 +25,7 @@ namespace CrossProject.Ui.Implementations
             {
                 zoneAnchorMin = config.zoneAnchorMin,
                 zoneAnchorMax = config.zoneAnchorMax,
+                desiredPercentagePosition = config.desiredPercentagePosition,
                 backgroundRadius = config.backgroundRadius,
                 backgroundAlphaInactive = config.backgroundAlphaInactive,
                 backgroundAlphaActive = config.backgroundAlphaActive,
