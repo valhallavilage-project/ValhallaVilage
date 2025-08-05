@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 291271860480440527}
+  - component: {fileID: 332223387447031960}
   - component: {fileID: 7190889870523618706}
-  - component: {fileID: 2188046510829155977}
   - component: {fileID: 7118450510575045076}
   - component: {fileID: 2645367442998763702}
   m_Layer: 5
-  m_Name: SettingsHudElement
+  m_Name: ShopButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38,18 +38,10 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -30, y: -30}
+  m_AnchoredPosition: {x: -250, y: -30}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 1, y: 1}
---- !u!222 &7190889870523618706
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1605135204763009382}
-  m_CullTransparentMesh: 1
---- !u!114 &2188046510829155977
+--- !u!114 &332223387447031960
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -58,10 +50,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1605135204763009382}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84d0fd0eae9e45e7aefae17dcd270075, type: 3}
+  m_Script: {fileID: 11500000, guid: ae383cbf1b794cbc8e3be15b8deddfc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 2645367442998763702}
+--- !u!222 &7190889870523618706
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1605135204763009382}
+  m_CullTransparentMesh: 1
 --- !u!114 &7118450510575045076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,7 +246,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 65, y: 65}
+  m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &654624696034984376
 CanvasRenderer:
@@ -276,7 +276,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b3948287166934e559c8ea7d8f610326, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9d1483c4f9b7c4949954abd3c6d0718d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

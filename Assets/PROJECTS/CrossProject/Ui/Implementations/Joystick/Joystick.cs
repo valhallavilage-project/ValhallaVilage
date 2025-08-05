@@ -38,6 +38,8 @@ namespace CrossProject.Ui.Implementations
 
             _sqrDeadZoneRadius = Model.deadZoneRadius * Model.deadZoneRadius;
             _sqrMaxZoneRadius = Model.maxZoneRadius * Model.maxZoneRadius;
+
+            EndDrag();
         }
 
         public void StartDrag()
@@ -62,13 +64,8 @@ namespace CrossProject.Ui.Implementations
 
         public void EndDrag()
         {
-            var parentRect = transform.parent.GetComponent<RectTransform>().sizeDelta;
-            background.anchorMin = background.anchorMax = Vector2.zero;
-            var desiredPosition =
-                new Vector2(
-                    parentRect.x * Model.desiredPercentagePosition.x,
-                    parentRect.y * Model.desiredPercentagePosition.y);
-            background.anchoredPosition = desiredPosition;
+            background.anchorMin = background.anchorMax = Model.desiredPercentagePosition;
+            background.anchoredPosition = Vector2.zero;
             _backgroundCanvasGroup.alpha = Model.backgroundAlphaInactive;
             stick.anchoredPosition = Vector3.zero;
             _stickCanvasGroup.alpha = Model.stickAlphaInactive;

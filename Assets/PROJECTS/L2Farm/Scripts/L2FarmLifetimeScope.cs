@@ -13,6 +13,9 @@ using CrossProject.Ui.Implementations;
 using CrossProject.Ui.Implementations.InteractButton;
 using CrossProject.Ui.Implementations.SettingsPopup;
 using Cysharp.Threading.Tasks;
+using L2Farm.Features.InventoryScreen;
+using L2Farm.Features.QuestsScreen;
+using L2Farm.Features.ShopScreen;
 using L2Farm.Scripts.CharacterHudElement;
 using PROJECTS.L2Farm.Scripts.CharacterSkinSelect;
 using VContainer;
@@ -116,6 +119,18 @@ namespace L2Farm.Scripts
                 .AsImplementedInterfaces();
 
             builder.Register<CharacterHudElementController>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+
+            builder.Register<InventoryScreenController>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+
+            builder.Register<QuestsPopupController>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+
+            builder.Register<ShopScreenController>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
 
