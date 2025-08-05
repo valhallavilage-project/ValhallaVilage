@@ -3,9 +3,9 @@ using CrossProject.Core.PROJECTS.CrossProject.Core.InGameResources;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace L2Farm.Features.LootResourceContent
+namespace CrossProject.Core.Content
 {
-    public class LootResourceContent : IResourceContent
+    public class ResourceContent : IResourceContent
     {
         [SerializeField]
         private ResourceId resourceId;
@@ -37,6 +37,12 @@ namespace L2Farm.Features.LootResourceContent
                 ? Random.Range(lowerRange, upperRange + 1)
                 : amount;
             set => amount = value;
+        }
+
+        public ResourceContent(ResourceId id, int amount = 0)
+        {
+            Resource = id;
+            Amount = amount;
         }
     }
 }
