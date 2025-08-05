@@ -56,6 +56,34 @@ PrefabInstance:
       propertyPath: animation
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: _resourceContent
+      value: 4482425347590848514
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: managedReferences[4482425347590848514]
+      value: Assembly-CSharp L2Farm.Features.LootResourceContent.LootResourceContent
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: managedReferences[4482425347590848514].amount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: managedReferences[4482425347590848514].lowerRange
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: managedReferences[4482425347590848514].upperRange
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: managedReferences[4482425347590848514].randomAmount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: managedReferences[4482425347590848514].resourceId.value
+      value: Resource_Wood
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

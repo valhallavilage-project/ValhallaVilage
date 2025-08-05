@@ -1,4 +1,4 @@
-using System;
+using CrossProject.Core.Content;
 using CrossProject.Core.Energy;
 using CrossProject.Core.SaveLoad;
 using Cysharp.Threading.Tasks;
@@ -11,6 +11,9 @@ namespace CrossProject.Core.Interactions
 {
     public class ResourceInteractiveObject : InteractiveObject
     {
+        [SerializeReference]
+        private IResourceContent _resourceContent;
+
         [SerializeField]
         private NavMeshObstacle _obstacle;
 

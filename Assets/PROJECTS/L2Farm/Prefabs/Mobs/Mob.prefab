@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 2962678597378798446}
   - component: {fileID: 6489754502753368715}
   - component: {fileID: 5593516471528899137}
+  - component: {fileID: 7868292844230528031}
   m_Layer: 0
   m_Name: Mob
   m_TagString: Untagged
@@ -78,6 +79,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e107eca9a2246c0b7584835580e5a2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  energyNeeded: 2
+  interactionDistance: 1
+  interactionDuration: 0
+  buttonSprite: {fileID: 0}
+  animation: 0
+  viewRoot: {fileID: 0}
+  highLight: {fileID: 0}
   minRadius: 15
   maxRadius: 40
   minWaitTime: 1
@@ -108,6 +116,27 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!135 &7868292844230528031
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4230157716610811338}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6019216532538934344
 GameObject:
   m_ObjectHideFlags: 0

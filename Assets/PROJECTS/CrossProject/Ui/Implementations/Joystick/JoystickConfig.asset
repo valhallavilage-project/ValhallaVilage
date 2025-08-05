@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zoneAnchorMin: {x: 0, y: 0}
   zoneAnchorMax: {x: 0.4, y: 0.8}
-  desiredPercentagePosition: {x: 0.25, y: 0.4}
+  desiredPercentagePosition: {x: 0.3, y: 0.4}
   backgroundRadius: 200
   backgroundAlphaInactive: 0.4
   backgroundAlphaActive: 0.8

@@ -142,6 +142,34 @@ PrefabInstance:
       propertyPath: buttonSprite
       value: 
       objectReference: {fileID: 21300000, guid: 9cac07d28bcae473a93a6639bd4d7219, type: 3}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: _resourceContent
+      value: 4482425347590848512
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: managedReferences[4482425347590848512]
+      value: Assembly-CSharp L2Farm.Features.LootResourceContent.LootResourceContent
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: managedReferences[4482425347590848512].amount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: managedReferences[4482425347590848512].lowerRange
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: managedReferences[4482425347590848512].upperRange
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: managedReferences[4482425347590848512].randomAmount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5218657213724613654, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
+      propertyPath: managedReferences[4482425347590848512].resourceId.value
+      value: Resource_Seeds
+      objectReference: {fileID: 0}
     - target: {fileID: 5491077745900576367, guid: 60a7d434afeae4010bb21b92e2c0f3bb, type: 3}
       propertyPath: m_IsActive
       value: 0
