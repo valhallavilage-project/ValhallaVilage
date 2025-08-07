@@ -1,8 +1,10 @@
 using CrossProject.Core;
+using CrossProject.Core.Actions;
 using CrossProject.Core.Audio;
 using CrossProject.Core.Camera;
 using CrossProject.Core.Characters;
 using CrossProject.Core.Cheats;
+using CrossProject.Core.Conditions;
 using CrossProject.Core.Interactions;
 using CrossProject.Core.PROJECTS.CrossProject.Core;
 using CrossProject.Core.SaveLoad;
@@ -44,6 +46,14 @@ namespace L2Farm.Scripts
         {
             builder.RegisterEntryPoint<EmptyEntryPoint>()
                 .AsSelf();
+
+            builder.Register<ActionService>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+
+            builder.Register<ConditionService>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
 
             builder.RegisterComponentInHierarchy<ManualPrefabInjector>()
                 .AsSelf();
