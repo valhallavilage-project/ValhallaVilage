@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using VContainer.Unity;
 
@@ -25,7 +26,8 @@ namespace CrossProject.Core
 
         public async UniTask UnloadScene(string sceneName)
         {
-            await SceneManager.UnloadSceneAsync(sceneName).ToUniTask();
+            Debug.LogWarning(sceneName + " Unload");
+            await SceneManager.UnloadSceneAsync(sceneName);
             if (string.Equals(CurrentSceneName, sceneName))
                 CurrentSceneName = null;
         }

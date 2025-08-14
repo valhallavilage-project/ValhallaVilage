@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Buildings
+  m_EditorClassIdentifier: 
+  m_GroupName: Buildings
+  m_Data:
+    m_SerializedData: []
+  m_GUID: e1967264262024987a76680182fe2533
+  m_SerializeEntries:
+  - m_GUID: 4e04e5d3e132c40d28878d995e39a979
+    m_Address: Mill_Broken
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 610fecbab3dbb471e99b5ff62d9b7c2a
+    m_Address: Mill_Ready
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: c7df8a55234934d49939dec28c48ca4c, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: a5ad839a074774e6a9fb80651b650741, type: 2}
+    - {fileID: 11400000, guid: 4af5ea4e5525740d591587ab544ddf82, type: 2}

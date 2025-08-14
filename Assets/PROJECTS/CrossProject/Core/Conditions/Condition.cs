@@ -4,9 +4,15 @@ namespace CrossProject.Core.Conditions
 {
     public abstract class Condition<TConditionConfig> : ICondition where TConditionConfig : IConditionConfig
     {
+        protected readonly ConditionService conditionService;
         protected TConditionConfig config;
 
         public Type ConfigType => typeof(TConditionConfig);
+
+        public Condition(ConditionService conditionService)
+        {
+            this.conditionService = conditionService;
+        }
 
         public void SetConfig(IConditionConfig conditionConfig)
         {

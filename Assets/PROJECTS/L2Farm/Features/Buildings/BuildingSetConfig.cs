@@ -1,0 +1,30 @@
+﻿using System;
+using System.Collections.Generic;
+using CrossProject.Core.SpawnPoints;
+using Sirenix.OdinInspector;
+using UnityEngine;
+
+namespace L2Farm.Features.Buildings
+{
+    [CreateAssetMenu(menuName = "L2Farm/BuildingSetConfig", fileName = "BuildingSetConfig")]
+    public class BuildingSetConfig : ScriptableObject
+    {
+        public List<BuildingConfig> items = new();
+    }
+
+    [Serializable]
+    public class BuildingConfig
+    {
+        [FoldoutGroup("$id")]
+        public string id;
+
+        [FoldoutGroup("$id")]
+        public SceneId sceneId;
+
+        [FoldoutGroup("$id")]
+        public string assetIdBroken;
+
+        [FoldoutGroup("$id")]
+        public string assetIdReady;
+    }
+}

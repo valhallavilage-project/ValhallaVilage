@@ -1,15 +1,17 @@
 using System.Collections.Generic;
 using CrossProject.Core.Characters;
-using CrossProject.Core.PROJECTS.CrossProject.Core.InGameResources;
+using CrossProject.Core.InGameResources;
+using CrossProject.Core.Quests;
 using CrossProject.Core.Skins;
+using CrossProject.Core.SpawnPoints;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
 namespace CrossProject.Core.SaveLoad
 {
-    public static class JsonSerializerSettingsProvider
+    public class JsonSerializerSettingsProvider : IJsonSerializerSettingsProvider
     {
-        public static JsonSerializerSettings DefaultSettings => new ()
+        public JsonSerializerSettings Settings => new ()
         {
             TypeNameHandling = TypeNameHandling.Auto,
             TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Simple,
@@ -26,6 +28,9 @@ namespace CrossProject.Core.SaveLoad
                 new CharacterIdConverter(),
                 new SkinIdConverter(),
                 new ResourceIdConverter(),
+                new SceneIdConverter(),
+                new SpawnPointIdConverter(),
+                new QuestIdConverter(),
             }
         };
     }

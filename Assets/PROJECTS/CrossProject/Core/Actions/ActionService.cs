@@ -64,5 +64,11 @@ namespace CrossProject.Core.Actions
             action.SetConfig(config);
             action.Execute();
         }
+
+        public void Execute(IEnumerable<IActionConfig> configs)
+        {
+            foreach (var actionConfig in configs)
+                Execute(actionConfig);
+        }
     }
 }

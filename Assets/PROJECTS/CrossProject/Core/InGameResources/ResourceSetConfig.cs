@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace CrossProject.Core.PROJECTS.CrossProject.Core.InGameResources
+namespace CrossProject.Core.InGameResources
 {
     [CreateAssetMenu(menuName = "Cross Project/InGameResources/ResourceSetConfig", fileName = "ResourceSetConfig")]
     public class ResourceSetConfig : ScriptableObject

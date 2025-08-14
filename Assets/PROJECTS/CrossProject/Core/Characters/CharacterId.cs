@@ -7,6 +7,8 @@ namespace CrossProject.Core.Characters
     [Serializable]
     public class CharacterId : EntityId<string>, IEquatable<CharacterId>
     {
+        public override int GetHashCode() => Value.GetHashCode();
+
         public CharacterId(string value) : base(value) {}
 
         public bool Equals(CharacterId other) => Value.Equals(other?.Value);

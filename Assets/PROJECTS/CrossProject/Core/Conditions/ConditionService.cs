@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using CrossProject.Core.Conditions.ConditionsImplementations;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
@@ -32,8 +33,11 @@ namespace CrossProject.Core.Conditions
 
         private ICondition GetCondition(IConditionConfig conditionConfig)
         {
-            //TODO : VM : check for AND condition
-            //TODO : VM : check for OR condition
+            if (conditionConfig is AndConditionConfig)
+                return new AndCondition(this);
+
+            if (conditionConfig is OrConditionConfig)
+                return new OrCondition(this);
 
             if (_conditionMap.TryGetValue(conditionConfig.GetType(), out var condition))
                 return condition;
@@ -52,8 +56,8 @@ namespace CrossProject.Core.Conditions
                 .Where(type => !type.IsAbstract && !type.IsInterface && conditionInterface.IsAssignableFrom(type))
                 .ToList();
 
-            //TODO : VM : remove and condition
-            //TODO : VM : remove or condition
+            conditionTypes.Remove(typeof(AndCondition));
+            conditionTypes.Remove(typeof(OrCondition));
 
             foreach (var type in conditionTypes)
             {
@@ -72,6 +76,10 @@ namespace CrossProject.Core.Conditions
 
         public bool Check<TConditionConfig>(TConditionConfig conditionConfig) where TConditionConfig : class, IConditionConfig
         {
+            //If there is no condition set -> there is no blockers
+            if (conditionConfig == null)
+                return true;
+
             var condition = GetCondition(conditionConfig);
             condition.SetConfig(conditionConfig);
             return condition.Check();

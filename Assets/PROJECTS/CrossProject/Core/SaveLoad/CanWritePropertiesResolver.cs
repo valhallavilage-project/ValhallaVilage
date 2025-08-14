@@ -7,7 +7,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace CrossProject.Core.SaveLoad
 {
-    internal sealed class CanWritePropertiesResolver : DefaultContractResolver
+    public sealed class CanWritePropertiesResolver : DefaultContractResolver
     {
         // As of 7.0.1, Json.NET suggests using a static instance for "stateless" contract resolvers, for performance reasons.
         // http://www.newtonsoft.com/json/help/html/ContractResolver.htm

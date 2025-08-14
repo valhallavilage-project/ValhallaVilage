@@ -10,10 +10,15 @@ namespace CrossProject.Core.SaveLoad
     {
         private const string GameStatePrefsKey = nameof(GameStatePrefsKey);
 
-        private readonly JsonSerializer _serializer = new ();
+        private readonly JsonSerializer _serializer;
 
         private GameState _gameState;
         private UniTask _saveTask;
+
+        public GameStateManager(IJsonSerializerSettingsProvider provider)
+        {
+            _serializer = new JsonSerializer(provider);
+        }
 
         public GameState State
         {

@@ -7,7 +7,19 @@ namespace CrossProject.Core.SaveLoad
     public class GameState
     {
         [JsonProperty]
-        private Dictionary<Type, IGameStatePart> _partsMap = new();
+        private readonly Dictionary<Type, IGameStatePart> _partsMap = new();
+
+        public TGameStatePart Get<TGameStatePart>() where TGameStatePart : class, IGameStatePart, new()
+        {
+            var type = typeof(TGameStatePart);
+
+            if (_partsMap.TryGetValue(type, out var existing))
+                return (TGameStatePart)existing;
+
+            var created = new TGameStatePart();
+            _partsMap[type] = created;
+            return created;
+        }
 
         public bool TryGet<TGameStatePart>(out TGameStatePart part) where TGameStatePart : class, IGameStatePart
         {

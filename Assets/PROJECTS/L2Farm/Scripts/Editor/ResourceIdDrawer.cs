@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using CrossProject.Core.PROJECTS.CrossProject.Core.InGameResources;
+using CrossProject.Core.InGameResources;
 using CrossProject.Editor.OdinEntities;
 using UnityEditor;
 

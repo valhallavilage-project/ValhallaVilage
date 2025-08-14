@@ -17,6 +17,12 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: f0cda9746db524148957a11d56e174a8
   m_SerializeEntries:
+  - m_GUID: 21173dce8cec5491b9534d1c61483134
+    m_Address: SpawnPointSetConfig
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - prewarm
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 39d72b3e167104093b6ba16bd4393d2c
     m_Address: SkinSetConfig
     m_ReadOnly: 0
@@ -29,8 +35,26 @@ MonoBehaviour:
     m_SerializedLabels:
     - prewarm
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 94b7cff46e44a419dbba44a2ce97b1ac
+    m_Address: SceneSetConfig
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - prewarm
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d777050ecc32d4fbfb9aa5b5734efa56
+    m_Address: QuestSetConfig
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - prewarm
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e761a6584d71449569ad185b9864f32b
     m_Address: CharacterSetConfig
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - prewarm
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f283214defd38448d9d9f06713a44e31
+    m_Address: ResourceSetConfig
     m_ReadOnly: 0
     m_SerializedLabels:
     - prewarm

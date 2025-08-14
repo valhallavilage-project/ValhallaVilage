@@ -1,4 +1,4 @@
-using CrossProject.Core.PROJECTS.CrossProject.Core.InGameResources;
+using CrossProject.Core.InGameResources;
 
 namespace CrossProject.Core.Content
 {

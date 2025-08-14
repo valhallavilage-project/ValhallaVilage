@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace CrossProject.Core.Audio
@@ -9,6 +10,11 @@ namespace CrossProject.Core.Audio
 
         [SerializeField]
         private AudioSourcePool _pool;
+
+        private void Awake()
+        {
+            DontDestroyOnLoad(gameObject);
+        }
 
         private void RepositionAudioSource(Transform source, Transform parent)
         {

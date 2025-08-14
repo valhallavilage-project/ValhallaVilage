@@ -2,7 +2,7 @@ using System;
 using CrossProject.Core.OdinEntities;
 using Newtonsoft.Json;
 
-namespace CrossProject.Core.PROJECTS.CrossProject.Core.InGameResources
+namespace CrossProject.Core.InGameResources
 {
     [Serializable]
     public class ResourceId : EntityId<string>, IEquatable<ResourceId>

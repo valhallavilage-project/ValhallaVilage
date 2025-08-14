@@ -1,5 +1,4 @@
-using CrossProject.Core.Content;
-using CrossProject.Core.PROJECTS.CrossProject.Core.InGameResources;
+using CrossProject.Core.InGameResources;
 using Sirenix.OdinInspector;
 using UnityEngine;
 

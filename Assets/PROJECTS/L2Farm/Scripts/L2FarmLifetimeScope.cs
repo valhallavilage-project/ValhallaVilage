@@ -1,5 +1,6 @@
 using CrossProject.Core;
 using CrossProject.Core.Actions;
+using CrossProject.Core.Actions.Implementations;
 using CrossProject.Core.Audio;
 using CrossProject.Core.Camera;
 using CrossProject.Core.Characters;
@@ -10,6 +11,7 @@ using CrossProject.Core.PROJECTS.CrossProject.Core;
 using CrossProject.Core.SaveLoad;
 using CrossProject.Core.SimpleMovement;
 using CrossProject.Core.Skins;
+using CrossProject.Core.SpawnPoints;
 using CrossProject.Ui.Core;
 using CrossProject.Ui.Implementations;
 using CrossProject.Ui.Implementations.InteractButton;
@@ -19,6 +21,7 @@ using L2Farm.Features.InventoryScreen;
 using L2Farm.Features.QuestsScreen;
 using L2Farm.Features.ShopScreen;
 using L2Farm.Scripts.CharacterHudElement;
+using L2Farm.Scripts.Conditions;
 using PROJECTS.L2Farm.Scripts.CharacterSkinSelect;
 using VContainer;
 using VContainer.Unity;
@@ -42,18 +45,36 @@ namespace L2Farm.Scripts
                 .AsImplementedInterfaces();
         }
 
-        protected override void Configure(IContainerBuilder builder)
+        private void RegisterConditionsAndActions(IContainerBuilder builder)
         {
-            builder.RegisterEntryPoint<EmptyEntryPoint>()
-                .AsSelf();
+            builder.Register<ConditionService>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+
+            builder.Register<HasEnoughResourcesCondition>(Lifetime.Singleton).AsSelf();
 
             builder.Register<ActionService>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
 
-            builder.Register<ConditionService>(Lifetime.Singleton)
+            builder.Register<LaunchQuestAction>(Lifetime.Singleton).AsSelf();
+            builder.Register<LoseQuestAction>(Lifetime.Singleton).AsSelf();
+        }
+
+        protected override void Configure(IContainerBuilder builder)
+        {
+            builder.RegisterEntryPoint<EmptyEntryPoint>()
+                .AsSelf();
+
+            builder.Register<L2FarmJsonSerializerSettingsProvider>(Lifetime.Singleton)
+                .AsImplementedInterfaces();
+
+            builder.Register<SpawnPointService>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
+
+
+
 
             builder.RegisterComponentInHierarchy<ManualPrefabInjector>()
                 .AsSelf();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using CrossProject.Core.Camera;
 using CrossProject.Core.Skins;
+using CrossProject.Core.SpawnPoints;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
@@ -16,6 +17,7 @@ namespace CrossProject.Core.SimpleMovement
     {
         private CameraService _cameraService;
         private IJoystickValueProvider _joystick;
+        private SpawnPointService _spawnPointService;
 
         [SerializeField] private Transform skinRoot;
 
@@ -53,10 +55,12 @@ namespace CrossProject.Core.SimpleMovement
         [Inject]
         private void Construct(
             CameraService cameraService,
-            IJoystickValueProvider joystickValueProvider)
+            IJoystickValueProvider joystickValueProvider,
+            SpawnPointService spawnPointService)
         {
             _cameraService = cameraService;
             _joystick = joystickValueProvider;
+            _spawnPointService = spawnPointService;
         }
 
         public void Tick()
@@ -92,6 +96,8 @@ namespace CrossProject.Core.SimpleMovement
         public void PostInitialize()
         {
             _cameraService.SetTarget(transform);
+            var targetPos = _spawnPointService.GetPosition(new SpawnPointId("PlayerSpawnPoint"));
+            _playerNavMeshAgent.Warp(targetPos);
         }
     }
 }
