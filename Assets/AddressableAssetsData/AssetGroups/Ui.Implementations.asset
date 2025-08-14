@@ -42,6 +42,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7a0b0cfad739148adb28ed9719b4dbc2
+    m_Address: SimpleMonologPopupView
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8fcbadfc4aab34903a222ee5b9f6e0aa
     m_Address: Slider
     m_ReadOnly: 0

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using CrossProject.Core.SaveLoad;
 
-namespace CrossProject.Core.Content
+namespace CrossProject.Core.InGameResources
 {
     public class ResourceContentPart : IGameStatePart
     {

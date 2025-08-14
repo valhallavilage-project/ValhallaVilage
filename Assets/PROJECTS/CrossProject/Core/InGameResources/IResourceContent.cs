@@ -1,6 +1,4 @@
-using CrossProject.Core.InGameResources;
-
-namespace CrossProject.Core.Content
+namespace CrossProject.Core.InGameResources
 {
     public interface IResourceContent
     {

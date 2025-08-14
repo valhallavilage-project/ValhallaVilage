@@ -1,9 +1,11 @@
-using CrossProject.Core.InGameResources;
+using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-namespace CrossProject.Core.Content
+namespace CrossProject.Core.InGameResources
 {
+    [Serializable]
     public class ResourceContent : IResourceContent
     {
         [SerializeField]

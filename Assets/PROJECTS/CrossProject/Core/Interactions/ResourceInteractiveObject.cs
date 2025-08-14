@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using CrossProject.Core.Content;
+using CrossProject.Core.InGameResources;
 using CrossProject.Core.Energy;
 using CrossProject.Core.SaveLoad;
 using Cysharp.Threading.Tasks;

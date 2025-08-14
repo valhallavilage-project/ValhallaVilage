@@ -585,7 +585,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Russian
+  m_text: English
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4c2a86390946a43b2ae5f79c150199d6, type: 2}
   m_sharedMaterial: {fileID: 2147912664184731528, guid: 4c2a86390946a43b2ae5f79c150199d6, type: 2}
@@ -783,9 +783,9 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Russian
-      m_Image: {fileID: 0}
     - m_Text: English
+      m_Image: {fileID: 0}
+    - m_Text: Russian
       m_Image: {fileID: 0}
     - m_Text: Spanish
       m_Image: {fileID: 0}
@@ -831,7 +831,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 600, y: 200}
+  m_SizeDelta: {x: 600, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8959011489779560012
 MonoBehaviour:
@@ -2030,7 +2030,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 600, y: 200}
+  m_SizeDelta: {x: 600, y: 115}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &258109535464323234
 MonoBehaviour:
@@ -2646,7 +2646,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 700, y: 200}
+  m_SizeDelta: {x: 700, y: 100}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &5253629134662664608
 MonoBehaviour:
@@ -3605,7 +3605,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 900, y: 900}
+  m_SizeDelta: {x: 650, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &8763536292678722285
 GameObject:
