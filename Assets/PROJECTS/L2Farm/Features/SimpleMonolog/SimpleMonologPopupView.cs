@@ -33,10 +33,12 @@ namespace L2Farm.Features.SimpleMonolog
             portrait.sprite = Model.portrait;
             personName.text = Model.personName;
             message.text = Model.message;
-            //close button
-            if (Model.config != null)
+            close.onClick.RemoveAllListeners();
+            close.onClick.AddListener(() => Model.close?.Invoke());
+            if (Model.hasEnoughResourcesConditionConfig != null && Model.hasEnoughResourcesConditionConfig.resourceConditions.Count > 0)
             {
-                //next button
+                next.onClick.RemoveAllListeners();
+                next.onClick.AddListener(() => Model.next?.Invoke());
                 rootForConditionItems.GetComponentsInChildren<MonologConditionItem>();
             }
         }

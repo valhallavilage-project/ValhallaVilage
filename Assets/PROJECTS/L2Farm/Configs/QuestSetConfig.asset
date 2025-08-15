@@ -17,8 +17,47 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 4482425490423152640
       type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
       data:
-        id: 
-        steps: []
+        id: HelloWorld
+        launchCondition:
+          rid: -2
+        launchActions: []
+        steps:
+        - rid: 4482425573669863425
+        winCondition:
+          rid: -2
+        winActions:
+        - rid: 4482425573669863426
+        loseCondition:
+          rid: -2
+        loseActions: []
+        targetSpawnPoint:
+          value: 
+    - rid: 4482425573669863425
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        winCondition:
+          rid: -2
+        winActions: []
+        stepAction:
+          rid: 4482425573669863427
+        loseCondition:
+          rid: -2
+        loseActions: []
+    - rid: 4482425573669863426
+      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: 
+    - rid: 4482425573669863427
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Scripts.Actions, asm: Assembly-CSharp}
+      data:
+        speaker:
+          value: NPC_Dwarf
+        message: Help us! Please!
+        hasEnoughResourcesConditionConfig:
+          resourceConditions: []

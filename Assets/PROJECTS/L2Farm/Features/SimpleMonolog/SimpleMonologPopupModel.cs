@@ -9,6 +9,8 @@ namespace L2Farm.Features.SimpleMonolog
         public Sprite portrait;
         public string personName;
         public string message;
-        public HasEnoughResourcesConditionConfig config;
+        public HasEnoughResourcesConditionConfig hasEnoughResourcesConditionConfig;
+        public System.Action close;
+        public System.Action next;
     }
 }

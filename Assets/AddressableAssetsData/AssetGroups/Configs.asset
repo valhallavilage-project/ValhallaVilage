@@ -47,6 +47,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - prewarm
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e64fd9210b3334384ad8a4876adc527f
+    m_Address: EnergyRestorationConfig
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - prewarm
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e761a6584d71449569ad185b9864f32b
     m_Address: CharacterSetConfig
     m_ReadOnly: 0

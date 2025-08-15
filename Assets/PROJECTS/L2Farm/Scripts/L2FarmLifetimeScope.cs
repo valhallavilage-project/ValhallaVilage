@@ -6,8 +6,10 @@ using CrossProject.Core.Camera;
 using CrossProject.Core.Characters;
 using CrossProject.Core.Cheats;
 using CrossProject.Core.Conditions;
+using CrossProject.Core.Conditions.ConditionsImplementations;
 using CrossProject.Core.Interactions;
 using CrossProject.Core.PROJECTS.CrossProject.Core;
+using CrossProject.Core.Quests;
 using CrossProject.Core.SaveLoad;
 using CrossProject.Core.SimpleMovement;
 using CrossProject.Core.Skins;
@@ -16,10 +18,10 @@ using CrossProject.Ui.Core;
 using CrossProject.Ui.Implementations;
 using CrossProject.Ui.Implementations.InteractButton;
 using CrossProject.Ui.Implementations.SettingsPopup;
-using Cysharp.Threading.Tasks;
 using L2Farm.Features.InventoryScreen;
 using L2Farm.Features.QuestsScreen;
 using L2Farm.Features.ShopScreen;
+using L2Farm.Scripts.Actions;
 using L2Farm.Scripts.CharacterHudElement;
 using L2Farm.Scripts.Conditions;
 using PROJECTS.L2Farm.Scripts.CharacterSkinSelect;
@@ -52,6 +54,8 @@ namespace L2Farm.Scripts
                 .AsImplementedInterfaces();
 
             builder.Register<HasEnoughResourcesCondition>(Lifetime.Singleton).AsSelf();
+            builder.Register<FalseCondition>(Lifetime.Singleton).AsSelf();
+            builder.Register<TrueCondition>(Lifetime.Singleton).AsSelf();
 
             builder.Register<ActionService>(Lifetime.Singleton)
                 .AsSelf()
@@ -59,6 +63,7 @@ namespace L2Farm.Scripts
 
             builder.Register<LaunchQuestAction>(Lifetime.Singleton).AsSelf();
             builder.Register<LoseQuestAction>(Lifetime.Singleton).AsSelf();
+            builder.Register<ShowMonologAction>(Lifetime.Singleton).AsSelf();
         }
 
         protected override void Configure(IContainerBuilder builder)
@@ -73,8 +78,12 @@ namespace L2Farm.Scripts
                 .AsSelf()
                 .AsImplementedInterfaces();
 
+            // builder.RegisterComponentInHierarchy<QuestIndication>()
+            //     .AsSelf();
 
-
+            builder.Register<QuestService>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
 
             builder.RegisterComponentInHierarchy<ManualPrefabInjector>()
                 .AsSelf();
@@ -165,6 +174,7 @@ namespace L2Farm.Scripts
                 .AsSelf()
                 .AsImplementedInterfaces();
 
+            RegisterConditionsAndActions(builder);
             RegisterCheats(builder);
         }
     }

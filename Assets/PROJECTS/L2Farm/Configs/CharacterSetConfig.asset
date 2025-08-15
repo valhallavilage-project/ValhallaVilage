@@ -15,25 +15,37 @@ MonoBehaviour:
   items:
   - id: MC_Female
     portrait: {fileID: 21300000, guid: 02f9b5e27ebe72d42bc5f8721323f194, type: 3}
+    personName: Hero
   - id: MC_Male
     portrait: {fileID: 21300000, guid: 005808e350337dd4c9715c0b03ad25b4, type: 3}
+    personName: Hero
   - id: NPC_Randolf
     portrait: {fileID: 21300000, guid: f4630b281fc67465fabaa203f5d8593b, type: 3}
+    personName: Randolf
   - id: NPC_Smith_Hammer
     portrait: {fileID: 21300000, guid: 3350f082a65d34faba994bb4f5a4a3c0, type: 3}
+    personName: Pushkin
   - id: NPC_Smith_Pick
     portrait: {fileID: 21300000, guid: b82e00b4f2e404544ac71813aeda8024, type: 3}
+    personName: Morgan
   - id: NPC_Guard
     portrait: {fileID: 21300000, guid: dea92023282a5471ebabac7767b4d01a, type: 3}
+    personName: Batis
   - id: NPC_Forester
     portrait: {fileID: 21300000, guid: 213235abd25514c9d88fb3233a065d88, type: 3}
+    personName: Balmir
   - id: NPC_Fisher
     portrait: {fileID: 21300000, guid: 53785c2b749084c9facf0da216b0fbaf, type: 3}
+    personName: O'Fulle
   - id: NPC_Farmer
     portrait: {fileID: 21300000, guid: 74220d1ad62ba431591e4297b90123aa, type: 3}
+    personName: Faros
   - id: NPC_Dwarf
     portrait: {fileID: 21300000, guid: d66d536b81fb042f2aee51da91fe6ebb, type: 3}
+    personName: Valentine
   - id: NPC_Dwarf_Bronze_Beard
     portrait: {fileID: 21300000, guid: 8f2ae8f2db01e44c0842df670e8eb190, type: 3}
+    personName: Toma
   - id: NPC_Boy_With_Dragon
     portrait: {fileID: 21300000, guid: 4d3160286b21548e488bec6f86cb5557, type: 3}
+    personName: Cooper

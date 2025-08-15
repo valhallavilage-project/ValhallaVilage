@@ -2,6 +2,7 @@ using System.Linq;
 using System.Threading;
 using CrossProject.Core;
 using CrossProject.Core.Characters;
+using CrossProject.Core.Quests;
 using CrossProject.Core.SaveLoad;
 using CrossProject.Core.Skins;
 using CrossProject.Ui.Core;
@@ -16,6 +17,7 @@ namespace PROJECTS.L2Farm.Scripts.CharacterSkinSelect
         private readonly UiService _uiService;
         private readonly CharactersService _charactersService;
         private readonly SkinService _skinService;
+        private readonly QuestService _questService;
 
         private CharacterSelectScreen _view;
 
@@ -23,12 +25,14 @@ namespace PROJECTS.L2Farm.Scripts.CharacterSkinSelect
             GameStateManager gameStateManager,
             UiService uiService,
             CharactersService charactersService,
-            SkinService skinService)
+            SkinService skinService,
+            QuestService questService)
         {
             _gameStateManager = gameStateManager;
             _uiService = uiService;
             _charactersService = charactersService;
             _skinService = skinService;
+            _questService = questService;
         }
 
         public async UniTask Initialize()
@@ -64,6 +68,7 @@ namespace PROJECTS.L2Farm.Scripts.CharacterSkinSelect
             _charactersService.Obtain(characterId);
             _charactersService.Select(characterId);
             _skinService.Select(_skinService.GetDefaultSkinFor(characterId));
+            _questService.TryLaunch(new QuestId("HelloWorld"));
         }
 
         private void OnClose()

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using CrossProject.Core.Actions;
 using CrossProject.Core.Conditions;
 using CrossProject.Core.SaveLoad;
@@ -16,7 +17,7 @@ namespace CrossProject.Core.Quests
 
         private QuestSetConfig _questSetConfig;
 
-        private Dictionary<QuestId, int> _launchedQuests = new();
+        private readonly Dictionary<QuestId, int> _launchedQuests = new();
 
         public QuestService(
             AddressablesManager addressablesManager,
@@ -39,6 +40,7 @@ namespace CrossProject.Core.Quests
         private void LoadQuests()
         {
             var part = _gameStateManager.State.Get<QuestsLogPart>();
+
             foreach (var log in part.launchedQuests)
                 TryLaunch(log.Key, log.Value);
         }
@@ -106,9 +108,7 @@ namespace CrossProject.Core.Quests
         public void ProceedAllQuests()
         {
             foreach (var questsKey in _launchedQuests.Keys)
-            {
                 TryProceed(questsKey);
-            }
         }
 
         public void ForceLose(QuestId id, QuestConfig config = null)

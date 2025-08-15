@@ -1,16 +1,19 @@
 using System.Collections.Generic;
 using CrossProject.Core.Actions;
 using CrossProject.Core.Conditions;
+using UnityEngine;
 
 namespace CrossProject.Core.Quests
 {
     [System.Serializable]
-    public abstract class QuestStepConfig
+    public class QuestStepConfig
     {
-        public IConditionConfig winCondition;
-        public IConditionConfig loseCondition;
+        [SerializeReference] public IConditionConfig winCondition;
+        [SerializeReference] public List<IActionConfig> winActions = new();
 
-        public List<IActionConfig> winActions = new();
-        public List<IActionConfig> loseActions = new();
+        [SerializeReference] public IActionConfig stepAction;
+
+        [SerializeReference] public IConditionConfig loseCondition;
+        [SerializeReference] public List<IActionConfig> loseActions = new();
     }
 }

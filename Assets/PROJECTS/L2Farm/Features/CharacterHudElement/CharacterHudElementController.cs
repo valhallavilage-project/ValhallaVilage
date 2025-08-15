@@ -1,15 +1,18 @@
 using System;
+using CrossProject.Core;
 using CrossProject.Core.Characters;
 using CrossProject.Core.SaveLoad;
 using CrossProject.Ui.Core;
 using Cysharp.Threading.Tasks;
 using CrossProject.Core.Energy;
+using UnityEngine;
 using VContainer.Unity;
 
 namespace L2Farm.Scripts.CharacterHudElement
 {
     public class CharacterHudElementController : IInitializable, IEnergyProvider
     {
+        private readonly AddressablesManager _addressablesManager;
         private readonly UiService _uiService;
         private readonly CharactersService _charactersService;
         private readonly GameStateManager _gameStateManager;
@@ -22,10 +25,12 @@ namespace L2Farm.Scripts.CharacterHudElement
         public event Action<int, int> OnEnergySpend;
 
         public CharacterHudElementController(
+            AddressablesManager addressablesManager,
             UiService uiService,
             CharactersService charactersService,
             GameStateManager gameStateManager)
         {
+            _addressablesManager = addressablesManager;
             _uiService = uiService;
             _charactersService = charactersService;
             _gameStateManager = gameStateManager;
@@ -33,11 +38,19 @@ namespace L2Farm.Scripts.CharacterHudElement
 
         public async UniTask Initialize()
         {
+            var energyRestorationConfig = await _addressablesManager.LoadAssetAsync<EnergyRestorationConfig>();
             _view = await _uiService.TryOpen(new CharacterHudElementModel()) as CharacterHudElement;
             if (_gameStateManager.State.TryGet<ObtainedCharactersPart>(out var part))
             {
                 var config = _charactersService.GetConfigFor(part.CurrentCharacterId);
                 _view.SetPortrait(config.portrait);
+                var energyStatePart = _gameStateManager.State.Get<EnergyStatePart>();
+                if (energyStatePart.energyValue > 0)
+                {
+                    int timesToRestore = (int)(DateTime.UtcNow - energyStatePart.lastEnergySpent).TotalSeconds / energyRestorationConfig.intervalInSeconds;
+                    var energyToRestore = Mathf.Clamp(energyStatePart.energyValue + timesToRestore * energyRestorationConfig.energyToRestoreForOneInterval, 0, energyRestorationConfig.energyMaximum);
+                    CurrentValue = energyToRestore;
+                }
             }
             else
             {

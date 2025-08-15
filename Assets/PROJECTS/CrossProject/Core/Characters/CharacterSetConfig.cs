@@ -20,5 +20,8 @@ namespace CrossProject.Core.Characters
         [FoldoutGroup("$id")]
         [PreviewField(128f, ObjectFieldAlignment.Right)]
         public Sprite portrait;
+
+        [FoldoutGroup("$id")]
+        public string personName;
     }
 }
