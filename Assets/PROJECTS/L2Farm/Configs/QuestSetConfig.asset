@@ -23,6 +23,8 @@ MonoBehaviour:
       type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
       data:
         id: HelloWorld
+        targetSpawnPoint:
+          value: 
         launchCondition:
           rid: -2
         launchActions: []
@@ -30,34 +32,34 @@ MonoBehaviour:
         - rid: 4482425573669863425
         winCondition:
           rid: -2
-        winActions:
-        - rid: 4482425573669863426
+        winActions: []
         loseCondition:
-          rid: -2
+          rid: 4482425653225586689
         loseActions: []
-        targetSpawnPoint:
-          value: 
     - rid: 4482425573669863425
       type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
       data:
+        stepAction:
+          rid: 4482425653225586688
         winCondition:
           rid: -2
         winActions: []
-        stepAction:
-          rid: 4482425573669863427
         loseCondition:
-          rid: -2
+          rid: 4482425653225586690
         loseActions: []
-    - rid: 4482425573669863426
-      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
-      data:
-        questId:
-          value: 
-    - rid: 4482425573669863427
-      type: {class: ShowMonologActionConfig, ns: L2Farm.Scripts.Actions, asm: Assembly-CSharp}
+    - rid: 4482425653225586688
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: Assembly-CSharp}
       data:
         speaker:
-          value: NPC_Dwarf
-        message: Help us! Please!
-        hasEnoughResourcesConditionConfig:
+          value: MC
+        message: W-Where am I?
+        questId:
+          value: HelloWorld
+        resources:
           resourceConditions: []
+    - rid: 4482425653225586689
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 4482425653225586690
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 

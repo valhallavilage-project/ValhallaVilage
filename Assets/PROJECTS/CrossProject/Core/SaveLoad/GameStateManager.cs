@@ -15,10 +15,7 @@ namespace CrossProject.Core.SaveLoad
         private GameState _gameState;
         private UniTask _saveTask;
 
-        public GameStateManager(IJsonSerializerSettingsProvider provider)
-        {
-            _serializer = new JsonSerializer(provider);
-        }
+        public bool IsInitialized { get; private set; }
 
         public GameState State
         {
@@ -29,6 +26,17 @@ namespace CrossProject.Core.SaveLoad
 
                 return _gameState;
             }
+        }
+
+        public GameStateManager(IJsonSerializerSettingsProvider provider)
+        {
+            _serializer = new JsonSerializer(provider);
+        }
+
+        public async UniTask Initialize()
+        {
+            LoadOrCreateSavedData();
+            IsInitialized = true;
         }
 
         private void CreateEmptyState()
@@ -66,11 +74,6 @@ namespace CrossProject.Core.SaveLoad
         {
             if (_saveTask.Status != UniTaskStatus.Pending)
                 _saveTask = SaveTask();
-        }
-
-        public async UniTask Initialize()
-        {
-            LoadOrCreateSavedData();
         }
     }
 }

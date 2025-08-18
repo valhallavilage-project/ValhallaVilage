@@ -21,6 +21,8 @@ namespace PROJECTS.L2Farm.Scripts.CharacterSkinSelect
 
         private CharacterSelectScreen _view;
 
+        public bool IsInitialized { get; private set; }
+
         public CharacterSkinSelectScreenController(
             GameStateManager gameStateManager,
             UiService uiService,
@@ -46,10 +48,12 @@ namespace PROJECTS.L2Farm.Scripts.CharacterSkinSelect
                 _gameStateManager.State.TryGet<ObtainedSkinsPart>(out var obtainedSkinsPart);
                 var currentSkin = obtainedSkinsPart.obtainedSkins[currentCharacter].currentSkinId;
                 _skinService.Select(currentSkin);
+                IsInitialized = true;
                 return;
             }
 
             _view = await _uiService.TryOpen(GetModel()) as CharacterSelectScreen;
+            IsInitialized = true;
         }
 
         private CharacterSelectScreenModel GetModel()

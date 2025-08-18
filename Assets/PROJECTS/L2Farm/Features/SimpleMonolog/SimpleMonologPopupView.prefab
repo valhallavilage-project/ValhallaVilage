@@ -325,8 +325,8 @@ MonoBehaviour:
   portrait: {fileID: 1098715026540896269}
   personName: {fileID: 8883408150957530616}
   message: {fileID: 3254495325331378698}
-  monologConditionItem: {fileID: 762214967317955312, guid: ef0e914b6253241fa885168f8e5e5fde, type: 3}
-  rootForConditionItems: {fileID: 394519907124215175}
+  itemRequirement: {fileID: 762214967317955312, guid: ef0e914b6253241fa885168f8e5e5fde, type: 3}
+  rootForItemRequirements: {fileID: 394519907124215175}
   close: {fileID: 8321089627752134589}
   next: {fileID: 1657101377065381798}
 --- !u!222 &7190889870523618706

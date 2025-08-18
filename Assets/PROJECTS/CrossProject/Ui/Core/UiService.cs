@@ -24,6 +24,7 @@ namespace CrossProject.Ui.Core
         public RectTransform HudRoot => hudRoot;
         public RectTransform ScreenRoot => screenRoot;
         public RectTransform PopupRoot => popupRoot;
+        public bool IsInitialized { get; private set; }
 
         [Inject]
         private void Construct(AddressablesManager addressablesManager)
@@ -31,17 +32,18 @@ namespace CrossProject.Ui.Core
             _addressablesManager = addressablesManager;
         }
 
-        private void Awake()
-        {
-            DontDestroyOnLoad(this);
-            ApplySafeAreaTo(hudRoot);
-        }
-
         public async UniTask Initialize()
         {
             AddRule(new UiQueueRule<ScreenModel>(ScreenRoot, _addressablesManager));
             AddRule(new UiQueueRule<PopupModel>(PopupRoot, _addressablesManager));
             AddRule(new UiDictionaryRule<HudElementModel>(HudRoot, _addressablesManager));
+            IsInitialized = true;
+        }
+
+        private void Awake()
+        {
+            DontDestroyOnLoad(this);
+            ApplySafeAreaTo(hudRoot);
         }
 
         public void ApplySafeAreaTo(RectTransform rectTransform, bool left = true, bool top = true, bool right = true, bool bottom = true)

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace L2Farm.Features.SimpleMonolog
 {
-    public class MonologConditionItem : MonoBehaviour
+    public class ItemRequirement : MonoBehaviour
     {
         [SerializeField]
         private Image background;
@@ -15,11 +15,11 @@ namespace L2Farm.Features.SimpleMonolog
         [SerializeField]
         private TMP_Text count;
 
-        public void SetVisuals(Sprite icon, int has, int need)
+        public void SetVisuals(ResourceRequirementData data)
         {
-            this.icon.sprite = icon;
-            count.text = $"{has}/{need}";
-            background.color = has >= need
+            icon.sprite = data.icon;
+            count.text = $"{data.has}/{data.need}";
+            background.color = data.has >= data.need
                 ? Color.green
                 : Color.white;
         }

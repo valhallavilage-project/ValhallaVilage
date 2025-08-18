@@ -16,9 +16,17 @@ namespace CrossProject.Ui.Implementations
         private readonly CancellationTokenSource _cancellationTokenSource = new ();
         private readonly TimeSpan _delay = TimeSpan.FromSeconds(5);
 
+        public bool IsInitialized { get; private set; }
+
         public NoInternetScreenController(UiService uiService)
         {
             _uiService = uiService;
+        }
+
+        public async UniTask Initialize()
+        {
+            Routine(_cancellationTokenSource.Token).Forget();
+            IsInitialized = true;
         }
 
         private async UniTask Routine(CancellationToken cancellationToken)
@@ -44,11 +52,6 @@ namespace CrossProject.Ui.Implementations
                 }
             }
             // ReSharper disable once FunctionNeverReturns
-        }
-
-        public async UniTask Initialize()
-        {
-            Routine(_cancellationTokenSource.Token).Forget();
         }
 
         public void Dispose()

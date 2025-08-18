@@ -18,6 +18,8 @@ namespace L2Farm.Scripts.AutoLootButton
         private AutoLootButton _view;
         private CancellationTokenSource _cts = new ();
 
+        public bool IsInitialized { get; private set; }
+
         public AutoLootButtonController(
             UiService uiService,
             Interactor interactor,
@@ -37,6 +39,7 @@ namespace L2Farm.Scripts.AutoLootButton
                 startAutoLoot = AutoLoot
             };
             _view = await _uiService.TryOpen(model) as AutoLootButton;
+            IsInitialized = true;
         }
 
         private void AutoLoot()

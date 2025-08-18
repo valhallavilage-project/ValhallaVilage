@@ -16,6 +16,8 @@ namespace L2Farm.Scripts
         private readonly ScenesService _scenesService;
         private readonly IObjectResolver _resolver;
 
+        public bool IsInitialized { get; private set; }
+
         public L2FarmGameLoader(
             UiService uiService,
             ScenesService scenesService,
@@ -45,6 +47,7 @@ namespace L2Farm.Scripts
             #endif
 
             _uiService.Load(PrepareGameLoad()).Forget();
+            IsInitialized = true;
         }
     }
 }

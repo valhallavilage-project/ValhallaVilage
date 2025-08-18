@@ -19,6 +19,7 @@ namespace L2Farm.Scripts.CharacterHudElement
 
         private CharacterHudElement _view;
 
+        public bool IsInitialized { get; private set; }
         public int CurrentValue { get; private set; } = 100;
         public int MaxValue => 100;
 
@@ -56,6 +57,7 @@ namespace L2Farm.Scripts.CharacterHudElement
             {
                 _charactersService.OnCharacterSelected += OnCharacterSelected;
             }
+            IsInitialized = true;
         }
 
         private void OnCharacterSelected(CharacterId characterId)

@@ -11,6 +11,8 @@ namespace CrossProject.Core.InGameResources
 
         private ResourceSetConfig _resourceSetConfig;
 
+        public bool IsInitialized { get; private set; }
+
         public ResourcesService(AddressablesManager addressablesManager)
         {
             _addressablesManager = addressablesManager;
@@ -19,6 +21,7 @@ namespace CrossProject.Core.InGameResources
         public async UniTask Initialize()
         {
             _resourceSetConfig = await _addressablesManager.LoadAssetAsync<ResourceSetConfig>();
+            IsInitialized = true;
         }
 
         public Sprite GetSprite(ResourceId id)

@@ -11,6 +11,8 @@ namespace CrossProject.Core.Camera
         [SerializeField] private Transform zoomHandle;
         [SerializeField] private CameraConfig cameraConfig;
 
+        public bool IsInitialized { get; private set; }
+
         public float XRotation
         {
             get => transform.rotation.eulerAngles.x;
@@ -62,6 +64,7 @@ namespace CrossProject.Core.Camera
             YRotation = cameraConfig.yRotationAngle;
             XRotation = cameraConfig.xRotationAngle;
             Zoom = cameraConfig.zoomDistance;
+            IsInitialized = true;
         }
 
         public void PostLateTick()

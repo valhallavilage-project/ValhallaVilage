@@ -9,6 +9,8 @@ namespace L2Farm.Features.QuestsScreen
     {
         private readonly UiService _uiService;
 
+        public bool IsInitialized { get; private set; }
+
         public QuestsPopupController(UiService uiService)
         {
             _uiService = uiService;
@@ -22,6 +24,7 @@ namespace L2Farm.Features.QuestsScreen
         public async UniTask Initialize()
         {
             await _uiService.TryOpen(new QuestsButtonModel(OpenPopup));
+            IsInitialized = true;
         }
     }
 }

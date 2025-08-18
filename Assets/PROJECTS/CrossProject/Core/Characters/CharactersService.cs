@@ -20,6 +20,8 @@ namespace CrossProject.Core.Characters
         public event Action<CharacterId> OnCharacterObtained;
         public event Action<CharacterId> OnCharacterSelected;
 
+        public bool IsInitialized { get; private set; }
+
         public CharactersService(
             GameStateManager gameStateManager,
             AddressablesManager addressablesManager,
@@ -33,6 +35,7 @@ namespace CrossProject.Core.Characters
         public async UniTask Initialize()
         {
             _characterSetConfig = await _addressablesManager.LoadAssetAsync<CharacterSetConfig>();
+            IsInitialized = true;
         }
 
         public void Obtain(CharacterId characterId)
@@ -72,7 +75,13 @@ namespace CrossProject.Core.Characters
 
         public CharacterConfig GetConfigFor(CharacterId characterId)
         {
-            return _characterSetConfig.items.FirstOrDefault(x => new CharacterId(x.id) == characterId);
+            if (characterId == "MC")
+            {
+                var id = _gameStateManager.State.Get<ObtainedCharactersPart>().ObtainedCharacters.First();
+                return _characterSetConfig.items.FirstOrDefault(x => x.id == id);
+            }
+
+            return _characterSetConfig.items.FirstOrDefault(x => x.id == characterId);
         }
 
         //TODO : VM : remove

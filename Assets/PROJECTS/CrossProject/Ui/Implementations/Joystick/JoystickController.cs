@@ -33,12 +33,29 @@ namespace CrossProject.Ui.Implementations
             }
         }
 
+        public bool IsInitialized { get; private set; }
+
         public JoystickController(
             UiService uiService,
             AddressablesManager addressablesManager)
         {
             _uiService = uiService;
             _addressablesManager = addressablesManager;
+        }
+
+        public async UniTask Initialize()
+        {
+            OpenJoystick();
+
+            var screenRule = _uiService.GetRule(typeof(ScreenModel));
+            screenRule.OnOpen += AddBlock;
+            screenRule.OnClose += RemoveBlock;
+
+            var popupRule = _uiService.GetRule(typeof(PopupModel));
+            popupRule.OnOpen += AddBlock;
+            popupRule.OnClose += RemoveBlock;
+
+            IsInitialized = true;
         }
 
         public void AddBlock(object blockRequester)
@@ -61,19 +78,6 @@ namespace CrossProject.Ui.Implementations
         {
             var config = await _addressablesManager.LoadAssetAsync<JoystickConfig>(nameof(JoystickConfig));
             _view = await _uiService.TryOpen(JoystickModel.From(config)) as Joystick;
-        }
-
-        public async UniTask Initialize()
-        {
-            OpenJoystick();
-
-            var screenRule = _uiService.GetRule(typeof(ScreenModel));
-            screenRule.OnOpen += AddBlock;
-            screenRule.OnClose += RemoveBlock;
-
-            var popupRule = _uiService.GetRule(typeof(PopupModel));
-            popupRule.OnOpen += AddBlock;
-            popupRule.OnClose += RemoveBlock;
         }
 
         public void Tick()

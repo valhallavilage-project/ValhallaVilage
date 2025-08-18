@@ -13,11 +13,15 @@ namespace PROJECTS.L2Farm.Editor
         protected override IEnumerable<string> GetNamesArray()
         {
             string[] assetUIDs = AssetDatabase.FindAssets($"t:{nameof(CharacterSetConfig)}");
-            return assetUIDs
+            var ids = assetUIDs
                 .Select(AssetDatabase.GUIDToAssetPath)
                 .Select(AssetDatabase.LoadAssetAtPath<CharacterSetConfig>)
                 .SelectMany(x => x.items)
-                .Select(x => x.id);
+                .Select(x => x.id)
+                .ToList();
+            var result = new List<string> { "MC" };
+            result.AddRange(ids);
+            return result;
         }
     }
 }

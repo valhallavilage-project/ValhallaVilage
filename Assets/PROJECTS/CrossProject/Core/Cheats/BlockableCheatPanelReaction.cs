@@ -8,6 +8,8 @@ namespace CrossProject.Core.Cheats
     {
         private readonly IEnumerable<IBlockable> _blockables;
 
+        public bool IsInitialized { get; private set; }
+
         public BlockableCheatPanelReaction(
             IEnumerable<IBlockable> blockables)
         {
@@ -26,6 +28,7 @@ namespace CrossProject.Core.Cheats
                         blockable.RemoveBlock(this);
                 };
             }
+            IsInitialized = true;
         }
     }
 }

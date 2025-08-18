@@ -1,4 +1,5 @@
-﻿using CrossProject.Ui.Core;
+﻿using CrossProject.Extensions;
+using CrossProject.Ui.Core;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,10 +18,10 @@ namespace L2Farm.Features.SimpleMonolog
         private TMP_Text message;
 
         [SerializeField]
-        private MonologConditionItem monologConditionItem;
+        private ItemRequirement itemRequirement;
 
         [SerializeField]
-        private Transform rootForConditionItems;
+        private Transform rootForItemRequirements;
 
         [SerializeField]
         private Button close;
@@ -35,11 +36,19 @@ namespace L2Farm.Features.SimpleMonolog
             message.text = Model.message;
             close.onClick.RemoveAllListeners();
             close.onClick.AddListener(() => Model.close?.Invoke());
-            if (Model.hasEnoughResourcesConditionConfig != null && Model.hasEnoughResourcesConditionConfig.resourceConditions.Count > 0)
+            if (Model.resourcesData is { Count: > 0 })
             {
-                next.onClick.RemoveAllListeners();
-                next.onClick.AddListener(() => Model.next?.Invoke());
-                rootForConditionItems.GetComponentsInChildren<MonologConditionItem>();
+                next.SetUniqueCallback(Model.next);
+                rootForItemRequirements.RemoveAllChildren();
+                foreach (var data in Model.resourcesData)
+                {
+                    var instance = Instantiate(itemRequirement, rootForItemRequirements);
+                    instance.SetVisuals(data);
+                }
+            }
+            else
+            {
+                
             }
         }
     }

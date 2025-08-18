@@ -21,7 +21,7 @@ using CrossProject.Ui.Implementations.SettingsPopup;
 using L2Farm.Features.InventoryScreen;
 using L2Farm.Features.QuestsScreen;
 using L2Farm.Features.ShopScreen;
-using L2Farm.Scripts.Actions;
+using L2Farm.Features.SimpleMonolog;
 using L2Farm.Scripts.CharacterHudElement;
 using L2Farm.Scripts.Conditions;
 using PROJECTS.L2Farm.Scripts.CharacterSkinSelect;

@@ -14,6 +14,8 @@ namespace CrossProject.Core.Actions
         private readonly IObjectResolver _objectResolver;
         private readonly Dictionary<Type, IAction> _actionMap = new();
 
+        public bool IsInitialized { get; private set; }
+
         public ActionService(IObjectResolver objectResolver)
         {
             _objectResolver = objectResolver;
@@ -22,6 +24,7 @@ namespace CrossProject.Core.Actions
         public async UniTask Initialize()
         {
             FillMap();
+            IsInitialized = true;
             await UniTask.CompletedTask;
         }
 

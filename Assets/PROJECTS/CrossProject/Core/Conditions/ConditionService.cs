@@ -15,6 +15,8 @@ namespace CrossProject.Core.Conditions
         private readonly IObjectResolver _objectResolver;
         private readonly Dictionary<Type, ICondition> _conditionMap = new();
 
+        public bool IsInitialized { get; private set; }
+
         public ConditionService(IObjectResolver objectResolver)
         {
             _objectResolver = objectResolver;
@@ -24,6 +26,7 @@ namespace CrossProject.Core.Conditions
         {
             FillMap();
             await UniTask.CompletedTask;
+            IsInitialized = true;
         }
 
         public void Dispose()
@@ -65,6 +68,7 @@ namespace CrossProject.Core.Conditions
                 {
                     var condition = _objectResolver.Resolve(type) as ICondition;
                     _conditionMap.TryAdd(condition.ConfigType, condition);
+                    Debug.Log($"[{nameof(ConditionService)}] filled map with : {type.Name} : {_conditionMap.Keys.Count}");
                 }
                 catch (Exception e)
                 {

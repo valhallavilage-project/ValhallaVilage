@@ -19,6 +19,8 @@ namespace CrossProject.Core.Quests
 
         private readonly Dictionary<QuestId, int> _launchedQuests = new();
 
+        public bool IsInitialized { get; private set; }
+
         public QuestService(
             AddressablesManager addressablesManager,
             GameStateManager gameStateManager,
@@ -35,14 +37,24 @@ namespace CrossProject.Core.Quests
         {
             _questSetConfig = await _addressablesManager.LoadAssetAsync<QuestSetConfig>();
             LoadQuests();
+            IsInitialized = true;
         }
 
         private void LoadQuests()
         {
             var part = _gameStateManager.State.Get<QuestsLogPart>();
 
-            foreach (var log in part.launchedQuests)
-                TryLaunch(log.Key, log.Value);
+            if (part.launchedQuests.Count != 0)
+            {
+                foreach (var log in part.launchedQuests)
+                {
+                    TryLaunch(log.Key, log.Value);
+                }
+            }
+            else
+            {
+                TryLaunch(new QuestId(_questSetConfig.items.First().id));
+            }
         }
 
         public bool TryLaunch(QuestId id, int step = 0)
@@ -59,6 +71,7 @@ namespace CrossProject.Core.Quests
             _gameStateManager.State.Get<QuestsLogPart>().launchedQuests.Add(id, step);
             _gameStateManager.Save();
             _actionService.Execute(config.launchActions);
+            TryProceed(id);
             return true;
         }
 
@@ -82,7 +95,7 @@ namespace CrossProject.Core.Quests
             return true;
         }
 
-        private bool TryProceed(QuestId id)
+        public bool TryProceed(QuestId id)
         {
             if (!_launchedQuests.TryGetValue(id, out var stepIndex))
                 return false;
@@ -103,12 +116,6 @@ namespace CrossProject.Core.Quests
             _actionService.Execute(step.winActions);
             _launchedQuests[id]++;
             return true;
-        }
-
-        public void ProceedAllQuests()
-        {
-            foreach (var questsKey in _launchedQuests.Keys)
-                TryProceed(questsKey);
         }
 
         public void ForceLose(QuestId id, QuestConfig config = null)
@@ -136,5 +143,7 @@ namespace CrossProject.Core.Quests
             _launchedQuests.Remove(id);
             _actionService.Execute(config.winActions);
         }
+
+        public QuestConfig GetConfigFor(QuestId id) => _questSetConfig.Get(id);
     }
 }

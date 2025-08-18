@@ -11,22 +11,17 @@ namespace CrossProject.Core.Quests
     public class QuestConfig
     {
         [FoldoutGroup("$id")] public string id;
+        [FoldoutGroup("$id")] public SpawnPointId targetSpawnPoint;
 
-        [Space(25)]
-        [FoldoutGroup("$id"), SerializeReference] public IConditionConfig launchCondition;
-        [FoldoutGroup("$id"), SerializeReference] public List<IActionConfig> launchActions = new();
+        [FoldoutGroup("$id/Launch"), SerializeReference] public IConditionConfig launchCondition;
+        [FoldoutGroup("$id/Launch"), SerializeReference] public List<IActionConfig> launchActions = new();
 
-        [Space(25)]
         [FoldoutGroup("$id"), SerializeReference] public List<QuestStepConfig> steps = new();
 
-        [Space(25)]
-        [FoldoutGroup("$id"), SerializeReference] public IConditionConfig winCondition;
-        [FoldoutGroup("$id"), SerializeReference] public List<IActionConfig> winActions = new();
+        [FoldoutGroup("$id/Win"), SerializeReference] public IConditionConfig winCondition;
+        [FoldoutGroup("$id/Win"), SerializeReference] public List<IActionConfig> winActions = new();
 
-        [Space(25)]
-        [FoldoutGroup("$id"), SerializeReference] public IConditionConfig loseCondition;
-        [FoldoutGroup("$id"), SerializeReference] public List<IActionConfig> loseActions = new();
-
-        [FoldoutGroup("$id")] public SpawnPointId targetSpawnPoint;
+        [FoldoutGroup("$id/Lose"), SerializeReference] public IConditionConfig loseCondition;
+        [FoldoutGroup("$id/Lose"), SerializeReference] public List<IActionConfig> loseActions = new();
     }
 }

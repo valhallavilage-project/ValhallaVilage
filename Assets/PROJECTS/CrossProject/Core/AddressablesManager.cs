@@ -10,6 +10,8 @@ namespace CrossProject.Core
     [DefaultExecutionOrder(-1000)]
     public class AddressablesManager : IInitializable
     {
+        public bool IsInitialized { get; private set; }
+
         public async UniTask<T> LoadAssetAsync<T>(string addressableName = null) where T : class
         {
             await Addressables.InitializeAsync();
@@ -35,6 +37,7 @@ namespace CrossProject.Core
         public async UniTask Initialize()
         {
             await Prewarm();
+            IsInitialized = true;
         }
     }
 }

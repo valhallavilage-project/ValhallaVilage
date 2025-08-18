@@ -9,6 +9,8 @@ namespace L2Farm.Features.InventoryScreen
     {
         private readonly UiService _uiService;
 
+        public bool IsInitialized { get; private set; }
+
         public InventoryScreenController(UiService uiService)
         {
             _uiService = uiService;
@@ -22,6 +24,7 @@ namespace L2Farm.Features.InventoryScreen
         public async UniTask Initialize()
         {
             await _uiService.TryOpen(new InventoryButtonModel(OpenScreen));
+            IsInitialized = true;
         }
     }
 }

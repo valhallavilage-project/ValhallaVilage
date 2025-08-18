@@ -1,5 +1,5 @@
-﻿using CrossProject.Ui.Core;
-using L2Farm.Scripts.Conditions;
+﻿using System.Collections.Generic;
+using CrossProject.Ui.Core;
 using UnityEngine;
 
 namespace L2Farm.Features.SimpleMonolog
@@ -9,7 +9,7 @@ namespace L2Farm.Features.SimpleMonolog
         public Sprite portrait;
         public string personName;
         public string message;
-        public HasEnoughResourcesConditionConfig hasEnoughResourcesConditionConfig;
+        public List<ResourceRequirementData> resourcesData;
         public System.Action close;
         public System.Action next;
     }

@@ -22,6 +22,8 @@ namespace CrossProject.Core.Skins
         public event Action<SkinId> OnSkinObtained;
         public event Action<SkinId> OnSkinSelected;
 
+        public bool IsInitialized { get; private set; }
+
         public SkinService(
             IPlayerSkinProvider playerSkinProvider,
             GameStateManager gameStateManager,
@@ -35,6 +37,7 @@ namespace CrossProject.Core.Skins
         public async UniTask Initialize()
         {
             _skinSetConfig = await _addressablesManager.LoadAssetAsync<SkinSetConfig>();
+            IsInitialized = true;
         }
 
         public void Obtain(SkinId skinId)

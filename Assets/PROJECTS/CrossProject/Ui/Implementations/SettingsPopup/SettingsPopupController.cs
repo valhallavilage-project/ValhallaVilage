@@ -18,6 +18,8 @@ namespace CrossProject.Ui.Implementations.SettingsPopup
         private SettingsHudElement _settingsHudElement;
         private SettingsPopup _popupView;
 
+        public bool IsInitialized { get; private set; }
+
         public SettingsPopupController(
             UiService uiService,
             CameraService cameraService,
@@ -35,6 +37,7 @@ namespace CrossProject.Ui.Implementations.SettingsPopup
             if (_settingsHudElement == null)
                 throw new Exception($"Something went wrong while opening {nameof(SettingsHudElement)}");
             _settingsHudElement.OnSettingsHudElementClick += OpenSettings;
+            IsInitialized = true;
         }
 
         private SettingsPopupModel GetPopupModel()

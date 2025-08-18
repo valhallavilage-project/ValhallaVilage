@@ -21,6 +21,8 @@ namespace CrossProject.Ui.Implementations.InteractButton
         private InteractButton _view;
         private CancellationTokenSource _cts = new ();
 
+        public bool IsInitialized { get; private set; }
+
         public InteractButtonController(
             UiService uiService,
             Interactor interactor,
@@ -37,6 +39,7 @@ namespace CrossProject.Ui.Implementations.InteractButton
         {
             _view = await _uiService.TryOpen(new InteractButtonModel(null, null)) as InteractButton;
             _disposables.Add(_interactor.Closest.Subscribe(_ => UpdateButtonModel()));
+            IsInitialized = true;
         }
 
         private async UniTask GetInteraction(CancellationToken cancellationToken)

@@ -9,6 +9,8 @@ namespace L2Farm.Features.ShopScreen
     {
         private readonly UiService _uiService;
 
+        public bool IsInitialized { get; private set; }
+
         public ShopScreenController(UiService uiService)
         {
             _uiService = uiService;
@@ -22,6 +24,7 @@ namespace L2Farm.Features.ShopScreen
         public async UniTask Initialize()
         {
             await _uiService.TryOpen(new ShopButtonModel(OpenScreen));
+            IsInitialized = true;
         }
     }
 }
