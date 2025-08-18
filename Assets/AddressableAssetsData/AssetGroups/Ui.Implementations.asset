@@ -43,7 +43,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7a0b0cfad739148adb28ed9719b4dbc2
-    m_Address: SimpleMonologPopupView
+    m_Address: SimpleMonologPopup
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

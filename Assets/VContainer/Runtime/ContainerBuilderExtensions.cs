@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using UnityEngine;
 using VContainer.Internal;
 
 namespace VContainer
@@ -11,12 +12,15 @@ namespace VContainer
         public static RegistrationBuilder Register(
             this IContainerBuilder builder,
             Type type,
-            Lifetime lifetime) =>
-            builder.Register(type.IsGenericType && type.IsGenericTypeDefinition
+            Lifetime lifetime)
+        {
+            Debug.Log($"[VContainer] register {type.Name}");
+            return builder.Register(type.IsGenericType && type.IsGenericTypeDefinition
                 ? new OpenGenericRegistrationBuilder(type, lifetime)
                 : new RegistrationBuilder(type, lifetime));
+        }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static RegistrationBuilder Register(
             this IContainerBuilder builder,
             Type interfaceType,

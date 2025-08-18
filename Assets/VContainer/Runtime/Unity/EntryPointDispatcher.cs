@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using VContainer.Internal;
 #if VCONTAINER_ECS_INTEGRATION
@@ -25,7 +26,25 @@ namespace VContainer.Unity
 
             var exceptionHandler = container.ResolveOrDefault<EntryPointExceptionHandler>();
 
+            var priorityInitializables = container.Resolve<ContainerLocal<IReadOnlyList<IPriorityInitializable>>>().Value;
+            foreach (var priorityInitializable in priorityInitializables)
+            {
+                try
+                {
+                    await priorityInitializable.Initialize();
+                    Debug.Log($"{priorityInitializable.GetType().Name} was PriorityInitialized");
+                }
+                catch (Exception ex)
+                {
+                    if (exceptionHandler != null)
+                        exceptionHandler.Publish(ex);
+                    else
+                        UnityEngine.Debug.LogException(ex);
+                }
+            }
+
             var initializables = container.Resolve<ContainerLocal<IReadOnlyList<IInitializable>>>().Value;
+            initializables = initializables.Where(x => x is not IPriorityInitializable).ToList();
             for (var i = 0; i < initializables.Count; i++)
             {
                 try

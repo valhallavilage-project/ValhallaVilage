@@ -8,7 +8,7 @@ using Object = UnityEngine.Object;
 namespace CrossProject.Core
 {
     [DefaultExecutionOrder(-1000)]
-    public class AddressablesManager : IInitializable
+    public class AddressablesManager : IPriorityInitializable
     {
         public bool IsInitialized { get; private set; }
 

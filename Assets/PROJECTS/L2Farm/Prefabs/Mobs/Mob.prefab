@@ -82,10 +82,10 @@ MonoBehaviour:
   energyNeeded: 2
   interactionDistance: 1
   interactionDuration: 0
-  buttonSprite: {fileID: 0}
+  buttonSprite: {fileID: 21300000, guid: bd6a954c3467e4309881a90c8c60ab46, type: 3}
   animation: 0
-  viewRoot: {fileID: 0}
-  highLight: {fileID: 0}
+  viewRoot: {fileID: 137288055449518871}
+  highLight: {fileID: 6019216532538934344}
   minRadius: 15
   maxRadius: 40
   minWaitTime: 1

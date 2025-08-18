@@ -10,7 +10,7 @@ using VContainer.Unity;
 
 namespace CrossProject.Core.Conditions
 {
-    public class ConditionService : IInitializable, IDisposable
+    public class ConditionService : IPriorityInitializable, IDisposable
     {
         private readonly IObjectResolver _objectResolver;
         private readonly Dictionary<Type, ICondition> _conditionMap = new();
@@ -52,27 +52,18 @@ namespace CrossProject.Core.Conditions
         {
             _conditionMap.Clear();
 
-            var conditionInterface = typeof(ICondition);
-            var conditionTypes = Assembly
-                .GetExecutingAssembly()
-                .GetTypes()
-                .Where(type => !type.IsAbstract && !type.IsInterface && conditionInterface.IsAssignableFrom(type))
-                .ToList();
-
-            conditionTypes.Remove(typeof(AndCondition));
-            conditionTypes.Remove(typeof(OrCondition));
-
-            foreach (var type in conditionTypes)
+            var conditions = _objectResolver.Resolve<IReadOnlyList<ICondition>>();
+            conditions = conditions.Where(x => x is not AndCondition && x is not OrCondition).ToList();
+            foreach (var condition in conditions)
             {
                 try
                 {
-                    var condition = _objectResolver.Resolve(type) as ICondition;
                     _conditionMap.TryAdd(condition.ConfigType, condition);
-                    Debug.Log($"[{nameof(ConditionService)}] filled map with : {type.Name} : {_conditionMap.Keys.Count}");
+                    Debug.Log($"[{nameof(ConditionService)}] filled map with : {condition.GetType().Name} : {_conditionMap.Keys.Count}");
                 }
                 catch (Exception e)
                 {
-                    Debug.LogException(new NotImplementedException($"No condition found for config {type.Name}"));
+                    Debug.LogException(new NotImplementedException($"No condition found for config {condition.GetType().Name}"));
                     throw;
                 }
             }

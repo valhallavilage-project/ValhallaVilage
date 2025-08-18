@@ -17,7 +17,7 @@ namespace L2Farm.Features.SimpleMonolog
         private readonly ResourcesService _resourcesService;
         private readonly GameStateManager _gameStateManager;
 
-        private SimpleMonologPopupView _view;
+        private SimpleMonologPopup _view;
 
         public ShowMonologAction(
             UiService uiService,
@@ -69,7 +69,7 @@ namespace L2Farm.Features.SimpleMonolog
                     }
                 }
             };
-            _view = await _uiService.TryOpen(model) as SimpleMonologPopupView;
+            _view = await _uiService.TryOpen(model) as SimpleMonologPopup;
         }
     }
 }

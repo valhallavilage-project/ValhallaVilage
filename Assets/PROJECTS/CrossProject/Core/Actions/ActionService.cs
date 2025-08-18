@@ -9,7 +9,7 @@ using VContainer.Unity;
 
 namespace CrossProject.Core.Actions
 {
-    public class ActionService : IInitializable, IDisposable
+    public class ActionService : IPriorityInitializable, IDisposable
     {
         private readonly IObjectResolver _objectResolver;
         private readonly Dictionary<Type, IAction> _actionMap = new();
@@ -37,23 +37,17 @@ namespace CrossProject.Core.Actions
         {
             _actionMap.Clear();
 
-            var actionInterface = typeof(IAction);
-            var actionTypes = Assembly
-                .GetExecutingAssembly()
-                .GetTypes()
-                .Where(type => !type.IsAbstract && !type.IsInterface && actionInterface.IsAssignableFrom(type))
-                .ToList();
-
-            foreach (var type in actionTypes)
+            var actions = _objectResolver.Resolve<IReadOnlyList<IAction>>();
+            foreach (var action in actions)
             {
                 try
                 {
-                    var action = _objectResolver.Resolve(type) as IAction;
                     _actionMap.TryAdd(action.ConfigType, action);
+                    Debug.Log($"[{nameof(ActionService)}] filled map with : {action.GetType().Name} : {_actionMap.Keys.Count}");
                 }
                 catch (Exception e)
                 {
-                    Debug.LogException(new NotImplementedException($"No action found for config {type.Name}"));
+                    Debug.LogException(new NotImplementedException($"No action found for config {action.GetType().Name}"));
                     throw;
                 }
             }

@@ -7,6 +7,7 @@ using CrossProject.Core.Characters;
 using CrossProject.Core.Cheats;
 using CrossProject.Core.Conditions;
 using CrossProject.Core.Conditions.ConditionsImplementations;
+using CrossProject.Core.InGameResources;
 using CrossProject.Core.Interactions;
 using CrossProject.Core.PROJECTS.CrossProject.Core;
 using CrossProject.Core.Quests;
@@ -18,6 +19,7 @@ using CrossProject.Ui.Core;
 using CrossProject.Ui.Implementations;
 using CrossProject.Ui.Implementations.InteractButton;
 using CrossProject.Ui.Implementations.SettingsPopup;
+using L2Farm.Features.DayNight;
 using L2Farm.Features.InventoryScreen;
 using L2Farm.Features.QuestsScreen;
 using L2Farm.Features.ShopScreen;
@@ -49,21 +51,21 @@ namespace L2Farm.Scripts
 
         private void RegisterConditionsAndActions(IContainerBuilder builder)
         {
+            builder.Register<HasEnoughResourcesCondition>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            builder.Register<FalseCondition>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            builder.Register<TrueCondition>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+
             builder.Register<ConditionService>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
 
-            builder.Register<HasEnoughResourcesCondition>(Lifetime.Singleton).AsSelf();
-            builder.Register<FalseCondition>(Lifetime.Singleton).AsSelf();
-            builder.Register<TrueCondition>(Lifetime.Singleton).AsSelf();
+            builder.Register<ShowMonologAction>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            builder.Register<LaunchQuestAction>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            builder.Register<LoseQuestAction>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
 
             builder.Register<ActionService>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
-
-            builder.Register<LaunchQuestAction>(Lifetime.Singleton).AsSelf();
-            builder.Register<LoseQuestAction>(Lifetime.Singleton).AsSelf();
-            builder.Register<ShowMonologAction>(Lifetime.Singleton).AsSelf();
         }
 
         protected override void Configure(IContainerBuilder builder)
@@ -78,8 +80,16 @@ namespace L2Farm.Scripts
                 .AsSelf()
                 .AsImplementedInterfaces();
 
+            builder.RegisterComponentInHierarchy<DayNightService>()
+                .AsSelf()
+                .AsImplementedInterfaces();
+
             // builder.RegisterComponentInHierarchy<QuestIndication>()
             //     .AsSelf();
+
+            builder.Register<ResourcesService>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
 
             builder.Register<QuestService>(Lifetime.Singleton)
                 .AsSelf()

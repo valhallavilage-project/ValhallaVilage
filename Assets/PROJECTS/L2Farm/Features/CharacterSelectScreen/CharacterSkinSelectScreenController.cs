@@ -72,12 +72,12 @@ namespace PROJECTS.L2Farm.Scripts.CharacterSkinSelect
             _charactersService.Obtain(characterId);
             _charactersService.Select(characterId);
             _skinService.Select(_skinService.GetDefaultSkinFor(characterId));
-            _questService.TryLaunch(new QuestId("HelloWorld"));
         }
 
         private void OnClose()
         {
             _uiService.Close(_view);
+            _questService.TryLaunch(new QuestId("HelloWorld"));
         }
     }
 }

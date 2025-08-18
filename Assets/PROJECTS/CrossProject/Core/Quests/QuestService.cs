@@ -4,6 +4,7 @@ using CrossProject.Core.Actions;
 using CrossProject.Core.Conditions;
 using CrossProject.Core.SaveLoad;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using VContainer.Unity;
 
 namespace CrossProject.Core.Quests
@@ -44,20 +45,11 @@ namespace CrossProject.Core.Quests
         {
             var part = _gameStateManager.State.Get<QuestsLogPart>();
 
-            if (part.launchedQuests.Count != 0)
-            {
-                foreach (var log in part.launchedQuests)
-                {
-                    TryLaunch(log.Key, log.Value);
-                }
-            }
-            else
-            {
-                TryLaunch(new QuestId(_questSetConfig.items.First().id));
-            }
+            foreach (var log in part.launchedQuests)
+                TryLaunch(log.Key, log.Value);
         }
 
-        public bool TryLaunch(QuestId id, int step = 0)
+        public bool TryLaunch(QuestId id, int stepIndex = 0)
         {
             //TODO : VM : queue of non-launched quests
             if (_launchedQuests.ContainsKey(id))
@@ -67,10 +59,12 @@ namespace CrossProject.Core.Quests
             if (!_conditionService.Check(config.launchCondition))
                 return false;
 
-            _launchedQuests.Add(id, step);
-            _gameStateManager.State.Get<QuestsLogPart>().launchedQuests.Add(id, step);
+            _launchedQuests.Add(id, stepIndex);
+            _gameStateManager.State.Get<QuestsLogPart>().launchedQuests.Add(id, stepIndex);
             _gameStateManager.Save();
             _actionService.Execute(config.launchActions);
+            _actionService.Execute(config.steps[stepIndex].stepAction);
+            Debug.Log($"[{nameof(QuestService)}] : Launch : {id}");
             TryProceed(id);
             return true;
         }
@@ -82,6 +76,7 @@ namespace CrossProject.Core.Quests
                 return false;
 
             ForceWin(id, config);
+            Debug.Log($"[{nameof(QuestService)}] : Win : {id}");
             return true;
         }
 
@@ -92,6 +87,7 @@ namespace CrossProject.Core.Quests
                 return false;
 
             ForceLose(id, config);
+            Debug.Log($"[{nameof(QuestService)}] : Lose : {id}");
             return true;
         }
 
@@ -115,6 +111,7 @@ namespace CrossProject.Core.Quests
 
             _actionService.Execute(step.winActions);
             _launchedQuests[id]++;
+            Debug.Log($"[{nameof(QuestService)}] : Step proceed : {id} : {_launchedQuests[id]}");
             return true;
         }
 
