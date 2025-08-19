@@ -6,6 +6,7 @@ using CrossProject.Core.SimpleMovement;
 using CrossProject.Ui.Core;
 using Cysharp.Threading.Tasks;
 using R3;
+using UnityEngine;
 using VContainer.Unity;
 
 namespace CrossProject.Ui.Implementations.InteractButton
@@ -44,6 +45,7 @@ namespace CrossProject.Ui.Implementations.InteractButton
 
         private async UniTask GetInteraction(CancellationToken cancellationToken)
         {
+            Debug.Log("[Interaction] 1 step");
             _joystickController.AddBlock(this);
             _simpleMovementController.AddBlock(this);
             await _simpleMovementController.MoveTo(_interactor.Closest.Value.transform.position, cancellationToken, _interactor.Closest.Value.interactionDistance);
@@ -56,10 +58,13 @@ namespace CrossProject.Ui.Implementations.InteractButton
         {
             if (_interactor.Closest.Value == null)
             {
+                Debug.Log($"[Interactions] null model");
                 _view.BindModel(new InteractButtonModel(null, null));
                 return;
             }
 
+            Debug.Log($"[Interactions] {_interactor.Closest.Value.name} ");
+            _cts = new CancellationTokenSource();
             var model = new InteractButtonModel(_interactor.Closest.Value.buttonSprite, () => GetInteraction(_cts.Token).Forget());
             _view.BindModel(model);
         }

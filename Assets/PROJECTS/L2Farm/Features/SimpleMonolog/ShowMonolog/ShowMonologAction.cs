@@ -38,7 +38,6 @@ namespace L2Farm.Features.SimpleMonolog
 
         public override async void Execute()
         {
-            Debug.Log("Show Monolog");
             var characterConfig = _charactersService.GetConfigFor(config.speaker);
             var data = new List<ResourceRequirementData>();
             foreach (var resourceCondition in config.resources.resourceConditions)
@@ -61,7 +60,6 @@ namespace L2Farm.Features.SimpleMonolog
                 {
                     _uiService.Close(_view);
                     _questService.TryProceed(config.questId);
-                    Debug.Log("Close Monolog");
                 }
             };
             _view = await _uiService.TryOpen(model) as SimpleMonologPopup;

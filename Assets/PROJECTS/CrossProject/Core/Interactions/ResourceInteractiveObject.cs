@@ -50,22 +50,22 @@ namespace CrossProject.Core.Interactions
             _energyProvider.Spend(energyNeeded);
             await transform.DOShakeScale(0.2f, new Vector3(0.25f, 0.5f, 0.25f));
             await UniTask.WaitForSeconds(interactionDuration);
-            if (_gameStateManager.State.TryGet(out ResourceContentPart part))
-            {
-                var resource = part.Resources.FirstOrDefault(x => x.Resource == _resourceContent.Resource);
-                resource ??= new ResourceContent(_resourceContent.Resource);
-                resource.Amount += _resourceContent.Amount;
-            }
-            else
-            {
-                part = new ResourceContentPart();
-                part.Resources = new List<ResourceContent>
-                {
-                    new (_resourceContent.Resource, _resourceContent.Amount)
-                };
-            }
-            _gameStateManager.State.Set(part);
-            _gameStateManager.Save();
+            // if (_gameStateManager.State.TryGet(out ResourceContentPart part))
+            // {
+            //     var resource = part.Resources.FirstOrDefault(x => x.Resource == _resourceContent.Resource);
+            //     resource ??= new ResourceContent(_resourceContent.Resource);
+            //     resource.Amount += _resourceContent.Amount;
+            // }
+            // else
+            // {
+            //     part = new ResourceContentPart();
+            //     part.Resources = new List<ResourceContent>
+            //     {
+            //         new (_resourceContent.Resource, _resourceContent.Amount)
+            //     };
+            // }
+            // _gameStateManager.State.Set(part);
+            // _gameStateManager.Save();
             Respawn().Forget();
         }
 
