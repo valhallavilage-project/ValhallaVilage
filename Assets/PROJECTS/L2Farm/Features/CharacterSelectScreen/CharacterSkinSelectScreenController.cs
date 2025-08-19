@@ -1,6 +1,3 @@
-using System.Linq;
-using System.Threading;
-using CrossProject.Core;
 using CrossProject.Core.Characters;
 using CrossProject.Core.Quests;
 using CrossProject.Core.SaveLoad;
@@ -20,6 +17,7 @@ namespace PROJECTS.L2Farm.Scripts.CharacterSkinSelect
         private readonly QuestService _questService;
 
         private CharacterSelectScreen _view;
+        private CharacterId _selectedCharacterId;
 
         public bool IsInitialized { get; private set; }
 
@@ -69,13 +67,14 @@ namespace PROJECTS.L2Farm.Scripts.CharacterSkinSelect
 
         private void OnCharacterSelected(CharacterId characterId)
         {
-            _charactersService.Obtain(characterId);
-            _charactersService.Select(characterId);
-            _skinService.Select(_skinService.GetDefaultSkinFor(characterId));
+            _selectedCharacterId = characterId;
         }
 
         private void OnClose()
         {
+            _charactersService.Obtain(_selectedCharacterId);
+            _charactersService.Select(_selectedCharacterId);
+            _skinService.Select(_skinService.GetDefaultSkinFor(_selectedCharacterId));
             _uiService.Close(_view);
             _questService.TryLaunch(new QuestId("HelloWorld"));
         }
