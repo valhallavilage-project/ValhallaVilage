@@ -34,21 +34,17 @@ namespace L2Farm.Features.SimpleMonolog
             portrait.sprite = Model.portrait;
             personName.text = Model.personName;
             message.text = Model.message;
-            close.onClick.RemoveAllListeners();
-            close.onClick.AddListener(() => Model.close?.Invoke());
+            close.SetUniqueCallback(Model.close);
+            next.SetUniqueCallback(Model.next);
+
             if (Model.resourcesData is { Count: > 0 })
             {
-                next.SetUniqueCallback(Model.next);
                 rootForItemRequirements.RemoveAllChildren();
                 foreach (var data in Model.resourcesData)
                 {
                     var instance = Instantiate(itemRequirement, rootForItemRequirements);
                     instance.SetVisuals(data);
                 }
-            }
-            else
-            {
-                
             }
         }
     }

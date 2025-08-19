@@ -63,7 +63,6 @@ namespace CrossProject.Core.Quests
             _gameStateManager.State.Get<QuestsLogPart>().launchedQuests.Add(id, stepIndex);
             _gameStateManager.Save();
             _actionService.Execute(config.launchActions);
-            _actionService.Execute(config.steps[stepIndex].stepAction);
             Debug.Log($"[{nameof(QuestService)}] : Launch : {id}");
             TryProceed(id);
             return true;
@@ -96,7 +95,15 @@ namespace CrossProject.Core.Quests
             if (!_launchedQuests.TryGetValue(id, out var stepIndex))
                 return false;
 
-            var step = _questSetConfig.Get(id).steps[stepIndex];
+            var questConfig = _questSetConfig.Get(id);
+            if (stepIndex >= questConfig.steps.Count)
+            {
+                ForceWin(id);
+                return true;
+            }
+
+            var step = questConfig.steps[stepIndex];
+            _actionService.Execute(step.stepAction);
 
             if (_conditionService.Check(step.loseCondition))
             {

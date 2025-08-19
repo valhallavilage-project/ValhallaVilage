@@ -5,6 +5,7 @@ using CrossProject.Core.InGameResources;
 using CrossProject.Core.Quests;
 using CrossProject.Core.SaveLoad;
 using CrossProject.Ui.Core;
+using UnityEngine;
 
 namespace L2Farm.Features.SimpleMonolog
 {
@@ -37,6 +38,7 @@ namespace L2Farm.Features.SimpleMonolog
 
         public override async void Execute()
         {
+            Debug.Log("Show Monolog");
             var characterConfig = _charactersService.GetConfigFor(config.speaker);
             var data = new List<ResourceRequirementData>();
             foreach (var resourceCondition in config.resources.resourceConditions)
@@ -57,16 +59,9 @@ namespace L2Farm.Features.SimpleMonolog
                 close = () => _uiService.Close(_view),
                 next = () =>
                 {
-                    if (config.resources != null || config.resources.resourceConditions.Count == 0)
-                    {
-                        _questService.TryProceed(config.questId);
-                        _uiService.Close(_view);
-                    }
-                    else
-                    {
-                        _actionService.Execute(config.onNextClickActionConfig);
-                        _uiService.Close(_view);
-                    }
+                    _uiService.Close(_view);
+                    _questService.TryProceed(config.questId);
+                    Debug.Log("Close Monolog");
                 }
             };
             _view = await _uiService.TryOpen(model) as SimpleMonologPopup;

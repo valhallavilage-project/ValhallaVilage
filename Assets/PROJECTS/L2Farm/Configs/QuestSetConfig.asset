@@ -30,6 +30,7 @@ MonoBehaviour:
         launchActions: []
         steps:
         - rid: 4482425573669863425
+        - rid: 4482425671116914689
         winCondition:
           rid: -2
         winActions: []
@@ -61,5 +62,29 @@ MonoBehaviour:
       type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
       data: 
     - rid: 4482425653225586690
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 4482425671116914689
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 4482425671116914690
+        winCondition:
+          rid: -2
+        winActions: []
+        loseCondition:
+          rid: 4482425671116914691
+        loseActions: []
+    - rid: 4482425671116914690
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: Assembly-CSharp}
+      data:
+        speaker:
+          value: NPC_Dwarf
+        message: Help!
+        questId:
+          value: HelloWorld
+        resources:
+          resourceConditions: []
+    - rid: 4482425671116914691
       type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
       data: 
