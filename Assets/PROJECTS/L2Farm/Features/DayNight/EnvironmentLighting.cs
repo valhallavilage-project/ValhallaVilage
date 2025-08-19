@@ -9,7 +9,7 @@ namespace L2Farm.Features.DayNight
 
         protected override void Evaluate(float evaluation)
         {
-            pointLight.intensity = baseIntensity * evaluation;
+            pointLight.intensity = baseIntensity * Mathf.RoundToInt(evaluation);
         }
     }
 }
