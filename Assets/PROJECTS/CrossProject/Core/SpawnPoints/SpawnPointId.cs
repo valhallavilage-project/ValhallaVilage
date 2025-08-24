@@ -7,13 +7,15 @@ namespace CrossProject.Core.SpawnPoints
     [Serializable]
     public class SpawnPointId : EntityId<string>
     {
+        public override int GetHashCode() => Value.GetHashCode();
+
         public SpawnPointId(string value) : base(value) {}
 
         public bool Equals(SpawnPointId other) => Value.Equals(other?.Value);
 
         public override bool Equals(object obj) => obj is SpawnPointId id && Equals(id);
 
-        public static explicit operator SpawnPointId(string value) => new (value);
+        public static implicit operator SpawnPointId(string value) => new (value);
 
         public static bool operator ==(SpawnPointId a, SpawnPointId b) => a?.Value == b?.Value;
 

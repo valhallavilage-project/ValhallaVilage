@@ -24,8 +24,11 @@ using L2Farm.Features.InventoryScreen;
 using L2Farm.Features.QuestsScreen;
 using L2Farm.Features.ShopScreen;
 using L2Farm.Features.SimpleMonolog;
+using L2Farm.Scripts.Actions;
 using L2Farm.Scripts.CharacterHudElement;
 using L2Farm.Scripts.Conditions;
+using L2Farm.Scripts.Conditions.QuestCompleted;
+using L2Farm.Scripts.Conditions.QuestNotCompleted;
 using PROJECTS.L2Farm.Scripts.CharacterSkinSelect;
 using VContainer;
 using VContainer.Unity;
@@ -52,6 +55,9 @@ namespace L2Farm.Scripts
         private void RegisterConditionsAndActions(IContainerBuilder builder)
         {
             builder.Register<HasEnoughResourcesCondition>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            builder.Register<NotEnoughResourcesCondition>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            builder.Register<QuestCompletedCondition>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            builder.Register<QuestNotCompletedCondition>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<FalseCondition>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<TrueCondition>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
 
@@ -59,6 +65,8 @@ namespace L2Farm.Scripts
                 .AsSelf()
                 .AsImplementedInterfaces();
 
+            builder.Register<SpawnNPCAction>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            builder.Register<DespawnNPCAction>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<ShowMonologAction>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<LaunchQuestAction>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<LoseQuestAction>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();

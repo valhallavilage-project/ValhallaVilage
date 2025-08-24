@@ -11,6 +11,8 @@ namespace CrossProject.Core.Quests
 {
     public class QuestService : IInitializable
     {
+        #region Injected fields, private fields, properties and init
+
         private readonly AddressablesManager _addressablesManager;
         private readonly GameStateManager _gameStateManager;
         private readonly ConditionService _conditionService;
@@ -49,12 +51,14 @@ namespace CrossProject.Core.Quests
                 TryLaunch(log.Key, log.Value);
         }
 
+        #endregion
+
         public bool TryLaunch(QuestId id, int stepIndex = 0)
         {
-            //TODO : VM : queue of non-launched quests
             if (_launchedQuests.ContainsKey(id))
                 return false;
 
+            //TODO : VM : queue of non-launched, but fired quests?
             var config = _questSetConfig.Get(id);
             if (!_conditionService.Check(config.launchCondition))
                 return false;
@@ -64,36 +68,17 @@ namespace CrossProject.Core.Quests
             _gameStateManager.Save();
             _actionService.Execute(config.launchActions);
             Debug.Log($"[{nameof(QuestService)}] : Launch : {id}");
-            TryProceed(id);
+            TryProceedStepsOf(id);
             return true;
         }
 
-        private bool TryWin(QuestId id)
-        {
-            var config = _questSetConfig.Get(id);
-            if (!_conditionService.Check(config.winCondition))
-                return false;
-
-            ForceWin(id, config);
-            Debug.Log($"[{nameof(QuestService)}] : Win : {id}");
-            return true;
-        }
-
-        private bool TryLose(QuestId id)
-        {
-            var config = _questSetConfig.Get(id);
-            if (!_conditionService.Check(config.loseCondition))
-                return false;
-
-            ForceLose(id, config);
-            Debug.Log($"[{nameof(QuestService)}] : Lose : {id}");
-            return true;
-        }
-
-        public bool TryProceed(QuestId id)
+        public bool TryProceedStepsOf(QuestId id)
         {
             if (!_launchedQuests.TryGetValue(id, out var stepIndex))
+            {
+                Debug.LogError($"[{nameof(QuestService)}] : {id} is not launched!");
                 return false;
+            }
 
             var questConfig = _questSetConfig.Get(id);
             if (stepIndex >= questConfig.steps.Count)
@@ -108,17 +93,21 @@ namespace CrossProject.Core.Quests
             if (_conditionService.Check(step.loseCondition))
             {
                 _actionService.Execute(step.loseActions);
+                Debug.Log($"[{nameof(QuestService)}] : {id} at step {stepIndex} Lose");
                 return false;
             }
 
             if (!_conditionService.Check(step.winCondition))
             {
+                Debug.Log($"[{nameof(QuestService)}] : {id} at step {stepIndex} can't proceed");
                 return false;
             }
 
             _actionService.Execute(step.winActions);
             _launchedQuests[id]++;
-            Debug.Log($"[{nameof(QuestService)}] : Step proceed : {id} : {_launchedQuests[id]}");
+            _gameStateManager.State.Get<QuestsLogPart>().launchedQuests[id]++;
+            _gameStateManager.Save();
+            Debug.Log($"[{nameof(QuestService)}] : Step proceed : {id} : {_launchedQuests[id] - 1} ---> {_launchedQuests[id]}");
             return true;
         }
 
@@ -133,6 +122,7 @@ namespace CrossProject.Core.Quests
 
             _launchedQuests.Remove(id);
             _actionService.Execute(config.loseActions);
+            Debug.Log($"[{nameof(QuestService)}] : {id} Quest Lose :-(");
         }
 
         public void ForceWin(QuestId id, QuestConfig config = null)
@@ -146,8 +136,10 @@ namespace CrossProject.Core.Quests
 
             _launchedQuests.Remove(id);
             _actionService.Execute(config.winActions);
+            Debug.Log($"[{nameof(QuestService)}] : {id} Quest Win :-)");
         }
 
+        //TODO : VM : remove?
         public QuestConfig GetConfigFor(QuestId id) => _questSetConfig.Get(id);
     }
 }

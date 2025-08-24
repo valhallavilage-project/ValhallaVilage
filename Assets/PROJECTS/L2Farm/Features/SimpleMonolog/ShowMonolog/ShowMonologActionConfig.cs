@@ -12,6 +12,6 @@ namespace L2Farm.Features.SimpleMonolog
         public CharacterId speaker;
         public string message;
         public QuestId questId;
-        public HasEnoughResourcesConditionConfig resources;
+        public int stepIndexWithResourceCondition = -1;
     }
 }

@@ -31,5 +31,13 @@ namespace CrossProject.Core.SpawnPoints
                 .First(x => id == new SpawnPointId(x.id))
                 .position;
         }
+
+        public Vector3 GetEulerAngles(SpawnPointId id)
+        {
+            return _spawnPointSetConfig
+                .items
+                .First(x => id == x.id)
+                .eulerAngles;
+        }
     }
 }

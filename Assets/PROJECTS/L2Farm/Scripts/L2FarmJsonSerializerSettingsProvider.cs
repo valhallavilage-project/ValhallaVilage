@@ -6,6 +6,7 @@ using CrossProject.Core.SaveLoad;
 using CrossProject.Core.Skins;
 using CrossProject.Core.SpawnPoints;
 using L2Farm.Features.Buildings;
+using L2Farm.Features.NPC;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -34,6 +35,7 @@ namespace L2Farm.Scripts
                 new SpawnPointIdConverter(),
                 new QuestIdConverter(),
                 new BuildingIdConverter(),
+                new NPCIdConverter(),
             }
         };
     }

@@ -56,8 +56,7 @@ MonoBehaviour:
         message: W-Where am I?
         questId:
           value: HelloWorld
-        resources:
-          resourceConditions: []
+        stepIndexWithResourceCondition: -1
     - rid: 4482425653225586689
       type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
       data: 
@@ -83,8 +82,7 @@ MonoBehaviour:
         message: Help!
         questId:
           value: HelloWorld
-        resources:
-          resourceConditions: []
+        stepIndexWithResourceCondition: -1
     - rid: 4482425671116914691
       type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
       data: 

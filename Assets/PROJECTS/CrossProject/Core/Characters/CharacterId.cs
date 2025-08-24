@@ -27,6 +27,6 @@ namespace CrossProject.Core.Characters
         public override void WriteJson(JsonWriter writer, CharacterId value, JsonSerializer serializer) =>
             writer.WriteValue(value.ToString());
         public override CharacterId ReadJson(JsonReader reader, Type objectType, CharacterId existingValue, bool hasExistingValue, JsonSerializer serializer) =>
-            (CharacterId)(string)reader.Value;
+            (string)reader.Value;
     }
 }

@@ -5,7 +5,7 @@ using CrossProject.Core.InGameResources;
 using CrossProject.Core.Quests;
 using CrossProject.Core.SaveLoad;
 using CrossProject.Ui.Core;
-using UnityEngine;
+using L2Farm.Scripts.Conditions;
 
 namespace L2Farm.Features.SimpleMonolog
 {
@@ -14,7 +14,6 @@ namespace L2Farm.Features.SimpleMonolog
         private readonly UiService _uiService;
         private readonly CharactersService _charactersService;
         private readonly QuestService _questService;
-        private readonly ActionService _actionService;
         private readonly ResourcesService _resourcesService;
         private readonly GameStateManager _gameStateManager;
 
@@ -24,14 +23,12 @@ namespace L2Farm.Features.SimpleMonolog
             UiService uiService,
             CharactersService charactersService,
             QuestService questService,
-            ActionService actionService,
             ResourcesService resourcesService,
             GameStateManager gameStateManager)
         {
             _uiService = uiService;
             _charactersService = charactersService;
             _questService = questService;
-            _actionService = actionService;
             _resourcesService = resourcesService;
             _gameStateManager = gameStateManager;
         }
@@ -40,7 +37,12 @@ namespace L2Farm.Features.SimpleMonolog
         {
             var characterConfig = _charactersService.GetConfigFor(config.speaker);
             var data = new List<ResourceRequirementData>();
-            foreach (var resourceCondition in config.resources.resourceConditions)
+
+            var resourceConditions = config.stepIndexWithResourceCondition >= 0
+                ? ((HasEnoughResourcesConditionConfig)_questService.GetConfigFor(config.questId).steps[config.stepIndexWithResourceCondition].winCondition).resourceConditions
+                : new HasEnoughResourcesConditionConfig().resourceConditions;
+
+            foreach (var resourceCondition in resourceConditions)
             {
                 data.Add(new ResourceRequirementData
                 {
@@ -59,7 +61,7 @@ namespace L2Farm.Features.SimpleMonolog
                 next = () =>
                 {
                     _uiService.Close(_view);
-                    _questService.TryProceed(config.questId);
+                    _questService.TryProceedStepsOf(config.questId);
                 }
             };
             _view = await _uiService.TryOpen(model) as SimpleMonologPopup;
