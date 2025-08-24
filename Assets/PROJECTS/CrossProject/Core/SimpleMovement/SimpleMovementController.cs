@@ -19,10 +19,17 @@ namespace CrossProject.Core.SimpleMovement
         private IJoystickValueProvider _joystick;
         private SpawnPointService _spawnPointService;
 
+        [SerializeField] private float speed = 3.5f;
+        [SerializeField] private float acceleration = 10f;
+        [SerializeField] private float deceleration = 10f;
+        [SerializeField, Range(0, 180)] private float instantTurnAngle = 90f;
         [SerializeField] private Transform skinRoot;
 
         private NavMeshAgent _playerNavMeshAgent;
         private Vector3 _direction;
+        private Vector3 _lastDirection;
+        private Vector3 _calculatedVelocity;
+        private Vector3 _currentVelocity;
         private Skin _skin;
 
         private static readonly int Speed = Animator.StringToHash("Speed");
@@ -48,7 +55,7 @@ namespace CrossProject.Core.SimpleMovement
         private void Awake()
         {
             _playerNavMeshAgent = GetComponent<NavMeshAgent>();
-            _playerNavMeshAgent.updateRotation = true;
+            _playerNavMeshAgent.updateRotation = false;
             DontDestroyOnLoad(this);
         }
 
@@ -73,24 +80,67 @@ namespace CrossProject.Core.SimpleMovement
             //TODO : VM : fix later
             _direction.x *= 1.5f;
             _direction.z *= _joystick.NormalizedVector2.y;
-            _playerNavMeshAgent.isStopped = false;
-            _playerNavMeshAgent.SetDestination(transform.position + _direction);
+
+            if (_direction == Vector3.zero)
+            {
+                _currentVelocity = Vector3.MoveTowards(_currentVelocity, Vector3.zero, deceleration * Time.deltaTime);
+                _playerNavMeshAgent.ResetPath();
+
+                if (_currentVelocity.sqrMagnitude > 0.01f)
+                {
+                    _playerNavMeshAgent.nextPosition = transform.position + _currentVelocity * Time.deltaTime;
+                    transform.position = _playerNavMeshAgent.nextPosition;
+                }
+            }
+            else
+            {
+                var angle = Mathf.Abs(Vector3.Angle(_lastDirection, _direction));
+                if (angle > instantTurnAngle)
+                {
+                    _playerNavMeshAgent.ResetPath();
+                    _currentVelocity = Vector3.zero;
+                }
+
+                if (_direction != Vector3.zero)
+                {
+                    transform.forward = _direction;
+                    _lastDirection = _direction;
+                }
+
+
+                _currentVelocity = Vector3.MoveTowards(_calculatedVelocity, _direction * speed, acceleration * Time.deltaTime);
+
+                _calculatedVelocity = _direction * speed;
+                _playerNavMeshAgent.velocity = _calculatedVelocity;
+                _playerNavMeshAgent.nextPosition = transform.position + _calculatedVelocity * Time.deltaTime;
+                transform.position = _playerNavMeshAgent.nextPosition;
+
+                if (angle <= instantTurnAngle)
+                {
+                    var targetPos = transform.position + _direction * 0.5f;
+                    _playerNavMeshAgent.SetDestination(targetPos);
+                }
+                else
+                {
+                    var targetPos = transform.position + _direction * 2f;
+                    _playerNavMeshAgent.SetDestination(targetPos);
+                }
+            }
 
             if (CurrentSkin != null && CurrentSkin.Animator != null)
             {
-                var velocity = _playerNavMeshAgent.velocity.magnitude;
-                var animSpeed = Mathf.InverseLerp(0, _playerNavMeshAgent.speed, velocity);
+                var animSpeed = Mathf.InverseLerp(0, _calculatedVelocity.magnitude, _currentVelocity.magnitude);
                 CurrentSkin.Animator.SetFloat(Speed, animSpeed);
             }
         }
 
         public async UniTask MoveTo(Vector3 target, CancellationToken cancellationToken, float targetDistance = 1)
         {
-            _playerNavMeshAgent.SetDestination(target);
-            CurrentSkin.Animator.SetFloat(Speed, 100);
-            await UniTask.WaitUntil(() => (transform.position - target).sqrMagnitude <= targetDistance * targetDistance, PlayerLoopTiming.Update, cancellationToken);
-            CurrentSkin.Animator.SetFloat(Speed, 0);
-            _playerNavMeshAgent.isStopped = true;
+            //TODO : VM : remake to speed control?
+            // _playerNavMeshAgent.SetDestination(target);
+            // CurrentSkin.Animator.SetFloat(Speed, 100);
+            // await UniTask.WaitUntil(() => (transform.position - target).sqrMagnitude <= targetDistance * targetDistance, PlayerLoopTiming.Update, cancellationToken);
+            // CurrentSkin.Animator.SetFloat(Speed, 0);
         }
 
         public void PostInitialize()
