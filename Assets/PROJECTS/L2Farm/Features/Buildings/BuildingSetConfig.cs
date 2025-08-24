@@ -23,6 +23,9 @@ namespace L2Farm.Features.Buildings
         public SceneId sceneId;
 
         [FoldoutGroup("$id")]
+        public SpawnPointId spawnPointId;
+
+        [FoldoutGroup("$id")]
         public string assetIdBroken = "_Broken";
 
         [FoldoutGroup("$id")]

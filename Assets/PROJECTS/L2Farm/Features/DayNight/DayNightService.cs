@@ -10,7 +10,7 @@ namespace L2Farm.Features.DayNight
         [SerializeField] private Light sunlight;
         [SerializeField] private DayNightConfig config;
 
-        private TimeSpan interval;
+        private TimeSpan _interval;
         private CancellationTokenSource _cts = new ();
 
         public float Evaluation { get; private set; }
@@ -18,7 +18,7 @@ namespace L2Farm.Features.DayNight
 
         private void Start()
         {
-            interval = TimeSpan.FromSeconds(config.updateIntervalInSeconds);
+            _interval = TimeSpan.FromSeconds(config.updateIntervalInSeconds);
             Routine(_cts.Token).Forget();
         }
 
@@ -38,7 +38,7 @@ namespace L2Farm.Features.DayNight
                 Debug.Log($"[{nameof(DayNightService)}] : {Evaluation}");
                 OnEvaluate?.Invoke(Evaluation);
                 sunlight.color = config.gradient.Evaluate(Evaluation);
-                await UniTask.Delay(interval);
+                await UniTask.Delay(_interval);
             }
         }
 

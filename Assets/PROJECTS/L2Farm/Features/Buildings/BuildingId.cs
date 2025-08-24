@@ -13,7 +13,7 @@ namespace L2Farm.Features.Buildings
 
         public override bool Equals(object obj) => obj is BuildingId id && Equals(id);
 
-        public static explicit operator BuildingId(string value) => new (value);
+        public static implicit operator BuildingId(string value) => new (value);
 
         public static bool operator ==(BuildingId a, BuildingId b) => a?.Value == b?.Value;
 
