@@ -87,8 +87,36 @@ PrefabInstance:
       value: Interactive_Tree
       objectReference: {fileID: 0}
     - target: {fileID: 2161099450640851090, guid: 862ae5e2f85c0491fad751ad5724a0cb, type: 3}
+      propertyPath: animation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2161099450640851090, guid: 862ae5e2f85c0491fad751ad5724a0cb, type: 3}
+      propertyPath: buttonSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 41ce8f7ef538946d9b27e58092b07ca9, type: 3}
+    - target: {fileID: 2161099450640851090, guid: 862ae5e2f85c0491fad751ad5724a0cb, type: 3}
+      propertyPath: energyRequired
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2161099450640851090, guid: 862ae5e2f85c0491fad751ad5724a0cb, type: 3}
+      propertyPath: content.lowerRange
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2161099450640851090, guid: 862ae5e2f85c0491fad751ad5724a0cb, type: 3}
+      propertyPath: content.upperRange
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2161099450640851090, guid: 862ae5e2f85c0491fad751ad5724a0cb, type: 3}
       propertyPath: interactionDuration
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2161099450640851090, guid: 862ae5e2f85c0491fad751ad5724a0cb, type: 3}
+      propertyPath: content.randomAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2161099450640851090, guid: 862ae5e2f85c0491fad751ad5724a0cb, type: 3}
+      propertyPath: content.resourceId.value
+      value: Resource_Wood
       objectReference: {fileID: 0}
     - target: {fileID: 2665815157793418560, guid: 862ae5e2f85c0491fad751ad5724a0cb, type: 3}
       propertyPath: m_LocalPosition.x

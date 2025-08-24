@@ -10,23 +10,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 328b8208f2fad09488a9bfebd771024a, type: 3}
       propertyPath: m_LocalScale.x
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 328b8208f2fad09488a9bfebd771024a, type: 3}
       propertyPath: m_LocalScale.y
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 328b8208f2fad09488a9bfebd771024a, type: 3}
       propertyPath: m_LocalScale.z
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 328b8208f2fad09488a9bfebd771024a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: -0.25
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 328b8208f2fad09488a9bfebd771024a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.28
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 328b8208f2fad09488a9bfebd771024a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -91,8 +91,36 @@ PrefabInstance:
       value: Interactive_Stone
       objectReference: {fileID: 0}
     - target: {fileID: 2161099450640851090, guid: 862ae5e2f85c0491fad751ad5724a0cb, type: 3}
+      propertyPath: animation
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2161099450640851090, guid: 862ae5e2f85c0491fad751ad5724a0cb, type: 3}
+      propertyPath: buttonSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f6b55d5f9c1c84d5e96f83d973251c47, type: 3}
+    - target: {fileID: 2161099450640851090, guid: 862ae5e2f85c0491fad751ad5724a0cb, type: 3}
+      propertyPath: energyRequired
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2161099450640851090, guid: 862ae5e2f85c0491fad751ad5724a0cb, type: 3}
+      propertyPath: content.lowerRange
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2161099450640851090, guid: 862ae5e2f85c0491fad751ad5724a0cb, type: 3}
+      propertyPath: content.upperRange
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2161099450640851090, guid: 862ae5e2f85c0491fad751ad5724a0cb, type: 3}
       propertyPath: interactionDuration
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2161099450640851090, guid: 862ae5e2f85c0491fad751ad5724a0cb, type: 3}
+      propertyPath: content.randomAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2161099450640851090, guid: 862ae5e2f85c0491fad751ad5724a0cb, type: 3}
+      propertyPath: content.resourceId.value
+      value: Resource_Stone
       objectReference: {fileID: 0}
     - target: {fileID: 2665815157793418560, guid: 862ae5e2f85c0491fad751ad5724a0cb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -136,15 +164,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8482387185474381411, guid: 862ae5e2f85c0491fad751ad5724a0cb, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8482387185474381411, guid: 862ae5e2f85c0491fad751ad5724a0cb, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8482387185474381411, guid: 862ae5e2f85c0491fad751ad5724a0cb, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
