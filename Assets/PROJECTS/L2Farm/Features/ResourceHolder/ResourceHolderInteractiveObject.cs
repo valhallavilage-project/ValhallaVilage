@@ -1,9 +1,11 @@
+using CrossProject.Core;
 using CrossProject.Core.Energy;
 using CrossProject.Core.InGameResources;
 using CrossProject.Core.Interactions;
 using CrossProject.Core.SaveLoad;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using VContainer;
 
 namespace L2Farm.Features.ResourceHolder
 {
@@ -16,6 +18,17 @@ namespace L2Farm.Features.ResourceHolder
         private GameStateManager _gameStateManager;
 
         public override bool CanInteract() => _energyProvider.CurrentValue >= energyRequired;
+
+        private void Start()
+        {
+            ManualPrefabInjector.Instance.Inject(this);
+        }
+
+        [Inject]
+        private void Construct(IEnergyProvider energyProvider)
+        {
+            _energyProvider = energyProvider;
+        }
 
         protected override async UniTask AfterInteraction()
         {
