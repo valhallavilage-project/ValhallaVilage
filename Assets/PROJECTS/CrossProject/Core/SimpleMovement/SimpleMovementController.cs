@@ -28,7 +28,6 @@ namespace CrossProject.Core.SimpleMovement
         private NavMeshAgent _playerNavMeshAgent;
         private Vector3 _direction;
         private Vector3 _lastDirection;
-        private Vector3 _calculatedVelocity;
         private Vector3 _currentVelocity;
         private Skin _skin;
 
@@ -76,60 +75,32 @@ namespace CrossProject.Core.SimpleMovement
                 return;
 
             _direction = _cameraService.CamDirectionOnPlane.normalized;
-            _direction.x *= _joystick.NormalizedVector2.x;
-            //TODO : VM : fix later
-            _direction.x *= 1.5f;
+            _direction.x *= _joystick.NormalizedVector2.x * 1.5f; //TODO : VM : fix later
             _direction.z *= _joystick.NormalizedVector2.y;
+            var inputDir = _direction.normalized;
 
-            if (_direction == Vector3.zero)
+            bool hasInput = inputDir != Vector3.zero;
+            float targetSpeed = hasInput ? speed : 0;
+            float currentSpeed = _currentVelocity.magnitude;
+            currentSpeed = Mathf.MoveTowards(currentSpeed, targetSpeed, (hasInput ? acceleration : deceleration)*Time.deltaTime);
+
+            if (!hasInput)
             {
-                _currentVelocity = Vector3.MoveTowards(_currentVelocity, Vector3.zero, deceleration * Time.deltaTime);
-                _playerNavMeshAgent.ResetPath();
-
-                if (_currentVelocity.sqrMagnitude > 0.01f)
-                {
-                    _playerNavMeshAgent.nextPosition = transform.position + _currentVelocity * Time.deltaTime;
-                    transform.position = _playerNavMeshAgent.nextPosition;
-                }
+                _currentVelocity = transform.forward * currentSpeed;
             }
             else
             {
-                var angle = Mathf.Abs(Vector3.Angle(_lastDirection, _direction));
-                if (angle > instantTurnAngle)
-                {
-                    _playerNavMeshAgent.ResetPath();
-                    _currentVelocity = Vector3.zero;
-                }
-
-                if (_direction != Vector3.zero)
-                {
-                    transform.forward = _direction;
-                    _lastDirection = _direction;
-                }
-
-
-                _currentVelocity = Vector3.MoveTowards(_calculatedVelocity, _direction * speed, acceleration * Time.deltaTime);
-
-                _calculatedVelocity = _direction * speed;
-                _playerNavMeshAgent.velocity = _calculatedVelocity;
-                _playerNavMeshAgent.nextPosition = transform.position + _calculatedVelocity * Time.deltaTime;
-                transform.position = _playerNavMeshAgent.nextPosition;
-
-                if (angle <= instantTurnAngle)
-                {
-                    var targetPos = transform.position + _direction * 0.5f;
-                    _playerNavMeshAgent.SetDestination(targetPos);
-                }
-                else
-                {
-                    var targetPos = transform.position + _direction * 2f;
-                    _playerNavMeshAgent.SetDestination(targetPos);
-                }
+                transform.forward = inputDir;
+                _currentVelocity = inputDir * currentSpeed;
             }
+
+            _playerNavMeshAgent.velocity = _currentVelocity;
+            _playerNavMeshAgent.nextPosition = transform.position + _currentVelocity * Time.deltaTime;
+            transform.position = _playerNavMeshAgent.nextPosition;
 
             if (CurrentSkin != null && CurrentSkin.Animator != null)
             {
-                var animSpeed = Mathf.InverseLerp(0, _calculatedVelocity.magnitude, _currentVelocity.magnitude);
+                float animSpeed = Mathf.InverseLerp(0, speed, _currentVelocity.magnitude);
                 CurrentSkin.Animator.SetFloat(Speed, animSpeed);
             }
         }

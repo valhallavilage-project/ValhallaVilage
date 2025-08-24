@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  acceleration: 0.1
+  acceleration: 10
   deceleration: 10
   instantTurnAngle: 45
   skinRoot: {fileID: 7083118912159600162}
