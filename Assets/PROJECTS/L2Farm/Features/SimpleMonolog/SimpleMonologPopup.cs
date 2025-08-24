@@ -1,5 +1,6 @@
 ﻿using CrossProject.Extensions;
 using CrossProject.Ui.Core;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -34,6 +35,12 @@ namespace L2Farm.Features.SimpleMonolog
             portrait.sprite = Model.portrait;
             personName.text = Model.personName;
             message.text = Model.message;
+            message.maxVisibleCharacters = 0;
+            int totalChars = message.text.Length;
+            DOTween
+                .To(() => message.maxVisibleCharacters, x => message.maxVisibleCharacters = x, totalChars, 0.5f)
+                .SetEase(Ease.Linear);
+
             close.SetUniqueCallback(Model.close);
             next.SetUniqueCallback(Model.next);
 

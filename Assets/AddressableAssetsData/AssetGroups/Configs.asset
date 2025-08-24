@@ -41,6 +41,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - prewarm
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cd491b73cf44a41fdb9272b4129cd308
+    m_Address: NPCSetConfig
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - prewarm
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d777050ecc32d4fbfb9aa5b5734efa56
     m_Address: QuestSetConfig
     m_ReadOnly: 0

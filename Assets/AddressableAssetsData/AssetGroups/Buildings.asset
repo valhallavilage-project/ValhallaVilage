@@ -17,13 +17,83 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: e1967264262024987a76680182fe2533
   m_SerializeEntries:
+  - m_GUID: 045a9d13abc98da4f9181e41f6bae69e
+    m_Address: Smithy_Broken
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0e94e950c4cc1bc4eaef1a152e7de487
+    m_Address: Sawmill_Broken
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2eb80fe148ae4f14192b6e5ebf20bf54
+    m_Address: Farm_Ready
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4e04e5d3e132c40d28878d995e39a979
     m_Address: Mill_Broken
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 59455cdca7c6b4a9e9753026b2fa7ba1
+    m_Address: House_Broken
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 610fecbab3dbb471e99b5ff62d9b7c2a
     m_Address: Mill_Ready
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6f9ead7d38b2c8a4f8bee5aac25c41cb
+    m_Address: Smithy_Ready
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 81d7066af1cc4904db5f567472dc94af
+    m_Address: Fishing_Ready
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8348de51f8560594d8d5d50738257ce6
+    m_Address: Ambar_Ready
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 87c4aa48151584244a3aafc929a032bd
+    m_Address: Sawmill_Ready
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 96f4355fc31f82242980f429d93c3e97
+    m_Address: Bakery_Broken
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9f3dc33376a470346ab73395fa8474e8
+    m_Address: Fishing_Broken
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a06650c703a62ed459da519761f6afe2
+    m_Address: Ambar_Broken
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a0b56337194d7af469ebc0bdee4f3ea9
+    m_Address: Farm_Broken
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ae3b52588ba7fc84490332b9add3bcdc
+    m_Address: Bakery_Ready
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e23391134b02c4da4bd8ef96ba865046
+    m_Address: House_Ready
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using CrossProject.Core.Conditions;
 using CrossProject.Core.SpawnPoints;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -22,9 +23,13 @@ namespace L2Farm.Features.Buildings
         public SceneId sceneId;
 
         [FoldoutGroup("$id")]
-        public string assetIdBroken;
+        public string assetIdBroken = "_Broken";
 
         [FoldoutGroup("$id")]
-        public string assetIdReady;
+        public string assetIdReady = "_Ready";
+
+        [FoldoutGroup("$id")]
+        [SerializeReference]
+        public IConditionConfig spawnReadyCondition;
     }
 }

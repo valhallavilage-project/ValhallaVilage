@@ -21,6 +21,7 @@ using CrossProject.Ui.Implementations.InteractButton;
 using CrossProject.Ui.Implementations.SettingsPopup;
 using L2Farm.Features.DayNight;
 using L2Farm.Features.InventoryScreen;
+using L2Farm.Features.NPC;
 using L2Farm.Features.QuestsScreen;
 using L2Farm.Features.ShopScreen;
 using L2Farm.Features.SimpleMonolog;
@@ -49,6 +50,9 @@ namespace L2Farm.Scripts
                 .AsImplementedInterfaces();
 
             builder.Register<BlockableCheatPanelReaction>(Lifetime.Singleton)
+                .AsImplementedInterfaces();
+
+            builder.Register<DayNightCheatOptions>(Lifetime.Singleton)
                 .AsImplementedInterfaces();
         }
 
@@ -89,6 +93,10 @@ namespace L2Farm.Scripts
                 .AsImplementedInterfaces();
 
             builder.RegisterComponentInHierarchy<DayNightService>()
+                .AsSelf()
+                .AsImplementedInterfaces();
+
+            builder.Register<NPCService>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
 

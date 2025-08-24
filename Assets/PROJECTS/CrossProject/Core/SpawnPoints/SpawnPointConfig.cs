@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace CrossProject.Core.SpawnPoints
@@ -5,9 +6,9 @@ namespace CrossProject.Core.SpawnPoints
     [System.Serializable]
     public class SpawnPointConfig
     {
-        public string id;
-        public SceneId sceneId;
-        public Vector3 position;
-        public Vector3 eulerAngles;
+        [FoldoutGroup("$id")] public string id;
+        [FoldoutGroup("$id")] public SceneId sceneId;
+        [FoldoutGroup("$id")] public Vector3 position;
+        [FoldoutGroup("$id")] public Vector3 eulerAngles;
     }
 }

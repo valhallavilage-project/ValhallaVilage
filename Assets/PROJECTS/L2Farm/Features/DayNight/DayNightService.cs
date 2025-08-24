@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ namespace L2Farm.Features.DayNight
         [SerializeField] private DayNightConfig config;
 
         private TimeSpan interval;
+        private CancellationTokenSource _cts = new ();
 
         public float Evaluation { get; private set; }
         public event Action<float> OnEvaluate;
@@ -17,13 +19,16 @@ namespace L2Farm.Features.DayNight
         private void Start()
         {
             interval = TimeSpan.FromSeconds(config.updateIntervalInSeconds);
-            Routine().Forget();
+            Routine(_cts.Token).Forget();
         }
 
-        private async UniTask Routine()
+        private async UniTask Routine(CancellationToken token)
         {
             while (true)
             {
+                if (token.IsCancellationRequested)
+                    break;
+
                 var now = DateTime.Now;
                 var secondsSinceMidnight = (float)now.TimeOfDay.TotalSeconds;
                 var halfDaySeconds = (float)TimeSpan.FromHours(12).TotalSeconds;
@@ -35,6 +40,15 @@ namespace L2Farm.Features.DayNight
                 sunlight.color = config.gradient.Evaluate(Evaluation);
                 await UniTask.Delay(interval);
             }
+        }
+
+        public void Set(float value)
+        {
+            _cts.Cancel();
+
+            Evaluation = value;
+            OnEvaluate?.Invoke(Evaluation);
+            sunlight.color = config.gradient.Evaluate(Evaluation);
         }
     }
 }
