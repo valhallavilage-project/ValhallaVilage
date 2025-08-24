@@ -13,6 +13,18 @@ PrefabInstance:
       value: Strawberry_bush
       objectReference: {fileID: 0}
     - target: {fileID: 8853513564365669374, guid: dfb0b73d8eca16042845c06ee2db20e1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8853513564365669374, guid: dfb0b73d8eca16042845c06ee2db20e1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8853513564365669374, guid: dfb0b73d8eca16042845c06ee2db20e1, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8853513564365669374, guid: dfb0b73d8eca16042845c06ee2db20e1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
