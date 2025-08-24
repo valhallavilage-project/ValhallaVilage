@@ -26,6 +26,7 @@ namespace CrossProject.Core.SimpleMovement
         [SerializeField] private Transform skinRoot;
 
         private NavMeshAgent _playerNavMeshAgent;
+        private Transform _transform;
         private Vector3 _direction;
         private Vector3 _lastDirection;
         private Vector3 _currentVelocity;
@@ -55,6 +56,7 @@ namespace CrossProject.Core.SimpleMovement
         {
             _playerNavMeshAgent = GetComponent<NavMeshAgent>();
             _playerNavMeshAgent.updateRotation = false;
+            _transform = transform;
             DontDestroyOnLoad(this);
         }
 
@@ -86,17 +88,17 @@ namespace CrossProject.Core.SimpleMovement
 
             if (!hasInput)
             {
-                _currentVelocity = transform.forward * currentSpeed;
+                _currentVelocity = _transform.forward * currentSpeed;
             }
             else
             {
-                transform.forward = inputDir;
+                _transform.forward = inputDir;
                 _currentVelocity = inputDir * currentSpeed;
             }
 
             _playerNavMeshAgent.velocity = _currentVelocity;
-            _playerNavMeshAgent.nextPosition = transform.position + _currentVelocity * Time.deltaTime;
-            transform.position = _playerNavMeshAgent.nextPosition;
+            _playerNavMeshAgent.nextPosition = _transform.position + _currentVelocity * Time.deltaTime;
+            _transform.position = _playerNavMeshAgent.nextPosition;
 
             if (CurrentSkin != null && CurrentSkin.Animator != null)
             {
@@ -107,16 +109,18 @@ namespace CrossProject.Core.SimpleMovement
 
         public async UniTask MoveTo(Vector3 target, CancellationToken cancellationToken, float targetDistance = 1)
         {
-            //TODO : VM : remake to speed control?
-            // _playerNavMeshAgent.SetDestination(target);
-            // CurrentSkin.Animator.SetFloat(Speed, 100);
-            // await UniTask.WaitUntil(() => (transform.position - target).sqrMagnitude <= targetDistance * targetDistance, PlayerLoopTiming.Update, cancellationToken);
-            // CurrentSkin.Animator.SetFloat(Speed, 0);
+            var direction = target - _transform.position;
+            if (direction != Vector3.zero)
+                _transform.forward = direction;
+            _playerNavMeshAgent.SetDestination(target);
+            CurrentSkin.Animator.SetFloat(Speed, 1);
+            await UniTask.WaitUntil(() => (_transform.position - target).sqrMagnitude <= targetDistance * targetDistance, PlayerLoopTiming.Update, cancellationToken);
+            CurrentSkin.Animator.SetFloat(Speed, 0);
         }
 
         public void PostInitialize()
         {
-            _cameraService.SetTarget(transform);
+            _cameraService.SetTarget(_transform);
             var targetPos = _spawnPointService.GetPosition(new SpawnPointId("PlayerSpawnPoint"));
             _playerNavMeshAgent.Warp(targetPos);
         }
