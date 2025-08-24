@@ -6,7 +6,6 @@ namespace CrossProject.Core.Interactions
     [RequireComponent(typeof(SphereCollider))]
     public abstract class InteractiveObject : MonoBehaviour
     {
-        public int energyNeeded = 2;
         public float interactionDistance = 1;
         public float interactionDuration;
         public Sprite buttonSprite;
