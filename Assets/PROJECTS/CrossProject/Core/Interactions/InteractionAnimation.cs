@@ -5,6 +5,7 @@ namespace CrossProject.Core.Interactions
         Attack,
         Chop,
         Pickaxe,
-        Gather
+        Gather,
+        Talk
     }
 }

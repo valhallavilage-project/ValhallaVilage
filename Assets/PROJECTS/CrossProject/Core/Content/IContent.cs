@@ -1,4 +1,6 @@
 namespace CrossProject.Core.Content
 {
-    public interface IContent { }
+    public interface IContent : IMatchable<IContent>, ICloneable<IContent>
+    {
+    }
 }

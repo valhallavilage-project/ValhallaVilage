@@ -1,4 +1,5 @@
 using System;
+using CrossProject.Core.Content;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -6,7 +7,7 @@ using Random = UnityEngine.Random;
 namespace CrossProject.Core.InGameResources
 {
     [Serializable]
-    public class ResourceContent : IResourceContent
+    public class ResourceContent : IContent
     {
         [SerializeField]
         private ResourceId resourceId;
@@ -45,5 +46,8 @@ namespace CrossProject.Core.InGameResources
             Resource = id;
             Amount = amount;
         }
+
+        public bool IsMatch(IContent other) => other is ResourceContent rc && rc.Resource == Resource;
+        public IContent Clone() => new ResourceContent(Resource, amount);
     }
 }

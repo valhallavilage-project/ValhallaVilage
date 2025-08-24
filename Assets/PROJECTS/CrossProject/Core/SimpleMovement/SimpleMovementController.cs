@@ -40,7 +40,9 @@ namespace CrossProject.Core.SimpleMovement
         public Vector3 Direction => _direction;
         public Transform PlayerSkinRoot => skinRoot;
 
-        private Skin CurrentSkin => _skin ??= skinRoot.GetComponentInChildren<Skin>();
+        Skin IPlayerSkinProvider.CurrentSkin => _skin ??= skinRoot.GetComponentInChildren<Skin>();
+
+        private Skin LocalAccessCurrentSkin => ((IPlayerSkinProvider)this).CurrentSkin;
 
         public void AddBlock(object blockRequester)
         {
@@ -100,10 +102,10 @@ namespace CrossProject.Core.SimpleMovement
             _playerNavMeshAgent.nextPosition = _transform.position + _currentVelocity * Time.deltaTime;
             _transform.position = _playerNavMeshAgent.nextPosition;
 
-            if (CurrentSkin != null && CurrentSkin.Animator != null)
+            if (LocalAccessCurrentSkin != null && LocalAccessCurrentSkin.Animator != null)
             {
                 float animSpeed = Mathf.InverseLerp(0, speed, _currentVelocity.magnitude);
-                CurrentSkin.Animator.SetFloat(Speed, animSpeed);
+                LocalAccessCurrentSkin.Animator.SetFloat(Speed, animSpeed);
             }
         }
 
@@ -113,9 +115,9 @@ namespace CrossProject.Core.SimpleMovement
             if (direction != Vector3.zero)
                 _transform.forward = direction;
             _playerNavMeshAgent.SetDestination(target);
-            CurrentSkin.Animator.SetFloat(Speed, 1);
+            LocalAccessCurrentSkin.Animator.SetFloat(Speed, 1);
             await UniTask.WaitUntil(() => (_transform.position - target).sqrMagnitude <= targetDistance * targetDistance, PlayerLoopTiming.Update, cancellationToken);
-            CurrentSkin.Animator.SetFloat(Speed, 0);
+            LocalAccessCurrentSkin.Animator.SetFloat(Speed, 0);
         }
 
         public void PostInitialize()

@@ -4,7 +4,7 @@ using UnityEngine;
 namespace CrossProject.Core.Interactions
 {
     [RequireComponent(typeof(SphereCollider))]
-    public abstract class InteractiveObject : MonoBehaviour
+    public abstract class AbstractInteractiveObject : MonoBehaviour
     {
         public float interactionDistance = 1;
         public float interactionDuration;
@@ -16,14 +16,16 @@ namespace CrossProject.Core.Interactions
 
         private SphereCollider _collider;
 
-        public bool CanInteract { get; protected set; } = true;
-
         private void Awake()
         {
             _collider = GetComponent<SphereCollider>();
             _collider.isTrigger = true;
             gameObject.layer = LayerMask.NameToLayer("Interactable");
         }
+
+        public virtual bool CanSelect() => true;
+
+        public virtual bool CanInteract() => true;
 
         public virtual void Select()
         {
@@ -35,6 +37,12 @@ namespace CrossProject.Core.Interactions
             highLight.SetActive(false);
         }
 
-        public abstract UniTask Interaction();
+        protected abstract UniTask AfterInteraction();
+
+        public async UniTask Interaction()
+        {
+            await UniTask.WaitForSeconds(interactionDuration);
+            await AfterInteraction();
+        }
     }
 }

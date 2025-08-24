@@ -45,7 +45,7 @@ namespace L2Farm.Features.SimpleMonolog
                 data.Add(new ResourceRequirementData
                 {
                     icon = _resourcesService.GetSprite(resourceCondition.resourceId),
-                    has = _gameStateManager.State.Get<ResourceContentPart>().Has(resourceCondition.resourceId),
+                    has = _gameStateManager.State.Get<ResourceContentPart>().Resources[resourceCondition.resourceId],
                     need = resourceCondition.neededQuantity
                 });
             }
