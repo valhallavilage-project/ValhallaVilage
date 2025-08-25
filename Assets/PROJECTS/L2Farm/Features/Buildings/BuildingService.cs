@@ -53,6 +53,7 @@ namespace L2Farm.Features.Buildings
             var instance = Object.Instantiate(asset, position, Quaternion.Euler(eulerAngles));
             var building = instance.GetComponent<Building>();
             _buildings[config.id] = building;
+            Debug.Log($"[{nameof(BuildingService)}] : spawned {config.id} with asset : {key}!");
         }
 
         public void StartUpgradeProcess(BuildingId id)

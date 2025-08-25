@@ -16,6 +16,8 @@ MonoBehaviour:
   - id: Ambar
     sceneId:
       value: L2Farm_FirstTown
+    spawnPointId:
+      value: Building_Ambar
     assetIdBroken: Ambar_Broken
     assetIdReady: Ambar_Ready
     spawnReadyCondition:
@@ -23,6 +25,8 @@ MonoBehaviour:
   - id: Bakery
     sceneId:
       value: L2Farm_FirstTown
+    spawnPointId:
+      value: Building_Bakery
     assetIdBroken: Bakery_Broken
     assetIdReady: Bakery_Ready
     spawnReadyCondition:
@@ -30,6 +34,8 @@ MonoBehaviour:
   - id: Farm
     sceneId:
       value: L2Farm_FirstTown
+    spawnPointId:
+      value: Building_Farm
     assetIdBroken: Farm_Broken
     assetIdReady: Farm_Ready
     spawnReadyCondition:
@@ -37,6 +43,8 @@ MonoBehaviour:
   - id: Fishing
     sceneId:
       value: L2Farm_FirstTown
+    spawnPointId:
+      value: Building_Fishing
     assetIdBroken: Fishing_Broken
     assetIdReady: Fishing_Ready
     spawnReadyCondition:
@@ -44,6 +52,8 @@ MonoBehaviour:
   - id: House
     sceneId:
       value: L2Farm_FirstTown
+    spawnPointId:
+      value: Building_House
     assetIdBroken: House_Broken
     assetIdReady: House_Ready
     spawnReadyCondition:
@@ -51,6 +61,8 @@ MonoBehaviour:
   - id: Mill
     sceneId:
       value: L2Farm_FirstTown
+    spawnPointId:
+      value: Building_Mill
     assetIdBroken: Mill_Broken
     assetIdReady: Mill_Ready
     spawnReadyCondition:
@@ -58,6 +70,8 @@ MonoBehaviour:
   - id: Sawmill
     sceneId:
       value: L2Farm_FirstTown
+    spawnPointId:
+      value: Building_Sawmill
     assetIdBroken: Sawmill_Broken
     assetIdReady: Sawmill_Ready
     spawnReadyCondition:
@@ -65,6 +79,8 @@ MonoBehaviour:
   - id: Smithy
     sceneId:
       value: L2Farm_FirstTown
+    spawnPointId:
+      value: Building_Smithy
     assetIdBroken: Smithy_Broken
     assetIdReady: Smithy_Ready
     spawnReadyCondition:

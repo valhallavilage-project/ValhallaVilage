@@ -26,40 +26,40 @@ MonoBehaviour:
   - id: Building_House
     sceneId:
       value: L2Farm_FirstTown
-    position: {x: 78.76495, y: -73.68569, z: 78.15425}
+    position: {x: 194.2, y: 0, z: -90.8}
     eulerAngles: {x: 0, y: -144.107, z: 0}
   - id: Building_Farm
     sceneId:
       value: L2Farm_FirstTown
-    position: {x: 50.17496, y: -71.36568, z: 142.8542}
+    position: {x: 163.64, y: 3, z: -27.85}
     eulerAngles: {x: 0, y: 93.33, z: 0}
   - id: Building_Fishing
     sceneId:
       value: L2Farm_FirstTown
-    position: {x: 106.835, y: -64.63569, z: 197.3443}
+    position: {x: 221.12, y: 8.9, z: 28.74}
     eulerAngles: {x: 0, y: -0.386, z: 0}
   - id: Building_Mill
     sceneId:
       value: L2Farm_FirstTown
-    position: {x: 18.95496, y: -73.79568, z: 116.7742}
+    position: {x: 132.73, y: 0, z: -49.6}
     eulerAngles: {x: 0, y: 45.786, z: 0}
   - id: Building_Smithy
     sceneId:
       value: L2Farm_FirstTown
-    position: {x: -34.89504, y: -67.36569, z: -1602576}
+    position: {x: 83.2, y: 9, z: -186.6}
     eulerAngles: {x: 0, y: 0, z: 0}
   - id: Building_Sawmill
     sceneId:
       value: L2Farm_FirstTown
-    position: {x: -58.10505, y: -73.34569, z: 33.28424}
+    position: {x: 53.5, y: 0, z: -136.6}
     eulerAngles: {x: 0, y: 0, z: 0}
   - id: Building_Ambar
     sceneId:
       value: L2Farm_FirstTown
-    position: {x: -91.76505, y: -64.22569, z: 91.58425}
+    position: {x: 22.12, y: 9.55, z: -79.2}
     eulerAngles: {x: 0, y: -0.783, z: 0}
   - id: Building_Bakery
     sceneId:
       value: L2Farm_FirstTown
-    position: {x: -67.43504, y: -63.81569, z: 90.21425}
+    position: {x: 46.54, y: 9.34, z: -79.43}
     eulerAngles: {x: 0, y: 0, z: 0}
