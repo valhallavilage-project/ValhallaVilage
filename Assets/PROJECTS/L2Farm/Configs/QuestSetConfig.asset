@@ -15,11 +15,87 @@ MonoBehaviour:
   items:
   - rid: 4482425490423152640
   - rid: 4482425807576236032
+  - rid: 77259970479915008
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
+    - rid: 77259970479915008
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Tutorial_2
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: NPC_Farmer
+        launchCondition:
+          rid: -2
+        launchActions:
+        - rid: 77259970479915013
+        steps:
+        - rid: 77259970479915009
+        winCondition:
+          rid: -2
+        winActions:
+        - rid: 77259970479915015
+        loseCondition:
+          rid: -2
+        loseActions: []
+    - rid: 77259970479915009
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 77259970479915010
+        winCondition:
+          rid: 77259970479915011
+        winActions: []
+        loseCondition:
+          rid: 77259970479915014
+        loseActions: []
+    - rid: 77259970479915010
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: Assembly-CSharp}
+      data:
+        speaker:
+          value: NPC_Farmer
+        message: KUKUKU
+        questId:
+          value: Tutorial_2
+        stepIndexWithResourceCondition: 0
+    - rid: 77259970479915011
+      type: {class: HasEnoughResourcesConditionConfig, ns: L2Farm.Scripts.Conditions, asm: Assembly-CSharp}
+      data:
+        resourceConditions:
+        - resourceId:
+            value: Resource_Wood
+          neededQuantity: 40
+        - resourceId:
+            value: Resource_Stone
+          neededQuantity: 25
+    - rid: 77259970479915013
+      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: Assembly-CSharp}
+      data:
+        npcId:
+          value: Farmer
+        spawnPointId:
+          value: NPC_Farmer
+        questId:
+          value: Tutorial_2
+    - rid: 77259970479915014
+      type: {class: NotEnoughResourcesConditionConfig, ns: L2Farm.Scripts.Conditions, asm: Assembly-CSharp}
+      data:
+        questId:
+          value: Tutorial_2
+        stepIndexWithResourceCondition: 0
+    - rid: 77259970479915015
+      type: {class: UpgradeBuildingActionConfig, ns: L2Farm.Features.Buildings.Actions, asm: Assembly-CSharp}
+      data:
+        buildingId:
+          value: Mill
+    - rid: 77259970479915017
+      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Tutorial_2
     - rid: 4482425490423152640
       type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
       data:
@@ -106,6 +182,7 @@ MonoBehaviour:
           rid: -2
         winActions:
         - rid: 4482425807576236040
+        - rid: 77259970479915017
         loseCondition:
           rid: -2
         loseActions: []

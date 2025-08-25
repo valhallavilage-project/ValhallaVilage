@@ -66,7 +66,7 @@ MonoBehaviour:
     assetIdBroken: Mill_Broken
     assetIdReady: Mill_Ready
     spawnReadyCondition:
-      rid: -2
+      rid: 77259970479915016
   - id: Sawmill
     sceneId:
       value: L2Farm_FirstTown
@@ -90,6 +90,16 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
+    - rid: 77259970479915016
+      type: {class: HasEnoughResourcesConditionConfig, ns: L2Farm.Scripts.Conditions, asm: Assembly-CSharp}
+      data:
+        resourceConditions:
+        - resourceId:
+            value: Resource_Wood
+          neededQuantity: 40
+        - resourceId:
+            value: Resource_Stone
+          neededQuantity: 25
     - rid: 4482425807576236039
       type: {class: HasEnoughResourcesConditionConfig, ns: L2Farm.Scripts.Conditions, asm: Assembly-CSharp}
       data:
