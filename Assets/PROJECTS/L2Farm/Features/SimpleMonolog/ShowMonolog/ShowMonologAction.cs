@@ -53,7 +53,7 @@ namespace L2Farm.Features.SimpleMonolog
                 data.Add(new ResourceRequirementData
                 {
                     icon = _resourcesService.GetSprite(resourceCondition.resourceId),
-                    has = _gameStateManager.State.Get<ResourceContentPart>().Resources[resourceCondition.resourceId],
+                    has = _gameStateManager.State.Get<ResourceContentPart>().Has(resourceCondition.resourceId),
                     need = resourceCondition.neededQuantity
                 });
             }
@@ -67,7 +67,8 @@ namespace L2Farm.Features.SimpleMonolog
                 next = () =>
                 {
                     _uiService.Close(_view);
-                    _questService.TryProceedStepsOf(config.questId);
+                    if (_questService.CanProceed(config.questId))
+                        _questService.TryProceedStepsOf(config.questId);
                 }
             };
             _view = await _uiService.TryOpen(model) as SimpleMonologPopup;

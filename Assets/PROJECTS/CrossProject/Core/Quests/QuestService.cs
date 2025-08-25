@@ -75,6 +75,24 @@ namespace CrossProject.Core.Quests
             return true;
         }
 
+        public bool CanProceed(QuestId id)
+        {
+            Debug.Log($"[{nameof(QuestService)}] : CanProceed : {id}");
+
+            if (!_launchedQuests.TryGetValue(id, out var stepIndex))
+            {
+                Debug.LogError($"[{nameof(QuestService)}] : {id} is not launched!");
+                return false;
+            }
+
+            var questConfig = _questSetConfig.Get(id);
+            if (stepIndex >= questConfig.steps.Count)
+                return true;
+
+            var step = questConfig.steps[stepIndex];
+            return _conditionService.Check(step.winCondition);
+        }
+
         public bool TryProceedStepsOf(QuestId id)
         {
             Debug.Log($"[{nameof(QuestService)}] : TryProceed : {id}");

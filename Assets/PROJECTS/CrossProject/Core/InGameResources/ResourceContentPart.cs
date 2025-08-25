@@ -18,5 +18,12 @@ namespace CrossProject.Core.InGameResources
                 Resources[id] = amount;
             OnResourceChange?.Invoke(id, amount);
         }
+
+        public int Has(ResourceId id)
+        {
+            return Resources.ContainsKey(id)
+                ? Resources[id]
+                : 0;
+        }
     }
 }
