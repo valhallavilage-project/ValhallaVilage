@@ -104,7 +104,8 @@ MonoBehaviour:
         - rid: 4482425807576236034
         winCondition:
           rid: -2
-        winActions: []
+        winActions:
+        - rid: 4482425807576236040
         loseCondition:
           rid: -2
         loseActions: []
@@ -160,3 +161,8 @@ MonoBehaviour:
       data:
         questId:
           value: Tutorial_1
+    - rid: 4482425807576236040
+      type: {class: UpgradeBuildingActionConfig, ns: L2Farm.Features.Buildings.Actions, asm: Assembly-CSharp}
+      data:
+        buildingId:
+          value: House

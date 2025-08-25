@@ -57,7 +57,7 @@ MonoBehaviour:
     assetIdBroken: House_Broken
     assetIdReady: House_Ready
     spawnReadyCondition:
-      rid: -2
+      rid: 4482425807576236039
   - id: Mill
     sceneId:
       value: L2Farm_FirstTown
@@ -90,3 +90,13 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
+    - rid: 4482425807576236039
+      type: {class: HasEnoughResourcesConditionConfig, ns: L2Farm.Scripts.Conditions, asm: Assembly-CSharp}
+      data:
+        resourceConditions:
+        - resourceId:
+            value: Resource_Wood
+          neededQuantity: 20
+        - resourceId:
+            value: Resource_Stone
+          neededQuantity: 15
