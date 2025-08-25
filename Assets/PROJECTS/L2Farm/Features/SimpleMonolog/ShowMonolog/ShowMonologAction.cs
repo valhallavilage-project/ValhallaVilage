@@ -6,6 +6,7 @@ using CrossProject.Core.Quests;
 using CrossProject.Core.SaveLoad;
 using CrossProject.Ui.Core;
 using L2Farm.Scripts.Conditions;
+using UnityEngine;
 
 namespace L2Farm.Features.SimpleMonolog
 {
@@ -36,6 +37,11 @@ namespace L2Farm.Features.SimpleMonolog
         public override async void Execute()
         {
             var characterConfig = _charactersService.GetConfigFor(config.speaker);
+            if (characterConfig == null)
+            {
+                Debug.LogError($"[{nameof(ShowMonologAction)}] : no character for : {config.speaker}");
+                return;
+            }
             var data = new List<ResourceRequirementData>();
 
             var resourceConditions = config.stepIndexWithResourceCondition >= 0

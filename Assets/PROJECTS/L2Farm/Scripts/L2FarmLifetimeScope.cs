@@ -20,6 +20,7 @@ using CrossProject.Ui.Implementations;
 using CrossProject.Ui.Implementations.InteractButton;
 using CrossProject.Ui.Implementations.SettingsPopup;
 using L2Farm.Features.Buildings;
+using L2Farm.Features.ClaimerResourcesHint;
 using L2Farm.Features.DayNight;
 using L2Farm.Features.InventoryScreen;
 using L2Farm.Features.NPC;
@@ -202,6 +203,10 @@ namespace L2Farm.Scripts
                 .AsImplementedInterfaces();
 
             builder.Register<ShopScreenController>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+
+            builder.Register<ClaimedResourcesHintController>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
 

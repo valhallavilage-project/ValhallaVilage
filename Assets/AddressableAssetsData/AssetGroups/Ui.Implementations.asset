@@ -62,6 +62,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a9d56f44ced894aa4b09c80a1a1d4a9e
+    m_Address: ClaimedResourcesHint
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c280f40aa18e341d6bee2401b9f16824
     m_Address: L2Farm_Joystick
     m_ReadOnly: 0

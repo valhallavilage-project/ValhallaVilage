@@ -51,10 +51,7 @@ namespace L2Farm.Features.ResourceHolder
         protected override async UniTask AfterInteraction()
         {
             var part = _gameStateManager.State.Get<ResourceContentPart>();
-            if (part.Resources.ContainsKey(content.Resource))
-                part.Resources[content.Resource] += content.Amount;
-            else
-                part.Resources[content.Resource] = content.Amount;
+            part.Edit(content.Resource, content.Amount);
             _gameStateManager.Save();
 
             audio.Play();

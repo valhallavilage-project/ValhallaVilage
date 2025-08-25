@@ -11,6 +11,7 @@ namespace CrossProject.Core.Quests
     public class QuestConfig
     {
         [FoldoutGroup("$id")] public string id;
+        [FoldoutGroup("$id")] public bool proceedAfterLaunch;
         [FoldoutGroup("$id")] public SpawnPointId targetSpawnPoint;
 
         [FoldoutGroup("$id/Launch"), SerializeReference] public IConditionConfig launchCondition;

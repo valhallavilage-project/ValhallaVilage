@@ -63,3 +63,23 @@ MonoBehaviour:
       value: L2Farm_FirstTown
     position: {x: 46.54, y: 9.34, z: -79.43}
     eulerAngles: {x: 0, y: 0, z: 0}
+  - id: NPC_Tutorial_1
+    sceneId:
+      value: L2Farm_FirstTown
+    position: {x: 190, y: 0.15, z: -111}
+    eulerAngles: {x: 0, y: -120, z: 0}
+  - id: NPC_Farmer
+    sceneId:
+      value: L2Farm_FirstTown
+    position: {x: 180, y: 0.15, z: -103}
+    eulerAngles: {x: 0, y: 180, z: 0}
+  - id: NPC_Valentine
+    sceneId:
+      value: L2Farm_FirstTown
+    position: {x: 136, y: 0.15, z: -66}
+    eulerAngles: {x: 0, y: -180, z: 0}
+  - id: NPC_Guard_1
+    sceneId:
+      value: L2Farm_FirstTown
+    position: {x: 90, y: 0.15, z: -100}
+    eulerAngles: {x: 0, y: 100, z: 0}

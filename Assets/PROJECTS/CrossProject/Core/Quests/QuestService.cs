@@ -68,7 +68,8 @@ namespace CrossProject.Core.Quests
             _gameStateManager.Save();
             _actionService.Execute(config.launchActions);
             Debug.Log($"[{nameof(QuestService)}] : Launch : {id}");
-            TryProceedStepsOf(id);
+            if (config.proceedAfterLaunch)
+                TryProceedStepsOf(id);
             return true;
         }
 
