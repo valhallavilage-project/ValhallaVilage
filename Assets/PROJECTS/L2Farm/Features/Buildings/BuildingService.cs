@@ -52,10 +52,15 @@ namespace L2Farm.Features.Buildings
             var eulerAngles = _spawnPointService.GetEulerAngles(config.spawnPointId);
             var instance = Object.Instantiate(asset, position, Quaternion.Euler(eulerAngles));
             var building = instance.GetComponent<Building>();
-            //TODO : VM : set building to...
+            _buildings[config.id] = building;
         }
 
-        public void SpawnBuilding(BuildingId id)
+        public void StartUpgradeProcess(BuildingId id)
+        {
+            
+        }
+
+        public void SpawnReadyBuilding(BuildingId id)
         {
             var config = _buildingSetConfig.items.FirstOrDefault(x => id == x.id);
             if (config == null)
@@ -64,13 +69,14 @@ namespace L2Farm.Features.Buildings
                 return;
             }
 
-            if (_buildings.TryGetValue(id, out var building))
+            if (!_conditionService.Check(config.spawnReadyCondition))
             {
-                //TODO : VM : rework this shit
-                if (!building.IsReady)
-                    building.IsReady = true;
+                Debug.LogError($"[{nameof(BuildingService)}] : building do not satisfy it's condition!");
                 return;
             }
+
+            if (_buildings.TryGetValue(id, out var building) && !building.IsReady)
+                Object.Destroy(building.gameObject);
 
             SpawnBuildingInternal(config).Forget();
         }

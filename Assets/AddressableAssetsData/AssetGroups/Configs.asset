@@ -41,6 +41,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - prewarm
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a64a397017cdf4a3db304df9044f8396
+    m_Address: BuildingSetConfig
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - prewarm
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: cd491b73cf44a41fdb9272b4129cd308
     m_Address: NPCSetConfig
     m_ReadOnly: 0

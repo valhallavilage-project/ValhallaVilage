@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Purchasing;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
@@ -18,6 +19,27 @@ namespace CrossProject.Extensions
         {
             button.onClick.RemoveAllListeners();
             button.onClick.AddListener(() => callback?.Invoke());
+        }
+
+        public static Vector3 WithX(this Vector3 vector3, float xValue)
+        {
+            var result = vector3;
+            result.x = xValue;
+            return result;
+        }
+
+        public static Vector3 WithY(this Vector3 vector3, float yValue)
+        {
+            var result = vector3;
+            result.y = yValue;
+            return result;
+        }
+
+        public static Vector3 WithZ(this Vector3 vector3, float zValue)
+        {
+            var result = vector3;
+            result.z = zValue;
+            return result;
         }
     }
 }
