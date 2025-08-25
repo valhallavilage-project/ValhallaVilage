@@ -47,7 +47,8 @@ namespace CrossProject.Core.Quests
         {
             var part = _gameStateManager.State.Get<QuestsLogPart>();
 
-            foreach (var log in part.launchedQuests)
+            var newList = part.launchedQuests.ToList();
+            foreach (var log in newList)
                 TryLaunch(log.Key, log.Value);
         }
 
@@ -64,7 +65,8 @@ namespace CrossProject.Core.Quests
                 return false;
 
             _launchedQuests.Add(id, stepIndex);
-            _gameStateManager.State.Get<QuestsLogPart>().launchedQuests.Add(id, stepIndex);
+            var part = _gameStateManager.State.Get<QuestsLogPart>();
+            part.launchedQuests[id] = stepIndex;
             _gameStateManager.Save();
             _actionService.Execute(config.launchActions);
             Debug.Log($"[{nameof(QuestService)}] : Launch : {id}");
@@ -75,6 +77,8 @@ namespace CrossProject.Core.Quests
 
         public bool TryProceedStepsOf(QuestId id)
         {
+            Debug.Log($"[{nameof(QuestService)}] : TryProceed : {id}");
+
             if (!_launchedQuests.TryGetValue(id, out var stepIndex))
             {
                 Debug.LogError($"[{nameof(QuestService)}] : {id} is not launched!");

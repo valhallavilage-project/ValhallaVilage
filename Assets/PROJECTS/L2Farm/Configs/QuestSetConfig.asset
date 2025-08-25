@@ -72,7 +72,8 @@ MonoBehaviour:
           rid: 4482425671116914690
         winCondition:
           rid: -2
-        winActions: []
+        winActions:
+        - rid: 4482425807576236038
         loseCondition:
           rid: 4482425671116914691
         loseActions: []
@@ -154,3 +155,8 @@ MonoBehaviour:
         questId:
           value: Tutorial_1
         stepIndexWithResourceCondition: 0
+    - rid: 4482425807576236038
+      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Tutorial_1
