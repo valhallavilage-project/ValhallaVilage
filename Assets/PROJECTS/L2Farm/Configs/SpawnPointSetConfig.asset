@@ -41,12 +41,12 @@ MonoBehaviour:
   - id: Building_Mill
     sceneId:
       value: L2Farm_FirstTown
-    position: {x: 132.73, y: 0, z: -49.6}
+    position: {x: 132.73, y: 0, z: -52.35}
     eulerAngles: {x: 0, y: 45.786, z: 0}
   - id: Building_Smithy
     sceneId:
       value: L2Farm_FirstTown
-    position: {x: 83.2, y: 9, z: -186.6}
+    position: {x: 83.2, y: 6.25, z: -186.6}
     eulerAngles: {x: 0, y: 0, z: 0}
   - id: Building_Sawmill
     sceneId:
