@@ -18,9 +18,9 @@ namespace L2Farm.Features.ClaimerResourcesHint
                 ? amount.ToString()
                 : "";
 
-            rectTransform.DOAnchorPosY(200, 1);
-            this.icon.DOColor(new Color(1, 1, 1, 0), 1);
-            Invoke(nameof(Kill), 1);
+            rectTransform.DOAnchorPosY(200, 3);
+            this.icon.DOColor(new Color(1, 1, 1, 0), 3);
+            Invoke(nameof(Kill), 3);
         }
 
         private void Kill()
