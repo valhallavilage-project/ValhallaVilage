@@ -111,6 +111,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2161099450640851090, guid: 862ae5e2f85c0491fad751ad5724a0cb, type: 3}
+      propertyPath: interactionDistance
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2161099450640851090, guid: 862ae5e2f85c0491fad751ad5724a0cb, type: 3}
       propertyPath: interactionDuration
       value: 3
       objectReference: {fileID: 0}

@@ -116,7 +116,11 @@ namespace CrossProject.Core.SimpleMovement
                 _transform.forward = direction;
             _playerNavMeshAgent.SetDestination(target);
             LocalAccessCurrentSkin.Animator.SetFloat(Speed, 1);
-            await UniTask.WaitUntil(() => (_transform.position - target).sqrMagnitude <= targetDistance * targetDistance, PlayerLoopTiming.Update, cancellationToken);
+            await UniTask.WaitUntil(() => !_playerNavMeshAgent.pathPending &&
+                                          _playerNavMeshAgent.remainingDistance <= targetDistance, PlayerLoopTiming.Update, cancellationToken);
+            _playerNavMeshAgent.ResetPath();
+            _playerNavMeshAgent.velocity = Vector3.zero;
+            _currentVelocity = Vector3.zero;
             LocalAccessCurrentSkin.Animator.SetFloat(Speed, 0);
         }
 

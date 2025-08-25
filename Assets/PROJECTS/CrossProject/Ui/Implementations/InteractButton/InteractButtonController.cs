@@ -45,7 +45,6 @@ namespace CrossProject.Ui.Implementations.InteractButton
 
         private async UniTask GetInteraction(CancellationToken cancellationToken)
         {
-            Debug.Log("[Interaction] 1 step");
             _joystickController.AddBlock(this);
             _simpleMovementController.AddBlock(this);
             await _simpleMovementController.MoveTo(_interactor.Closest.Value.transform.position, cancellationToken, _interactor.Closest.Value.interactionDistance);
