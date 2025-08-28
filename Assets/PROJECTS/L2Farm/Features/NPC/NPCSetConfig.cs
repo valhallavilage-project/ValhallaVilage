@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using CrossProject.Core.Characters;
+using CrossProject.Core.SpawnPoints;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -20,6 +21,9 @@ namespace L2Farm.Features.NPC
 
         [FoldoutGroup("$id")]
         public CharacterId characterId;
+
+        [FoldoutGroup("$id")]
+        public SpawnPointId defaultSpawnPoint;
 
         [FoldoutGroup("$id")]
         [PreviewField(128f, ObjectFieldAlignment.Right)]

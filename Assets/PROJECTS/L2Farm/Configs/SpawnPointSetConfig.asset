@@ -83,3 +83,38 @@ MonoBehaviour:
       value: L2Farm_FirstTown
     position: {x: 90, y: 0.15, z: -100}
     eulerAngles: {x: 0, y: 100, z: 0}
+  - id: NPC_Fisher
+    sceneId:
+      value: L2Farm_FirstTown
+    position: {x: 230, y: 0, z: 11}
+    eulerAngles: {x: 0, y: 170, z: 0}
+  - id: NPC_Cooper
+    sceneId:
+      value: L2Farm_FirstTown
+    position: {x: 185, y: 0, z: -25}
+    eulerAngles: {x: 0, y: 180, z: 0}
+  - id: NPC_Randolf
+    sceneId:
+      value: L2Farm_FirstTown
+    position: {x: 20, y: 0, z: -90}
+    eulerAngles: {x: 0, y: 180, z: 0}
+  - id: NPC_Toma
+    sceneId:
+      value: L2Farm_FirstTown
+    position: {x: 40, y: 0, z: -87}
+    eulerAngles: {x: 0, y: 180, z: 0}
+  - id: NPC_Morgan
+    sceneId:
+      value: L2Farm_FirstTown
+    position: {x: 44, y: 0, z: -150}
+    eulerAngles: {x: 0, y: 135, z: 0}
+  - id: NPC_Balmir
+    sceneId:
+      value: L2Farm_FirstTown
+    position: {x: 66, y: 0, z: -140}
+    eulerAngles: {x: 0, y: 180, z: 0}
+  - id: NPC_Pushkin
+    sceneId:
+      value: L2Farm_FirstTown
+    position: {x: 70, y: 0, z: -185}
+    eulerAngles: {x: 0, y: -90, z: 0}

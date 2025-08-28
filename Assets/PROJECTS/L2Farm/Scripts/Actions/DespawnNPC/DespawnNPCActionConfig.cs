@@ -1,5 +1,4 @@
 using CrossProject.Core.Actions;
-using CrossProject.Core.SpawnPoints;
 using L2Farm.Features.NPC;
 
 namespace L2Farm.Scripts.Actions
@@ -7,6 +6,5 @@ namespace L2Farm.Scripts.Actions
     public class DespawnNPCActionConfig : IActionConfig
     {
         public NPCId npcId;
-        public SpawnPointId spawnPointId;
     }
 }

@@ -11,9 +11,8 @@ namespace L2Farm.Features.NPC
         private QuestService _questService;
 
         private QuestId questId;
-        private NPCId npcId;
 
-        public NPCId Id => npcId;
+        public QuestId CurrentQuestId => questId;
 
         private void Start()
         {
@@ -28,17 +27,13 @@ namespace L2Farm.Features.NPC
 
         protected override async UniTask AfterInteraction()
         {
-            _questService.TryProceedStepsOf(questId);
+            if (questId != null)
+                _questService.TryProceedStepsOf(questId);
         }
 
         public void SetQuest(QuestId id)
         {
             questId = id;
-        }
-
-        public void SetId(NPCId id)
-        {
-            npcId = id;
         }
     }
 }

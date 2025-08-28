@@ -16,40 +16,60 @@ MonoBehaviour:
   - id: Randolf
     characterId:
       value: NPC_Randolf
+    defaultSpawnPoint:
+      value: NPC_Randolf
     prefab: {fileID: 7202525982123111068, guid: 03709c3dfdcf547bdb6ad8d9aac44c9c, type: 3}
   - id: Toma
     characterId:
+      value: NPC_Toma
+    defaultSpawnPoint:
       value: NPC_Toma
     prefab: {fileID: 225716808275150329, guid: e203345d599d74e1b92eb17b3d56bdd4, type: 3}
   - id: Pushkin
     characterId:
       value: NPC_Pushkin
+    defaultSpawnPoint:
+      value: NPC_Pushkin
     prefab: {fileID: 7761746707088774011, guid: 9dece745684c1448eaf84eba448b9c3b, type: 3}
   - id: Balmir
     characterId:
+      value: NPC_Balmir
+    defaultSpawnPoint:
       value: NPC_Balmir
     prefab: {fileID: 8615261589759953331, guid: 222350b55e9964293b3f8bd4632b1169, type: 3}
   - id: Farmer
     characterId:
       value: NPC_Farmer
+    defaultSpawnPoint:
+      value: NPC_Farmer
     prefab: {fileID: 3027076018082815354, guid: 04d6be933cf114c44bdd93a90d5d199f, type: 3}
   - id: Morgan
     characterId:
+      value: NPC_Morgan
+    defaultSpawnPoint:
       value: NPC_Morgan
     prefab: {fileID: 2822889628013218189, guid: 2bdc9a5429c1041ce953cebe900436b7, type: 3}
   - id: Fisher
     characterId:
       value: NPC_Fisher
+    defaultSpawnPoint:
+      value: NPC_Fisher
     prefab: {fileID: 7947752816944657358, guid: 9d1c19f8781f7456f87aaa15ff73ec55, type: 3}
   - id: Guard
     characterId:
       value: NPC_Guard
+    defaultSpawnPoint:
+      value: NPC_Guard_1
     prefab: {fileID: 2606471433145507562, guid: 928fd24dffc9841ca8846eb36084ac43, type: 3}
   - id: Valentine
     characterId:
       value: NPC_Valentine
+    defaultSpawnPoint:
+      value: NPC_Valentine
     prefab: {fileID: 3394070386784087573, guid: feec1e3e3a643421eaf99c9d21abcade, type: 3}
   - id: Cooper
     characterId:
+      value: NPC_Cooper
+    defaultSpawnPoint:
       value: NPC_Cooper
     prefab: {fileID: 5111460455862272033, guid: b001fbf978c4a4843859306ea0e43154, type: 3}

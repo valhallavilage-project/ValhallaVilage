@@ -16,7 +16,7 @@ namespace L2Farm.Features.NPC
 
         private NPCSetConfig _npcSetConfig;
 
-        private Dictionary<SpawnPointId, NPCInteractiveObject> _npcInteractiveObjects = new ();
+        private Dictionary<NPCId, (SpawnPointId spawnPointId, NPCInteractiveObject instance)> _npcs = new ();
 
         public bool IsInitialized { get; private set; }
 
@@ -31,6 +31,8 @@ namespace L2Farm.Features.NPC
         public async UniTask Initialize()
         {
             _npcSetConfig = await _addressablesManager.LoadAssetAsync<NPCSetConfig>();
+            foreach (var npcConfig in _npcSetConfig.items)
+                SpawnNPC(npcConfig.id, npcConfig.defaultSpawnPoint, null);
             IsInitialized = true;
         }
 
@@ -43,37 +45,33 @@ namespace L2Farm.Features.NPC
                 return;
             }
 
-            if (_npcInteractiveObjects.ContainsKey(spawnPointId))
+            if (!_npcs.TryGetValue(id, out var pair) || pair.spawnPointId != spawnPointId)
             {
-                Debug.LogError($"[{nameof(NPCService)}] : spawnPoint {spawnPointId} is busy by {_npcInteractiveObjects[spawnPointId].gameObject.name}!\nCan't spawn {id} at the same place!");
+                if (pair.instance != null)
+                    DespawnNPC(id);
+                var spawnPointPosition = _spawnPointService.GetPosition(spawnPointId);
+                var spawnPointRotation = _spawnPointService.GetEulerAngles(spawnPointId);
+                var instance = Object.Instantiate(config.prefab, spawnPointPosition, Quaternion.Euler(spawnPointRotation));
+                var component = instance.GetComponent<NPCInteractiveObject>();
+                component.SetQuest(questId);
+                _npcs[id] = (spawnPointId, component);
+                Debug.Log($"[{nameof(NPCService)}] : Spawned NPC with id : {id} at {spawnPointId} with quest :{questId}.");
                 return;
             }
 
-            var spawnPointPosition = _spawnPointService.GetPosition(spawnPointId);
-            var spawnPointRotation = _spawnPointService.GetEulerAngles(spawnPointId);
-            var instance = Object.Instantiate(config.prefab, spawnPointPosition, Quaternion.Euler(spawnPointRotation));
-            var component = instance.GetComponent<NPCInteractiveObject>();
-            component.SetQuest(questId);
-            component.SetId(id);
-            Debug.Log($"[{nameof(NPCService)}] : Spawned NPC with id : {id}");
+            if (pair.instance.CurrentQuestId != questId)
+            {
+                pair.instance.SetQuest(questId);
+                Debug.Log($"[{nameof(NPCService)}] : Updated quest for {id} at {spawnPointId} with : {questId}.");
+            }
         }
 
-        public void DespawnNPC(NPCId id, SpawnPointId spawnPointId)
+        public void DespawnNPC(NPCId id)
         {
-            if (!_npcInteractiveObjects.TryGetValue(spawnPointId, out var npc))
-            {
-                Debug.LogError($"[{nameof(NPCService)}] : there is no npc spawned on {spawnPointId}!");
-                return;
-            }
-
-            if (npc.Id != id)
-            {
-                Debug.LogError($"[{nameof(NPCService)}] : there is other npc spawned on {spawnPointId} - {npc.Id}!\n Can't despawn {id} from the same place!");
-                return;
-            }
-
+            var npc = _npcs[id].instance;
             Object.Destroy(npc.gameObject);
-            _npcInteractiveObjects.Remove(spawnPointId);
+            _npcs.Remove(id);
+            Debug.Log($"[{nameof(NPCService)}] : Despawned {id}");
         }
     }
 }

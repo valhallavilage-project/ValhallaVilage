@@ -14,7 +14,7 @@ namespace L2Farm.Scripts.Actions
 
         public override void Execute()
         {
-            _npcService.DespawnNPC(config.npcId, config.spawnPointId);
+            _npcService.DespawnNPC(config.npcId);
         }
     }
 }
