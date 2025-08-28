@@ -13,7 +13,9 @@ namespace CrossProject.Core.Quests
 
         public override bool Equals(object obj) => obj is QuestId id && Equals(id);
 
-        public static explicit operator QuestId(string value) => new (value);
+        public static implicit operator QuestId(string value) => new (value);
+
+        public static implicit operator string(QuestId value) => value.ToString();
 
         public static bool operator ==(QuestId a, QuestId b) => a?.Value == b?.Value;
 

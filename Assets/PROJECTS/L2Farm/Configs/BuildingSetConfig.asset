@@ -22,6 +22,9 @@ MonoBehaviour:
     assetIdReady: Ambar_Ready
     spawnReadyCondition:
       rid: -2
+    timeToBuildInSeconds: 60
+    questToLaunchOnComplete:
+      value: 
   - id: Bakery
     sceneId:
       value: L2Farm_FirstTown
@@ -31,6 +34,9 @@ MonoBehaviour:
     assetIdReady: Bakery_Ready
     spawnReadyCondition:
       rid: -2
+    timeToBuildInSeconds: 60
+    questToLaunchOnComplete:
+      value: 
   - id: Farm
     sceneId:
       value: L2Farm_FirstTown
@@ -40,6 +46,9 @@ MonoBehaviour:
     assetIdReady: Farm_Ready
     spawnReadyCondition:
       rid: -2
+    timeToBuildInSeconds: 60
+    questToLaunchOnComplete:
+      value: 
   - id: Fishing
     sceneId:
       value: L2Farm_FirstTown
@@ -49,6 +58,9 @@ MonoBehaviour:
     assetIdReady: Fishing_Ready
     spawnReadyCondition:
       rid: -2
+    timeToBuildInSeconds: 60
+    questToLaunchOnComplete:
+      value: 
   - id: House
     sceneId:
       value: L2Farm_FirstTown
@@ -57,7 +69,10 @@ MonoBehaviour:
     assetIdBroken: House_Broken
     assetIdReady: House_Ready
     spawnReadyCondition:
-      rid: 4482425807576236039
+      rid: 4482425876239876096
+    timeToBuildInSeconds: 60
+    questToLaunchOnComplete:
+      value: Tutorial_2
   - id: Mill
     sceneId:
       value: L2Farm_FirstTown
@@ -66,7 +81,10 @@ MonoBehaviour:
     assetIdBroken: Mill_Broken
     assetIdReady: Mill_Ready
     spawnReadyCondition:
-      rid: 77259970479915016
+      rid: 4482425876239876097
+    timeToBuildInSeconds: 60
+    questToLaunchOnComplete:
+      value: 
   - id: Sawmill
     sceneId:
       value: L2Farm_FirstTown
@@ -76,6 +94,9 @@ MonoBehaviour:
     assetIdReady: Sawmill_Ready
     spawnReadyCondition:
       rid: -2
+    timeToBuildInSeconds: 60
+    questToLaunchOnComplete:
+      value: 
   - id: Smithy
     sceneId:
       value: L2Farm_FirstTown
@@ -85,28 +106,21 @@ MonoBehaviour:
     assetIdReady: Smithy_Ready
     spawnReadyCondition:
       rid: -2
+    timeToBuildInSeconds: 60
+    questToLaunchOnComplete:
+      value: 
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 77259970479915016
-      type: {class: HasEnoughResourcesConditionConfig, ns: L2Farm.Scripts.Conditions, asm: Assembly-CSharp}
+    - rid: 4482425876239876096
+      type: {class: QuestCompletedConditionConfig, ns: L2Farm.Scripts.Conditions.QuestCompleted, asm: Assembly-CSharp}
       data:
-        resourceConditions:
-        - resourceId:
-            value: Resource_Wood
-          neededQuantity: 40
-        - resourceId:
-            value: Resource_Stone
-          neededQuantity: 25
-    - rid: 4482425807576236039
-      type: {class: HasEnoughResourcesConditionConfig, ns: L2Farm.Scripts.Conditions, asm: Assembly-CSharp}
+        questId:
+          value: Tutorial_1
+    - rid: 4482425876239876097
+      type: {class: QuestCompletedConditionConfig, ns: L2Farm.Scripts.Conditions.QuestCompleted, asm: Assembly-CSharp}
       data:
-        resourceConditions:
-        - resourceId:
-            value: Resource_Wood
-          neededQuantity: 20
-        - resourceId:
-            value: Resource_Stone
-          neededQuantity: 15
+        questId:
+          value: Tutorial_2

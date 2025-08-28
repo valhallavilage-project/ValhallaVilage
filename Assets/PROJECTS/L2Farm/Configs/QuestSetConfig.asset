@@ -91,11 +91,6 @@ MonoBehaviour:
       data:
         buildingId:
           value: Mill
-    - rid: 77259970479915017
-      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
-      data:
-        questId:
-          value: Tutorial_2
     - rid: 4482425490423152640
       type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
       data:
@@ -182,7 +177,6 @@ MonoBehaviour:
           rid: -2
         winActions:
         - rid: 4482425807576236040
-        - rid: 77259970479915017
         loseCondition:
           rid: -2
         loseActions: []

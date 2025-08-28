@@ -72,7 +72,7 @@ namespace L2Farm.Features.Buildings
 
             if (!_conditionService.Check(config.spawnReadyCondition))
             {
-                Debug.LogError($"[{nameof(BuildingService)}] : building do not satisfy it's condition!");
+                Debug.LogError($"[{nameof(BuildingService)}] : building {id} do not satisfy it's condition!");
                 return;
             }
 

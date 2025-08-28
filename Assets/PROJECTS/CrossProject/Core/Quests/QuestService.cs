@@ -24,6 +24,9 @@ namespace CrossProject.Core.Quests
 
         public bool IsInitialized { get; private set; }
 
+        public event System.Action<QuestId> OnQuestWin;
+        public event System.Action<QuestId> OnQuestLose;
+
         public QuestService(
             AddressablesManager addressablesManager,
             GameStateManager gameStateManager,
@@ -56,6 +59,12 @@ namespace CrossProject.Core.Quests
 
         public bool TryLaunch(QuestId id, int stepIndex = 0)
         {
+            if (string.IsNullOrEmpty(id))
+            {
+                Debug.LogError($"[{nameof(QuestService)}] : Trying to Launch quest with id NULL");
+                return false;
+            }
+
             if (_launchedQuests.ContainsKey(id))
                 return false;
 
@@ -145,6 +154,7 @@ namespace CrossProject.Core.Quests
 
             _launchedQuests.Remove(id);
             _actionService.Execute(config.loseActions);
+            OnQuestLose?.Invoke(id);
             Debug.Log($"[{nameof(QuestService)}] : {id} Quest Lose :-(");
         }
 
@@ -159,10 +169,10 @@ namespace CrossProject.Core.Quests
 
             _launchedQuests.Remove(id);
             _actionService.Execute(config.winActions);
+            OnQuestWin?.Invoke(id);
             Debug.Log($"[{nameof(QuestService)}] : {id} Quest Win :-)");
         }
 
-        //TODO : VM : remove?
         public QuestConfig GetConfigFor(QuestId id) => _questSetConfig.Get(id);
     }
 }

@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: L2Farm_MC_Controller_Right_Version
+  m_Controller: {fileID: 9100000, guid: 3afc8d0d4a9924b7485bb9dbc6eb55b2, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 4596573fe74ff477f936bf3fcb1ae7cf, type: 2}
+    m_OverrideClip: {fileID: -254939693048021813, guid: d28470e4d099b4ad5832c6da3268385b, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: c2eaa82c04b4d4256a0ad593eed7af23, type: 2}
+    m_OverrideClip: {fileID: -2747271250175993976, guid: d28470e4d099b4ad5832c6da3268385b, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 422d2b303560e4a6b85790bdbc6225b1, type: 2}
+    m_OverrideClip: {fileID: 3629374123086485364, guid: d28470e4d099b4ad5832c6da3268385b, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: d053a40230f7c4459a4972fa3fb1eb42, type: 2}
+    m_OverrideClip: {fileID: -5988302268149342035, guid: d28470e4d099b4ad5832c6da3268385b, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: c0ff1dc78faf9464a8894016123aec89, type: 2}
+    m_OverrideClip: {fileID: -1840485284503913560, guid: d28470e4d099b4ad5832c6da3268385b, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 5def865fcd322488d8ca5aa125766b79, type: 2}
+    m_OverrideClip: {fileID: 4981685467022100080, guid: d28470e4d099b4ad5832c6da3268385b, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 467d477a0e73544ea9a19b53e4740371, type: 2}
+    m_OverrideClip: {fileID: 68254896556110029, guid: d28470e4d099b4ad5832c6da3268385b, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 9e7309af39a754584a82ad0b98299493, type: 2}
+    m_OverrideClip: {fileID: -6519196778107397948, guid: d28470e4d099b4ad5832c6da3268385b, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 4d8782bb4a05f4f29917caf3b05dd6e3, type: 2}
+    m_OverrideClip: {fileID: 6423843893443246164, guid: d28470e4d099b4ad5832c6da3268385b, type: 3}

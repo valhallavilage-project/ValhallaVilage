@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using CrossProject.Core.Actions;
 using CrossProject.Core.Conditions;
+using CrossProject.Core.Quests;
 using CrossProject.Core.SpawnPoints;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -34,5 +36,11 @@ namespace L2Farm.Features.Buildings
         [FoldoutGroup("$id")]
         [SerializeReference]
         public IConditionConfig spawnReadyCondition;
+
+        [FoldoutGroup("$id")]
+        public int timeToBuildInSeconds = 60;
+
+        [FoldoutGroup("$id")]
+        public QuestId questToLaunchOnComplete;
     }
 }

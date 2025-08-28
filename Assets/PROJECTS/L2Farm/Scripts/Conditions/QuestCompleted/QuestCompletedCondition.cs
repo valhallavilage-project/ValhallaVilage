@@ -18,7 +18,7 @@ namespace L2Farm.Scripts.Conditions.QuestCompleted
 
         public override bool Check()
         {
-            return _gameStateManager.State.Get<QuestsLogPart>().launchedQuests.ContainsKey(config.questId);
+            return _gameStateManager.State.Get<QuestsLogPart>().wonQuests.Contains(config.questId);
         }
     }
 }

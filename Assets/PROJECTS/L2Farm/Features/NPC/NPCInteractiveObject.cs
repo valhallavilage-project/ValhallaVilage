@@ -23,6 +23,7 @@ namespace L2Farm.Features.NPC
         private void Construct(QuestService questService)
         {
             _questService = questService;
+            _questService.OnQuestWin += HandleCurrentQuestWin;
         }
 
         protected override async UniTask AfterInteraction()
@@ -34,6 +35,12 @@ namespace L2Farm.Features.NPC
         public void SetQuest(QuestId id)
         {
             questId = id;
+        }
+
+        private void HandleCurrentQuestWin(QuestId id)
+        {
+            if (id == questId)
+                questId = null;
         }
     }
 }
