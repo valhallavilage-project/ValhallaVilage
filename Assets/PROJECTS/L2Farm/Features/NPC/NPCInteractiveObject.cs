@@ -17,7 +17,7 @@ namespace L2Farm.Features.NPC
 
         private void Start()
         {
-            ManualPrefabInjector.Instance.Inject(this);
+            ManualPrefabInjector.Instance?.Inject(this);
         }
 
         [Inject]
