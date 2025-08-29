@@ -22,7 +22,7 @@ namespace L2Farm.Features.ResourceHolder
         private IEnergyProvider _energyProvider;
         private GameStateManager _gameStateManager;
 
-        public override bool CanInteract() => _energyProvider.CurrentValue >= energyRequired && viewRoot.activeSelf;
+        public override bool CanInteract() => _energyProvider.CurrentValue >= energyRequired && viewRoot.activeSelf && !isBusy;
 
         private void Start()
         {

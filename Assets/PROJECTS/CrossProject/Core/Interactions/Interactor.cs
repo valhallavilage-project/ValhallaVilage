@@ -18,6 +18,7 @@ namespace CrossProject.Core.Interactions
         private SphereCollider _collider;
 
         public ReactiveProperty<AbstractInteractiveObject> Closest { get; } = new ();
+        public bool IsBusy { get; set; }
 
         public event Action<InteractionAnimation> OnInteractionStart;
         public event Action<InteractionAnimation> OnInteractionEnd;

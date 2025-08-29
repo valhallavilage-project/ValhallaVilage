@@ -14,6 +14,8 @@ namespace CrossProject.Core.Interactions
         [SerializeField] protected GameObject viewRoot;
         [SerializeField] private GameObject highLight;
 
+        protected bool isBusy;
+
         private SphereCollider _collider;
 
         private void Awake()
@@ -25,7 +27,7 @@ namespace CrossProject.Core.Interactions
 
         public virtual bool CanSelect() => true;
 
-        public virtual bool CanInteract() => true;
+        public virtual bool CanInteract() => !isBusy;
 
         public virtual void Select()
         {
@@ -41,8 +43,10 @@ namespace CrossProject.Core.Interactions
 
         public async UniTask Interaction()
         {
+            isBusy = true;
             await UniTask.WaitForSeconds(interactionDuration);
             await AfterInteraction();
+            isBusy = false;
         }
     }
 }

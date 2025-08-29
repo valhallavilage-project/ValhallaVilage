@@ -45,10 +45,15 @@ namespace CrossProject.Ui.Implementations.InteractButton
 
         private async UniTask GetInteraction(CancellationToken cancellationToken)
         {
+            if (!_interactor.Closest.Value.CanInteract() || _interactor.IsBusy)
+                return;
+
+            _interactor.IsBusy = true;
             _joystickController.AddBlock(this);
             _simpleMovementController.AddBlock(this);
             await _simpleMovementController.MoveTo(_interactor.Closest.Value.transform.position, cancellationToken, _interactor.Closest.Value.interactionDistance);
             await _interactor.Interact();
+            _interactor.IsBusy = false;
             _joystickController.RemoveBlock(this);
             _simpleMovementController.RemoveBlock(this);
         }
