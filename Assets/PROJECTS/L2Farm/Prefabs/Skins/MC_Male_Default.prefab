@@ -1218,6 +1218,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4104135679669921186}
   - component: {fileID: 720147359471471628}
+  - component: {fileID: 3740232414790060009}
   m_Layer: 0
   m_Name: Tool_Sword
   m_TagString: Untagged
@@ -1334,6 +1335,20 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.0021457253, y: 0.002189096, z: 0.012880908}
     m_Extent: {x: 0.012104134, y: 0.012158653, z: 0.008930096}
   m_DirtyAABB: 0
+--- !u!114 &3740232414790060009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6802662834748911554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21bffac416b54036968735ed7a10b4af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skinnedMeshRenderer: {fileID: 720147359471471628}
+  toolSetConfig: {fileID: 11400000, guid: 17d7d2ffba8cf4f0cbaf2a10dafa2f71, type: 2}
 --- !u!1 &7039726151138366997
 GameObject:
   m_ObjectHideFlags: 0

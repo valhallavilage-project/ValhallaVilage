@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using CrossProject.Core.Skins;
 using Cysharp.Threading.Tasks;
@@ -17,6 +18,9 @@ namespace CrossProject.Core.Interactions
         private SphereCollider _collider;
 
         public ReactiveProperty<AbstractInteractiveObject> Closest { get; } = new ();
+
+        public event Action<InteractionAnimation> OnInteractionStart;
+        public event Action<InteractionAnimation> OnInteractionEnd;
 
         private void Awake()
         {
@@ -98,13 +102,19 @@ namespace CrossProject.Core.Interactions
         {
             var animationName = Closest.Value.animation;
             if (animationName != InteractionAnimation.Talk)
-                _playerSkinProvider.CurrentSkin.Animator.SetBool(Closest.Value.animation.ToString(), true);
+            {
+                _playerSkinProvider.CurrentSkin.Animator.SetBool(animationName.ToString(), true);
+                OnInteractionStart?.Invoke(animationName);
+            }
 
             await Closest.Value.Interaction();
             Closest.Value.Deselect();
 
             if (animationName != InteractionAnimation.Talk)
-                _playerSkinProvider.CurrentSkin.Animator.SetBool(Closest.Value.animation.ToString(), false);
+            {
+                _playerSkinProvider.CurrentSkin.Animator.SetBool(animationName.ToString(), false);
+                OnInteractionEnd?.Invoke(animationName);
+            }
         }
     }
 }

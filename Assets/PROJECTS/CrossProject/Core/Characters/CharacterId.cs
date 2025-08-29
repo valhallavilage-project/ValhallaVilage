@@ -17,6 +17,8 @@ namespace CrossProject.Core.Characters
 
         public static implicit operator CharacterId(string value) => new (value);
 
+        public static implicit operator string(CharacterId value) => value.ToString();
+
         public static bool operator ==(CharacterId a, CharacterId b) => a?.Value == b?.Value;
 
         public static bool operator !=(CharacterId a, CharacterId b) => !(a == b);

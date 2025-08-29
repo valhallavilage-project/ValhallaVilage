@@ -234,6 +234,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8979694698170909401}
   - component: {fileID: 5590342981626325879}
+  - component: {fileID: 6350114217411399273}
   m_Layer: 0
   m_Name: Tool_Sword
   m_TagString: Untagged
@@ -252,7 +253,7 @@ Transform:
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1651505942141937385}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -350,6 +351,20 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.0021457253, y: 0.002189096, z: 0.012880908}
     m_Extent: {x: 0.012104134, y: 0.012158653, z: 0.008930096}
   m_DirtyAABB: 0
+--- !u!114 &6350114217411399273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1877280494268254393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21bffac416b54036968735ed7a10b4af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skinnedMeshRenderer: {fileID: 5590342981626325879}
+  toolSetConfig: {fileID: 11400000, guid: 17d7d2ffba8cf4f0cbaf2a10dafa2f71, type: 2}
 --- !u!1 &2076233530614493990
 GameObject:
   m_ObjectHideFlags: 0
