@@ -17,6 +17,8 @@ namespace CrossProject.Core.SpawnPoints
 
         public static implicit operator SpawnPointId(string value) => new (value);
 
+        public static implicit operator string(SpawnPointId value) => value.ToString();
+
         public static bool operator ==(SpawnPointId a, SpawnPointId b) => a?.Value == b?.Value;
 
         public static bool operator !=(SpawnPointId a, SpawnPointId b) => !(a == b);

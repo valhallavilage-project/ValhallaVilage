@@ -24,6 +24,7 @@ namespace CrossProject.Core.Quests
 
         public bool IsInitialized { get; private set; }
 
+        public event System.Action<QuestId> OnQuestLaunch;
         public event System.Action<QuestId> OnQuestWin;
         public event System.Action<QuestId> OnQuestLose;
 
@@ -78,6 +79,7 @@ namespace CrossProject.Core.Quests
             part.launchedQuests[id] = stepIndex;
             _gameStateManager.Save();
             _actionService.Execute(config.launchActions);
+            OnQuestLaunch?.Invoke(id);
             Debug.Log($"[{nameof(QuestService)}] : Launch : {id}");
             if (config.proceedAfterLaunch)
                 TryProceedStepsOf(id);

@@ -25,6 +25,7 @@ using L2Farm.Features.ClaimerResourcesHint;
 using L2Farm.Features.DayNight;
 using L2Farm.Features.InventoryScreen;
 using L2Farm.Features.NPC;
+using L2Farm.Features.QuestIndication;
 using L2Farm.Features.QuestsScreen;
 using L2Farm.Features.ShopScreen;
 using L2Farm.Features.SimpleMonolog;
@@ -108,8 +109,8 @@ namespace L2Farm.Scripts
                 .AsSelf()
                 .AsImplementedInterfaces();
 
-            // builder.RegisterComponentInHierarchy<QuestIndication>()
-            //     .AsSelf();
+            builder.RegisterComponentInHierarchy<QuestIndication>()
+                .AsSelf();
 
             builder.Register<ResourcesService>(Lifetime.Singleton)
                 .AsSelf()

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CrossProject.Core;
+using CrossProject.Core.Quests;
 using CrossProject.Core.SpawnPoints;
 using CrossProject.Extensions;
 using UnityEngine;
@@ -11,12 +12,13 @@ namespace L2Farm.Features.QuestIndication
     public class QuestIndication : MonoBehaviour
     {
         private SpawnPointService _spawnPointService;
+        private QuestService _questService;
 
         [SerializeField] private float radius;
         [SerializeField] private Indicator prefab;
         [SerializeField] private IndicationTypeSetConfig indicationTypeSetConfig;
 
-        private readonly Dictionary<SpawnPointId, (Vector3 target, Indicator instance)> _activeIndicators = new();
+        private readonly Dictionary<QuestId, (Vector3 target, Indicator instance)> _activeIndicators = new();
 
         private void Start()
         {
@@ -24,37 +26,59 @@ namespace L2Farm.Features.QuestIndication
         }
 
         [Inject]
-        private void Construct(SpawnPointService spawnPointService)
+        private void Construct(
+            SpawnPointService spawnPointService,
+            QuestService questService)
         {
             _spawnPointService = spawnPointService;
+            _questService = questService;
+            _questService.OnQuestLaunch += OnQuestLaunch;
+            _questService.OnQuestWin += OnQuestComplete;
+            _questService.OnQuestLose += OnQuestComplete;
         }
 
-        public void AddTarget(SpawnPointId spawnPointId, IndicationTypeId indicationTypeId)
+        private void OnQuestLaunch(QuestId questId)
         {
-            if (_activeIndicators.ContainsKey(spawnPointId))
+            AddTarget(questId, new IndicationTypeId("Quest_Active"));
+        }
+
+        private void OnQuestComplete(QuestId questId)
+        {
+            RemoveTarget(questId);
+        }
+
+        public void AddTarget(QuestId questId, IndicationTypeId indicationTypeId)
+        {
+            if (_activeIndicators.ContainsKey(questId))
             {
-                Debug.LogError($"[{nameof(QuestIndication)}] : {spawnPointId} is busy by some other indicator!");
+                Debug.LogError($"[{nameof(QuestIndication)}] : {questId} is busy by some other indicator!");
                 return;
             }
+
+            var spawnPoint = _questService.GetConfigFor(questId).targetSpawnPoint;
+            if (string.IsNullOrEmpty(spawnPoint))
+                return;
 
             var instance = Instantiate(prefab, Vector3.zero, Quaternion.identity, transform);
             var config = indicationTypeSetConfig.items.FirstOrDefault(x => x.id == indicationTypeId);
             if (config != null)
                 instance.SetUp(config.icon, config.color);
             instance.SetRadius(radius);
-            _activeIndicators.Add(spawnPointId, (_spawnPointService.GetPosition(spawnPointId), instance));
+            _activeIndicators.Add(questId, (_spawnPointService.GetPosition(spawnPoint), instance));
+            Debug.Log($"[{nameof(QuestIndication)}] : Add for : {questId}");
         }
 
-        public void RemoveTarget(SpawnPointId spawnPointId)
+        public void RemoveTarget(QuestId questId)
         {
-            if (!_activeIndicators.TryGetValue(spawnPointId, out var pair))
+            if (!_activeIndicators.TryGetValue(questId, out var pair))
             {
                 Debug.LogError($"[{nameof(QuestIndication)}] : No such indicator");
                 return;
             }
 
             Destroy(pair.instance.gameObject);
-            _activeIndicators.Remove(spawnPointId);
+            _activeIndicators.Remove(questId);
+            Debug.Log($"[{nameof(QuestIndication)}] : Removed for : {questId}");
         }
 
         private void LateUpdate()
@@ -64,6 +88,7 @@ namespace L2Farm.Features.QuestIndication
                 var pair = _activeIndicators[spawnPointId];
                 var instancePos = pair.instance.transform.position.WithY(0);
                 var targetPos = pair.target.WithY(0);
+                pair.instance.transform.localPosition = Vector3.zero;
                 pair.instance.transform.forward = targetPos - instancePos;
             }
         }

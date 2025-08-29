@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer.Unity;
@@ -26,10 +27,18 @@ namespace CrossProject.Core.SpawnPoints
 
         public Vector3 GetPosition(SpawnPointId id)
         {
-            return _spawnPointSetConfig
-                .items
-                .First(x => id == new SpawnPointId(x.id))
-                .position;
+            try
+            {
+                return _spawnPointSetConfig
+                    .items
+                    .First(x => id == x.id)
+                    .position;
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"Failed to find spawn point with id : {id}");
+                throw;
+            }
         }
 
         public Vector3 GetEulerAngles(SpawnPointId id)
