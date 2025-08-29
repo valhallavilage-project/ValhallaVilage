@@ -15,7 +15,15 @@ MonoBehaviour:
   items:
   - rid: 4482425490423152640
   - rid: 4482425807576236032
+  - rid: 4482425896350515200
   - rid: 77259970479915008
+  - rid: 4482425896350515210
+  - rid: 4482425896350515215
+  - rid: 4482425896350515220
+  - rid: 4482425896350515225
+  - rid: 4482425896350515235
+  - rid: 4482425896350515230
+  - rid: 4482425896350515240
   references:
     version: 2
     RefIds:
@@ -39,7 +47,7 @@ MonoBehaviour:
         winActions:
         - rid: 77259970479915015
         loseCondition:
-          rid: -2
+          rid: 4482425896350515208
         loseActions: []
     - rid: 77259970479915009
       type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
@@ -172,13 +180,13 @@ MonoBehaviour:
         launchActions:
         - rid: 4482425807576236033
         steps:
+        - rid: 4482425896350515201
         - rid: 4482425807576236034
         winCondition:
           rid: -2
-        winActions:
-        - rid: 4482425807576236040
+        winActions: []
         loseCondition:
-          rid: -2
+          rid: 4482425896350515207
         loseActions: []
     - rid: 4482425807576236033
       type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: Assembly-CSharp}
@@ -205,9 +213,7 @@ MonoBehaviour:
       data:
         speaker:
           value: NPC_Valentine
-        message: Greetings! We've run into trouble. A recent earthquake has devastated
-          our town. Grandpa's house and our farm were damaged too. Please, help us
-          rebuild everything!
+        message: Please, help us rebuild everything!
         questId:
           value: Tutorial_1
         stepIndexWithResourceCondition: 0
@@ -232,8 +238,417 @@ MonoBehaviour:
       data:
         questId:
           value: Tutorial_1
-    - rid: 4482425807576236040
+    - rid: 4482425896350515200
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Tutorial_1_Build_Home
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: NPC_Valentine
+        launchCondition:
+          rid: -2
+        launchActions: []
+        steps:
+        - rid: 4482425896350515204
+        winCondition:
+          rid: -2
+        winActions:
+        - rid: 4482425896350515206
+        loseCondition:
+          rid: 4482425896350515209
+        loseActions: []
+    - rid: 4482425896350515201
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 4482425896350515202
+        winCondition:
+          rid: -2
+        winActions: []
+        loseCondition:
+          rid: 4482425896350515203
+        loseActions: []
+    - rid: 4482425896350515202
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: Assembly-CSharp}
+      data:
+        speaker:
+          value: NPC_Valentine
+        message: 'Greetings! We''ve run into trouble. A recent earthquake has devastated
+          our town. Grandpa''s house and our farm were damaged too. '
+        questId:
+          value: Tutorial_1
+        stepIndexWithResourceCondition: -1
+    - rid: 4482425896350515203
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 4482425896350515204
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 4482425896350515205
+        winCondition:
+          rid: -2
+        winActions: []
+        loseCondition:
+          rid: -2
+        loseActions: []
+    - rid: 4482425896350515205
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: Assembly-CSharp}
+      data:
+        speaker:
+          value: NPC_Valentine
+        message: "Great! You\u2019ve been a huge help. Now we have enough resources
+          to rebuild Grandpa\u2019s house."
+        questId:
+          value: Tutorial_1_Build_Home
+        stepIndexWithResourceCondition: -1
+    - rid: 4482425896350515206
       type: {class: UpgradeBuildingActionConfig, ns: L2Farm.Features.Buildings.Actions, asm: Assembly-CSharp}
       data:
         buildingId:
           value: House
+    - rid: 4482425896350515207
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 4482425896350515208
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 4482425896350515209
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 4482425896350515210
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Build_Ambar
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: NPC_Valentine
+        launchCondition:
+          rid: -2
+        launchActions: []
+        steps:
+        - rid: 4482425896350515211
+        winCondition:
+          rid: -2
+        winActions:
+        - rid: 4482425896350515212
+        loseCondition:
+          rid: 4482425896350515213
+        loseActions: []
+    - rid: 4482425896350515211
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 4482425896350515214
+        winCondition:
+          rid: -2
+        winActions: []
+        loseCondition:
+          rid: -2
+        loseActions: []
+    - rid: 4482425896350515212
+      type: {class: UpgradeBuildingActionConfig, ns: L2Farm.Features.Buildings.Actions, asm: Assembly-CSharp}
+      data:
+        buildingId:
+          value: Ambar
+    - rid: 4482425896350515213
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 4482425896350515214
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: Assembly-CSharp}
+      data:
+        speaker:
+          value: NPC_Valentine
+        message: "Great! You\u2019ve been a huge help. Now we have enough resources
+          to rebuild Grandpa\u2019s house."
+        questId:
+          value: Tutorial_1_Build_Home
+        stepIndexWithResourceCondition: -1
+    - rid: 4482425896350515215
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Build_Bakery
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: NPC_Valentine
+        launchCondition:
+          rid: -2
+        launchActions: []
+        steps:
+        - rid: 4482425896350515216
+        winCondition:
+          rid: -2
+        winActions:
+        - rid: 4482425896350515217
+        loseCondition:
+          rid: 4482425896350515218
+        loseActions: []
+    - rid: 4482425896350515216
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 4482425896350515219
+        winCondition:
+          rid: -2
+        winActions: []
+        loseCondition:
+          rid: -2
+        loseActions: []
+    - rid: 4482425896350515217
+      type: {class: UpgradeBuildingActionConfig, ns: L2Farm.Features.Buildings.Actions, asm: Assembly-CSharp}
+      data:
+        buildingId:
+          value: Bakery
+    - rid: 4482425896350515218
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 4482425896350515219
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: Assembly-CSharp}
+      data:
+        speaker:
+          value: NPC_Valentine
+        message: "Great! You\u2019ve been a huge help. Now we have enough resources
+          to rebuild Grandpa\u2019s house."
+        questId:
+          value: Tutorial_1_Build_Home
+        stepIndexWithResourceCondition: -1
+    - rid: 4482425896350515220
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Build_Farm
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: NPC_Valentine
+        launchCondition:
+          rid: -2
+        launchActions: []
+        steps:
+        - rid: 4482425896350515221
+        winCondition:
+          rid: -2
+        winActions:
+        - rid: 4482425896350515222
+        loseCondition:
+          rid: 4482425896350515223
+        loseActions: []
+    - rid: 4482425896350515221
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 4482425896350515224
+        winCondition:
+          rid: -2
+        winActions: []
+        loseCondition:
+          rid: -2
+        loseActions: []
+    - rid: 4482425896350515222
+      type: {class: UpgradeBuildingActionConfig, ns: L2Farm.Features.Buildings.Actions, asm: Assembly-CSharp}
+      data:
+        buildingId:
+          value: Farm
+    - rid: 4482425896350515223
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 4482425896350515224
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: Assembly-CSharp}
+      data:
+        speaker:
+          value: NPC_Valentine
+        message: "Great! You\u2019ve been a huge help. Now we have enough resources
+          to rebuild Grandpa\u2019s house."
+        questId:
+          value: Tutorial_1_Build_Home
+        stepIndexWithResourceCondition: -1
+    - rid: 4482425896350515225
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Build_Fishing
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: NPC_Valentine
+        launchCondition:
+          rid: -2
+        launchActions: []
+        steps:
+        - rid: 4482425896350515226
+        winCondition:
+          rid: -2
+        winActions:
+        - rid: 4482425896350515227
+        loseCondition:
+          rid: 4482425896350515228
+        loseActions: []
+    - rid: 4482425896350515226
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 4482425896350515229
+        winCondition:
+          rid: -2
+        winActions: []
+        loseCondition:
+          rid: -2
+        loseActions: []
+    - rid: 4482425896350515227
+      type: {class: UpgradeBuildingActionConfig, ns: L2Farm.Features.Buildings.Actions, asm: Assembly-CSharp}
+      data:
+        buildingId:
+          value: Fishing
+    - rid: 4482425896350515228
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 4482425896350515229
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: Assembly-CSharp}
+      data:
+        speaker:
+          value: NPC_Valentine
+        message: "Great! You\u2019ve been a huge help. Now we have enough resources
+          to rebuild Grandpa\u2019s house."
+        questId:
+          value: Tutorial_1_Build_Home
+        stepIndexWithResourceCondition: -1
+    - rid: 4482425896350515230
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Build_Sawmill
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: NPC_Valentine
+        launchCondition:
+          rid: -2
+        launchActions: []
+        steps:
+        - rid: 4482425896350515231
+        winCondition:
+          rid: -2
+        winActions:
+        - rid: 4482425896350515232
+        loseCondition:
+          rid: 4482425896350515233
+        loseActions: []
+    - rid: 4482425896350515231
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 4482425896350515234
+        winCondition:
+          rid: -2
+        winActions: []
+        loseCondition:
+          rid: -2
+        loseActions: []
+    - rid: 4482425896350515232
+      type: {class: UpgradeBuildingActionConfig, ns: L2Farm.Features.Buildings.Actions, asm: Assembly-CSharp}
+      data:
+        buildingId:
+          value: Sawmill
+    - rid: 4482425896350515233
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 4482425896350515234
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: Assembly-CSharp}
+      data:
+        speaker:
+          value: NPC_Valentine
+        message: "Great! You\u2019ve been a huge help. Now we have enough resources
+          to rebuild Grandpa\u2019s house."
+        questId:
+          value: Tutorial_1_Build_Home
+        stepIndexWithResourceCondition: -1
+    - rid: 4482425896350515235
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Build_Mill
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: NPC_Valentine
+        launchCondition:
+          rid: -2
+        launchActions: []
+        steps:
+        - rid: 4482425896350515236
+        winCondition:
+          rid: -2
+        winActions:
+        - rid: 4482425896350515237
+        loseCondition:
+          rid: 4482425896350515238
+        loseActions: []
+    - rid: 4482425896350515236
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 4482425896350515239
+        winCondition:
+          rid: -2
+        winActions: []
+        loseCondition:
+          rid: -2
+        loseActions: []
+    - rid: 4482425896350515237
+      type: {class: UpgradeBuildingActionConfig, ns: L2Farm.Features.Buildings.Actions, asm: Assembly-CSharp}
+      data:
+        buildingId:
+          value: Mill
+    - rid: 4482425896350515238
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 4482425896350515239
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: Assembly-CSharp}
+      data:
+        speaker:
+          value: NPC_Valentine
+        message: "Great! You\u2019ve been a huge help. Now we have enough resources
+          to rebuild Grandpa\u2019s house."
+        questId:
+          value: Tutorial_1_Build_Home
+        stepIndexWithResourceCondition: -1
+    - rid: 4482425896350515240
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Build_Smithy
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: NPC_Valentine
+        launchCondition:
+          rid: -2
+        launchActions: []
+        steps:
+        - rid: 4482425896350515241
+        winCondition:
+          rid: -2
+        winActions:
+        - rid: 4482425896350515242
+        loseCondition:
+          rid: 4482425896350515243
+        loseActions: []
+    - rid: 4482425896350515241
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 4482425896350515244
+        winCondition:
+          rid: -2
+        winActions: []
+        loseCondition:
+          rid: -2
+        loseActions: []
+    - rid: 4482425896350515242
+      type: {class: UpgradeBuildingActionConfig, ns: L2Farm.Features.Buildings.Actions, asm: Assembly-CSharp}
+      data:
+        buildingId:
+          value: Smithy
+    - rid: 4482425896350515243
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 4482425896350515244
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: Assembly-CSharp}
+      data:
+        speaker:
+          value: NPC_Valentine
+        message: "Great! You\u2019ve been a huge help. Now we have enough resources
+          to rebuild Grandpa\u2019s house."
+        questId:
+          value: Tutorial_1_Build_Home
+        stepIndexWithResourceCondition: -1
