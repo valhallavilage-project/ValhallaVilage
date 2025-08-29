@@ -41,5 +41,34 @@ namespace CrossProject.Extensions
             result.z = zValue;
             return result;
         }
+
+        public static string ToTimeFormat(this int totalSeconds)
+        {
+            return FormatTime(totalSeconds);
+        }
+
+        public static string ToTimeFormat(this float totalSeconds)
+        {
+            return FormatTime((int)totalSeconds);
+        }
+
+        private static string FormatTime(int totalSeconds)
+        {
+            var time = TimeSpan.FromSeconds(totalSeconds);
+            var result = "";
+
+            if (totalSeconds >= 86400)
+                result += $"{time.Days:00} D ";
+
+            if (totalSeconds >= 3600)
+                result += $"{time.Hours:00} H ";
+
+            if (totalSeconds >= 60)
+                result += $"{time.Minutes:00} M ";
+
+            result += $"{time.Seconds:00} S";
+
+            return result.Trim();
+        }
     }
 }

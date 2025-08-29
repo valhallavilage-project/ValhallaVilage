@@ -15,6 +15,8 @@ namespace L2Farm.Features.Buildings
 
         public static implicit operator BuildingId(string value) => new (value);
 
+        public static implicit operator string(BuildingId value) => value.ToString();
+
         public static bool operator ==(BuildingId a, BuildingId b) => a?.Value == b?.Value;
 
         public static bool operator !=(BuildingId a, BuildingId b) => !(a == b);

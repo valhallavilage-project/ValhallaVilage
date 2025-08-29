@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using CrossProject.Core.Actions;
 using CrossProject.Core.Conditions;
 using CrossProject.Core.Quests;
@@ -13,6 +14,10 @@ namespace L2Farm.Features.Buildings
     public class BuildingSetConfig : ScriptableObject
     {
         public List<BuildingConfig> items = new();
+
+        public int GetSecondsFor(BuildingId buildingId) => items.First(x => x.id == buildingId).timeToBuildInSeconds;
+
+        public QuestId GetQuestFor(BuildingId buildingId) => items.First(x => x.id == buildingId).questToLaunchOnComplete;
     }
 
     [Serializable]

@@ -1,4 +1,5 @@
 using CrossProject.Core.Actions;
+using Cysharp.Threading.Tasks;
 
 namespace L2Farm.Features.Buildings.Actions
 {
@@ -13,7 +14,7 @@ namespace L2Farm.Features.Buildings.Actions
 
         public override void Execute()
         {
-            _buildingService.SpawnReadyBuilding(config.buildingId);
+            _buildingService.StartUpgradeProcess(config.buildingId).Forget();
         }
     }
 }

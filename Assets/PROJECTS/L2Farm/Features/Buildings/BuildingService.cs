@@ -1,11 +1,14 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using CrossProject.Core;
 using CrossProject.Core.Conditions;
+using CrossProject.Core.SaveLoad;
 using CrossProject.Core.SpawnPoints;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer.Unity;
+using Object = UnityEngine.Object;
 
 namespace L2Farm.Features.Buildings
 {
@@ -14,6 +17,7 @@ namespace L2Farm.Features.Buildings
         private readonly AddressablesManager _addressablesManager;
         private readonly ConditionService _conditionService;
         private readonly SpawnPointService _spawnPointService;
+        private readonly GameStateManager _gameStateManager;
 
         private BuildingSetConfig _buildingSetConfig;
 
@@ -24,28 +28,55 @@ namespace L2Farm.Features.Buildings
         public BuildingService(
             AddressablesManager addressablesManager,
             ConditionService conditionService,
-            SpawnPointService spawnPointService)
+            SpawnPointService spawnPointService,
+            GameStateManager gameStateManager)
         {
             _addressablesManager = addressablesManager;
             _conditionService = conditionService;
             _spawnPointService = spawnPointService;
+            _gameStateManager = gameStateManager;
         }
 
         public async UniTask Initialize()
         {
             _buildingSetConfig = await _addressablesManager.LoadAssetAsync<BuildingSetConfig>();
 
+            var part = _gameStateManager.State.Get<BuildingPart>();
             foreach (var buildingConfig in _buildingSetConfig.items)
-                await SpawnBuildingInternal(buildingConfig);
+            {
+                if (!part.requests.TryGetValue(buildingConfig.id, out var time))
+                    await SpawnBuildingInternal(buildingConfig);
+                else
+                    await SpawnBuildingInternal(buildingConfig, 0, (int)(DateTime.Now - time).TotalSeconds);
+            }
 
             IsInitialized = true;
         }
 
-        private async UniTask SpawnBuildingInternal(BuildingConfig config)
+        private async UniTask SpawnBuildingInternal(BuildingConfig config, int manualOverride = -1, int seconds = -1)
         {
-            var key = _conditionService.Check(config.spawnReadyCondition)
-                ? config.assetIdReady
-                : config.assetIdBroken;
+            if (_buildings.TryGetValue(config.id, out var buildingInstance))
+            {
+                if (buildingInstance.IsReady)
+                    return;
+
+                Object.Destroy(buildingInstance);
+                _buildings.Remove(config.id);
+            }
+
+            string key;
+            if (manualOverride < 0)
+            {
+                key = _conditionService.Check(config.spawnReadyCondition)
+                    ? config.assetIdReady
+                    : config.assetIdBroken;
+            }
+            else
+            {
+                key = manualOverride > 0 || seconds == 0
+                    ? config.assetIdReady
+                    : config.assetIdBroken;
+            }
 
             var asset = await _addressablesManager.LoadAssetAsync<GameObject>(key);
             var position = _spawnPointService.GetPosition(config.spawnPointId);
@@ -53,12 +84,26 @@ namespace L2Farm.Features.Buildings
             var instance = Object.Instantiate(asset, position, Quaternion.Euler(eulerAngles));
             var building = instance.GetComponent<Building>();
             _buildings[config.id] = building;
+
+            if (seconds > 0)
+            {
+                var timerPrefab = await _addressablesManager.LoadAssetAsync<GameObject>(nameof(BuildingTimer));
+                var timerInstance = Object.Instantiate(timerPrefab, building.transform.position, Quaternion.identity);
+                timerInstance.GetComponent<BuildingTimer>().Setup(seconds, config.questToLaunchOnComplete);
+            }
+
             Debug.Log($"[{nameof(BuildingService)}] : spawned {config.id} with asset : {key}!");
         }
 
-        public void StartUpgradeProcess(BuildingId id)
+        public async UniTask StartUpgradeProcess(BuildingId id)
         {
-            
+            Debug.Log($"[{nameof(BuildingService)}] : start upgrade : {id}");
+            var part = _gameStateManager.State.Get<BuildingPart>();
+            part.requests.Add(id, DateTime.Now);
+            _gameStateManager.Save();
+            var timerPrefab = await _addressablesManager.LoadAssetAsync<GameObject>(nameof(BuildingTimer));
+            var timerInstance = Object.Instantiate(timerPrefab, _buildings[id].transform.position, Quaternion.identity);
+            timerInstance.GetComponent<BuildingTimer>().Setup(_buildingSetConfig.GetSecondsFor(id), _buildingSetConfig.GetQuestFor(id));
         }
 
         public void SpawnReadyBuilding(BuildingId id)

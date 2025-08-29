@@ -79,5 +79,10 @@ namespace CrossProject.Core.Camera
         {
             _target = target;
         }
+
+        public void AlignWithCamera(Transform target)
+        {
+            target.forward = zoomHandle.forward;
+        }
     }
 }

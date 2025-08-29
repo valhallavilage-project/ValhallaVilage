@@ -82,6 +82,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dc749c077ae744f4ab1e0c3009bac668
+    m_Address: BuildingTimer
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e8e745b91b7424d61bfa003d1e28f572
     m_Address: ShopButton
     m_ReadOnly: 0
