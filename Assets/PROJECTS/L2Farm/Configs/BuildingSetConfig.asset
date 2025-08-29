@@ -21,7 +21,7 @@ MonoBehaviour:
     assetIdBroken: Ambar_Broken
     assetIdReady: Ambar_Ready
     spawnReadyCondition:
-      rid: -2
+      rid: 4482425896350515245
     timeToBuildInSeconds: 60
     questToLaunchOnComplete:
       value: 
@@ -33,7 +33,7 @@ MonoBehaviour:
     assetIdBroken: Bakery_Broken
     assetIdReady: Bakery_Ready
     spawnReadyCondition:
-      rid: -2
+      rid: 4482425896350515246
     timeToBuildInSeconds: 60
     questToLaunchOnComplete:
       value: 
@@ -45,7 +45,7 @@ MonoBehaviour:
     assetIdBroken: Farm_Broken
     assetIdReady: Farm_Ready
     spawnReadyCondition:
-      rid: -2
+      rid: 4482425896350515247
     timeToBuildInSeconds: 60
     questToLaunchOnComplete:
       value: 
@@ -57,7 +57,7 @@ MonoBehaviour:
     assetIdBroken: Fishing_Broken
     assetIdReady: Fishing_Ready
     spawnReadyCondition:
-      rid: -2
+      rid: 4482425896350515248
     timeToBuildInSeconds: 60
     questToLaunchOnComplete:
       value: 
@@ -72,7 +72,7 @@ MonoBehaviour:
       rid: 4482425876239876096
     timeToBuildInSeconds: 60
     questToLaunchOnComplete:
-      value: Tutorial_2
+      value: Tutorial_1_Build_Home
   - id: Mill
     sceneId:
       value: L2Farm_FirstTown
@@ -93,7 +93,7 @@ MonoBehaviour:
     assetIdBroken: Sawmill_Broken
     assetIdReady: Sawmill_Ready
     spawnReadyCondition:
-      rid: -2
+      rid: 4482425896350515249
     timeToBuildInSeconds: 60
     questToLaunchOnComplete:
       value: 
@@ -105,22 +105,50 @@ MonoBehaviour:
     assetIdBroken: Smithy_Broken
     assetIdReady: Smithy_Ready
     spawnReadyCondition:
-      rid: -2
+      rid: 4482425896350515250
     timeToBuildInSeconds: 60
     questToLaunchOnComplete:
-      value: 
+      value: Build_Smithy
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
     - rid: 4482425876239876096
       type: {class: QuestCompletedConditionConfig, ns: L2Farm.Scripts.Conditions.QuestCompleted, asm: Assembly-CSharp}
       data:
         questId:
-          value: Tutorial_1
+          value: Tutorial_1_Gather
     - rid: 4482425876239876097
       type: {class: QuestCompletedConditionConfig, ns: L2Farm.Scripts.Conditions.QuestCompleted, asm: Assembly-CSharp}
       data:
         questId:
           value: Tutorial_2
+    - rid: 4482425896350515245
+      type: {class: QuestCompletedConditionConfig, ns: L2Farm.Scripts.Conditions.QuestCompleted, asm: Assembly-CSharp}
+      data:
+        questId:
+          value: Build_Ambar
+    - rid: 4482425896350515246
+      type: {class: QuestCompletedConditionConfig, ns: L2Farm.Scripts.Conditions.QuestCompleted, asm: Assembly-CSharp}
+      data:
+        questId:
+          value: Build_Bakery
+    - rid: 4482425896350515247
+      type: {class: QuestCompletedConditionConfig, ns: L2Farm.Scripts.Conditions.QuestCompleted, asm: Assembly-CSharp}
+      data:
+        questId:
+          value: Build_Farm
+    - rid: 4482425896350515248
+      type: {class: QuestCompletedConditionConfig, ns: L2Farm.Scripts.Conditions.QuestCompleted, asm: Assembly-CSharp}
+      data:
+        questId:
+          value: Build_Fishing
+    - rid: 4482425896350515249
+      type: {class: QuestCompletedConditionConfig, ns: L2Farm.Scripts.Conditions.QuestCompleted, asm: Assembly-CSharp}
+      data:
+        questId:
+          value: Build_Sawmill
+    - rid: 4482425896350515250
+      type: {class: QuestCompletedConditionConfig, ns: L2Farm.Scripts.Conditions.QuestCompleted, asm: Assembly-CSharp}
+      data:
+        questId:
+          value: Build_Smithy

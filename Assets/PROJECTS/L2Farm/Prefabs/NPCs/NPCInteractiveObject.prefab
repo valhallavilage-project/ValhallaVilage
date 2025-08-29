@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ca80267b02a44ac840a0687f455c170, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionDistance: 1
+  interactionDistance: 2
   interactionDuration: 0
   buttonSprite: {fileID: 21300000, guid: 79d37627cea5d4a33a34a6ae7cfc6dc4, type: 3}
   animation: 4
