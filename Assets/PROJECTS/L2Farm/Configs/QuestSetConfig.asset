@@ -163,7 +163,7 @@ MonoBehaviour:
     - rid: 4482425807576236032
       type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
       data:
-        id: Tutorial_1
+        id: Tutorial_1_Gather
         proceedAfterLaunch: 0
         targetSpawnPoint:
           value: NPC_Tutorial_1
