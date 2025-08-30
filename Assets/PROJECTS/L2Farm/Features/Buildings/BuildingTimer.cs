@@ -21,6 +21,7 @@ namespace L2Farm.Features.Buildings
         private CameraService _cameraService;
         private GameStateManager _gameStateManager;
 
+        [SerializeField] private Transform vfxRoot;
         [SerializeField] private Transform uiRoot;
         [SerializeField] private TMP_Text timerLabel;
         [SerializeField] private Image progressBar;
@@ -49,12 +50,13 @@ namespace L2Farm.Features.Buildings
             Injector.Instance?.Inject(this);
         }
 
-        public void Setup(int seconds, BuildingId buildingId, QuestId questId)
+        public void Setup(int seconds, BuildingId buildingId, QuestId questId, float vfxScale)
         {
             _seconds = _secondsLeft = seconds;
             _buildingId = buildingId;
             _questId = questId;
             _cameraService.AlignWithCamera(uiRoot);
+            vfxRoot.localScale = Vector3.one * vfxScale;
             Routine().Forget();
         }
 

@@ -88,8 +88,9 @@ namespace L2Farm.Features.Buildings
             if (seconds > 0)
             {
                 var timerPrefab = await _addressablesManager.LoadAssetAsync<GameObject>(nameof(BuildingTimer));
-                var timerInstance = Object.Instantiate(timerPrefab, building.transform.position, Quaternion.identity);
-                timerInstance.GetComponent<BuildingTimer>().Setup(seconds, config.id, config.questToLaunchOnComplete);
+                var timerInstance = Object.Instantiate(timerPrefab, building.transform.position + config.buildingVFXOffset, Quaternion.identity);
+                var timer = timerInstance.GetComponent<BuildingTimer>();
+                timer.Setup(seconds, config.id, config.questToLaunchOnComplete, config.buildingVFXScale);
             }
 
             Debug.Log($"[{nameof(BuildingService)}] : spawned {config.id} with asset : {key}!");
@@ -101,9 +102,10 @@ namespace L2Farm.Features.Buildings
             var part = _gameStateManager.State.Get<BuildingPart>();
             part.requests.Add(id, DateTime.Now);
             _gameStateManager.Save();
+            var config = _buildingSetConfig.items.First(x => x.id == id);
             var timerPrefab = await _addressablesManager.LoadAssetAsync<GameObject>(nameof(BuildingTimer));
-            var timerInstance = Object.Instantiate(timerPrefab, _buildings[id].transform.position, Quaternion.identity);
-            timerInstance.GetComponent<BuildingTimer>().Setup(_buildingSetConfig.GetSecondsFor(id), id, _buildingSetConfig.GetQuestFor(id));
+            var timerInstance = Object.Instantiate(timerPrefab, _buildings[id].transform.position + config.buildingVFXOffset, Quaternion.identity);
+            timerInstance.GetComponent<BuildingTimer>().Setup(_buildingSetConfig.GetSecondsFor(id), id, _buildingSetConfig.GetQuestFor(id), config.buildingVFXScale);
         }
     }
 }
