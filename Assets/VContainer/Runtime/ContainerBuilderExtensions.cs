@@ -14,7 +14,7 @@ namespace VContainer
             Type type,
             Lifetime lifetime)
         {
-            Debug.Log($"[VContainer] register {type.Name}");
+            //Debug.Log($"[VContainer] register {type.Name}");
             return builder.Register(type.IsGenericType && type.IsGenericTypeDefinition
                 ? new OpenGenericRegistrationBuilder(type, lifetime)
                 : new RegistrationBuilder(type, lifetime));

@@ -237,7 +237,7 @@ MonoBehaviour:
       type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
       data:
         questId:
-          value: Tutorial_1
+          value: Tutorial_1_Gather
     - rid: 4482425896350515200
       type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
       data:

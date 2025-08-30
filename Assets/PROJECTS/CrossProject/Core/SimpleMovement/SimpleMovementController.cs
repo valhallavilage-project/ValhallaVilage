@@ -13,7 +13,7 @@ using VContainer.Unity;
 namespace CrossProject.Core.SimpleMovement
 {
     [RequireComponent(typeof(NavMeshAgent))]
-    public class SimpleMovementController : MonoBehaviour, ITickable, IPostInitializable, IBlockable, IPlayerVelocityProvider, IPlayerSkinProvider
+    public class SimpleMovementController : MonoBehaviour, ITickable, IInitializable, IBlockable, IPlayerVelocityProvider, IPlayerSkinProvider
     {
         private CameraService _cameraService;
         private IJoystickValueProvider _joystick;
@@ -39,6 +39,7 @@ namespace CrossProject.Core.SimpleMovement
         public Vector3 Velocity => _playerNavMeshAgent.velocity;
         public Vector3 Direction => _direction;
         public Transform PlayerSkinRoot => skinRoot;
+        public bool IsInitialized { get; private set; }
 
         Skin IPlayerSkinProvider.CurrentSkin => _skin ??= skinRoot.GetComponentInChildren<Skin>();
 
@@ -124,11 +125,13 @@ namespace CrossProject.Core.SimpleMovement
             LocalAccessCurrentSkin.Animator.SetFloat(Speed, 0);
         }
 
-        public void PostInitialize()
+        public async UniTask Initialize()
         {
+            await UniTask.WaitUntil(() => _cameraService.IsInitialized && _spawnPointService.IsInitialized);
             _cameraService.SetTarget(_transform);
             var targetPos = _spawnPointService.GetPosition(new SpawnPointId("PlayerSpawnPoint"));
             _playerNavMeshAgent.Warp(targetPos);
+            IsInitialized = true;
         }
     }
 }

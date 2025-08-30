@@ -43,7 +43,7 @@ namespace CrossProject.Core.Actions
                 try
                 {
                     _actionMap.TryAdd(action.ConfigType, action);
-                    Debug.Log($"[{nameof(ActionService)}] filled map with : {action.GetType().Name} : {_actionMap.Keys.Count}");
+                    //Debug.Log($"[{nameof(ActionService)}] filled map with : {action.GetType().Name} : {_actionMap.Keys.Count}");
                 }
                 catch (Exception e)
                 {

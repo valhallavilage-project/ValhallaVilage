@@ -71,6 +71,11 @@ namespace CrossProject.Core.Quests
 
             //TODO : VM : queue of non-launched, but fired quests?
             var config = _questSetConfig.Get(id);
+            if (config == null)
+            {
+                Debug.LogError($"[{nameof(QuestService)}] : cannot find config for {id}!");
+                return false;
+            }
             if (!_conditionService.Check(config.launchCondition))
                 return false;
 

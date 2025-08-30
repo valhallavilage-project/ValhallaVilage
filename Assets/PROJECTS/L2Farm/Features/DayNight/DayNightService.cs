@@ -35,7 +35,7 @@ namespace L2Farm.Features.DayNight
                 Evaluation = secondsSinceMidnight <= halfDaySeconds
                     ? secondsSinceMidnight/halfDaySeconds
                     : 1 - (secondsSinceMidnight - halfDaySeconds)/halfDaySeconds;
-                Debug.Log($"[{nameof(DayNightService)}] : {Evaluation}");
+                //Debug.Log($"[{nameof(DayNightService)}] : {Evaluation}");
                 OnEvaluate?.Invoke(Evaluation);
                 sunlight.color = config.gradient.Evaluate(Evaluation);
                 await UniTask.Delay(_interval);

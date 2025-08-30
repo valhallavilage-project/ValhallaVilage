@@ -18,6 +18,7 @@ namespace L2Farm.Features.Buildings
     {
         private ActionService _actionService;
         private QuestService _questService;
+        private CameraService _cameraService;
         private GameStateManager _gameStateManager;
 
         [SerializeField] private Transform uiRoot;
@@ -26,6 +27,7 @@ namespace L2Farm.Features.Buildings
 
         private float _seconds = -1;
         private float _secondsLeft;
+        private BuildingId _buildingId;
         private QuestId _questId;
 
         [Inject]
@@ -36,7 +38,7 @@ namespace L2Farm.Features.Buildings
             GameStateManager gameStateManager)
         {
             _actionService = actionService;
-            cameraService.AlignWithCamera(uiRoot);
+            _cameraService = cameraService;
             questService.OnQuestWin += OnQuestWin;
             _questService = questService;
             _gameStateManager = gameStateManager;
@@ -47,10 +49,12 @@ namespace L2Farm.Features.Buildings
             ManualPrefabInjector.Instance?.Inject(this);
         }
 
-        public void Setup(int seconds, QuestId questId)
+        public void Setup(int seconds, BuildingId buildingId, QuestId questId)
         {
             _seconds = _secondsLeft = seconds;
+            _buildingId = buildingId;
             _questId = questId;
+            _cameraService.AlignWithCamera(uiRoot);
             Routine().Forget();
         }
 
@@ -70,6 +74,7 @@ namespace L2Farm.Features.Buildings
             {
                 questId = _questId
             });
+            _gameStateManager.State.Get<BuildingPart>().requests.Remove(_buildingId);
         }
 
         private void Update()

@@ -4,7 +4,7 @@ using VContainer.Unity;
 
 namespace CrossProject.Core.Camera
 {
-    public class CameraService : MonoBehaviour, IInitializable, IPostLateTickable
+    public class CameraService : MonoBehaviour, IPriorityInitializable, IPostLateTickable
     {
         private Transform _target;
 

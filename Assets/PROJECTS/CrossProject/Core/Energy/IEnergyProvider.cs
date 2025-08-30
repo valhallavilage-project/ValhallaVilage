@@ -7,6 +7,6 @@ namespace CrossProject.Core.Energy
         int CurrentValue { get; }
         int MaxValue { get; }
         void Spend(int amount);
-        event Action<int, int> OnEnergySpend; //spend amount and current value
+        event Action<int, int> OnEnergyChanged; //old and current value
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer.Internal;
 #if VCONTAINER_ECS_INTEGRATION
@@ -39,7 +40,7 @@ namespace VContainer.Unity
                     if (exceptionHandler != null)
                         exceptionHandler.Publish(ex);
                     else
-                        UnityEngine.Debug.LogException(ex);
+                        Debug.LogException(ex);
                 }
             }
 
@@ -49,7 +50,7 @@ namespace VContainer.Unity
             {
                 try
                 {
-                    await initializables[i].Initialize();
+                    initializables[i].Initialize().Forget();
                     Debug.Log($"{initializables[i].GetType().Name} was Initialized");
                 }
                 catch (Exception ex)
@@ -57,7 +58,7 @@ namespace VContainer.Unity
                     if (exceptionHandler != null)
                         exceptionHandler.Publish(ex);
                     else
-                        UnityEngine.Debug.LogException(ex);
+                        Debug.LogException(ex);
                 }
             }
 

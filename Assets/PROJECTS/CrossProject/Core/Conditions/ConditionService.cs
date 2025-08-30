@@ -59,7 +59,7 @@ namespace CrossProject.Core.Conditions
                 try
                 {
                     _conditionMap.TryAdd(condition.ConfigType, condition);
-                    Debug.Log($"[{nameof(ConditionService)}] filled map with : {condition.GetType().Name} : {_conditionMap.Keys.Count}");
+                    //Debug.Log($"[{nameof(ConditionService)}] filled map with : {condition.GetType().Name} : {_conditionMap.Keys.Count}");
                 }
                 catch (Exception e)
                 {

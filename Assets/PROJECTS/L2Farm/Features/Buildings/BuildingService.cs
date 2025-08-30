@@ -89,7 +89,7 @@ namespace L2Farm.Features.Buildings
             {
                 var timerPrefab = await _addressablesManager.LoadAssetAsync<GameObject>(nameof(BuildingTimer));
                 var timerInstance = Object.Instantiate(timerPrefab, building.transform.position, Quaternion.identity);
-                timerInstance.GetComponent<BuildingTimer>().Setup(seconds, config.questToLaunchOnComplete);
+                timerInstance.GetComponent<BuildingTimer>().Setup(seconds, config.id, config.questToLaunchOnComplete);
             }
 
             Debug.Log($"[{nameof(BuildingService)}] : spawned {config.id} with asset : {key}!");
@@ -103,28 +103,7 @@ namespace L2Farm.Features.Buildings
             _gameStateManager.Save();
             var timerPrefab = await _addressablesManager.LoadAssetAsync<GameObject>(nameof(BuildingTimer));
             var timerInstance = Object.Instantiate(timerPrefab, _buildings[id].transform.position, Quaternion.identity);
-            timerInstance.GetComponent<BuildingTimer>().Setup(_buildingSetConfig.GetSecondsFor(id), _buildingSetConfig.GetQuestFor(id));
-        }
-
-        public void SpawnReadyBuilding(BuildingId id)
-        {
-            var config = _buildingSetConfig.items.FirstOrDefault(x => id == x.id);
-            if (config == null)
-            {
-                Debug.LogError($"[{nameof(BuildingService)}] : there is no config for {id}");
-                return;
-            }
-
-            if (!_conditionService.Check(config.spawnReadyCondition))
-            {
-                Debug.LogError($"[{nameof(BuildingService)}] : building {id} do not satisfy it's condition!");
-                return;
-            }
-
-            if (_buildings.TryGetValue(id, out var building) && !building.IsReady)
-                Object.Destroy(building.gameObject);
-
-            SpawnBuildingInternal(config).Forget();
+            timerInstance.GetComponent<BuildingTimer>().Setup(_buildingSetConfig.GetSecondsFor(id), id, _buildingSetConfig.GetQuestFor(id));
         }
     }
 }

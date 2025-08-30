@@ -51,7 +51,7 @@ namespace L2Farm.Features.QuestIndication
         {
             if (_activeIndicators.ContainsKey(questId))
             {
-                Debug.LogError($"[{nameof(QuestIndication)}] : {questId} is busy by some other indicator!");
+                //Debug.LogError($"[{nameof(QuestIndication)}] : {questId} is busy by some other indicator!");
                 return;
             }
 
@@ -65,20 +65,20 @@ namespace L2Farm.Features.QuestIndication
                 instance.SetUp(config.icon, config.color);
             instance.SetRadius(radius);
             _activeIndicators.Add(questId, (_spawnPointService.GetPosition(spawnPoint), instance));
-            Debug.Log($"[{nameof(QuestIndication)}] : Add for : {questId}");
+            //Debug.Log($"[{nameof(QuestIndication)}] : Add for : {questId}");
         }
 
         public void RemoveTarget(QuestId questId)
         {
             if (!_activeIndicators.TryGetValue(questId, out var pair))
             {
-                Debug.LogError($"[{nameof(QuestIndication)}] : No such indicator");
+                //Debug.LogError($"[{nameof(QuestIndication)}] : No such indicator");
                 return;
             }
 
             Destroy(pair.instance.gameObject);
             _activeIndicators.Remove(questId);
-            Debug.Log($"[{nameof(QuestIndication)}] : Removed for : {questId}");
+            //Debug.Log($"[{nameof(QuestIndication)}] : Removed for : {questId}");
         }
 
         private void LateUpdate()

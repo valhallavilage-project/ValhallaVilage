@@ -54,7 +54,7 @@ namespace CrossProject.Core.SaveLoad
             else
             {
                 _gameState = _serializer.Deserialize<GameState>(json);
-                Debug.Log(json);
+                //Debug.Log(json);
             }
         }
 

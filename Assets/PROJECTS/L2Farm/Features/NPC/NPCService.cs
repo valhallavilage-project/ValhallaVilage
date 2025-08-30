@@ -31,6 +31,7 @@ namespace L2Farm.Features.NPC
         public async UniTask Initialize()
         {
             _npcSetConfig = await _addressablesManager.LoadAssetAsync<NPCSetConfig>();
+            await UniTask.WaitUntil(() => _spawnPointService.IsInitialized);
             foreach (var npcConfig in _npcSetConfig.items)
                 SpawnNPC(npcConfig.id, npcConfig.defaultSpawnPoint, null);
             IsInitialized = true;

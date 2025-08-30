@@ -36,7 +36,7 @@ namespace CrossProject.Core.SpawnPoints
             }
             catch (Exception e)
             {
-                Debug.LogError($"Failed to find spawn point with id : {id}");
+                Debug.LogError($"Failed to find spawn point with id : {id}; Total Config : {_spawnPointSetConfig.items.Count}");
                 throw;
             }
         }
