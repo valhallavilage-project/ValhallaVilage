@@ -215,8 +215,8 @@ MonoBehaviour:
           value: NPC_Valentine
         message: Please, help us rebuild everything!
         questId:
-          value: Tutorial_1
-        stepIndexWithResourceCondition: 0
+          value: Tutorial_1_Gather
+        stepIndexWithResourceCondition: 1
     - rid: 4482425807576236036
       type: {class: HasEnoughResourcesConditionConfig, ns: L2Farm.Scripts.Conditions, asm: Assembly-CSharp}
       data:
@@ -276,7 +276,7 @@ MonoBehaviour:
         message: 'Greetings! We''ve run into trouble. A recent earthquake has devastated
           our town. Grandpa''s house and our farm were damaged too. '
         questId:
-          value: Tutorial_1
+          value: Tutorial_1_Gather
         stepIndexWithResourceCondition: -1
     - rid: 4482425896350515203
       type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
