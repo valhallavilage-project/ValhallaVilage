@@ -548,7 +548,7 @@ GameObject:
   - component: {fileID: 446808796}
   - component: {fileID: 446808797}
   m_Layer: 0
-  m_Name: ManualPrefabInjector
+  m_Name: Injector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
