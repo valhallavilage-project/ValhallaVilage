@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 7026675902236719106}
   - component: {fileID: 2495081373555319215}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: NameLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -265,6 +265,7 @@ MonoBehaviour:
   portrait: {fileID: 2903507805091137213}
   healthBarFill: {fileID: 3741931558862487345}
   manaBarFill: {fileID: 8223610182722300355}
+  manaLabel: {fileID: 4849739658788724092}
   frame: {fileID: 1261017839355825107}
   premiumFrame: {fileID: 21300000, guid: af8b0d7a4ae3e4b13b7fb78fd1b03996, type: 3}
 --- !u!1 &1647794836728379458
@@ -431,7 +432,7 @@ GameObject:
   - component: {fileID: 3524692238641764158}
   - component: {fileID: 2832055133160335631}
   m_Layer: 5
-  m_Name: Text (TMP) (3)
+  m_Name: NameLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -882,7 +883,7 @@ GameObject:
   - component: {fileID: 7383308083684798211}
   - component: {fileID: 4849739658788724092}
   m_Layer: 5
-  m_Name: Text (TMP) (2)
+  m_Name: CountLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1687,7 +1688,7 @@ GameObject:
   - component: {fileID: 1099665226735244931}
   - component: {fileID: 6716161932400960014}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: CountLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
