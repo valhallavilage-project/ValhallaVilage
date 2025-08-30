@@ -31,7 +31,7 @@ namespace CrossProject.Core.Interactions
 
         private void Start()
         {
-            ManualPrefabInjector.Instance.Inject(this);
+            Injector.Instance.Inject(this);
         }
 
         [Inject]

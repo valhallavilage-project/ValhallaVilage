@@ -3,9 +3,9 @@ using VContainer;
 
 namespace CrossProject.Core
 {
-    public class ManualPrefabInjector : MonoBehaviour
+    public class Injector : MonoBehaviour
     {
-        public static ManualPrefabInjector Instance;
+        public static Injector Instance;
 
         private IObjectResolver _objectResolver;
 
