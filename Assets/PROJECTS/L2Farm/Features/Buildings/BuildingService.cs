@@ -47,13 +47,13 @@ namespace L2Farm.Features.Buildings
                 if (!part.requests.TryGetValue(buildingConfig.id, out var time))
                     await SpawnBuildingInternal(buildingConfig);
                 else
-                    await SpawnBuildingInternal(buildingConfig, 0, (int)(DateTime.Now - time).TotalSeconds);
+                    await SpawnBuildingInternal(buildingConfig, (int)(DateTime.Now - time).TotalSeconds);
             }
 
             IsInitialized = true;
         }
 
-        private async UniTask SpawnBuildingInternal(BuildingConfig config, int manualOverride = -1, int seconds = -1)
+        private async UniTask SpawnBuildingInternal(BuildingConfig config, int elapsedSeconds = -1)
         {
             if (_buildings.TryGetValue(config.id, out var buildingInstance))
             {
@@ -64,19 +64,9 @@ namespace L2Farm.Features.Buildings
                 _buildings.Remove(config.id);
             }
 
-            string key;
-            if (manualOverride < 0)
-            {
-                key = _conditionService.Check(config.spawnReadyCondition)
-                    ? config.assetIdReady
-                    : config.assetIdBroken;
-            }
-            else
-            {
-                key = manualOverride > 0 || seconds == 0
-                    ? config.assetIdReady
-                    : config.assetIdBroken;
-            }
+            string key = _conditionService.Check(config.spawnReadyCondition)
+                ? config.assetIdReady
+                : config.assetIdBroken;
 
             var asset = await _addressablesManager.LoadAssetAsync<GameObject>(key);
             var position = _spawnPointService.GetPosition(config.spawnPointId);
@@ -85,12 +75,13 @@ namespace L2Farm.Features.Buildings
             var building = instance.GetComponent<Building>();
             _buildings[config.id] = building;
 
-            if (seconds > 0)
+            if (elapsedSeconds >= 0)
             {
                 var timerPrefab = await _addressablesManager.LoadAssetAsync<GameObject>(nameof(BuildingTimer));
                 var timerInstance = Object.Instantiate(timerPrefab, building.transform.position + config.buildingVFXOffset, Quaternion.identity);
                 var timer = timerInstance.GetComponent<BuildingTimer>();
-                timer.Setup(seconds, config.id, config.questToLaunchOnComplete, config.buildingVFXScale);
+                int remainingTime = Mathf.Clamp(config.timeToBuildInSeconds - elapsedSeconds, 0, config.timeToBuildInSeconds);
+                timer.Setup(remainingTime, config.id, config.questToLaunchOnComplete, config.buildingVFXScale);
             }
 
             Debug.Log($"[{nameof(BuildingService)}] : spawned {config.id} with asset : {key}!");
