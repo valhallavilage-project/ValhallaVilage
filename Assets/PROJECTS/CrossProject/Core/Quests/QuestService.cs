@@ -60,6 +60,7 @@ namespace CrossProject.Core.Quests
 
         public bool TryLaunch(QuestId id, int stepIndex = 0)
         {
+            Debug.Log($"[{nameof(QuestService)}] : Try to Launch {id}");
             if (string.IsNullOrEmpty(id))
             {
                 Debug.LogError($"[{nameof(QuestService)}] : Trying to Launch quest with id NULL");

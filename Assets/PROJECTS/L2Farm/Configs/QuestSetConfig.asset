@@ -184,9 +184,10 @@ MonoBehaviour:
         - rid: 4482425807576236034
         winCondition:
           rid: -2
-        winActions: []
+        winActions:
+        - rid: 4482425896350515253
         loseCondition:
-          rid: 4482425896350515207
+          rid: 4482425896350515251
         loseActions: []
     - rid: 4482425807576236033
       type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: Assembly-CSharp}
@@ -231,8 +232,8 @@ MonoBehaviour:
       type: {class: NotEnoughResourcesConditionConfig, ns: L2Farm.Scripts.Conditions, asm: Assembly-CSharp}
       data:
         questId:
-          value: Tutorial_1
-        stepIndexWithResourceCondition: 0
+          value: Tutorial_1_Gather
+        stepIndexWithResourceCondition: 1
     - rid: 4482425807576236038
       type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
       data:
@@ -244,16 +245,17 @@ MonoBehaviour:
         id: Tutorial_1_Build_Home
         proceedAfterLaunch: 0
         targetSpawnPoint:
-          value: NPC_Valentine
+          value: NPC_Tutorial_1
         launchCondition:
           rid: -2
-        launchActions: []
+        launchActions:
+        - rid: 4482425896350515257
         steps:
         - rid: 4482425896350515204
         winCondition:
           rid: -2
         winActions:
-        - rid: 4482425896350515206
+        - rid: 4482425896350515255
         loseCondition:
           rid: 4482425896350515209
         loseActions: []
@@ -290,7 +292,7 @@ MonoBehaviour:
           rid: -2
         winActions: []
         loseCondition:
-          rid: -2
+          rid: 4482425896350515256
         loseActions: []
     - rid: 4482425896350515205
       type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: Assembly-CSharp}
@@ -302,14 +304,6 @@ MonoBehaviour:
         questId:
           value: Tutorial_1_Build_Home
         stepIndexWithResourceCondition: -1
-    - rid: 4482425896350515206
-      type: {class: UpgradeBuildingActionConfig, ns: L2Farm.Features.Buildings.Actions, asm: Assembly-CSharp}
-      data:
-        buildingId:
-          value: House
-    - rid: 4482425896350515207
-      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
-      data: 
     - rid: 4482425896350515208
       type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
       data: 
@@ -652,3 +646,28 @@ MonoBehaviour:
         questId:
           value: Tutorial_1_Build_Home
         stepIndexWithResourceCondition: -1
+    - rid: 4482425896350515251
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 4482425896350515253
+      type: {class: StartBuildingActionConfig, ns: L2Farm.Features.Buildings.Actions, asm: Assembly-CSharp}
+      data:
+        buildingId:
+          value: House
+    - rid: 4482425896350515255
+      type: {class: FinishBuildingActionConfig, ns: L2Farm.Features.Buildings.Actions, asm: Assembly-CSharp}
+      data:
+        buildingId:
+          value: House
+    - rid: 4482425896350515256
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 4482425896350515257
+      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: Assembly-CSharp}
+      data:
+        npcId:
+          value: Valentine
+        spawnPointId:
+          value: NPC_Tutorial_1
+        questId:
+          value: Tutorial_1_Build_Home

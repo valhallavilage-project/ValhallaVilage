@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -36.70279, y: 0}
-  m_SizeDelta: {x: -81.4056, y: -8}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -8.000008, y: -8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1840246307982464085
 CanvasRenderer:
@@ -357,7 +357,7 @@ GameObject:
   - component: {fileID: 898978733678326736}
   - component: {fileID: 5853613032965792428}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -663,8 +663,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -58.00003, y: 0}
-  m_SizeDelta: {x: -123.99994, y: -8}
+  m_AnchoredPosition: {x: -0.000030517578, y: 0}
+  m_SizeDelta: {x: -7.999939, y: -8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6861460007436664294
 CanvasRenderer:
@@ -695,7 +695,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 7482667652216324306, guid: cf617c8bd18144bfd8b28da36105c6a1, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
@@ -738,8 +738,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -36.70279, y: 0}
-  m_SizeDelta: {x: -81.4056, y: -8}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -8.000008, y: -8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4982821431266564836
 CanvasRenderer:
@@ -770,11 +770,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 7482667652216324306, guid: cf617c8bd18144bfd8b28da36105c6a1, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -1173,7 +1173,7 @@ GameObject:
   - component: {fileID: 2409446762347954349}
   - component: {fileID: 5325394246219892577}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Level
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1303,7 +1303,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 99
+  m_text: "-1\x03"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4c2a86390946a43b2ae5f79c150199d6, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: a4cbf0acfb2fb4cd9938aaeaa5276ca1, type: 2}

@@ -107,5 +107,26 @@ namespace L2Farm.Features.Buildings
             var timerInstance = Object.Instantiate(timerPrefab, _buildings[id].transform.position + config.buildingVFXOffset, Quaternion.identity);
             timerInstance.GetComponent<BuildingTimer>().Setup(_buildingSetConfig.GetSecondsFor(id), id, _buildingSetConfig.GetQuestFor(id), config.buildingVFXScale);
         }
+
+        public void SpawnReadyBuilding(BuildingId id)
+        {
+            var config = _buildingSetConfig.items.FirstOrDefault(x => id == x.id);
+            if (config == null)
+            {
+                Debug.LogError($"[{nameof(BuildingService)}] : there is no config for {id}");
+                return;
+            }
+
+            if (!_conditionService.Check(config.spawnReadyCondition))
+            {
+                Debug.LogError($"[{nameof(BuildingService)}] : building {id} do not satisfy it's condition!");
+                return;
+            }
+
+            if (_buildings.TryGetValue(id, out var building) && !building.IsReady)
+                Object.Destroy(building.gameObject);
+
+            SpawnBuildingInternal(config).Forget();
+        }
     }
 }

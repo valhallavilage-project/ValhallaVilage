@@ -28,6 +28,7 @@ namespace L2Farm.Features.Buildings
 
         private float _seconds = -1;
         private float _secondsLeft;
+        private bool _tick;
         private BuildingId _buildingId;
         private QuestId _questId;
 
@@ -45,7 +46,7 @@ namespace L2Farm.Features.Buildings
             _gameStateManager = gameStateManager;
         }
 
-        private void Start()
+        private void Awake()
         {
             Injector.Instance?.Inject(this);
         }
@@ -56,7 +57,7 @@ namespace L2Farm.Features.Buildings
             _buildingId = buildingId;
             _questId = questId;
             _cameraService.AlignWithCamera(uiRoot);
-            vfxRoot.localScale = Vector3.one * vfxScale;
+            vfxRoot.GetChild(0).localScale = Vector3.one * vfxScale;
             Routine().Forget();
         }
 
@@ -81,7 +82,7 @@ namespace L2Farm.Features.Buildings
 
         private void Update()
         {
-            if (_seconds < 0)
+            if (_seconds < 0 && _tick)
                 return;
 
             _secondsLeft -= Time.deltaTime;
@@ -96,6 +97,7 @@ namespace L2Farm.Features.Buildings
                 timerLabel.text = "DONE";
                 progressBar.color = Color.green;
             }
+            _tick = true;
         }
     }
 }

@@ -22,6 +22,8 @@ MonoBehaviour:
     assetIdReady: Ambar_Ready
     spawnReadyCondition:
       rid: 4482425896350515245
+    buildingVFXScale: 1
+    buildingVFXOffset: {x: 0, y: 0, z: 0}
     timeToBuildInSeconds: 60
     questToLaunchOnComplete:
       value: 
@@ -34,6 +36,8 @@ MonoBehaviour:
     assetIdReady: Bakery_Ready
     spawnReadyCondition:
       rid: 4482425896350515246
+    buildingVFXScale: 1
+    buildingVFXOffset: {x: 0, y: 0, z: 0}
     timeToBuildInSeconds: 60
     questToLaunchOnComplete:
       value: 
@@ -46,6 +50,8 @@ MonoBehaviour:
     assetIdReady: Farm_Ready
     spawnReadyCondition:
       rid: 4482425896350515247
+    buildingVFXScale: 1
+    buildingVFXOffset: {x: 0, y: 0, z: 0}
     timeToBuildInSeconds: 60
     questToLaunchOnComplete:
       value: 
@@ -58,6 +64,8 @@ MonoBehaviour:
     assetIdReady: Fishing_Ready
     spawnReadyCondition:
       rid: 4482425896350515248
+    buildingVFXScale: 1
+    buildingVFXOffset: {x: 0, y: 0, z: 0}
     timeToBuildInSeconds: 60
     questToLaunchOnComplete:
       value: 
@@ -70,6 +78,8 @@ MonoBehaviour:
     assetIdReady: House_Ready
     spawnReadyCondition:
       rid: 4482425876239876096
+    buildingVFXScale: 1.5
+    buildingVFXOffset: {x: -5, y: 0, z: -10}
     timeToBuildInSeconds: 60
     questToLaunchOnComplete:
       value: Tutorial_1_Build_Home
@@ -82,6 +92,8 @@ MonoBehaviour:
     assetIdReady: Mill_Ready
     spawnReadyCondition:
       rid: 4482425876239876097
+    buildingVFXScale: 1
+    buildingVFXOffset: {x: 0, y: 0, z: 0}
     timeToBuildInSeconds: 60
     questToLaunchOnComplete:
       value: 
@@ -94,6 +106,8 @@ MonoBehaviour:
     assetIdReady: Sawmill_Ready
     spawnReadyCondition:
       rid: 4482425896350515249
+    buildingVFXScale: 1
+    buildingVFXOffset: {x: 0, y: 0, z: 0}
     timeToBuildInSeconds: 60
     questToLaunchOnComplete:
       value: 
@@ -106,6 +120,8 @@ MonoBehaviour:
     assetIdReady: Smithy_Ready
     spawnReadyCondition:
       rid: 4482425896350515250
+    buildingVFXScale: 1
+    buildingVFXOffset: {x: 0, y: 0, z: 0}
     timeToBuildInSeconds: 60
     questToLaunchOnComplete:
       value: Build_Smithy
@@ -116,7 +132,7 @@ MonoBehaviour:
       type: {class: QuestCompletedConditionConfig, ns: L2Farm.Scripts.Conditions.QuestCompleted, asm: Assembly-CSharp}
       data:
         questId:
-          value: Tutorial_1_Gather
+          value: Tutorial_1_Build_Home
     - rid: 4482425876239876097
       type: {class: QuestCompletedConditionConfig, ns: L2Farm.Scripts.Conditions.QuestCompleted, asm: Assembly-CSharp}
       data:

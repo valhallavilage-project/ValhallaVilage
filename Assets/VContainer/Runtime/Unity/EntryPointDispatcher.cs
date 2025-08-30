@@ -43,6 +43,7 @@ namespace VContainer.Unity
                         Debug.LogException(ex);
                 }
             }
+            await UniTask.WaitUntil(() => priorityInitializables.All(x => x.IsInitialized));
 
             var initializables = container.Resolve<ContainerLocal<IReadOnlyList<IInitializable>>>().Value;
             initializables = initializables.Where(x => x is not IPriorityInitializable).ToList();

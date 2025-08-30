@@ -72,8 +72,9 @@ namespace L2Farm.Scripts
             builder.Register<ConditionService>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
-            
-            builder.Register<UpgradeBuildingAction>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+
+            builder.Register<StartBuildingAction>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            builder.Register<FinishBuildingAction>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<SpawnNPCAction>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<DespawnNPCAction>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<ShowMonologAction>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
