@@ -40,7 +40,6 @@ namespace L2Farm.Features.ResourceHolder
 
         private async UniTask RespawnTask()
         {
-            Debug.LogError("FrameTest2");
             viewRoot.gameObject.SetActive(false);
             obstacle.enabled = false;
             await UniTask.WaitForSeconds(respawnInSeconds);
@@ -57,7 +56,6 @@ namespace L2Farm.Features.ResourceHolder
 
             audio.Play();
             DOTween.Kill(this);
-            Debug.LogError("FrameTest1");
             await viewRoot.transform.DOScale(new Vector3(1.5f, 1.5f, 1.5f), 0.2f);
             await viewRoot.transform.DOScale(Vector3.zero, 0.2f);
             _energyProvider.Spend(energyRequired);

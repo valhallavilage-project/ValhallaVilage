@@ -196,7 +196,7 @@ MonoBehaviour:
         spawnPointId:
           value: NPC_Tutorial_1
         questId:
-          value: Tutorial_1
+          value: Tutorial_1_Gather
     - rid: 4482425807576236034
       type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
       data:
