@@ -80,13 +80,7 @@ namespace L2Farm.Scripts.CharacterHudElement
             }
 
             RestorationRoutine().Forget();
-            OnEnergyChanged += OnOnEnergyChanged;
             IsInitialized = true;
-        }
-
-        private void OnOnEnergyChanged(int old, int current)
-        {
-            _view.SetMana(CurrentValue / (float)MaxValue);
         }
 
         private void OnCharacterSelected(CharacterId characterId)

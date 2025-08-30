@@ -29,7 +29,7 @@ namespace L2Farm.Features.Tools
 
         private void Start()
         {
-            ManualPrefabInjector.Instance?.Inject(this);
+            Injector.Instance?.Inject(this);
         }
 
         [Inject]

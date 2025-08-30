@@ -10,7 +10,7 @@ namespace L2Farm.Features.DayNight
 
         private void Start()
         {
-            ManualPrefabInjector.Instance.Inject(this);
+            Injector.Instance.Inject(this);
         }
 
         [Inject]

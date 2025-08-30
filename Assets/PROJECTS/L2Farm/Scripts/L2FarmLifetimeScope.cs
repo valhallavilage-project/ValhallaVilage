@@ -120,7 +120,7 @@ namespace L2Farm.Scripts
                 .AsSelf()
                 .AsImplementedInterfaces();
 
-            builder.RegisterComponentInHierarchy<ManualPrefabInjector>()
+            builder.RegisterComponentInHierarchy<Injector>()
                 .AsSelf();
 
             builder.Register<AddressablesManager>(Lifetime.Singleton)

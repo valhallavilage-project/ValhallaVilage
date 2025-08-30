@@ -1,33 +1,49 @@
+using CrossProject.Core;
+using CrossProject.Core.Energy;
 using CrossProject.Ui.Core;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using VContainer;
 
 namespace L2Farm.Scripts.CharacterHudElement
 {
     public class CharacterHudElement : HudElementView<CharacterHudElementModel>
     {
-        private static readonly int FillAmount = Shader.PropertyToID("_FillAmount");
+        private IEnergyProvider _energyProvider;
 
-        [SerializeField]
-        private Image portrait;
+        [SerializeField] private Image portrait;
 
-        [SerializeField]
-        private Image healthBarFill;
+        [SerializeField] private Image healthBarFill;
 
-        [SerializeField]
-        private Image manaBarFill;
+        [SerializeField] private Image manaBarFill;
 
-        [SerializeField]
-        private Image frame;
+        [SerializeField] private TMP_Text manaLabel;
 
-        [SerializeField]
-        private Sprite premiumFrame;
+        [SerializeField] private Image frame;
+
+        [SerializeField] private Sprite premiumFrame;
+
+        private void Start()
+        {
+            Injector.Instance?.Inject(this);
+        }
+
+        [Inject]
+        private void Construct(
+            IEnergyProvider energyProvider)
+        {
+            _energyProvider = energyProvider;
+            _energyProvider.OnEnergyChanged += OnEnergyChanged;
+        }
 
         public void SetPortrait(Sprite sprite) => portrait.sprite = sprite;
 
-        public void SetHealth(float value01) => healthBarFill.material.SetFloat(FillAmount, value01);
-
-        public void SetMana(float value01) => manaBarFill.material.SetFloat(FillAmount, value01);
+        private void OnEnergyChanged(int old, int current)
+        {
+            manaBarFill.fillAmount = (float)current/_energyProvider.MaxValue;
+            manaLabel.text = $"{current}/{_energyProvider.MaxValue}";
+        }
 
         public void SetPremium(bool value)
         {

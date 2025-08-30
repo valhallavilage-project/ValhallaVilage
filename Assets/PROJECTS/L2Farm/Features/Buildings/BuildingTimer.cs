@@ -46,7 +46,7 @@ namespace L2Farm.Features.Buildings
 
         private void Start()
         {
-            ManualPrefabInjector.Instance?.Inject(this);
+            Injector.Instance?.Inject(this);
         }
 
         public void Setup(int seconds, BuildingId buildingId, QuestId questId)
