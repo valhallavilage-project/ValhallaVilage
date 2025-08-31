@@ -32,6 +32,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3c6fa3754f34e40228bf537ea9b7b07b
+    m_Address: InventoryScreen
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 411eaeda2ab5c4e43a5b612872e2698e
     m_Address: SettingsHudElement
     m_ReadOnly: 0
