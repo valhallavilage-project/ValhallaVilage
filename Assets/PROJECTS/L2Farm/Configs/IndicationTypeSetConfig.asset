@@ -15,7 +15,7 @@ MonoBehaviour:
   items:
   - id: Quest_Active
     icon: {fileID: 21300000, guid: 54dea1f54e3fc42f5871b0eacec05572, type: 3}
-    color: {r: 1, g: 0.78683865, b: 0, a: 1}
+    color: {r: 1, g: 1, b: 1, a: 1}
   - id: Quest_Ready
     icon: {fileID: 21300000, guid: de8df5f50d5873242bc3acb76489dd3b, type: 3}
     color: {r: 1, g: 0.7882353, b: 0, a: 1}
