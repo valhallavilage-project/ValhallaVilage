@@ -17,11 +17,11 @@ MonoBehaviour:
   - rid: 4482425807576236032
   - rid: 4482425896350515200
   - rid: 77259970479915008
+  - rid: 4482425896350515235
   - rid: 4482425896350515210
   - rid: 4482425896350515215
   - rid: 4482425896350515220
   - rid: 4482425896350515225
-  - rid: 4482425896350515235
   - rid: 4482425896350515230
   - rid: 4482425896350515240
   references:
@@ -42,10 +42,12 @@ MonoBehaviour:
         - rid: 77259970479915013
         steps:
         - rid: 77259970479915009
+        - rid: 4482425937018486790
+        - rid: 4482425937018486799
         winCondition:
           rid: -2
         winActions:
-        - rid: 77259970479915015
+        - rid: 4482425937018486797
         loseCondition:
           rid: 4482425896350515208
         loseActions: []
@@ -58,17 +60,18 @@ MonoBehaviour:
           rid: 77259970479915011
         winActions: []
         loseCondition:
-          rid: 77259970479915014
+          rid: 4482425937018486791
         loseActions: []
     - rid: 77259970479915010
       type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: Assembly-CSharp}
       data:
         speaker:
           value: NPC_Farmer
-        message: KUKUKU
+        message: "I\u2019d like to thank you with our harvest, but our mill was damaged
+          as well."
         questId:
           value: Tutorial_2
-        stepIndexWithResourceCondition: 0
+        stepIndexWithResourceCondition: -1
     - rid: 77259970479915011
       type: {class: HasEnoughResourcesConditionConfig, ns: L2Farm.Scripts.Conditions, asm: Assembly-CSharp}
       data:
@@ -88,17 +91,6 @@ MonoBehaviour:
           value: NPC_Farmer
         questId:
           value: Tutorial_2
-    - rid: 77259970479915014
-      type: {class: NotEnoughResourcesConditionConfig, ns: L2Farm.Scripts.Conditions, asm: Assembly-CSharp}
-      data:
-        questId:
-          value: Tutorial_2
-        stepIndexWithResourceCondition: 0
-    - rid: 77259970479915015
-      type: {class: UpgradeBuildingActionConfig, ns: L2Farm.Features.Buildings.Actions, asm: Assembly-CSharp}
-      data:
-        buildingId:
-          value: Mill
     - rid: 4482425490423152640
       type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
       data:
@@ -182,6 +174,7 @@ MonoBehaviour:
         steps:
         - rid: 4482425896350515201
         - rid: 4482425807576236034
+        - rid: 4482425937018486784
         winCondition:
           rid: -2
         winActions:
@@ -205,7 +198,8 @@ MonoBehaviour:
           rid: 4482425807576236035
         winCondition:
           rid: 4482425807576236036
-        winActions: []
+        winActions:
+        - rid: 4482425937018486802
         loseCondition:
           rid: 4482425807576236037
         loseActions: []
@@ -224,10 +218,10 @@ MonoBehaviour:
         resourceConditions:
         - resourceId:
             value: Resource_Wood
-          neededQuantity: 1
+          neededQuantity: 20
         - resourceId:
             value: Resource_Stone
-          neededQuantity: 1
+          neededQuantity: 15
     - rid: 4482425807576236037
       type: {class: NotEnoughResourcesConditionConfig, ns: L2Farm.Scripts.Conditions, asm: Assembly-CSharp}
       data:
@@ -245,7 +239,7 @@ MonoBehaviour:
         id: Tutorial_1_Build_Home
         proceedAfterLaunch: 0
         targetSpawnPoint:
-          value: NPC_Tutorial_1
+          value: NPC_Farmer
         launchCondition:
           rid: -2
         launchActions:
@@ -256,6 +250,8 @@ MonoBehaviour:
           rid: -2
         winActions:
         - rid: 4482425896350515255
+        - rid: 4482425937018486788
+        - rid: 4482425937018486789
         loseCondition:
           rid: 4482425896350515209
         loseActions: []
@@ -298,9 +294,8 @@ MonoBehaviour:
       type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: Assembly-CSharp}
       data:
         speaker:
-          value: NPC_Valentine
-        message: "Great! You\u2019ve been a huge help. Now we have enough resources
-          to rebuild Grandpa\u2019s house."
+          value: NPC_Farmer
+        message: Thank you!
         questId:
           value: Tutorial_1_Build_Home
         stepIndexWithResourceCondition: -1
@@ -559,13 +554,14 @@ MonoBehaviour:
           value: NPC_Valentine
         launchCondition:
           rid: -2
-        launchActions: []
+        launchActions:
+        - rid: 4482425937018486796
         steps:
         - rid: 4482425896350515236
         winCondition:
           rid: -2
         winActions:
-        - rid: 4482425896350515237
+        - rid: 4482425937018486798
         loseCondition:
           rid: 4482425896350515238
         loseActions: []
@@ -580,11 +576,6 @@ MonoBehaviour:
         loseCondition:
           rid: -2
         loseActions: []
-    - rid: 4482425896350515237
-      type: {class: UpgradeBuildingActionConfig, ns: L2Farm.Features.Buildings.Actions, asm: Assembly-CSharp}
-      data:
-        buildingId:
-          value: Mill
     - rid: 4482425896350515238
       type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
       data: 
@@ -666,8 +657,137 @@ MonoBehaviour:
       type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: Assembly-CSharp}
       data:
         npcId:
-          value: Valentine
+          value: Farmer
         spawnPointId:
-          value: NPC_Tutorial_1
+          value: NPC_Farmer
         questId:
           value: Tutorial_1_Build_Home
+    - rid: 4482425937018486784
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 4482425937018486785
+        winCondition:
+          rid: -2
+        winActions: []
+        loseCondition:
+          rid: 4482425937018486786
+        loseActions: []
+    - rid: 4482425937018486785
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: Assembly-CSharp}
+      data:
+        speaker:
+          value: NPC_Valentine
+        message: "Great! You\u2019ve been a huge help. Now we have enough resources
+          to rebuild Grandpa\u2019s house."
+        questId:
+          value: Tutorial_1_Gather
+        stepIndexWithResourceCondition: -1
+    - rid: 4482425937018486786
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 4482425937018486788
+      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: Assembly-CSharp}
+      data:
+        npcId:
+          value: Valentine
+        spawnPointId:
+          value: NPC_Valentine
+        questId:
+          value: 
+    - rid: 4482425937018486789
+      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Tutorial_2
+    - rid: 4482425937018486790
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 4482425937018486792
+        winCondition:
+          rid: 4482425937018486794
+        winActions: []
+        loseCondition:
+          rid: 4482425937018486795
+        loseActions: []
+    - rid: 4482425937018486791
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 4482425937018486792
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: Assembly-CSharp}
+      data:
+        speaker:
+          value: NPC_Farmer
+        message: Might you lend a hand in repairing it as well?
+        questId:
+          value: Tutorial_2
+        stepIndexWithResourceCondition: 1
+    - rid: 4482425937018486794
+      type: {class: HasEnoughResourcesConditionConfig, ns: L2Farm.Scripts.Conditions, asm: Assembly-CSharp}
+      data:
+        resourceConditions:
+        - resourceId:
+            value: Resource_Stone
+          neededQuantity: 40
+        - resourceId:
+            value: Resource_Wood
+          neededQuantity: 25
+    - rid: 4482425937018486795
+      type: {class: NotEnoughResourcesConditionConfig, ns: L2Farm.Scripts.Conditions, asm: Assembly-CSharp}
+      data:
+        questId:
+          value: Tutorial_2
+        stepIndexWithResourceCondition: 1
+    - rid: 4482425937018486796
+      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: Assembly-CSharp}
+      data:
+        npcId:
+          value: Valentine
+        spawnPointId:
+          value: NPC_Valentine
+        questId:
+          value: Build_Mill
+    - rid: 4482425937018486797
+      type: {class: StartBuildingActionConfig, ns: L2Farm.Features.Buildings.Actions, asm: Assembly-CSharp}
+      data:
+        buildingId:
+          value: Mill
+    - rid: 4482425937018486798
+      type: {class: FinishBuildingActionConfig, ns: L2Farm.Features.Buildings.Actions, asm: Assembly-CSharp}
+      data:
+        buildingId:
+          value: Mill
+    - rid: 4482425937018486799
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 4482425937018486800
+        winCondition:
+          rid: -2
+        winActions: []
+        loseCondition:
+          rid: 4482425937018486801
+        loseActions: []
+    - rid: 4482425937018486800
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: Assembly-CSharp}
+      data:
+        speaker:
+          value: NPC_Valentine
+        message: Wow! It looks cool!
+        questId:
+          value: Tutorial_2
+        stepIndexWithResourceCondition: -1
+    - rid: 4482425937018486801
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 4482425937018486802
+      type: {class: SpendResourcesActionConfig, ns: L2Farm.Scripts.Actions.SpendResources, asm: Assembly-CSharp}
+      data:
+        resourceConditions:
+        - resourceId:
+            value: Resource_Wood
+          neededQuantity: 20
+        - resourceId:
+            value: Resource_Stone
+          neededQuantity: 15

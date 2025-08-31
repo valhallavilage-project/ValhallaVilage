@@ -30,6 +30,7 @@ using L2Farm.Features.QuestsScreen;
 using L2Farm.Features.ShopScreen;
 using L2Farm.Features.SimpleMonolog;
 using L2Farm.Scripts.Actions;
+using L2Farm.Scripts.Actions.SpendResources;
 using L2Farm.Scripts.CharacterHudElement;
 using L2Farm.Scripts.Conditions;
 using L2Farm.Scripts.Conditions.QuestCompleted;
@@ -73,6 +74,7 @@ namespace L2Farm.Scripts
                 .AsSelf()
                 .AsImplementedInterfaces();
 
+            builder.Register<SpendResourcesAction>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<StartBuildingAction>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<FinishBuildingAction>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<SpawnNPCAction>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();

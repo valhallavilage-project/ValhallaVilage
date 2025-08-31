@@ -25,6 +25,8 @@ namespace L2Farm.Features.NPC
         {
             _questService = questService;
             _questService.OnQuestProceed += OnQuestProceed;
+            _questService.OnQuestWin += OnQuestComplete;
+            _questService.OnQuestLose += OnQuestComplete;
         }
 
         private void OnDestroy()
@@ -32,13 +34,17 @@ namespace L2Farm.Features.NPC
             _questService.OnQuestProceed -= OnQuestProceed;
         }
 
+        private void OnQuestComplete(QuestId id)
+        {
+            if (id == _targetQuestId)
+                HideAll();
+        }
+
         private void OnQuestProceed(QuestId questId, int stepIndex)
         {
             if (string.IsNullOrEmpty(questId))
             {
-                activeQuestionMark.SetActive(false);
-                disabledQuestionMark.SetActive(false);
-                exclamationMark.SetActive(false);
+                HideAll();
                 return;
             }
 
@@ -56,6 +62,13 @@ namespace L2Farm.Features.NPC
                 activeQuestionMark.SetActive(condition);
                 disabledQuestionMark.SetActive(!condition);
             }
+        }
+        private void HideAll()
+        {
+
+            activeQuestionMark.SetActive(false);
+            disabledQuestionMark.SetActive(false);
+            exclamationMark.SetActive(false);
         }
 
         public void Setup(QuestId questId, QuestService questService)

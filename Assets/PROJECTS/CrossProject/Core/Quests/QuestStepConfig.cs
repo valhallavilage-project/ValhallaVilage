@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace CrossProject.Core.Quests
 {
-    [System.Serializable, HideReferenceObjectPicker]
+    [System.Serializable]
     public class QuestStepConfig
     {
         [SerializeReference] public IActionConfig stepAction;

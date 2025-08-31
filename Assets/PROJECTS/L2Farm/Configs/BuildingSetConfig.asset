@@ -80,7 +80,7 @@ MonoBehaviour:
       rid: 4482425876239876096
     buildingVFXScale: 1.5
     buildingVFXOffset: {x: -5, y: 0, z: -10}
-    timeToBuildInSeconds: 60
+    timeToBuildInSeconds: 20
     questToLaunchOnComplete:
       value: Tutorial_1_Build_Home
   - id: Mill
@@ -96,7 +96,7 @@ MonoBehaviour:
     buildingVFXOffset: {x: 0, y: 0, z: 0}
     timeToBuildInSeconds: 60
     questToLaunchOnComplete:
-      value: 
+      value: Build_Mill
   - id: Sawmill
     sceneId:
       value: L2Farm_FirstTown
