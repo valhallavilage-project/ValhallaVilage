@@ -5,6 +5,7 @@ using CrossProject.Core.SaveLoad;
 using CrossProject.Ui.Core;
 using Cysharp.Threading.Tasks;
 using CrossProject.Core.Energy;
+using CrossProject.Core.Experience;
 using UnityEngine;
 using VContainer.Unity;
 
@@ -20,6 +21,7 @@ namespace L2Farm.Scripts.CharacterHudElement
         private CharacterHudElement _view;
         private EnergyRestorationConfig _energyRestorationConfig;
         private int _currentValue = 100;
+        private int _currentExp = 0;
 
         public bool IsInitialized { get; private set; }
         public int CurrentValue
@@ -40,7 +42,15 @@ namespace L2Farm.Scripts.CharacterHudElement
                 OnEnergyChanged?.Invoke(oldValue, _currentValue);
             }
         }
+
         public int MaxValue => 100;
+
+        public int CurrentTotalExp
+        {
+            get => _currentExp;
+        }
+
+        public int CurrentLevel { get; }
 
         public event Action<int, int> OnEnergyChanged;
 
