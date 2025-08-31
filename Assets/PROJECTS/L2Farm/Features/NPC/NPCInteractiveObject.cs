@@ -2,6 +2,7 @@ using CrossProject.Core;
 using CrossProject.Core.Interactions;
 using CrossProject.Core.Quests;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using VContainer;
 
 namespace L2Farm.Features.NPC
@@ -10,21 +11,11 @@ namespace L2Farm.Features.NPC
     {
         private QuestService _questService;
 
+        [SerializeField] private NpcQuestMarker _marker;
+
         private QuestId questId;
 
         public QuestId CurrentQuestId => questId;
-
-        private void Start()
-        {
-            Injector.Instance?.Inject(this);
-        }
-
-        [Inject]
-        private void Construct(QuestService questService)
-        {
-            _questService = questService;
-            _questService.OnQuestWin += HandleCurrentQuestWin;
-        }
 
         protected override async UniTask AfterInteraction()
         {
@@ -32,9 +23,12 @@ namespace L2Farm.Features.NPC
                 _questService.TryProceedStepsOf(questId);
         }
 
-        public void SetQuest(QuestId id)
+        public void SetQuest(QuestId id, QuestService questService)
         {
             questId = id;
+            _questService = questService;
+            _questService.OnQuestWin += HandleCurrentQuestWin;
+            _marker.Setup(id, _questService);
         }
 
         private void HandleCurrentQuestWin(QuestId id)

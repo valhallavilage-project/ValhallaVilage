@@ -15,6 +15,7 @@ namespace L2Farm.Features.QuestIndication
         private QuestService _questService;
 
         [SerializeField] private float radius;
+        [SerializeField] private float hideRadius = 10;
         [SerializeField] private Indicator prefab;
         [SerializeField] private IndicationTypeSetConfig indicationTypeSetConfig;
 
@@ -90,6 +91,8 @@ namespace L2Farm.Features.QuestIndication
                 var targetPos = pair.target.WithY(0);
                 pair.instance.transform.localPosition = Vector3.zero;
                 pair.instance.transform.forward = targetPos - instancePos;
+
+                pair.instance.gameObject.SetActive(Vector3.Distance(transform.position, targetPos) > hideRadius);
             }
         }
     }

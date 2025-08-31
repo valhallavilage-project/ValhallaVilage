@@ -245,5 +245,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
+  hideRadius: 10
   prefab: {fileID: 1546175887605720995, guid: 7baa24ce87c044ef5913509e1a085d75, type: 3}
   indicationTypeSetConfig: {fileID: 11400000, guid: b11a4cfbd382846648b76d49b8c979a3, type: 2}

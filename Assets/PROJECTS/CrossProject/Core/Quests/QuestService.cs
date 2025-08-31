@@ -3,6 +3,7 @@ using System.Linq;
 using CrossProject.Core.Actions;
 using CrossProject.Core.Conditions;
 using CrossProject.Core.SaveLoad;
+using CrossProject.Core.SpawnPoints;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer.Unity;
@@ -17,6 +18,7 @@ namespace CrossProject.Core.Quests
         private readonly GameStateManager _gameStateManager;
         private readonly ConditionService _conditionService;
         private readonly ActionService _actionService;
+        private readonly SpawnPointService _spawnPointService;
 
         private QuestSetConfig _questSetConfig;
 
@@ -25,6 +27,7 @@ namespace CrossProject.Core.Quests
         public bool IsInitialized { get; private set; }
 
         public event System.Action<QuestId> OnQuestLaunch;
+        public event System.Action<QuestId, int> OnQuestProceed;
         public event System.Action<QuestId> OnQuestWin;
         public event System.Action<QuestId> OnQuestLose;
 
@@ -32,17 +35,20 @@ namespace CrossProject.Core.Quests
             AddressablesManager addressablesManager,
             GameStateManager gameStateManager,
             ConditionService conditionService,
-            ActionService actionService)
+            ActionService actionService,
+            SpawnPointService spawnPointService)
         {
             _addressablesManager = addressablesManager;
             _gameStateManager = gameStateManager;
             _conditionService = conditionService;
             _actionService = actionService;
+            _spawnPointService = spawnPointService;
         }
 
         public async UniTask Initialize()
         {
             _questSetConfig = await _addressablesManager.LoadAssetAsync<QuestSetConfig>();
+            await UniTask.WaitUntil(() => _spawnPointService.IsInitialized);
             LoadQuests();
             IsInitialized = true;
         }
@@ -145,6 +151,7 @@ namespace CrossProject.Core.Quests
 
             _actionService.Execute(step.winActions);
             _launchedQuests[id]++;
+            OnQuestProceed?.Invoke(id, _launchedQuests[id]);
             _gameStateManager.State.Get<QuestsLogPart>().launchedQuests[id]++;
             _gameStateManager.Save();
             Debug.Log($"[{nameof(QuestService)}] : Step proceed : {id} : {_launchedQuests[id] - 1} ---> {_launchedQuests[id]}");
@@ -179,6 +186,17 @@ namespace CrossProject.Core.Quests
             _actionService.Execute(config.winActions);
             OnQuestWin?.Invoke(id);
             Debug.Log($"[{nameof(QuestService)}] : {id} Quest Win :-)");
+        }
+
+        public int GetCurrentStepFor(QuestId id)
+        {
+            if (string.IsNullOrEmpty(id))
+                return -1;
+
+            if (_launchedQuests.TryGetValue(id, out int stepIndex))
+                return stepIndex;
+
+            return -1;
         }
 
         public QuestConfig GetConfigFor(QuestId id) => _questSetConfig.Get(id);

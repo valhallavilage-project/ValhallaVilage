@@ -9,19 +9,34 @@ using VContainer;
 namespace CrossProject.Core.Interactions
 {
     [RequireComponent(typeof(SphereCollider), typeof(Rigidbody))]
-    public class Interactor : MonoBehaviour
+    public class Interactor : MonoBehaviour, IBlockable
     {
         private IPlayerSkinProvider _playerSkinProvider;
 
         private readonly List<AbstractInteractiveObject> _objects = new();
 
         private SphereCollider _collider;
+        private HashSet<Type> _blockers = new ();
 
         public ReactiveProperty<AbstractInteractiveObject> Closest { get; } = new ();
-        public bool IsBusy { get; set; }
+        public bool IsBlocked => _blockers.Count > 0;
 
         public event Action<InteractionAnimation> OnInteractionStart;
         public event Action<InteractionAnimation> OnInteractionEnd;
+
+        public void AddBlock(object blockRequester)
+        {
+            var type = blockRequester.GetType();
+            if (!_blockers.Contains(type))
+                _blockers.Add(type);
+        }
+
+        public void RemoveBlock(object blockRequester)
+        {
+            var type = blockRequester.GetType();
+            if (_blockers.Contains(type))
+                _blockers.Remove(type);
+        }
 
         private void Awake()
         {
@@ -60,6 +75,9 @@ namespace CrossProject.Core.Interactions
 
         private void FixedUpdate()
         {
+            if (IsBlocked)
+                return;
+
             float closestDistance = -1;
             AbstractInteractiveObject closest = null;
             foreach (var interactableObject in _objects)

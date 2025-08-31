@@ -13,6 +13,7 @@ namespace L2Farm.Features.NPC
     {
         private readonly AddressablesManager _addressablesManager;
         private readonly SpawnPointService _spawnPointService;
+        private readonly QuestService _questService;
 
         private NPCSetConfig _npcSetConfig;
 
@@ -22,18 +23,24 @@ namespace L2Farm.Features.NPC
 
         public NPCService(
             AddressablesManager addressablesManager,
-            SpawnPointService spawnPointService)
+            SpawnPointService spawnPointService,
+            QuestService questService)
         {
             _addressablesManager = addressablesManager;
             _spawnPointService = spawnPointService;
+            _questService = questService;
         }
 
         public async UniTask Initialize()
         {
             _npcSetConfig = await _addressablesManager.LoadAssetAsync<NPCSetConfig>();
-            await UniTask.WaitUntil(() => _spawnPointService.IsInitialized);
+            await UniTask.WaitUntil(() => _spawnPointService.IsInitialized && _questService.IsInitialized);
             foreach (var npcConfig in _npcSetConfig.items)
+            {
+                if (_npcs.ContainsKey(npcConfig.id))
+                    continue;
                 SpawnNPC(npcConfig.id, npcConfig.defaultSpawnPoint, null);
+            }
             IsInitialized = true;
         }
 
@@ -54,7 +61,7 @@ namespace L2Farm.Features.NPC
                 var spawnPointRotation = _spawnPointService.GetEulerAngles(spawnPointId);
                 var instance = Object.Instantiate(config.prefab, spawnPointPosition, Quaternion.Euler(spawnPointRotation));
                 var component = instance.GetComponent<NPCInteractiveObject>();
-                component.SetQuest(questId);
+                component.SetQuest(questId, _questService);
                 _npcs[id] = (spawnPointId, component);
                 Debug.Log($"[{nameof(NPCService)}] : Spawned NPC with id : {id} at {spawnPointId} with quest :{questId}.");
                 return;
@@ -62,7 +69,7 @@ namespace L2Farm.Features.NPC
 
             if (pair.instance.CurrentQuestId != questId)
             {
-                pair.instance.SetQuest(questId);
+                pair.instance.SetQuest(questId, _questService);
                 Debug.Log($"[{nameof(NPCService)}] : Updated quest for {id} at {spawnPointId} with : {questId}.");
             }
         }

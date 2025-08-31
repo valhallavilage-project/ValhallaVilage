@@ -12,7 +12,7 @@ namespace CrossProject.Core.SpawnPoints
 
         private SpawnPointSetConfig _spawnPointSetConfig;
 
-        public bool IsInitialized { get; private set; }
+        public bool IsInitialized { get; private set; } = false;
 
         public SpawnPointService(AddressablesManager addressablesManager)
         {
@@ -22,6 +22,8 @@ namespace CrossProject.Core.SpawnPoints
         public async UniTask Initialize()
         {
             _spawnPointSetConfig = await _addressablesManager.LoadAssetAsync<SpawnPointSetConfig>();
+            Debug.Log($"[{nameof(SpawnPointService)}] : loaded config : {_spawnPointSetConfig?.items?.Count}");
+            await UniTask.WaitUntil(() => _spawnPointSetConfig != null);
             IsInitialized = true;
         }
 
