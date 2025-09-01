@@ -3,7 +3,47 @@ guid: d28470e4d099b4ad5832c6da3268385b
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MC_Female_Body
+    second: {fileID: 2100000, guid: 921aaf218aba9944a8748793e7454b22, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MC_Female_Body_Skin2
+    second: {fileID: 2100000, guid: f35c70794af725348a777f45ef6acd98, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MC_Female_Head
+    second: {fileID: 2100000, guid: 05c984b84b8b1d644ac38b1e755816e4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MC_Male_Body
+    second: {fileID: 2100000, guid: 5324f5e18d43a416faecffb6ffb13cb6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MC_Male_Body_Skin2
+    second: {fileID: 2100000, guid: 2326e8eff50ade84f9899b40fbcb76b4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MC_Male_Head
+    second: {fileID: 2100000, guid: a8a955edc5efc477096908e72093eb14, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tool_Sword
+    second: {fileID: 2100000, guid: 051eee90381cbf44ea4d8da9f681a9ce, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tool_Sword_Skin2
+    second: {fileID: 2100000, guid: b6e32cf450b142942ada892ed7399d79, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
