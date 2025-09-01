@@ -13128,6 +13128,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -2072040086291044643, guid: d7f7806f6d3926549a656c66056f95b1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.12041747
+      objectReference: {fileID: 0}
+    - target: {fileID: -2072040086291044643, guid: d7f7806f6d3926549a656c66056f95b1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.0036802085
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d7f7806f6d3926549a656c66056f95b1, type: 3}
       propertyPath: m_Name
       value: GuardJunior_Idle (2)
@@ -13160,7 +13168,7 @@ Animator:
   m_GameObject: {fileID: 307417955}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 693ceabb502313e47963850bf7b75a1e, type: 2}
+  m_Controller: {fileID: 9100000, guid: d7f439a8aa7e00045888c25fceb2cecd, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -18342,6 +18350,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -2072040086291044643, guid: d7f7806f6d3926549a656c66056f95b1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.12041747
+      objectReference: {fileID: 0}
+    - target: {fileID: -2072040086291044643, guid: d7f7806f6d3926549a656c66056f95b1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.0036802085
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d7f7806f6d3926549a656c66056f95b1, type: 3}
       propertyPath: m_Name
       value: GuardJunior_Idle (4)
@@ -18374,7 +18390,7 @@ Animator:
   m_GameObject: {fileID: 418767424}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 693ceabb502313e47963850bf7b75a1e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 0fa17c596dfef1c4d9127fc572f497ab, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -21491,6 +21507,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -2072040086291044643, guid: d7f7806f6d3926549a656c66056f95b1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.12041747
+      objectReference: {fileID: 0}
+    - target: {fileID: -2072040086291044643, guid: d7f7806f6d3926549a656c66056f95b1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.0036802085
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d7f7806f6d3926549a656c66056f95b1, type: 3}
       propertyPath: m_Name
       value: GuardJunior_Idle
@@ -21523,7 +21547,7 @@ Animator:
   m_GameObject: {fileID: 468636263}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 693ceabb502313e47963850bf7b75a1e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 46e02be0085b9504eb49e9a89330ae29, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -30316,7 +30340,7 @@ Animator:
   m_GameObject: {fileID: 690534143}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ae1fcc6764fea6e4abdceb63d778b53c, type: 2}
+  m_Controller: {fileID: 9100000, guid: d65bb1c9921a00541bd048d1fd26bd0e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -32255,6 +32279,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -2072040086291044643, guid: d7f7806f6d3926549a656c66056f95b1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.12041747
+      objectReference: {fileID: 0}
+    - target: {fileID: -2072040086291044643, guid: d7f7806f6d3926549a656c66056f95b1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.0036802085
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d7f7806f6d3926549a656c66056f95b1, type: 3}
       propertyPath: m_Name
       value: GuardJunior_Idle (1)
@@ -32287,7 +32319,7 @@ Animator:
   m_GameObject: {fileID: 742207952}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 693ceabb502313e47963850bf7b75a1e, type: 2}
+  m_Controller: {fileID: 9100000, guid: b9e582a44abafba4081f569eb5a67ebf, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -69354,6 +69386,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -2072040086291044643, guid: d7f7806f6d3926549a656c66056f95b1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.12041747
+      objectReference: {fileID: 0}
+    - target: {fileID: -2072040086291044643, guid: d7f7806f6d3926549a656c66056f95b1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.0036802085
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d7f7806f6d3926549a656c66056f95b1, type: 3}
       propertyPath: m_Name
       value: GuardJunior_Idle (5)
@@ -80536,6 +80576,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -2072040086291044643, guid: d7f7806f6d3926549a656c66056f95b1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.12041747
+      objectReference: {fileID: 0}
+    - target: {fileID: -2072040086291044643, guid: d7f7806f6d3926549a656c66056f95b1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.0036802085
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d7f7806f6d3926549a656c66056f95b1, type: 3}
       propertyPath: m_Name
       value: GuardJunior_Idle (3)
@@ -80568,7 +80616,7 @@ Animator:
   m_GameObject: {fileID: 1954137634}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 693ceabb502313e47963850bf7b75a1e, type: 2}
+  m_Controller: {fileID: 9100000, guid: de5824e6410ade24d9c5a37577de3b0c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

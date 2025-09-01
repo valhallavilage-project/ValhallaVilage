@@ -28,7 +28,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GuardJunior_Idle
+  m_Name: GuardJunior_Idle 1
   serializedVersion: 5
   m_AnimatorParameters: []
   m_AnimatorLayers:
@@ -53,7 +53,7 @@ AnimatorState:
   m_PrefabAsset: {fileID: 0}
   m_Name: mixamo_com
   m_Speed: 1
-  m_CycleOffset: 0
+  m_CycleOffset: 0.25
   m_Transitions: []
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
