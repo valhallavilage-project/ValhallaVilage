@@ -707,7 +707,8 @@ MonoBehaviour:
           rid: 4482425937018486792
         winCondition:
           rid: 4482425937018486794
-        winActions: []
+        winActions:
+        - rid: 4482425937018486803
         loseCondition:
           rid: 4482425937018486795
         loseActions: []
@@ -791,3 +792,13 @@ MonoBehaviour:
         - resourceId:
             value: Resource_Stone
           neededQuantity: 15
+    - rid: 4482425937018486803
+      type: {class: SpendResourcesActionConfig, ns: L2Farm.Scripts.Actions.SpendResources, asm: Assembly-CSharp}
+      data:
+        resourceConditions:
+        - resourceId:
+            value: Resource_Stone
+          neededQuantity: 40
+        - resourceId:
+            value: Resource_Wood
+          neededQuantity: 25
