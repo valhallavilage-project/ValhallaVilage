@@ -63,7 +63,7 @@ namespace L2Farm.Features.NPC
                 var component = instance.GetComponent<NPCInteractiveObject>();
                 component.SetQuest(questId, _questService);
                 _npcs[id] = (spawnPointId, component);
-                Debug.Log($"[{nameof(NPCService)}] : Spawned NPC with id : {id} at {spawnPointId} with quest :{questId}.");
+                //Debug.Log($"[{nameof(NPCService)}] : Spawned NPC with id : {id} at {spawnPointId} with quest :{questId}.");
                 return;
             }
 

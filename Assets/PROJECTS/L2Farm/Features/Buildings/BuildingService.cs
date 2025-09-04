@@ -84,7 +84,7 @@ namespace L2Farm.Features.Buildings
                 timer.Setup(remainingTime, config.id, config.questToLaunchOnComplete, config.buildingVFXScale);
             }
 
-            Debug.Log($"[{nameof(BuildingService)}] : spawned {config.id} with asset : {key}!");
+            //Debug.Log($"[{nameof(BuildingService)}] : spawned {config.id} with asset : {key}!");
         }
 
         public async UniTask StartUpgradeProcess(BuildingId id)
