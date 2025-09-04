@@ -16,10 +16,16 @@ MonoBehaviour:
   - id: MC_Female_Default
     owner:
       value: MC_Female
-    skin: {fileID: 5892346067273240986, guid: f10c903b7f3ca40e29a32acd1c0d00ff, type: 3}
     isDefaultSkin: 1
   - id: MC_Male_Default
     owner:
       value: MC_Male
-    skin: {fileID: 5892346067273240986, guid: d8abca87f08254e0b902008758f12a2a, type: 3}
     isDefaultSkin: 1
+  - id: MC_Female_Black_Scale
+    owner:
+      value: MC_Female
+    isDefaultSkin: 0
+  - id: MC_Male_Black_Scale
+    owner:
+      value: MC_Male
+    isDefaultSkin: 0
