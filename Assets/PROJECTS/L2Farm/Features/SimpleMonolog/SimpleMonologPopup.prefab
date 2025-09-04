@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 20, y: 0}
-  m_SizeDelta: {x: -200, y: -10}
+  m_AnchoredPosition: {x: 30.2795, y: 0}
+  m_SizeDelta: {x: -179.4409, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4073320353353498979
 CanvasRenderer:
@@ -68,7 +68,7 @@ MonoBehaviour:
   m_text: New Text
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4c2a86390946a43b2ae5f79c150199d6, type: 2}
-  m_sharedMaterial: {fileID: 2147912664184731528, guid: 4c2a86390946a43b2ae5f79c150199d6, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: a4cbf0acfb2fb4cd9938aaeaa5276ca1, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -92,7 +92,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 29.35
+  m_fontSize: 43.7
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 100, y: 0, z: 70, w: 0}
+  m_margin: {x: 0.36767578, y: -4.7444153, z: 0.41540527, w: -4.7444153}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -743,14 +743,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis fringilla
-    vitae orci quis luctus. Sed scelerisque maximus maximus. Praesent metus nunc,
-    cursus non gravida non, efficitur at ex. Pellentesque varius tincidunt viverra.
-    Vivamus egestas dui id lorem finibus, vitae dictum dolor placerat. Mauris at
-    ultrices arcu, sit amet molestie neque.
+  m_text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4c2a86390946a43b2ae5f79c150199d6, type: 2}
-  m_sharedMaterial: {fileID: 2147912664184731528, guid: 4c2a86390946a43b2ae5f79c150199d6, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: a4cbf0acfb2fb4cd9938aaeaa5276ca1, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -774,7 +770,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 29.75
+  m_fontSize: 72
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
