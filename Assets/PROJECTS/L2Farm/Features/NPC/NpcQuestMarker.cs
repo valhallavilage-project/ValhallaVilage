@@ -54,6 +54,8 @@ namespace L2Farm.Features.NPC
             if (stepIndex == 0)
             {
                 exclamationMark.SetActive(true);
+                activeQuestionMark.SetActive(false);
+                disabledQuestionMark.SetActive(false);
             }
             else
             {
@@ -63,6 +65,7 @@ namespace L2Farm.Features.NPC
                 disabledQuestionMark.SetActive(!condition);
             }
         }
+
         private void HideAll()
         {
 
