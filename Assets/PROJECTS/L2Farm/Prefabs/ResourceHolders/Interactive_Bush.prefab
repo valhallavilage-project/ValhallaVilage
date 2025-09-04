@@ -103,6 +103,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2161099450640851090, guid: 862ae5e2f85c0491fad751ad5724a0cb, type: 3}
+      propertyPath: interactionDistance
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2161099450640851090, guid: 862ae5e2f85c0491fad751ad5724a0cb, type: 3}
       propertyPath: interactionDuration
       value: 2.5
       objectReference: {fileID: 0}
@@ -153,6 +157,14 @@ PrefabInstance:
     - target: {fileID: 2665815157793418560, guid: 862ae5e2f85c0491fad751ad5724a0cb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4979209157328270696, guid: 862ae5e2f85c0491fad751ad5724a0cb, type: 3}
+      propertyPath: m_Extents.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4979209157328270696, guid: 862ae5e2f85c0491fad751ad5724a0cb, type: 3}
+      propertyPath: m_Extents.z
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6641572915589553689, guid: 862ae5e2f85c0491fad751ad5724a0cb, type: 3}
       propertyPath: m_IsActive
