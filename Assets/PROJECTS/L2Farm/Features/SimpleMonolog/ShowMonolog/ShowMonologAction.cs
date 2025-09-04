@@ -57,6 +57,7 @@ namespace L2Farm.Features.SimpleMonolog
                     need = resourceCondition.neededQuantity
                 });
             }
+            var canProceed = _questService.CanProceed(config.questId);
             var model = new SimpleMonologPopupModel
             {
                 portrait = characterConfig.portrait,
@@ -67,7 +68,7 @@ namespace L2Farm.Features.SimpleMonolog
                 next = () =>
                 {
                     _uiService.Close(_view);
-                    if (_questService.CanProceed(config.questId))
+                    if (canProceed)
                         _questService.TryProceedStepsOf(config.questId);
                 }
             };

@@ -106,7 +106,8 @@ MonoBehaviour:
         - rid: 4482425671116914689
         winCondition:
           rid: -2
-        winActions: []
+        winActions:
+        - rid: 8603986450289000448
         loseCondition:
           rid: 4482425653225586689
         loseActions: []
@@ -143,8 +144,7 @@ MonoBehaviour:
           rid: 4482425671116914690
         winCondition:
           rid: -2
-        winActions:
-        - rid: 4482425807576236038
+        winActions: []
         loseCondition:
           rid: 4482425671116914691
         loseActions: []
@@ -228,11 +228,6 @@ MonoBehaviour:
         questId:
           value: Tutorial_1_Gather
         stepIndexWithResourceCondition: 1
-    - rid: 4482425807576236038
-      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
-      data:
-        questId:
-          value: Tutorial_1_Gather
     - rid: 4482425896350515200
       type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
       data:
@@ -261,7 +256,7 @@ MonoBehaviour:
         stepAction:
           rid: 4482425896350515202
         winCondition:
-          rid: -2
+          rid: 8603986450289000449
         winActions: []
         loseCondition:
           rid: 4482425896350515203
@@ -802,3 +797,11 @@ MonoBehaviour:
         - resourceId:
             value: Resource_Wood
           neededQuantity: 25
+    - rid: 8603986450289000448
+      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Tutorial_1_Gather
+    - rid: 8603986450289000449
+      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 

@@ -66,7 +66,7 @@ namespace CrossProject.Core.Quests
 
         public bool TryLaunch(QuestId id, int stepIndex = 0)
         {
-            Debug.Log($"[{nameof(QuestService)}] : Try to Launch {id}");
+            //Debug.Log($"[{nameof(QuestService)}] : Try to Launch {id}");
             if (string.IsNullOrEmpty(id))
             {
                 Debug.LogError($"[{nameof(QuestService)}] : Trying to Launch quest with id NULL");
@@ -83,6 +83,7 @@ namespace CrossProject.Core.Quests
                 Debug.LogError($"[{nameof(QuestService)}] : cannot find config for {id}!");
                 return false;
             }
+
             if (!_conditionService.Check(config.launchCondition))
                 return false;
 
@@ -100,8 +101,6 @@ namespace CrossProject.Core.Quests
 
         public bool CanProceed(QuestId id)
         {
-            Debug.Log($"[{nameof(QuestService)}] : CanProceed : {id}");
-
             if (!_launchedQuests.TryGetValue(id, out var stepIndex))
             {
                 Debug.LogError($"[{nameof(QuestService)}] : {id} is not launched!");
@@ -110,10 +109,15 @@ namespace CrossProject.Core.Quests
 
             var questConfig = _questSetConfig.Get(id);
             if (stepIndex >= questConfig.steps.Count)
+            {
+                Debug.Log($"[{nameof(QuestService)}] : CanProceed : {id} : true");
                 return true;
+            }
 
             var step = questConfig.steps[stepIndex];
-            return _conditionService.Check(step.winCondition);
+            var result = _conditionService.Check(step.winCondition);
+            Debug.Log($"[{nameof(QuestService)}] : CanProceed : {id} : {result}");
+            return result;
         }
 
         public bool TryProceedStepsOf(QuestId id)
@@ -183,9 +187,9 @@ namespace CrossProject.Core.Quests
             _gameStateManager.Save();
 
             _launchedQuests.Remove(id);
+            Debug.Log($"[{nameof(QuestService)}] : {id} Quest Win :-)");
             _actionService.Execute(config.winActions);
             OnQuestWin?.Invoke(id);
-            Debug.Log($"[{nameof(QuestService)}] : {id} Quest Win :-)");
         }
 
         public int GetCurrentStepFor(QuestId id)
