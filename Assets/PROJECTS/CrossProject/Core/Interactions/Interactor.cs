@@ -28,14 +28,20 @@ namespace CrossProject.Core.Interactions
         {
             var type = blockRequester.GetType();
             if (!_blockers.Contains(type))
+            {
                 _blockers.Add(type);
+                Debug.Log($"[{nameof(Interactor)}] : is blocked by : {type.Name}");
+            }
         }
 
         public void RemoveBlock(object blockRequester)
         {
             var type = blockRequester.GetType();
             if (_blockers.Contains(type))
+            {
                 _blockers.Remove(type);
+                Debug.Log($"[{nameof(Interactor)}] : is no longer blocked by : {type.Name}");
+            }
         }
 
         private void Awake()
@@ -107,13 +113,14 @@ namespace CrossProject.Core.Interactions
             if (Closest.Value != closest && closest != null)
             {
                 Closest.Value?.Deselect();
-
+                Debug.Log($"[{nameof(Interactor)}] : switch from \"{Closest.Value?.name}\" to \"{closest.name}\"");
                 Closest.Value = closest;
                 Closest.Value.Select();
             }
             else if (closest == null)
             {
                 Closest.Value = null;
+                Debug.Log($"[{nameof(Interactor)}] : there is no interactive objects nearby");
             }
         }
 

@@ -62,12 +62,12 @@ namespace CrossProject.Ui.Implementations.InteractButton
         {
             if (_interactor.Closest.Value == null)
             {
-                //Debug.Log($"[Interactions] null model");
+                Debug.Log($"[Interactions] null model");
                 _view.BindModel(new InteractButtonModel(null, null));
                 return;
             }
 
-            //Debug.Log($"[Interactions] {_interactor.Closest.Value.name} ");
+            Debug.Log($"[Interactions] {_interactor.Closest.Value.name} ");
             _cts = new CancellationTokenSource();
             var model = new InteractButtonModel(_interactor.Closest.Value.buttonSprite, () => GetInteraction(_cts.Token).Forget());
             _view.BindModel(model);
