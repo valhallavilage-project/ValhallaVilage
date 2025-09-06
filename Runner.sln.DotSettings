@@ -11,7 +11,7 @@
 	<s:Boolean x:Key="/Default/CodeStyle/CodeFormatting/CppFormatting/WRAP_AFTER_EXPRESSION_LBRACE/@EntryValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/CodeStyle/CodeFormatting/CppFormatting/WRAP_BEFORE_EXPRESSION_RBRACE/@EntryValue">False</s:Boolean>
 	<s:Int64 x:Key="/Default/CodeStyle/CodeFormatting/CppFormatting/WRAP_LIMIT/@EntryValue">153</s:Int64>
-	<s:String x:Key="/Default/CodeStyle/CodeFormatting/CSharpCodeStyle/ACCESSOR_OWNER_BODY/@EntryValue">AccessorsWithBlockBody</s:String>
+	<s:String x:Key="/Default/CodeStyle/CodeFormatting/CSharpCodeStyle/ACCESSOR_OWNER_BODY/@EntryValue">ExpressionBody</s:String>
 	<s:Boolean x:Key="/Default/CodeStyle/CodeFormatting/CSharpCodeStyle/ARGUMENTS_SKIP_SINGLE/@EntryValue">True</s:Boolean>
 	<s:String x:Key="/Default/CodeStyle/CodeFormatting/CSharpCodeStyle/BRACES_FOR_FOR/@EntryValue">RequiredForMultiline</s:String>
 	<s:String x:Key="/Default/CodeStyle/CodeFormatting/CSharpCodeStyle/BRACES_FOR_IFELSE/@EntryValue">NotRequired</s:String>
@@ -19,10 +19,10 @@
 	<s:String x:Key="/Default/CodeStyle/CodeFormatting/CSharpCodeStyle/BRACES_FOR_USING/@EntryValue">NotRequired</s:String>
 	<s:String x:Key="/Default/CodeStyle/CodeFormatting/CSharpCodeStyle/BRACES_FOR_WHILE/@EntryValue">RequiredForMultiline</s:String>
 	<s:Boolean x:Key="/Default/CodeStyle/CodeFormatting/CSharpCodeStyle/BRACES_REDUNDANT/@EntryValue">False</s:Boolean>
-	<s:String x:Key="/Default/CodeStyle/CodeFormatting/CSharpCodeStyle/DEFAULT_PRIVATE_MODIFIER/@EntryValue">Implicit</s:String>
+	<s:String x:Key="/Default/CodeStyle/CodeFormatting/CSharpCodeStyle/DEFAULT_PRIVATE_MODIFIER/@EntryValue">Explicit</s:String>
 	<s:String x:Key="/Default/CodeStyle/CodeFormatting/CSharpCodeStyle/MODIFIERS_ORDER/@EntryValue">protected internal private new public override volatile static async unsafe virtual extern sealed abstract readonly required</s:String>
 	<s:String x:Key="/Default/CodeStyle/CodeFormatting/CSharpCodeStyle/OBJECT_CREATION_WHEN_TYPE_EVIDENT/@EntryValue">ExplicitlyTyped</s:String>
-	<s:String x:Key="/Default/CodeStyle/CodeFormatting/CSharpCodeStyle/PARENTHESES_NON_OBVIOUS_OPERATIONS/@EntryValue">Bitwise, ConditionalAnd</s:String>
+	<s:String x:Key="/Default/CodeStyle/CodeFormatting/CSharpCodeStyle/PARENTHESES_NON_OBVIOUS_OPERATIONS/@EntryValue">Bitwise</s:String>
 	<s:String x:Key="/Default/CodeStyle/CodeFormatting/CSharpCodeStyle/PARENTHESES_REDUNDANCY_STYLE/@EntryValue">Remove</s:String>
 	<s:Boolean x:Key="/Default/CodeStyle/CodeFormatting/CSharpCodeStyle/PARENTHESES_SAME_TYPE_OPERATIONS/@EntryValue">True</s:Boolean>
 	<s:String x:Key="/Default/CodeStyle/CodeFormatting/CSharpCodeStyle/ThisQualifier/INSTANCE_MEMBERS_QUALIFY_DECLARED_IN/@EntryValue">0</s:String>
