@@ -81,37 +81,37 @@ MonoBehaviour:
   - id: NPC_Guard_1
     sceneId:
       value: L2Farm_FirstTown
-    position: {x: 90, y: 0.15, z: -100}
-    eulerAngles: {x: 0, y: 100, z: 0}
+    position: {x: 91.20792, y: 0.1500001, z: -93.17406}
+    eulerAngles: {x: 0, y: 158.937, z: 0}
   - id: NPC_Fisher
     sceneId:
       value: L2Farm_FirstTown
-    position: {x: 230, y: 0, z: 11}
+    position: {x: 223, y: 0, z: 22}
     eulerAngles: {x: 0, y: 170, z: 0}
   - id: NPC_Cooper
     sceneId:
       value: L2Farm_FirstTown
-    position: {x: 185, y: 0, z: -25}
+    position: {x: 173.75, y: 0, z: -23.75}
     eulerAngles: {x: 0, y: 180, z: 0}
   - id: NPC_Randolf
     sceneId:
       value: L2Farm_FirstTown
-    position: {x: 20, y: 0, z: -90}
+    position: {x: 20, y: 0, z: -91.25}
     eulerAngles: {x: 0, y: 180, z: 0}
   - id: NPC_Toma
     sceneId:
       value: L2Farm_FirstTown
-    position: {x: 40, y: 0, z: -87}
+    position: {x: 43.25, y: 0, z: -89}
     eulerAngles: {x: 0, y: 180, z: 0}
   - id: NPC_Morgan
     sceneId:
       value: L2Farm_FirstTown
-    position: {x: 44, y: 0, z: -150}
+    position: {x: 44.25, y: 0, z: -151.5}
     eulerAngles: {x: 0, y: 135, z: 0}
   - id: NPC_Balmir
     sceneId:
       value: L2Farm_FirstTown
-    position: {x: 66, y: 0, z: -140}
+    position: {x: 65.5, y: 0, z: -141.5}
     eulerAngles: {x: 0, y: 180, z: 0}
   - id: NPC_Pushkin
     sceneId:
