@@ -160,11 +160,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4979209157328270696, guid: 862ae5e2f85c0491fad751ad5724a0cb, type: 3}
       propertyPath: m_Extents.x
-      value: 1.75
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 4979209157328270696, guid: 862ae5e2f85c0491fad751ad5724a0cb, type: 3}
       propertyPath: m_Extents.z
-      value: 1.75
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 6641572915589553689, guid: 862ae5e2f85c0491fad751ad5724a0cb, type: 3}
       propertyPath: m_IsActive
