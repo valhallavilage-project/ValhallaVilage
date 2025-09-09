@@ -1,15 +1,12 @@
 {
-    "name": "CrossProject.Editor",
-    "rootNamespace": "CrossProject.Editor",
+    "name": "AYellowpaper.SerializedCollections",
     "references": [],
-    "includePlatforms": [
-        "Editor"
-    ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],
-    "autoReferenced": false,
+    "autoReferenced": true,
     "defineConstraints": [],
     "versionDefines": [],
     "noEngineReferences": false

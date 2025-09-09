@@ -1,7 +1,8 @@
 {
-    "name": "CrossProject.Editor",
-    "rootNamespace": "CrossProject.Editor",
-    "references": [],
+    "name": "AYellowpaper.SerializedCollections.Editor",
+    "references": [
+        "GUID:d525ad6bd40672747bde77962f1c401e"
+    ],
     "includePlatforms": [
         "Editor"
     ],
@@ -9,7 +10,7 @@
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],
-    "autoReferenced": false,
+    "autoReferenced": true,
     "defineConstraints": [],
     "versionDefines": [],
     "noEngineReferences": false

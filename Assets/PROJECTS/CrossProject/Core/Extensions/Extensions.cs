@@ -1,8 +1,5 @@
 using System;
-using CrossProject.Core.Interactions;
-using L2Farm.Features.Tools;
 using UnityEngine;
-using UnityEngine.Purchasing;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
@@ -71,17 +68,6 @@ namespace CrossProject.Extensions
             result += $"{time.Seconds:00} S";
 
             return result.Trim();
-        }
-
-        public static ToolId GetToolId(this InteractionAnimation animation)
-        {
-            return animation switch
-            {
-                InteractionAnimation.Attack => new ToolId("Sword"),
-                InteractionAnimation.Chop => new ToolId("Axe"),
-                InteractionAnimation.Pickaxe => new ToolId("Pickaxe"),
-                _ => null
-            };
         }
     }
 }

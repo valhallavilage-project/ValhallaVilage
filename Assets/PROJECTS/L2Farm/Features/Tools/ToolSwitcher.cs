@@ -1,7 +1,7 @@
 using System.Linq;
 using CrossProject.Core;
 using CrossProject.Core.Interactions;
-using CrossProject.Extensions;
+using L2Farm.Scripts;
 using UnityEngine;
 using VContainer;
 

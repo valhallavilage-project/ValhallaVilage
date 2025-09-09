@@ -1,12 +1,10 @@
 {
-    "name": "CrossProject.Ui.Core",
-    "rootNamespace": "CrossProject.Ui.Core",
+    "name": "L2Farm.Editor",
+    "rootNamespace": "",
     "references": [
-        "GUID:b0214a6008ed146ff8f122a6a9c2f6cc",
+        "GUID:ce2fc14371b22ea4e87e5e51ce91295f",
         "GUID:ba3d232eb13d74dc58639a52e4a2037b",
-        "GUID:f51ebe6a0ceec4240a699833d6309b23",
-        "GUID:6055be8ebefd69e48b49212b09b47b2f",
-        "GUID:029c1c1b674aaae47a6841a0b89ad80e"
+        "GUID:778bfbdf06d514684b7acb72a7430751"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
