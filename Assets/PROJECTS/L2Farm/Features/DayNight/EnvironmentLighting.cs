@@ -11,7 +11,7 @@ namespace L2Farm.Features.DayNight
         protected override void Evaluate(float evaluation)
         {
             int mode = 1 - Mathf.RoundToInt(evaluation);
-            Debug.Log($"[{nameof(EnvironmentLighting)}] Result : {mode} from Evaluation {evaluation};");
+            //Debug.Log($"[{nameof(EnvironmentLighting)}] Result : {mode} from Evaluation {evaluation};");
             pointLight.intensity = baseIntensity * mode;
             vfx?.SetActive(mode > 0);
         }
