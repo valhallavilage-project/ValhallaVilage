@@ -2,7 +2,7 @@ using System;
 using CrossProject.Core.OdinEntities;
 using Newtonsoft.Json;
 
-namespace L2Farm.Features.QuestIndication
+namespace CrossProject.Core.Quests
 {
     [Serializable]
     public class IndicationTypeId : EntityId<string>, IEquatable<IndicationTypeId>
@@ -16,6 +16,8 @@ namespace L2Farm.Features.QuestIndication
         public override bool Equals(object obj) => obj is IndicationTypeId id && Equals(id);
 
         public static implicit operator IndicationTypeId(string value) => new (value);
+
+        public static implicit operator string(IndicationTypeId value) => value.ToString();
 
         public static bool operator ==(IndicationTypeId a, IndicationTypeId b) => a?.Value == b?.Value;
 

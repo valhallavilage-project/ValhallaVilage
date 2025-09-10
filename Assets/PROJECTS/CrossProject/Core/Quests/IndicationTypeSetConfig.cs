@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace L2Farm.Features.QuestIndication
+namespace CrossProject.Core.Quests
 {
     [CreateAssetMenu(menuName = "L2Farm/IndicationTypeSetConfig", fileName = "IndicationTypeSetConfig")]
     public class IndicationTypeSetConfig : ScriptableObject

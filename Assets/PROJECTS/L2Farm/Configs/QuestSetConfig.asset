@@ -36,20 +36,16 @@ MonoBehaviour:
         proceedAfterLaunch: 0
         targetSpawnPoint:
           value: NPC_Farmer
-        launchCondition:
-          rid: -2
+        questIndication:
+          value: Quest_Active
         launchActions:
         - rid: 77259970479915013
         steps:
         - rid: 77259970479915009
         - rid: 4482425937018486790
         - rid: 4482425937018486799
-        winCondition:
-          rid: -2
         winActions:
         - rid: 4482425937018486797
-        loseCondition:
-          rid: 4482425896350515208
         loseActions: []
     - rid: 77259970479915009
       type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
@@ -98,18 +94,14 @@ MonoBehaviour:
         proceedAfterLaunch: 1
         targetSpawnPoint:
           value: 
-        launchCondition:
-          rid: -2
+        questIndication:
+          value: 
         launchActions: []
         steps:
         - rid: 4482425573669863425
         - rid: 4482425671116914689
-        winCondition:
-          rid: -2
         winActions:
         - rid: 8603986450289000448
-        loseCondition:
-          rid: 4482425653225586689
         loseActions: []
     - rid: 4482425573669863425
       type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
@@ -131,9 +123,6 @@ MonoBehaviour:
         questId:
           value: HelloWorld
         stepIndexWithResourceCondition: -1
-    - rid: 4482425653225586689
-      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
-      data: 
     - rid: 4482425653225586690
       type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
       data: 
@@ -167,20 +156,16 @@ MonoBehaviour:
         proceedAfterLaunch: 0
         targetSpawnPoint:
           value: NPC_Tutorial_1
-        launchCondition:
-          rid: -2
+        questIndication:
+          value: Quest_Active
         launchActions:
         - rid: 4482425807576236033
         steps:
         - rid: 4482425896350515201
         - rid: 4482425807576236034
         - rid: 4482425937018486784
-        winCondition:
-          rid: -2
         winActions:
         - rid: 4482425896350515253
-        loseCondition:
-          rid: 4482425896350515251
         loseActions: []
     - rid: 4482425807576236033
       type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: Assembly-CSharp}
@@ -235,20 +220,16 @@ MonoBehaviour:
         proceedAfterLaunch: 0
         targetSpawnPoint:
           value: NPC_Farmer
-        launchCondition:
-          rid: -2
+        questIndication:
+          value: Quest_Active
         launchActions:
         - rid: 4482425896350515257
         steps:
         - rid: 4482425896350515204
-        winCondition:
-          rid: -2
         winActions:
         - rid: 4482425896350515255
         - rid: 4482425937018486788
         - rid: 4482425937018486789
-        loseCondition:
-          rid: 4482425896350515209
         loseActions: []
     - rid: 4482425896350515201
       type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
@@ -294,12 +275,6 @@ MonoBehaviour:
         questId:
           value: Tutorial_1_Build_Home
         stepIndexWithResourceCondition: -1
-    - rid: 4482425896350515208
-      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
-      data: 
-    - rid: 4482425896350515209
-      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
-      data: 
     - rid: 4482425896350515210
       type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
       data:
@@ -307,17 +282,13 @@ MonoBehaviour:
         proceedAfterLaunch: 0
         targetSpawnPoint:
           value: NPC_Valentine
-        launchCondition:
-          rid: -2
+        questIndication:
+          value: 
         launchActions: []
         steps:
         - rid: 4482425896350515211
-        winCondition:
-          rid: -2
         winActions:
         - rid: 4482425896350515212
-        loseCondition:
-          rid: 4482425896350515213
         loseActions: []
     - rid: 4482425896350515211
       type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
@@ -335,9 +306,6 @@ MonoBehaviour:
       data:
         buildingId:
           value: Ambar
-    - rid: 4482425896350515213
-      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
-      data: 
     - rid: 4482425896350515214
       type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: Assembly-CSharp}
       data:
@@ -355,17 +323,13 @@ MonoBehaviour:
         proceedAfterLaunch: 0
         targetSpawnPoint:
           value: NPC_Valentine
-        launchCondition:
-          rid: -2
+        questIndication:
+          value: 
         launchActions: []
         steps:
         - rid: 4482425896350515216
-        winCondition:
-          rid: -2
         winActions:
         - rid: 4482425896350515217
-        loseCondition:
-          rid: 4482425896350515218
         loseActions: []
     - rid: 4482425896350515216
       type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
@@ -383,9 +347,6 @@ MonoBehaviour:
       data:
         buildingId:
           value: Bakery
-    - rid: 4482425896350515218
-      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
-      data: 
     - rid: 4482425896350515219
       type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: Assembly-CSharp}
       data:
@@ -403,17 +364,13 @@ MonoBehaviour:
         proceedAfterLaunch: 0
         targetSpawnPoint:
           value: NPC_Valentine
-        launchCondition:
-          rid: -2
+        questIndication:
+          value: 
         launchActions: []
         steps:
         - rid: 4482425896350515221
-        winCondition:
-          rid: -2
         winActions:
         - rid: 4482425896350515222
-        loseCondition:
-          rid: 4482425896350515223
         loseActions: []
     - rid: 4482425896350515221
       type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
@@ -431,9 +388,6 @@ MonoBehaviour:
       data:
         buildingId:
           value: Farm
-    - rid: 4482425896350515223
-      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
-      data: 
     - rid: 4482425896350515224
       type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: Assembly-CSharp}
       data:
@@ -451,17 +405,13 @@ MonoBehaviour:
         proceedAfterLaunch: 0
         targetSpawnPoint:
           value: NPC_Valentine
-        launchCondition:
-          rid: -2
+        questIndication:
+          value: 
         launchActions: []
         steps:
         - rid: 4482425896350515226
-        winCondition:
-          rid: -2
         winActions:
         - rid: 4482425896350515227
-        loseCondition:
-          rid: 4482425896350515228
         loseActions: []
     - rid: 4482425896350515226
       type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
@@ -479,9 +429,6 @@ MonoBehaviour:
       data:
         buildingId:
           value: Fishing
-    - rid: 4482425896350515228
-      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
-      data: 
     - rid: 4482425896350515229
       type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: Assembly-CSharp}
       data:
@@ -499,17 +446,13 @@ MonoBehaviour:
         proceedAfterLaunch: 0
         targetSpawnPoint:
           value: NPC_Valentine
-        launchCondition:
-          rid: -2
+        questIndication:
+          value: 
         launchActions: []
         steps:
         - rid: 4482425896350515231
-        winCondition:
-          rid: -2
         winActions:
         - rid: 4482425896350515232
-        loseCondition:
-          rid: 4482425896350515233
         loseActions: []
     - rid: 4482425896350515231
       type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
@@ -527,9 +470,6 @@ MonoBehaviour:
       data:
         buildingId:
           value: Sawmill
-    - rid: 4482425896350515233
-      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
-      data: 
     - rid: 4482425896350515234
       type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: Assembly-CSharp}
       data:
@@ -547,18 +487,14 @@ MonoBehaviour:
         proceedAfterLaunch: 0
         targetSpawnPoint:
           value: NPC_Valentine
-        launchCondition:
-          rid: -2
+        questIndication:
+          value: 
         launchActions:
         - rid: 4482425937018486796
         steps:
         - rid: 4482425896350515236
-        winCondition:
-          rid: -2
         winActions:
         - rid: 4482425937018486798
-        loseCondition:
-          rid: 4482425896350515238
         loseActions: []
     - rid: 4482425896350515236
       type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
@@ -571,9 +507,6 @@ MonoBehaviour:
         loseCondition:
           rid: -2
         loseActions: []
-    - rid: 4482425896350515238
-      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
-      data: 
     - rid: 4482425896350515239
       type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: Assembly-CSharp}
       data:
@@ -591,17 +524,13 @@ MonoBehaviour:
         proceedAfterLaunch: 0
         targetSpawnPoint:
           value: NPC_Valentine
-        launchCondition:
-          rid: -2
+        questIndication:
+          value: 
         launchActions: []
         steps:
         - rid: 4482425896350515241
-        winCondition:
-          rid: -2
         winActions:
         - rid: 4482425896350515242
-        loseCondition:
-          rid: 4482425896350515243
         loseActions: []
     - rid: 4482425896350515241
       type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
@@ -619,9 +548,6 @@ MonoBehaviour:
       data:
         buildingId:
           value: Smithy
-    - rid: 4482425896350515243
-      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
-      data: 
     - rid: 4482425896350515244
       type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: Assembly-CSharp}
       data:
@@ -632,9 +558,6 @@ MonoBehaviour:
         questId:
           value: Tutorial_1_Build_Home
         stepIndexWithResourceCondition: -1
-    - rid: 4482425896350515251
-      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
-      data: 
     - rid: 4482425896350515253
       type: {class: StartBuildingActionConfig, ns: L2Farm.Features.Buildings.Actions, asm: Assembly-CSharp}
       data:

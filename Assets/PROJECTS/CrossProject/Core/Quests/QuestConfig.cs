@@ -13,16 +13,14 @@ namespace CrossProject.Core.Quests
         [FoldoutGroup("$id")] public string id;
         [FoldoutGroup("$id")] public bool proceedAfterLaunch;
         [FoldoutGroup("$id")] public SpawnPointId targetSpawnPoint;
+        [FoldoutGroup("$id")] public IndicationTypeId questIndication;
 
-        [FoldoutGroup("$id/Launch"), SerializeReference] public IConditionConfig launchCondition;
-        [FoldoutGroup("$id/Launch"), SerializeReference] public List<IActionConfig> launchActions = new();
+        [FoldoutGroup("$id"), SerializeReference] public List<IActionConfig> launchActions = new();
 
         [FoldoutGroup("$id"), SerializeReference] public List<QuestStepConfig> steps = new();
 
-        [FoldoutGroup("$id/Win"), SerializeReference] public IConditionConfig winCondition;
-        [FoldoutGroup("$id/Win"), SerializeReference] public List<IActionConfig> winActions = new();
+        [FoldoutGroup("$id"), SerializeReference] public List<IActionConfig> winActions = new();
 
-        [FoldoutGroup("$id/Lose"), SerializeReference] public IConditionConfig loseCondition;
-        [FoldoutGroup("$id/Lose"), SerializeReference] public List<IActionConfig> loseActions = new();
+        [FoldoutGroup("$id"), SerializeReference] public List<IActionConfig> loseActions = new();
     }
 }

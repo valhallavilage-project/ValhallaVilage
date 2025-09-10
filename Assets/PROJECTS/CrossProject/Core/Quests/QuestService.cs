@@ -84,9 +84,6 @@ namespace CrossProject.Core.Quests
                 return false;
             }
 
-            if (!_conditionService.Check(config.launchCondition))
-                return false;
-
             _launchedQuests.Add(id, stepIndex);
             var part = _gameStateManager.State.Get<QuestsLogPart>();
             part.launchedQuests[id] = stepIndex;

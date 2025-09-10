@@ -40,7 +40,9 @@ namespace L2Farm.Features.QuestIndication
 
         private void OnQuestLaunch(QuestId questId)
         {
-            AddTarget(questId, new IndicationTypeId("Quest_Active"));
+            var indication = _questService.GetConfigFor(questId).questIndication;
+            if (!string.IsNullOrEmpty(indication))
+                AddTarget(questId, indication);
         }
 
         private void OnQuestComplete(QuestId questId)
