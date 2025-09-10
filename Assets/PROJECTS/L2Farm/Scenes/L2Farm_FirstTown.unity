@@ -68819,13 +68819,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: WolfSpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 2261021733402592936, guid: ca928bb2472ebd64b82596e66fc25af2, type: 3}
+      propertyPath: _maxMobs
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8134622062803552181, guid: ca928bb2472ebd64b82596e66fc25af2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 125.51741
       objectReference: {fileID: 0}
     - target: {fileID: 8134622062803552181, guid: ca928bb2472ebd64b82596e66fc25af2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -25
+      value: -24.5
       objectReference: {fileID: 0}
     - target: {fileID: 8134622062803552181, guid: ca928bb2472ebd64b82596e66fc25af2, type: 3}
       propertyPath: m_LocalPosition.z

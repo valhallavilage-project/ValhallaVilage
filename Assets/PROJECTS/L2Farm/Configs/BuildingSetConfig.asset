@@ -128,6 +128,8 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 4482425876239876096
       type: {class: QuestCompletedConditionConfig, ns: L2Farm.Scripts.Conditions.QuestCompleted, asm: Assembly-CSharp}
       data:
