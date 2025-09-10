@@ -7,7 +7,7 @@ using CrossProject.Core.Skins;
 using CrossProject.Core.SpawnPoints;
 using L2Farm.Features.Buildings;
 using L2Farm.Features.NPC;
-using L2Farm.Features.QuestIndication;
+using L2Farm.Features.ResourceProduction;
 using L2Farm.Features.Tools;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -40,6 +40,7 @@ namespace L2Farm.Scripts
                 new NPCIdConverter(),
                 new IndicationTypeIdConverter(),
                 new ToolIdConverter(),
+                new ProductionIdConverter(),
             }
         };
     }

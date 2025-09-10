@@ -119,5 +119,16 @@ namespace L2Farm.Features.Buildings
 
             SpawnBuildingInternal(config).Forget();
         }
+
+        public Vector3 GetVFXPositionFor(BuildingId buildingId)
+        {
+            var offset = _buildingSetConfig.items.First(x => x.id == buildingId).buildingVFXOffset;
+            return _buildings[buildingId].transform.position + offset;
+        }
+
+        public float GetVFXScaleFor(BuildingId buildingId)
+        {
+            return _buildingSetConfig.items.First(x => x.id == buildingId).buildingVFXScale;
+        }
     }
 }

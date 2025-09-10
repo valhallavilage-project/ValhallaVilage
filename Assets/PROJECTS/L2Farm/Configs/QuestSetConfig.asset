@@ -24,6 +24,8 @@ MonoBehaviour:
   - rid: 4482425896350515225
   - rid: 4482425896350515230
   - rid: 4482425896350515240
+  - rid: 8603986586732855296
+  - rid: 8603986586732855305
   references:
     version: 2
     RefIds:
@@ -43,7 +45,6 @@ MonoBehaviour:
         steps:
         - rid: 77259970479915009
         - rid: 4482425937018486790
-        - rid: 4482425937018486799
         winActions:
         - rid: 4482425937018486797
         loseActions: []
@@ -488,13 +489,14 @@ MonoBehaviour:
         targetSpawnPoint:
           value: NPC_Valentine
         questIndication:
-          value: 
+          value: Quest_Active
         launchActions:
         - rid: 4482425937018486796
         steps:
         - rid: 4482425896350515236
         winActions:
         - rid: 4482425937018486798
+        - rid: 8603986586732855321
         loseActions: []
     - rid: 4482425896350515236
       type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
@@ -502,10 +504,10 @@ MonoBehaviour:
         stepAction:
           rid: 4482425896350515239
         winCondition:
-          rid: -2
+          rid: 8603986586732855319
         winActions: []
         loseCondition:
-          rid: -2
+          rid: 8603986586732855320
         loseActions: []
     - rid: 4482425896350515239
       type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: Assembly-CSharp}
@@ -515,7 +517,7 @@ MonoBehaviour:
         message: "Great! You\u2019ve been a huge help. Now we have enough resources
           to rebuild Grandpa\u2019s house."
         questId:
-          value: Tutorial_1_Build_Home
+          value: Build_Mill
         stepIndexWithResourceCondition: -1
     - rid: 4482425896350515240
       type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
@@ -677,29 +679,6 @@ MonoBehaviour:
       data:
         buildingId:
           value: Mill
-    - rid: 4482425937018486799
-      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
-      data:
-        stepAction:
-          rid: 4482425937018486800
-        winCondition:
-          rid: -2
-        winActions: []
-        loseCondition:
-          rid: 4482425937018486801
-        loseActions: []
-    - rid: 4482425937018486800
-      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: Assembly-CSharp}
-      data:
-        speaker:
-          value: NPC_Valentine
-        message: Wow! It looks cool!
-        questId:
-          value: Tutorial_2
-        stepIndexWithResourceCondition: -1
-    - rid: 4482425937018486801
-      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
-      data: 
     - rid: 4482425937018486802
       type: {class: SpendResourcesActionConfig, ns: L2Farm.Scripts.Actions.SpendResources, asm: Assembly-CSharp}
       data:
@@ -728,3 +707,145 @@ MonoBehaviour:
     - rid: 8603986450289000449
       type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
       data: 
+    - rid: 8603986586732855296
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Production_Wheat_Start
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: NPC_Farmer
+        questIndication:
+          value: Production_Wheat
+        launchActions:
+        - rid: 8603986586732855297
+        steps:
+        - rid: 8603986586732855298
+        winActions: []
+        loseActions: []
+    - rid: 8603986586732855297
+      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: Assembly-CSharp}
+      data:
+        npcId:
+          value: Farmer
+        spawnPointId:
+          value: NPC_Farmer
+        questId:
+          value: Production_Wheat_Start
+    - rid: 8603986586732855298
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 8603986586732855299
+        winCondition:
+          rid: 8603986586732855300
+        winActions:
+        - rid: 8603986586732855302
+        - rid: 8603986586732855304
+        loseCondition:
+          rid: 8603986586732855301
+        loseActions: []
+    - rid: 8603986586732855299
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: Assembly-CSharp}
+      data:
+        speaker:
+          value: NPC_Farmer
+        message: Give me your seeds!
+        questId:
+          value: Production_Wheat_Start
+        stepIndexWithResourceCondition: 0
+    - rid: 8603986586732855300
+      type: {class: HasEnoughResourcesConditionConfig, ns: L2Farm.Scripts.Conditions, asm: Assembly-CSharp}
+      data:
+        resourceConditions:
+        - resourceId:
+            value: Resource_Seeds
+          neededQuantity: 10
+    - rid: 8603986586732855301
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 8603986586732855302
+      type: {class: SpendResourcesActionConfig, ns: L2Farm.Scripts.Actions.SpendResources, asm: Assembly-CSharp}
+      data:
+        resourceConditions:
+        - resourceId:
+            value: Resource_Seeds
+          neededQuantity: 10
+    - rid: 8603986586732855304
+      type: {class: StartProductionActionConfig, ns: L2Farm.Features.ResourceProduction.Actions, asm: Assembly-CSharp}
+      data:
+        productionId:
+          value: 
+    - rid: 8603986586732855305
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Production_Wheat_Finish
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: NPC_Farmer
+        questIndication:
+          value: Production_Wheat
+        launchActions:
+        - rid: 8603986586732855306
+        steps:
+        - rid: 8603986586732855307
+        winActions:
+        - rid: 8603986586732855318
+        - rid: 8603986586732855316
+        loseActions: []
+    - rid: 8603986586732855306
+      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: Assembly-CSharp}
+      data:
+        npcId:
+          value: Farmer
+        spawnPointId:
+          value: NPC_Farmer
+        questId:
+          value: Production_Wheat_Start
+    - rid: 8603986586732855307
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 8603986586732855308
+        winCondition:
+          rid: 8603986586732855313
+        winActions: []
+        loseCondition:
+          rid: 8603986586732855312
+        loseActions: []
+    - rid: 8603986586732855308
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: Assembly-CSharp}
+      data:
+        speaker:
+          value: NPC_Farmer
+        message: Take your wheat!
+        questId:
+          value: Production_Wheat_Start
+        stepIndexWithResourceCondition: 0
+    - rid: 8603986586732855312
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 8603986586732855313
+      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 8603986586732855316
+      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Production_Wheat_Start
+    - rid: 8603986586732855318
+      type: {class: GiveResourceActionConfig, ns: L2Farm.Features.ResourceProduction.GiveResources, asm: Assembly-CSharp}
+      data:
+        resourceId:
+          value: Resource_Wheat
+        amount: 20
+    - rid: 8603986586732855319
+      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 8603986586732855320
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 8603986586732855321
+      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Production_Wheat_Start

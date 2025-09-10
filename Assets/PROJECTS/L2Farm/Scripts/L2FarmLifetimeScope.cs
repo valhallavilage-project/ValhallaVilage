@@ -27,6 +27,9 @@ using L2Farm.Features.InventoryScreen;
 using L2Farm.Features.NPC;
 using L2Farm.Features.QuestIndication;
 using L2Farm.Features.QuestsScreen;
+using L2Farm.Features.ResourceProduction;
+using L2Farm.Features.ResourceProduction.Actions;
+using L2Farm.Features.ResourceProduction.GiveResources;
 using L2Farm.Features.ShopScreen;
 using L2Farm.Features.SimpleMonolog;
 using L2Farm.Scripts.Actions;
@@ -74,6 +77,8 @@ namespace L2Farm.Scripts
                 .AsSelf()
                 .AsImplementedInterfaces();
 
+            builder.Register<GiveResourcesAction>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            builder.Register<StartProductionAction>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<SpendResourcesAction>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<StartBuildingAction>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<FinishBuildingAction>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
@@ -213,6 +218,10 @@ namespace L2Farm.Scripts
                 .AsImplementedInterfaces();
 
             builder.Register<ClaimedResourcesHintController>(Lifetime.Singleton)
+                .AsSelf()
+                .AsImplementedInterfaces();
+
+            builder.Register<ProductionService>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
 

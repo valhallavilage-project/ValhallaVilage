@@ -7,6 +7,7 @@ using CrossProject.Core.Quests;
 using CrossProject.Core.SaveLoad;
 using CrossProject.Extensions;
 using Cysharp.Threading.Tasks;
+using L2Farm.Features.ResourceProduction;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -30,6 +31,7 @@ namespace L2Farm.Features.Buildings
         private float _secondsLeft;
         private bool _tick;
         private BuildingId _buildingId;
+        private ProductionId _productionId;
         private QuestId _questId;
 
         [Inject]
@@ -77,7 +79,10 @@ namespace L2Farm.Features.Buildings
             {
                 questId = _questId
             });
-            _gameStateManager.State.Get<BuildingPart>().requests.Remove(_buildingId);
+            if (!string.IsNullOrEmpty(_buildingId))
+                _gameStateManager.State.Get<BuildingPart>().requests.Remove(_buildingId);
+            if (!string.IsNullOrEmpty(_productionId))
+                _gameStateManager.State.Get<ProductionPart>().requests.Remove(_productionId);
         }
 
         private void Update()
