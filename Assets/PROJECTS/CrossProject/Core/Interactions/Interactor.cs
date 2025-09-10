@@ -119,8 +119,9 @@ namespace CrossProject.Core.Interactions
             }
             else if (closest == null)
             {
+                if (Closest.Value != null)
+                    Debug.Log($"[{nameof(Interactor)}] : there is no interactive objects nearby");
                 Closest.Value = null;
-                Debug.Log($"[{nameof(Interactor)}] : there is no interactive objects nearby");
             }
         }
 
