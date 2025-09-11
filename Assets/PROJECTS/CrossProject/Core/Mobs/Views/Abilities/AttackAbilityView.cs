@@ -1,0 +1,60 @@
+using System;
+using Cinemachine;
+using Cysharp.Threading.Tasks;
+using Cysharp.Threading.Tasks.Linq;
+using Cysharp.Threading.Tasks.Triggers;
+using UnityEngine;
+using VContainer;
+
+namespace CrossProject.Core
+{
+    public class AttackAbilityView : MonoBehaviour
+    {
+        [TagField] [SerializeField] private string _expectedObjectTag;
+        [SerializeField] private Collider _attackCollider;
+        [SerializeField] private float _attackTimeOffset;
+
+        private MobConfig _mobConfig;
+
+        [Inject]
+        private void AddDependencies(IAttackAbility attackAbility, MobConfig mobConfig)
+        {
+            _mobConfig = mobConfig;
+
+            attackAbility.AttackBegin.WithoutCurrent().ForEachAsync(AttackBegan, gameObject.GetCancellationTokenOnDestroy()).Forget();
+            attackAbility.AttackEnd.WithoutCurrent().ForEachAsync(AttackEnded, gameObject.GetCancellationTokenOnDestroy()).Forget();
+
+            _attackCollider.GetAsyncTriggerEnterTrigger().ForEachAsync(TriggerEnter, gameObject.GetCancellationTokenOnDestroy()).Forget();
+        }
+
+        private void AttackBegan(bool obj)
+        {
+            UniTask.Delay(TimeSpan.FromSeconds(_attackTimeOffset)).ContinueWith(() =>
+            {
+                _attackCollider.gameObject.SetActive(true);
+            }).Forget();
+        }
+
+        private void AttackEnded(bool obj)
+        {
+            _attackCollider.gameObject.SetActive(false);
+        }
+
+        private void TriggerEnter(Collider enterObject)
+        {
+            if (!enterObject.gameObject.CompareTag(_expectedObjectTag))
+            {
+                return;
+            }
+
+            var damageReceivers = enterObject.gameObject.GetComponentsInChildren<IDamageReceiver>();
+
+            if (damageReceivers.Length > 0)
+            {
+                damageReceivers[0].ReceiveDamage(_mobConfig.AttackDamage);
+            }
+
+            _attackCollider.gameObject.SetActive(false);
+        }
+    }
+}

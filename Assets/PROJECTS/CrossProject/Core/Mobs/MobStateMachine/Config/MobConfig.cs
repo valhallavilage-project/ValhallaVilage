@@ -20,6 +20,7 @@ namespace CrossProject.Core
 
         [Header("Attack")]
         [SerializeField] private float _attackDistance = 1;
+        [SerializeField] private float _attackDamage = 1;
 
         [Header("Heath")]
         [SerializeField] private float _health = 1;
@@ -35,5 +36,6 @@ namespace CrossProject.Core
         public float MinDistanceToApproach => _minDistanceToApproach;
         public float RoamingMinPathLength => _roamingMinPathLength;
         public float RoamingMinAngleBeforeForceRotate => _roamingMinAngleBeforeForceRotate;
+        public float AttackDamage => _attackDamage;
     }
 }

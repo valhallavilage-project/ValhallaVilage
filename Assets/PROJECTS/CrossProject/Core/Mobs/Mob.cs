@@ -61,7 +61,7 @@ namespace CrossProject.Core
         public void BindSpawnPoint(MobsSpawnPoint spawnPoint)
         {
             _spawnPoint = spawnPoint;
-            _roamArea.Init(spawnPoint.AgroZone, _config.RoamingMinPathLength);
+            _roamArea.Init(spawnPoint.RoamZone, _config.RoamingMinPathLength);
         }
 
         protected override UniTask AfterInteraction()

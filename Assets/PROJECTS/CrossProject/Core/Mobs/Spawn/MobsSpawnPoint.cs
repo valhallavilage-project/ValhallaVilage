@@ -14,19 +14,20 @@ namespace CrossProject.Core
         [SerializeField] private float _spawnRadius = 5f;
         [SerializeField] private float _spawnInterval = 2f;
         [SerializeField] private int _maxMobs = 10;
+        [SerializeField] private SphereCollider _roamZone;
         [SerializeField] private SphereCollider _agroZone;
 
         private MobsPool _pool;
-        private SphereCollider _areaCollider;
         private bool _isPaused;
         private int _spawnedMobs;
         
         public SphereCollider AgroZone => _agroZone;
+        public SphereCollider RoamZone => _roamZone;
 
         private void Awake()
         {
             _pool = GetComponent<MobsPool>();
-            _areaCollider = GetComponent<SphereCollider>();
+            _roamZone = GetComponent<SphereCollider>();
 
             this.GetAsyncTriggerEnterTrigger().ForEachAsync(OnPlayerEnter, gameObject.GetCancellationTokenOnDestroy());
             this.GetAsyncTriggerExitTrigger().ForEachAsync(OnPlayerExit, gameObject.GetCancellationTokenOnDestroy());
@@ -86,12 +87,12 @@ namespace CrossProject.Core
 
         private void OnValidate()
         {
-            if (_areaCollider == null)
+            if (_roamZone == null)
             {
-                _areaCollider = GetComponent<SphereCollider>();
+                _roamZone = GetComponent<SphereCollider>();
             }
 
-            _areaCollider.radius = _spawnRadius;
+            _roamZone.radius = _spawnRadius;
         }
     }
 }
