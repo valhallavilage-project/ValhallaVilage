@@ -17,6 +17,7 @@ namespace CrossProject.Core
             BindStateMachine(builder);
             BindStates(builder);
             BindTransitions(builder);
+            BindStateBindings(builder);
             BindAbilities(builder);
             BindConfigs(builder);
             BindData(builder);
@@ -55,6 +56,11 @@ namespace CrossProject.Core
             builder.Register<ReturnToRoamAreaMobTransition>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<RoamMobTransition>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<RoamRotationMobTransition>(Lifetime.Scoped).AsImplementedInterfaces();
+        }
+        
+        private void BindStateBindings(IContainerBuilder builder)
+        {
+            builder.Register<MobAnimationHandler>(Lifetime.Scoped).AsImplementedInterfaces();
         }
 
         private void BindAbilities(IContainerBuilder builder)
