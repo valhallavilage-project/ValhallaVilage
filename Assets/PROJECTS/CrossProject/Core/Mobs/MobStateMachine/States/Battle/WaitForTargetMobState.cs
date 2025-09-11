@@ -17,13 +17,21 @@ namespace CrossProject.Core
             _perUpdateData = perUpdateData;
         }
 
+        // public override async UniTask Enter()
+        // {
+        //     await base.Enter();
+        //
+        //     var direction = Vector3.ProjectOnPlane(_noticeEnemyArea.Enemy.position - _perUpdateData.Position, Vector3.up);
+        //     _rotateAbility.ForceRotate(direction.normalized);
+        // }
+
         protected override async UniTask HandleControl()
         {
             await base.HandleControl();
 
             var direction = Vector3.ProjectOnPlane(_noticeEnemyArea.Enemy.position - _perUpdateData.Position, Vector3.up);
 
-            _rotateAbility.Rotate(direction.normalized);
+            _rotateAbility.ForceRotate(direction.normalized);
         }
     }
 }

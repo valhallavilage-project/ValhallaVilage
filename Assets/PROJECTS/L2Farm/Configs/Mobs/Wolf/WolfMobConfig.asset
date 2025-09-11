@@ -15,8 +15,9 @@ MonoBehaviour:
   _maxSpeed: 4
   _acceleration: 70
   _maxAcceleration: 100
-  _rotationSpeed: 100
-  _rotationDamper: 0.5
+  _rotationSpeed: 30
+  _rotationDamper: 1
+  _torqueStrength: 1
   _minDistanceToApproach: 2
   _roamingMaxSpeed: 2
   _roamingMinPathLength: 2

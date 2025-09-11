@@ -11,6 +11,7 @@ namespace CrossProject.Core
         [SerializeField] private float _maxAcceleration = 100;
         [SerializeField] private float _rotationSpeed = 100;
         [SerializeField] private float _rotationDamper = 0.5f;
+        [SerializeField] private float _torqueStrength = 1f;
         [SerializeField] private float _minDistanceToApproach = 5f;
 
         [Header("Roam")]
@@ -37,5 +38,6 @@ namespace CrossProject.Core
         public float RoamingMinPathLength => _roamingMinPathLength;
         public float RoamingMinAngleBeforeForceRotate => _roamingMinAngleBeforeForceRotate;
         public float AttackDamage => _attackDamage;
+        public float TorqueStrength => _torqueStrength;
     }
 }
