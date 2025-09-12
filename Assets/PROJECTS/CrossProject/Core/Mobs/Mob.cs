@@ -9,10 +9,12 @@ namespace CrossProject.Core
     {
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] [ReadOnly] private MobState _state;
+        [SerializeField] [ReadOnly] private float _health;
 
         private MobsSpawnPoint _spawnPoint;
         private IMobStateMachine _mobStateMachine;
         private IRoamArea _roamArea;
+        private IHealthHandler _healthHandler;
 
         private IMobPerUpdateData _perUpdateData;
         private MobConfig _config;
@@ -24,17 +26,20 @@ namespace CrossProject.Core
 
         [Inject]
         public void AddDependencies(IMobStateMachine stateMachine, IMobPerUpdateData perUpdateData,
-            MobConfig config, IMoveAbility moveAbility, IRotateAbility rotateAbility, IRoamArea roamArea)
+            MobConfig config, IMoveAbility moveAbility, IRotateAbility rotateAbility, IRoamArea roamArea,
+            IHealthHandler healthHandler)
         {
             _perUpdateData = perUpdateData;
             _config = config;
             _roamArea = roamArea;
+            _healthHandler = healthHandler;
 
             _mobStateMachine = stateMachine;
 
             _moveAbility = moveAbility;
             _rotateAbility = rotateAbility;
 
+            healthHandler.Init(config.Health, config.Health);
             moveAbility.Init(config.Acceleration, config.MaxAcceleration);
             rotateAbility.Init(config.RotationSpeed, config.RotationDamper);
         }
@@ -42,6 +47,8 @@ namespace CrossProject.Core
         private void FixedUpdate()
         {
             _state = _mobStateMachine.CurrentState.Value;
+            _health = _healthHandler.Health.Value;
+            
             #if UNITY_EDITOR
             // to apply changes made in config during play mode
             _moveAbility.Init(_config.Acceleration, _config.MaxAcceleration);
@@ -63,6 +70,8 @@ namespace CrossProject.Core
         public void OnGet()
         {
             IsAvailableToGet = false;
+            _healthHandler.Init(_config.Health, _config.Health);
+            _mobStateMachine.ToDefaultState();
         }
 
         public void OnReturn()

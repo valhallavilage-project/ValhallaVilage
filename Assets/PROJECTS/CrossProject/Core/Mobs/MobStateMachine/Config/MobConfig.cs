@@ -24,7 +24,7 @@ namespace CrossProject.Core
         [SerializeField] private float _attackDamage = 1;
 
         [Header("Heath")]
-        [SerializeField] private float _health = 1;
+        [SerializeField] private float _health = 50;
 
         public float MaxSpeed => _maxSpeed;
         public float Acceleration => _acceleration;

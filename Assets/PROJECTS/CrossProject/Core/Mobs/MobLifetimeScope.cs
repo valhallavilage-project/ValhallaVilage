@@ -20,11 +20,14 @@ namespace CrossProject.Core
             BindStateBindings(builder);
             BindAbilities(builder);
             BindConfigs(builder);
-            BindData(builder);
+            BindHandlers(builder);
         }
 
         private void BindStateMachine(IContainerBuilder builder)
         {
+            builder.Register<MobPersistentData>(Lifetime.Scoped).AsImplementedInterfaces();
+            builder.Register<MobPerUpdateData>(Lifetime.Scoped).AsImplementedInterfaces();
+            
             builder.Register<MobStateMachine>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<MobStateTimingHandler>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<MobTransitionsHolder>(Lifetime.Scoped).AsImplementedInterfaces();
@@ -42,6 +45,7 @@ namespace CrossProject.Core
             builder.Register<ReturnToRoamAreaMobState>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<RoamMobState>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<RoamRotationMobState>(Lifetime.Scoped).AsImplementedInterfaces();
+            builder.Register<DieState>(Lifetime.Scoped).AsImplementedInterfaces();
         }
 
         private void BindTransitions(IContainerBuilder builder)
@@ -56,6 +60,7 @@ namespace CrossProject.Core
             builder.Register<ReturnToRoamAreaMobTransition>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<RoamMobTransition>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<RoamRotationMobTransition>(Lifetime.Scoped).AsImplementedInterfaces();
+            builder.Register<DieTransition>(Lifetime.Scoped).AsImplementedInterfaces();
         }
         
         private void BindStateBindings(IContainerBuilder builder)
@@ -79,10 +84,10 @@ namespace CrossProject.Core
             builder.RegisterInstance(_mobTransitionsConfig);
         }
 
-        private void BindData(IContainerBuilder builder)
+        private void BindHandlers(IContainerBuilder builder)
         {
-            builder.Register<MobPersistentData>(Lifetime.Scoped).AsImplementedInterfaces();
-            builder.Register<MobPerUpdateData>(Lifetime.Scoped).AsImplementedInterfaces();
+            builder.Register<HealthHandler>(Lifetime.Scoped).AsImplementedInterfaces();
+            builder.Register<MobDamageInfoProvider>(Lifetime.Scoped).AsImplementedInterfaces();
         }
     }
 }

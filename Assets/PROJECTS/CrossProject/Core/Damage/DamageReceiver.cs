@@ -1,4 +1,5 @@
 using UnityEngine;
+using VContainer;
 
 namespace CrossProject.Core
 {
@@ -9,9 +10,17 @@ namespace CrossProject.Core
 
     public class DamageReceiver : MonoBehaviour, IDamageReceiver
     {
+        private IHealthHandler _healthHandler;
+
+        [Inject]
+        public void AddDependencies(IHealthHandler hitHandler)
+        {
+            _healthHandler = hitHandler;
+        }
+
         public void ReceiveDamage(float damage)
         {
-            Debug.Log($"Received damage {damage}");
+            _healthHandler.Decrease(damage);
         }
     }
 }

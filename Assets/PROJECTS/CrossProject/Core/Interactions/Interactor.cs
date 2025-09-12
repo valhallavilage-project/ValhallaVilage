@@ -16,17 +16,30 @@ namespace CrossProject.Core.Interactions
         private readonly List<AbstractInteractiveObject> _objects = new();
 
         private SphereCollider _collider;
-        private HashSet<Type> _blockers = new ();
+        private HashSet<Type> _blockers = new();
 
-        public ReactiveProperty<AbstractInteractiveObject> Closest { get; } = new ();
+        public ReactiveProperty<AbstractInteractiveObject> Closest { get; } = new();
         public bool IsBlocked => _blockers.Count > 0;
 
         public event Action<InteractionAnimation> OnInteractionStart;
         public event Action<InteractionAnimation> OnInteractionEnd;
 
+        [Inject]
+        private void Construct(IPlayerSkinProvider playerSkinProvider)
+        {
+            _playerSkinProvider = playerSkinProvider;
+        }
+
+        private void Awake()
+        {
+            _collider = GetComponent<SphereCollider>();
+            _collider.isTrigger = true;
+        }
+
         public void AddBlock(object blockRequester)
         {
             var type = blockRequester.GetType();
+
             if (!_blockers.Contains(type))
             {
                 _blockers.Add(type);
@@ -37,28 +50,12 @@ namespace CrossProject.Core.Interactions
         public void RemoveBlock(object blockRequester)
         {
             var type = blockRequester.GetType();
+
             if (_blockers.Contains(type))
             {
                 _blockers.Remove(type);
                 Debug.Log($"[{nameof(Interactor)}] : is no longer blocked by : {type.Name}");
             }
-        }
-
-        private void Awake()
-        {
-            _collider = GetComponent<SphereCollider>();
-            _collider.isTrigger = true;
-        }
-
-        private void Start()
-        {
-            Injector.Instance.Inject(this);
-        }
-
-        [Inject]
-        private void Construct(IPlayerSkinProvider playerSkinProvider)
-        {
-            _playerSkinProvider = playerSkinProvider;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -86,6 +83,7 @@ namespace CrossProject.Core.Interactions
 
             float closestDistance = -1;
             AbstractInteractiveObject closest = null;
+
             foreach (var interactableObject in _objects)
             {
                 if (interactableObject == null)
@@ -128,6 +126,7 @@ namespace CrossProject.Core.Interactions
         public async UniTask Interact()
         {
             var animationName = Closest.Value.animation;
+
             if (animationName != InteractionAnimation.Talk)
             {
                 _playerSkinProvider.CurrentSkin.Animator.SetBool(animationName.ToString(), true);
@@ -135,7 +134,11 @@ namespace CrossProject.Core.Interactions
             }
 
             await Closest.Value.Interaction();
-            Closest.Value.Deselect();
+
+            if (animationName != InteractionAnimation.Attack)
+            {
+                Closest.Value.Deselect();
+            }
 
             if (animationName != InteractionAnimation.Talk)
             {

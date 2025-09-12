@@ -14,12 +14,12 @@ namespace CrossProject.Core
         [SerializeField] private Collider _attackCollider;
         [SerializeField] private float _attackTimeOffset;
 
-        private MobConfig _mobConfig;
+        private IDamageInfoProvider _damageInfoProvider;
 
         [Inject]
-        private void AddDependencies(IAttackAbility attackAbility, MobConfig mobConfig)
+        private void AddDependencies(IAttackAbility attackAbility, IDamageInfoProvider damageInfoProvider)
         {
-            _mobConfig = mobConfig;
+            _damageInfoProvider = damageInfoProvider;
 
             attackAbility.AttackBegin.WithoutCurrent().ForEachAsync(AttackBegan, gameObject.GetCancellationTokenOnDestroy()).Forget();
             attackAbility.AttackEnd.WithoutCurrent().ForEachAsync(AttackEnded, gameObject.GetCancellationTokenOnDestroy()).Forget();
@@ -51,7 +51,7 @@ namespace CrossProject.Core
 
             if (damageReceivers.Length > 0)
             {
-                damageReceivers[0].ReceiveDamage(_mobConfig.AttackDamage);
+                damageReceivers[0].ReceiveDamage(_damageInfoProvider.Damage);
             }
 
             _attackCollider.gameObject.SetActive(false);

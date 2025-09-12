@@ -8,6 +8,7 @@ namespace CrossProject.Core
         private readonly INoticeEnemyArea _noticeEnemyArea;
         private readonly IMobPerUpdateData _perUpdateData;
         private readonly IRotateAbility _rotateAbility;
+        
         public override MobState State => MobState.WaitForTarget;
 
         public WaitForTargetMobState(IRotateAbility rotateAbility, INoticeEnemyArea noticeEnemyArea, IMobPerUpdateData perUpdateData)
@@ -16,14 +17,6 @@ namespace CrossProject.Core
             _noticeEnemyArea = noticeEnemyArea;
             _perUpdateData = perUpdateData;
         }
-
-        // public override async UniTask Enter()
-        // {
-        //     await base.Enter();
-        //
-        //     var direction = Vector3.ProjectOnPlane(_noticeEnemyArea.Enemy.position - _perUpdateData.Position, Vector3.up);
-        //     _rotateAbility.ForceRotate(direction.normalized);
-        // }
 
         protected override async UniTask HandleControl()
         {
