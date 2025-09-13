@@ -264,6 +264,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   portrait: {fileID: 2903507805091137213}
   healthBarFill: {fileID: 3741931558862487345}
+  _healthLabel: {fileID: 6716161932400960014}
   manaBarFill: {fileID: 8223610182722300355}
   manaLabel: {fileID: 4849739658788724092}
   frame: {fileID: 1261017839355825107}

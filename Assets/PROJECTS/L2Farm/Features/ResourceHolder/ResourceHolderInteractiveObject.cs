@@ -1,5 +1,4 @@
 using CrossProject.Core;
-using CrossProject.Core.Energy;
 using CrossProject.Core.InGameResources;
 using CrossProject.Core.Interactions;
 using CrossProject.Core.SaveLoad;
@@ -11,7 +10,7 @@ using VContainer;
 
 namespace L2Farm.Features.ResourceHolder
 {
-    public class ResourceHolderInteractiveObject : AbstractInteractiveObject
+    public class ResourceHolderInteractiveObject : AbstractInteractiveObject, IResourceData
     {
         [SerializeField] private ResourceContent content;
         [SerializeField] private int energyRequired;
@@ -19,10 +18,12 @@ namespace L2Farm.Features.ResourceHolder
         [SerializeField] private AudioSource audio;
         [SerializeField] private NavMeshObstacle obstacle;
 
-        private IEnergyProvider _energyProvider;
+        private IMainCharacterSharedDataHolder _mainCharacterSharedData;
         private GameStateManager _gameStateManager;
 
-        public override bool CanInteract() => _energyProvider.CurrentValue >= energyRequired && viewRoot.activeSelf && !isBusy;
+        public int EnergyRequired => energyRequired;
+
+        public override bool CanInteract() => _mainCharacterSharedData.CurrentEnergy.Value >= energyRequired && viewRoot.activeSelf && !isBusy;
 
         private void Start()
         {
@@ -32,10 +33,10 @@ namespace L2Farm.Features.ResourceHolder
         [Inject]
         private void Construct(
             GameStateManager gameStateManager,
-            IEnergyProvider energyProvider)
+            IMainCharacterSharedDataHolder mainCharacterSharedData)
         {
             _gameStateManager = gameStateManager;
-            _energyProvider = energyProvider;
+            _mainCharacterSharedData = mainCharacterSharedData;
         }
 
         private async UniTask RespawnTask()
@@ -58,9 +59,9 @@ namespace L2Farm.Features.ResourceHolder
             DOTween.Kill(this);
             await viewRoot.transform.DOScale(new Vector3(1.5f, 1.5f, 1.5f), 0.2f);
             await viewRoot.transform.DOScale(Vector3.zero, 0.2f);
-            _energyProvider.Spend(energyRequired);
 
             RespawnTask().Forget();
         }
+
     }
 }

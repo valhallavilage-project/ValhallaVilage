@@ -1,4 +1,5 @@
 using System.Threading;
+using CrossProject.Core;
 using CrossProject.Core.Interactions;
 using CrossProject.Core.SimpleMovement;
 using CrossProject.Ui.Core;
@@ -11,7 +12,7 @@ namespace L2Farm.Scripts.AutoLootButton
     public class AutoLootButtonController : IInitializable
     {
         private readonly UiService _uiService;
-        private readonly Interactor _interactor;
+        private readonly IInteractionHandler _interactionHandler;
         private readonly JoystickController _joystickController;
         private readonly SimpleMovementController _simpleMovementController;
 
@@ -22,12 +23,12 @@ namespace L2Farm.Scripts.AutoLootButton
 
         public AutoLootButtonController(
             UiService uiService,
-            Interactor interactor,
+            IInteractionHandler interactionHandler,
             JoystickController joystickController,
             SimpleMovementController simpleMovementController)
         {
             _uiService = uiService;
-            _interactor = interactor;
+            _interactionHandler = interactionHandler;
             _joystickController = joystickController;
             _simpleMovementController = simpleMovementController;
         }
@@ -49,22 +50,22 @@ namespace L2Farm.Scripts.AutoLootButton
 
         private async UniTask AutoLootRoutine(CancellationToken cancellationToken)
         {
-            _joystickController.AddBlock(this);
-            _simpleMovementController.AddBlock(this);
+            _joystickController.AddBlock(GetType());
+            _simpleMovementController.AddBlock(GetType());
             _view.gameObject.SetActive(false);
-            while (_interactor.Closest.Value != null)
+            while (_interactionHandler.Closest.Value != null)
             {
                 if (cancellationToken.IsCancellationRequested)
                     break;
 
-                await _simpleMovementController.MoveTo(_interactor.Closest.Value.transform.position, cancellationToken, _interactor.Closest.Value.interactionDistance);
-                await _interactor.Interact();
+                await _simpleMovementController.MoveTo(_interactionHandler.Closest.Value.transform.position, cancellationToken, _interactionHandler.Closest.Value.interactionDistance);
+                await _interactionHandler.Interact();
 
                 await UniTask.DelayFrame(1, PlayerLoopTiming.PostLateUpdate, cancellationToken);
             }
 
-            _joystickController.RemoveBlock(this);
-            _simpleMovementController.RemoveBlock(this);
+            _joystickController.RemoveBlock(GetType());
+            _simpleMovementController.RemoveBlock(GetType());
             _view.gameObject.SetActive(true);
         }
     }

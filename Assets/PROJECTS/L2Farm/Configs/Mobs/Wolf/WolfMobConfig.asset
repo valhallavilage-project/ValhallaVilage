@@ -23,5 +23,5 @@ MonoBehaviour:
   _roamingMinPathLength: 2
   _roamingMinAngleBeforeForceRotate: 2
   _attackDistance: 3
-  _attackDamage: 1
+  _attackDamage: 8
   _health: 50

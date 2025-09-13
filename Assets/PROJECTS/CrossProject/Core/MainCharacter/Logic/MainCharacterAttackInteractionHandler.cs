@@ -1,24 +1,27 @@
 using System;
+using System.Threading;
 using CrossProject.Core.Interactions;
 using Cysharp.Threading.Tasks;
+using Cysharp.Threading.Tasks.Linq;
 using VContainer.Unity;
 
 namespace CrossProject.Core
 {
     public class MainCharacterAttackInteractionHandler : IDisposable, IInitializable
     {
-        private Interactor _interactor;
         private readonly IAttackAbility _attackAbility;
+        private readonly CancellationTokenSource _disposeCts;
         
         public bool IsInitialized { get; private set; }
 
-        public MainCharacterAttackInteractionHandler(Interactor interactor, IAttackAbility attackAbility)
+        public MainCharacterAttackInteractionHandler(IInteractionHandler interactionHandler, IAttackAbility attackAbility)
         {
-            _interactor = interactor;
             _attackAbility = attackAbility;
 
-            interactor.OnInteractionStart += InteractionStarted;
-            interactor.OnInteractionEnd += InteractionEnded;
+            _disposeCts = new CancellationTokenSource();
+
+            interactionHandler.InteractionStarted.WithoutCurrent().ForEachAsync(InteractionStarted, _disposeCts.Token).Forget();
+            interactionHandler.InteractionFinished.WithoutCurrent().ForEachAsync(InteractionFinished, _disposeCts.Token).Forget();
         }
 
         public UniTask Initialize()
@@ -38,7 +41,7 @@ namespace CrossProject.Core
             _attackAbility.BeginAttack();
         }
 
-        private void InteractionEnded(InteractionAnimation interaction)
+        private void InteractionFinished(InteractionAnimation interaction)
         {
             if (interaction != InteractionAnimation.Attack)
             {
@@ -50,9 +53,8 @@ namespace CrossProject.Core
 
         public void Dispose()
         {
-            _interactor.OnInteractionStart -= InteractionStarted;
-            _interactor.OnInteractionEnd -= InteractionEnded;
-            _interactor = null;
+            _disposeCts.Cancel();
+            _disposeCts.Dispose();
         }
     }
 }

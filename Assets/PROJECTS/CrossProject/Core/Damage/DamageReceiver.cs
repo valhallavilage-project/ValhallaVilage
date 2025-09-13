@@ -20,7 +20,7 @@ namespace CrossProject.Core
 
         public void ReceiveDamage(float damage)
         {
-            _healthHandler.Decrease(damage);
+            _healthHandler.Damage(damage);
         }
     }
 }

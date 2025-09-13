@@ -1,6 +1,8 @@
 using System.Linq;
 using CrossProject.Core;
 using CrossProject.Core.Interactions;
+using Cysharp.Threading.Tasks;
+using Cysharp.Threading.Tasks.Linq;
 using L2Farm.Scripts;
 using UnityEngine;
 using VContainer;
@@ -9,54 +11,32 @@ namespace L2Farm.Features.Tools
 {
     public class ToolSwitcher : MonoBehaviour
     {
-        public static ToolSwitcher Instance;
-
-        private Interactor _interactor;
-
         [SerializeField] private SkinnedMeshRenderer skinnedMeshRenderer;
         [SerializeField] private ToolSetConfig toolSetConfig;
 
-        private void Awake()
-        {
-            if (Instance != null)
-            {
-                Destroy(gameObject);
-                return;
-            }
-
-            Instance = this;
-        }
-
         private void Start()
         {
-            Injector.Instance?.Inject(this);
+            Injector.Instance.Inject(this);
         }
 
         [Inject]
-        private void Construct(Interactor interactor)
+        private void Construct(IInteractionHandler interactionHandler)
         {
-            _interactor = interactor;
-            _interactor.OnInteractionStart += OnInteractionStart;
-            _interactor.OnInteractionEnd += OnInteractionEnd;
+            interactionHandler.InteractionStarted.WithoutCurrent().ForEachAsync(InteractionStarted, gameObject.GetCancellationTokenOnDestroy()).Forget();
+            interactionHandler.InteractionFinished.WithoutCurrent().ForEachAsync(InteractionFinished, gameObject.GetCancellationTokenOnDestroy()).Forget();
         }
 
-        private void OnDestroy()
-        {
-            _interactor.OnInteractionStart -= OnInteractionStart;
-            _interactor.OnInteractionEnd -= OnInteractionEnd;
-        }
-
-        private void OnInteractionStart(InteractionAnimation interactionAnimation)
+        private void InteractionStarted(InteractionAnimation interactionAnimation)
         {
             SwitchTo(interactionAnimation.GetToolId());
         }
 
-        private void OnInteractionEnd(InteractionAnimation interactionAnimation)
+        private void InteractionFinished(InteractionAnimation interactionAnimation)
         {
             SwitchTo(InteractionAnimation.Attack.GetToolId());
         }
 
-        public void SwitchTo(ToolId id)
+        private void SwitchTo(ToolId id)
         {
             var config = toolSetConfig.items.FirstOrDefault(x => x.id == id);
             if (config == null)

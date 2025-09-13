@@ -23,9 +23,9 @@ namespace CrossProject.Core.Cheats
                 SRDebug.Instance.PanelVisibilityChanged += visible =>
                 {
                     if (visible)
-                        blockable.AddBlock(this);
+                        blockable.AddBlock(GetType());
                     else
-                        blockable.RemoveBlock(this);
+                        blockable.RemoveBlock(GetType());
                 };
             }
             IsInitialized = true;
