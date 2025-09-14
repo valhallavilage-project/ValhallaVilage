@@ -24,7 +24,7 @@ namespace CrossProject.Core.Interactions
             _playerSkinProvider = playerSkinProvider;
             _energyHandler = energyHandler;
             _interactionHandler = interactionHandler;
-            
+
             interactionHandler.InteractionLaunched.WithoutCurrent().ForEachAwaitAsync(Interact, gameObject.GetCancellationTokenOnDestroy()).Forget();
         }
 
@@ -109,12 +109,18 @@ namespace CrossProject.Core.Interactions
                 _interactionHandler.StartInteraction(animationName);
             }
 
-            await _interactionHandler.Closest.Value.Interaction();
+            IResourceData resourceData = null;
 
             if (animationName is InteractionAnimation.Chop or InteractionAnimation.Gather or InteractionAnimation.Pickaxe)
             {
-                var resourceData = _interactionHandler.Closest.Value as IResourceData;
+                resourceData = _interactionHandler.Closest.Value as IResourceData;
+            }
 
+            await _interactionHandler.Closest.Value.Interaction();
+
+            if (animationName is InteractionAnimation.Chop or InteractionAnimation.Gather or InteractionAnimation.Pickaxe
+                && resourceData != null)
+            {
                 _energyHandler.Spend(resourceData.EnergyRequired);
             }
 
@@ -128,6 +134,8 @@ namespace CrossProject.Core.Interactions
                 _playerSkinProvider.CurrentSkin.Animator.SetBool(animationName.ToString(), false);
                 _interactionHandler.FinishInteraction(animationName);
             }
+
+            _interactionHandler.IsInteractionInProcess = false;
         }
     }
 }

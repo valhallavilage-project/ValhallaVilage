@@ -220,6 +220,7 @@ namespace L2Farm.Scripts
                 .AsImplementedInterfaces();
 
             builder.Register<MainCharacterSharedDataHolder>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<LocalTimeService>(Lifetime.Singleton).AsImplementedInterfaces();
             
             builder.Register<ProductionService>(Lifetime.Singleton)
                 .AsSelf()

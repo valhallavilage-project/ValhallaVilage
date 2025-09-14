@@ -7,6 +7,7 @@ namespace CrossProject.Core
     public class MainCharacterLifetimeScope : LifetimeScope
     {
         [SerializeField] private MainCharacterClothesSetConfigFacade _mainCharacterSets;
+        [SerializeField] private EnergyRestorationConfig _energyRestorationConfig;
 
         protected override void Configure(IContainerBuilder builder)
         {
@@ -26,15 +27,20 @@ namespace CrossProject.Core
         {
             builder.Register<HealthHandler>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<EnergyHandler>(Lifetime.Scoped).AsImplementedInterfaces();
+            builder.Register<RestoreEnergyHandler>(Lifetime.Scoped).AsImplementedInterfaces();
+            
             builder.Register<MainCharacterAttackInteractionHandler>(Lifetime.Scoped).AsImplementedInterfaces().Build();
             builder.Register<MainCharacterDamageInfoProvider>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<MainCharacterClothesSetsService>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<MainCharacterSharedDataHandler>(Lifetime.Scoped).AsImplementedInterfaces();
+            builder.Register<MainCharacterSaveEnergyHandler>(Lifetime.Scoped).AsImplementedInterfaces();
+            builder.Register<MainCharacterSaveHealthHandler>(Lifetime.Scoped).AsImplementedInterfaces();
         }
 
         private void BindConfigs(IContainerBuilder builder)
         {
             builder.RegisterInstance(_mainCharacterSets);
+            builder.RegisterInstance(_energyRestorationConfig);
         }
     }
 }

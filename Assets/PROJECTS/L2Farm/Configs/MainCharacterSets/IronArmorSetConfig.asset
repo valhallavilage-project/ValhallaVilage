@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _clothesSetType: 1
   _health: 20
+  _energy: 20
   _damage: 2

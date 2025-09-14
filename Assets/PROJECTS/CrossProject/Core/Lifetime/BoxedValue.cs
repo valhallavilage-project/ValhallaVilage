@@ -2,30 +2,41 @@ using Cysharp.Threading.Tasks;
 
 namespace CrossProject.Core
 {
-    public abstract class BoxedValue<T>
+    public interface IBoxedValueHandler<in T>
+    {
+        bool IsInitialized { get; }
+
+        void Init(T max, T current, T min);
+    }
+
+    public abstract class BoxedValue<T> : IBoxedValueHandler<T>
     {
         protected readonly AsyncReactiveProperty<T> _maxValue = new(default);
         protected readonly AsyncReactiveProperty<T> _currentValue = new(default);
         protected readonly AsyncReactiveProperty<T> _minValue = new(default);
-        
+
+        public bool IsInitialized { get; private set; }
+
         public void Init(T max, T current, T min)
         {
             _maxValue.Value = max;
             _minValue.Value = min;
             _currentValue.Value = current;
+
+            IsInitialized = true;
         }
 
         protected void IncreaseCurrentValue(T value)
         {
             var currentValue = _currentValue.Value;
-            
+
             _currentValue.Value = MinValue(Addition(currentValue, value), _maxValue.Value);
         }
 
         protected void ReduceCurrentValue(T value)
         {
             var currentValue = _currentValue.Value;
-            _currentValue.Value = MaxValue(Subtraction(currentValue, value),_minValue.Value);
+            _currentValue.Value = MaxValue(Subtraction(currentValue, value), _minValue.Value);
         }
 
         protected void IncreaseMaxValue(T value)
@@ -38,7 +49,7 @@ namespace CrossProject.Core
         protected void ReduceMaxValue(T value)
         {
             var maxValue = _maxValue.Value;
-            _maxValue.Value = MaxValue(Subtraction(maxValue, value),_minValue.Value);
+            _maxValue.Value = MaxValue(Subtraction(maxValue, value), _minValue.Value);
             ReduceCurrentValue(value);
         }
 

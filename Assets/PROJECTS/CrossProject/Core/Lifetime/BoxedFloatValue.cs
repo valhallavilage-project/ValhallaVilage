@@ -10,7 +10,7 @@ namespace CrossProject.Core
         }
         protected override float Addition(float augend, float addend)
         {
-            return augend + augend;
+            return augend + addend;
         }
         protected override float MaxValue(float compared, float comparator)
         {

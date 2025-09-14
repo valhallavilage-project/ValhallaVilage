@@ -1855,6 +1855,10 @@ PrefabInstance:
       propertyPath: _data._serializedList.Array.data[10].Key
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 4869117256860943273, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5417413934468199986, guid: 3b21045f701005542a8588b2ff413744, type: 3}
       propertyPath: _eyesPosition
       value: 

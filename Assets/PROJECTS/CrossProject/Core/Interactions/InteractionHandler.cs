@@ -12,6 +12,7 @@ namespace CrossProject.Core
         IReadOnlyAsyncReactiveProperty<InteractionAnimation> InteractionFinished { get; }
         IReadOnlyAsyncReactiveProperty<AbstractInteractiveObject> Closest { get; }
         IReadOnlyAsyncReactiveProperty<bool> InteractionLaunched { get; }
+        bool IsInteractionInProcess { get; set; }
 
         void StartInteraction(InteractionAnimation interaction);
         void FinishInteraction(InteractionAnimation interaction);
@@ -21,7 +22,8 @@ namespace CrossProject.Core
 
     public class InteractionHandler : IInteractionHandler
     {
-        private HashSet<Type> _blockers = new();
+        private readonly HashSet<Type> _blockers = new();
+        private bool _isInteractionInProcess;
 
         private readonly AsyncReactiveProperty<InteractionAnimation> _interactionStarted = new(default);
         private readonly AsyncReactiveProperty<InteractionAnimation> _interactionFinished = new(default);
@@ -32,8 +34,9 @@ namespace CrossProject.Core
         public IReadOnlyAsyncReactiveProperty<InteractionAnimation> InteractionFinished => _interactionFinished;
         public IReadOnlyAsyncReactiveProperty<AbstractInteractiveObject> Closest => _closest;
         public IReadOnlyAsyncReactiveProperty<bool> InteractionLaunched => _interactionLaunched;
-        
+
         public bool IsBlocked => _blockers.Count > 0;
+        public bool IsInteractionInProcess { get; set; }
 
         public void StartInteraction(InteractionAnimation interaction)
         {
@@ -68,11 +71,12 @@ namespace CrossProject.Core
             }
         }
 
-        public UniTask Interact()
+        public async UniTask Interact()
         {
+            IsInteractionInProcess = true;
             _interactionLaunched.Value = true;
 
-            return UniTask.CompletedTask;
+            await UniTask.WaitWhile(() => IsInteractionInProcess);
         }
     }
 }

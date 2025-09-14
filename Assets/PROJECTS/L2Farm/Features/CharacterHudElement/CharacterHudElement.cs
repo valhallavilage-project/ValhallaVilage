@@ -1,5 +1,4 @@
 using CrossProject.Core;
-using CrossProject.Core.Energy;
 using CrossProject.Ui.Core;
 using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Linq;
@@ -41,13 +40,13 @@ namespace L2Farm.Scripts.CharacterHudElement
         private void OnEnergyChanged(float current)
         {
             manaBarFill.fillAmount = current / _mainCharacterSharedData.MaxEnergy.Value;
-            manaLabel.text = $"{current}/{_mainCharacterSharedData.MaxEnergy.Value}";
+            manaLabel.text = $"{Mathf.RoundToInt(current)}/{_mainCharacterSharedData.MaxEnergy.Value}";
         }
 
         private void OnHealthChanged(float current)
         {
             healthBarFill.fillAmount = current / _mainCharacterSharedData.MaxHealth.Value;
-            _healthLabel.text = $"{current}/{_mainCharacterSharedData.MaxHealth.Value}";
+            _healthLabel.text = $"{Mathf.RoundToInt(current)}/{_mainCharacterSharedData.MaxHealth.Value}";
         }
     }
 }

@@ -17,11 +17,26 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: f0cda9746db524148957a11d56e174a8
   m_SerializeEntries:
+  - m_GUID: 0be0baefdc3db3a4c9c8dfd54097cd96
+    m_Address: Assets/PROJECTS/L2Farm/Configs/Mobs/Wolf/WolfMobTransitionsConfig.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 21173dce8cec5491b9534d1c61483134
     m_Address: SpawnPointSetConfig
     m_ReadOnly: 0
     m_SerializedLabels:
     - prewarm
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 28548f18040bd5c408a9ab3c0da4cd74
+    m_Address: Assets/PROJECTS/L2Farm/Configs/MainCharacterSets/SteelArmorSetConfig.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 31950c3851ced3e40b6ab0091c724f3c
+    m_Address: Assets/PROJECTS/L2Farm/Configs/Mobs/Wolf/WolfMobStateTimeConfig.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 39d72b3e167104093b6ba16bd4393d2c
     m_Address: SkinSetConfig
@@ -29,6 +44,15 @@ MonoBehaviour:
     m_SerializedLabels:
     - prewarm
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 490a168ed011ac541be2e99a375d0dba
+    m_Address: Assets/PROJECTS/L2Farm/Configs/Mobs/Wolf/WolfMobConfig.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 49217c23db55e44478a1bc4eca107d72
+    m_Address: Assets/PROJECTS/L2Farm/Configs/MainCharacterSets/MainCharacterClothesSetConfigFacade.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   - m_GUID: 5e518e359fe984cf6aaabb4ab6b90551
     m_Address: ProductionSetConfig
     m_ReadOnly: 0
@@ -59,6 +83,11 @@ MonoBehaviour:
     m_SerializedLabels:
     - prewarm
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bd99c4e2bc801b1478cf58046fec62dd
+    m_Address: Assets/PROJECTS/L2Farm/Configs/MainCharacterSets/IronArmorSetConfig.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: cd491b73cf44a41fdb9272b4129cd308
     m_Address: NPCSetConfig
     m_ReadOnly: 0
@@ -70,6 +99,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - prewarm
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e1d91bca80cdffb49a1556d072389cdb
+    m_Address: Assets/PROJECTS/L2Farm/Configs/MainCharacterSets/DefaultClothesSetConfig.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e64fd9210b3334384ad8a4876adc527f
     m_Address: EnergyRestorationConfig

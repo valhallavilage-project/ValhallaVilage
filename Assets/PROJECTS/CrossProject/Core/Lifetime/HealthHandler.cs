@@ -2,7 +2,7 @@ using Cysharp.Threading.Tasks;
 
 namespace CrossProject.Core
 {
-    public interface IHealthHandler
+    public interface IHealthHandler : IBoxedValueHandler<float>
     {
         IReadOnlyAsyncReactiveProperty<float> MaxHealth { get; }
         IReadOnlyAsyncReactiveProperty<float> Health { get; }
