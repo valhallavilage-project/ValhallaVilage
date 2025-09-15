@@ -5,16 +5,16 @@ namespace CrossProject.Core
 {
     public class WaitForTargetMobState : BaseMobState
     {
-        private readonly INoticeEnemyArea _noticeEnemyArea;
+        private readonly IAgroArea _agroArea;
         private readonly IMobPerUpdateData _perUpdateData;
         private readonly IRotateAbility _rotateAbility;
         
         public override MobState State => MobState.WaitForTarget;
 
-        public WaitForTargetMobState(IRotateAbility rotateAbility, INoticeEnemyArea noticeEnemyArea, IMobPerUpdateData perUpdateData)
+        public WaitForTargetMobState(IRotateAbility rotateAbility, IAgroArea agroArea, IMobPerUpdateData perUpdateData)
         {
             _rotateAbility = rotateAbility;
-            _noticeEnemyArea = noticeEnemyArea;
+            _agroArea = agroArea;
             _perUpdateData = perUpdateData;
         }
 
@@ -22,7 +22,7 @@ namespace CrossProject.Core
         {
             await base.HandleControl();
 
-            var direction = Vector3.ProjectOnPlane(_noticeEnemyArea.Enemy.position - _perUpdateData.Position, Vector3.up);
+            var direction = Vector3.ProjectOnPlane(_agroArea.Enemy.position - _perUpdateData.Position, Vector3.up);
 
             _rotateAbility.ForceRotate(direction.normalized);
         }

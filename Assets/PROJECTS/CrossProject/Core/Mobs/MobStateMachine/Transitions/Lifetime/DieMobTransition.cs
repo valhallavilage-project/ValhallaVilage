@@ -1,13 +1,13 @@
 namespace CrossProject.Core
 {
-    public class DieTransition : BaseMobTransition
+    public class DieMobTransition : BaseMobTransition
     {
         private readonly IHealthHandler _healthHandler;
 
         public override MobState State => MobState.Die;
         public override MobTransition Transition => MobTransition.Die;
 
-        public DieTransition(IHealthHandler healthHandler)
+        public DieMobTransition(IHealthHandler healthHandler)
         {
             _healthHandler = healthHandler;
         }

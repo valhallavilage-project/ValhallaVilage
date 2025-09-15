@@ -7,7 +7,7 @@ using VContainer;
 
 namespace CrossProject.Core.Interactions
 {
-    [RequireComponent(typeof(SphereCollider), typeof(Rigidbody))]
+    [RequireComponent(typeof(SphereCollider))]
     public class Interactor : MonoBehaviour
     {
         private IPlayerSkinProvider _playerSkinProvider;

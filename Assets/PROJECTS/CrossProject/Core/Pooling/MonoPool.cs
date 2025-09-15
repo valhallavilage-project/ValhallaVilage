@@ -62,6 +62,7 @@ namespace CrossProject.Core.Pooling
             }
 
             _activeElements.AddLast(result);
+            result.OnGet();
             return result;
         }
 

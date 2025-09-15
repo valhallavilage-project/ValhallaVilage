@@ -6,18 +6,18 @@ namespace CrossProject.Core
     public class RotateToTargetMobState : BaseMobState
     {
         private readonly IRotateAbility _rotateAbility;
-        private readonly INoticeEnemyArea _noticeEnemyArea;
+        private readonly IAgroArea _agroArea;
         private readonly IMobPerUpdateData _perUpdateData;
         private readonly IMobPersistentData _persistentData;
         private readonly IMoveAbility _moveAbility;
 
         public override MobState State => MobState.RotateToTarget;
 
-        public RotateToTargetMobState(IRotateAbility rotateAbility, INoticeEnemyArea noticeEnemyArea,
+        public RotateToTargetMobState(IRotateAbility rotateAbility, IAgroArea agroArea,
             IMobPerUpdateData perUpdateData, IMobPersistentData persistentData, IMoveAbility moveAbility)
         {
             _rotateAbility = rotateAbility;
-            _noticeEnemyArea = noticeEnemyArea;
+            _agroArea = agroArea;
             _perUpdateData = perUpdateData;
             _persistentData = persistentData;
             _moveAbility = moveAbility;
@@ -39,7 +39,7 @@ namespace CrossProject.Core
             const float differenceAngles = 1;
             const float directionsMinDifference = 1 - differenceAngles * Mathf.Deg2Rad;
 
-            var direction = Vector3.ProjectOnPlane(_noticeEnemyArea.Enemy.position - _perUpdateData.Position, Vector3.up);
+            var direction = Vector3.ProjectOnPlane(_agroArea.Enemy.position - _perUpdateData.Position, Vector3.up);
 
             var difference = MathUtils.GetVectorsDirectionDifference(direction.normalized, _perUpdateData.Rotation * Vector3.forward, Vector3.up);
 

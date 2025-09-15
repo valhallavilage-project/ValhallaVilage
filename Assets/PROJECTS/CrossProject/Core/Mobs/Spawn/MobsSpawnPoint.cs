@@ -18,7 +18,6 @@ namespace CrossProject.Core
         [SerializeField] private SphereCollider _agroZone;
 
         private MobsPool _pool;
-        private bool _isPaused;
         private int _spawnedMobs;
         
         public SphereCollider AgroZone => _agroZone;
@@ -28,9 +27,6 @@ namespace CrossProject.Core
         {
             _pool = GetComponent<MobsPool>();
             _roamZone = GetComponent<SphereCollider>();
-
-            this.GetAsyncTriggerEnterTrigger().ForEachAsync(OnPlayerEnter, gameObject.GetCancellationTokenOnDestroy());
-            this.GetAsyncTriggerExitTrigger().ForEachAsync(OnPlayerExit, gameObject.GetCancellationTokenOnDestroy());
         }
 
         private void Start()
@@ -42,11 +38,17 @@ namespace CrossProject.Core
         {
             while (true)
             {
+                if (_spawnedMobs >= _maxMobs)
+                {
+                    await UniTask.Yield();
+                    continue;
+                }
+                
                 await UniTask.Delay(TimeSpan.FromSeconds(_spawnInterval), cancellationToken: gameObject.GetCancellationTokenOnDestroy());
 
-                if (_spawnedMobs >= _maxMobs || _isPaused)
+                if (_spawnedMobs >= _maxMobs)
                 {
-                    await UniTask.WaitUntil(() => _spawnedMobs < _maxMobs && !_isPaused, cancellationToken: gameObject.GetCancellationTokenOnDestroy());
+                    await UniTask.WaitUntil(() => _spawnedMobs < _maxMobs, cancellationToken: gameObject.GetCancellationTokenOnDestroy());
                 }
 
                 SpawnMob();
@@ -66,18 +68,6 @@ namespace CrossProject.Core
             mobComponent.BindSpawnPoint(this);
 
             _spawnedMobs++;
-        }
-        
-        private void OnPlayerEnter(Collider other)
-        {
-            if (other.CompareTag("Player"))
-                _isPaused = true;
-        }
-        
-        private void OnPlayerExit(Collider other)
-        {
-            if (other.CompareTag("Player"))
-                _isPaused = false;
         }
 
         public void RemoveMob()

@@ -2,28 +2,25 @@
 {
     public class ReturnToRoamAreaMobTransition : BaseMobTransition
     {
-        private readonly INoticeEnemyArea _noticeEnemyArea;
+        private readonly IAgroArea _agroArea;
         private readonly IRoamArea _roamArea;
         private readonly IMobPersistentData _persistentData;
         private readonly IMobPerUpdateData _perUpdateData;
-        private readonly MobConfig _config;
 
         public override MobState State => MobState.ReturnToRoamArea;
         public override MobTransition Transition => MobTransition.ReturnToRoamArea;
 
-        public ReturnToRoamAreaMobTransition(INoticeEnemyArea noticeEnemyArea, IRoamArea roamArea, IMobPersistentData persistentData, IMobPerUpdateData perUpdateData,
-            MobConfig config)
+        public ReturnToRoamAreaMobTransition(IAgroArea agroArea, IRoamArea roamArea, IMobPersistentData persistentData, IMobPerUpdateData perUpdateData)
         {
-            _noticeEnemyArea = noticeEnemyArea;
+            _agroArea = agroArea;
             _roamArea = roamArea;
             _persistentData = persistentData;
             _perUpdateData = perUpdateData;
-            _config = config;
         }
 
         protected override bool Condition()
         {
-            return !_noticeEnemyArea.IsEnemyInsideArea;
+            return !_agroArea.IsEnemyInsideArea;
         }
 
         protected override void FillConditionForStates()

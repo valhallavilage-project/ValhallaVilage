@@ -12,6 +12,7 @@ namespace CrossProject.Core
         AttackPause = 7,
         RoamRotation = 8,
         WaitForTarget = 9,
-        Die = 10
+        Die = 10,
+        Dead = 11
     }
 }

@@ -6,18 +6,18 @@ namespace CrossProject.Core
     {
         private readonly IMoveAbility _moveAbility;
         private readonly IRotateAbility _rotateAbility;
-        private readonly INoticeEnemyArea _noticeEnemyArea;
+        private readonly IAgroArea _agroArea;
         private readonly IMobPerUpdateData _perUpdateData;
         private readonly IMobPersistentData _persistentData;
 
         public override MobState State => MobState.ApproachTarget;
 
-        public ApproachTargetMobState(IMoveAbility moveAbility, IRotateAbility rotateAbility, INoticeEnemyArea noticeEnemyArea,
+        public ApproachTargetMobState(IMoveAbility moveAbility, IRotateAbility rotateAbility, IAgroArea agroArea,
             IMobPerUpdateData perUpdateData, IMobPersistentData persistentData)
         {
             _moveAbility = moveAbility;
             _rotateAbility = rotateAbility;
-            _noticeEnemyArea = noticeEnemyArea;
+            _agroArea = agroArea;
             _perUpdateData = perUpdateData;
             _persistentData = persistentData;
         }
@@ -33,7 +33,7 @@ namespace CrossProject.Core
         {
             await base.HandleControl();
 
-            var distance = _noticeEnemyArea.Enemy.position - _perUpdateData.Position;
+            var distance = _agroArea.Enemy.position - _perUpdateData.Position;
 
             if (distance.magnitude <= Config.AttackDistance)
             {

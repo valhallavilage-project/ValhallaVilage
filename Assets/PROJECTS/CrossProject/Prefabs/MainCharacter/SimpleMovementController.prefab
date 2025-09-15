@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3622925366806554106}
   - component: {fileID: 656522683095773467}
   - component: {fileID: 1295095151255340298}
+  - component: {fileID: 48987547880746888}
   m_Layer: 0
   m_Name: SimpleMovementController
   m_TagString: Untagged
@@ -114,6 +115,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c72feeb7b6b4bb0b9a660b289e460cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &48987547880746888
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 243141173245693883}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &322585332926425311
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,7 +459,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7533334227641878260}
   - component: {fileID: 8077115627840624914}
-  - component: {fileID: 4639614860903401786}
   - component: {fileID: 1401013528007428052}
   m_Layer: 6
   m_Name: Interactor
@@ -476,33 +503,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 30
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &4639614860903401786
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4124864569335157055}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!114 &1401013528007428052
 MonoBehaviour:
   m_ObjectHideFlags: 0

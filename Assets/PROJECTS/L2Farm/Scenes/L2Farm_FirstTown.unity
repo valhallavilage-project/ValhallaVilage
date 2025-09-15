@@ -68821,7 +68821,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2261021733402592936, guid: ca928bb2472ebd64b82596e66fc25af2, type: 3}
       propertyPath: _maxMobs
-      value: 1
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2261021733402592936, guid: ca928bb2472ebd64b82596e66fc25af2, type: 3}
+      propertyPath: _spawnInterval
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8134622062803552181, guid: ca928bb2472ebd64b82596e66fc25af2, type: 3}
       propertyPath: m_LocalPosition.x

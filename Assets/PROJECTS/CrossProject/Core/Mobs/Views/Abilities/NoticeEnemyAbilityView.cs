@@ -24,7 +24,6 @@ namespace CrossProject.Core
         protected void Start()
         {
             _areaCollider.GetAsyncTriggerEnterTrigger().ForEachAsync(OnTriggerEnter, gameObject.GetCancellationTokenOnDestroy()).Forget();
-            _areaCollider.GetAsyncTriggerExitTrigger().ForEachAsync(OnTriggerExit, gameObject.GetCancellationTokenOnDestroy()).Forget();
         }
 
         private void OnTriggerEnter(Collider enterObject)
@@ -53,16 +52,6 @@ namespace CrossProject.Core
             {
                 _area.NoticeEnemy(enterObject.transform);
             }
-        }
-
-        private void OnTriggerExit(Collider exitObject)
-        {
-            if (!exitObject.gameObject.CompareTag(_expectedObjectTag))
-            {
-                return;
-            }
-            
-            _area.EnemyLeave();
         }
     }
 }

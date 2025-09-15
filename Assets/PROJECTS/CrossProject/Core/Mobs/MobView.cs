@@ -1,15 +1,16 @@
 using CrossProject.Core.Pooling;
+using Cysharp.Threading.Tasks;
+using Cysharp.Threading.Tasks.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using VContainer;
 
 namespace CrossProject.Core
 {
-    public class Mob : MonoBehaviour, IPoolElement
+    public class MobView : MonoBehaviour, IPoolElement
     {
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] [ReadOnly] private MobState _state;
-        [SerializeField] [ReadOnly] private float _health;
 
         private MobsSpawnPoint _spawnPoint;
         private IMobStateMachine _mobStateMachine;
@@ -21,13 +22,15 @@ namespace CrossProject.Core
 
         private IMoveAbility _moveAbility;
         private IRotateAbility _rotateAbility;
+        private IPool _pool;
+        private IAgroArea _agroArea;
 
         public bool IsAvailableToGet { get; private set; }
 
         [Inject]
         public void AddDependencies(IMobStateMachine stateMachine, IMobPerUpdateData perUpdateData,
             MobConfig config, IMoveAbility moveAbility, IRotateAbility rotateAbility, IRoamArea roamArea,
-            IHealthHandler healthHandler)
+            IHealthHandler healthHandler, IDieAbility dieAbility, IAgroArea agroArea)
         {
             _perUpdateData = perUpdateData;
             _config = config;
@@ -38,16 +41,17 @@ namespace CrossProject.Core
 
             _moveAbility = moveAbility;
             _rotateAbility = rotateAbility;
+            _agroArea = agroArea;
 
             healthHandler.Init(config.Health, config.Health);
             moveAbility.Init(config.Acceleration, config.MaxAcceleration);
             rotateAbility.Init(config.RotationSpeed, config.RotationDamper);
+            dieAbility.Dead.WithoutCurrent().ForEachAsync(MobDie, gameObject.GetCancellationTokenOnDestroy()).Forget();
         }
 
         private void FixedUpdate()
         {
             _state = _mobStateMachine.CurrentState.Value;
-            _health = _healthHandler.Health.Value;
             
             #if UNITY_EDITOR
             // to apply changes made in config during play mode
@@ -65,10 +69,12 @@ namespace CrossProject.Core
 
         public void SetPool(IPool pool)
         {
+            _pool = pool;
         }
 
         public void OnGet()
         {
+            gameObject.SetActive(true);
             IsAvailableToGet = false;
             _healthHandler.Init(_config.Health, _config.Health);
             _mobStateMachine.ToDefaultState();
@@ -76,6 +82,7 @@ namespace CrossProject.Core
 
         public void OnReturn()
         {
+            gameObject.SetActive(false);
             _spawnPoint.RemoveMob();
             IsAvailableToGet = true;
         }
@@ -84,6 +91,12 @@ namespace CrossProject.Core
         {
             _spawnPoint = spawnPoint;
             _roamArea.Init(spawnPoint.RoamZone, _config.RoamingMinPathLength);
+            _agroArea.Init(spawnPoint.AgroZone);
+        }
+
+        private void MobDie(bool obj)
+        {
+            _pool.Return(this);
         }
     }
 }

@@ -9,18 +9,27 @@ namespace CrossProject.Core
         private readonly IMobPerUpdateData _perUpdateData;
         private readonly IMobPersistentData _persistentData;
         private readonly IRotateAbility _rotateAbility;
-        
+        private readonly IAgroArea _agroArea;
+
         public override MobState State => MobState.ReturnToRoamArea;
         
         public ReturnToRoamAreaMobState(IMoveAbility moveAbility, IMobPerUpdateData perUpdateData, IMobPersistentData persistentData,
-            IRotateAbility rotateAbility)
+            IRotateAbility rotateAbility, IAgroArea agroArea)
         {
             _moveAbility = moveAbility;
             _perUpdateData = perUpdateData;
             _persistentData = persistentData;
             _rotateAbility = rotateAbility;
+            _agroArea = agroArea;
         }
-        
+
+        public override async UniTask Enter()
+        {
+            await base.Enter();
+            
+            _agroArea.ForgotEnemy();
+        }
+
         protected override async UniTask HandleControl()
         {
             await base.HandleControl();

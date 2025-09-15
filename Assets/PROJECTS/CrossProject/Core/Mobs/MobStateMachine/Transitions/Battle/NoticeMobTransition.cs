@@ -2,7 +2,7 @@
 {
     public class NoticeMobTransition : BaseMobTransition
     {
-        private readonly INoticeEnemyArea _noticeEnemyArea;
+        private readonly IAgroArea _agroArea;
         private readonly IMobPerUpdateData _perUpdateData;
         private readonly MobConfig _config;
         private readonly IRoamArea _roamArea;
@@ -10,10 +10,10 @@
         public override MobState State => MobState.Notice;
         public override MobTransition Transition => MobTransition.Notice;
 
-        public NoticeMobTransition(INoticeEnemyArea noticeEnemyArea, IMobPerUpdateData perUpdateData, MobConfig config,
+        public NoticeMobTransition(IAgroArea agroArea, IMobPerUpdateData perUpdateData, MobConfig config,
             IRoamArea roamArea)
         {
-            _noticeEnemyArea = noticeEnemyArea;
+            _agroArea = agroArea;
             _perUpdateData = perUpdateData;
             _config = config;
             _roamArea = roamArea;
@@ -21,7 +21,7 @@
 
         protected override bool Condition()
         {
-            return _noticeEnemyArea.IsEnemyInsideArea;
+            return _agroArea.IsEnemyInsideArea;
         }
 
         protected override void FillConditionForStates()
@@ -36,7 +36,7 @@
         {
             return _roamArea.IsInside(_perUpdateData.Position)
                 ? Condition()
-                : (_noticeEnemyArea.Enemy.position - _perUpdateData.Position).magnitude < _config.MinDistanceToApproach;
+                : (_agroArea.Enemy.position - _perUpdateData.Position).magnitude < _config.MinDistanceToApproach;
         }
     }
 }

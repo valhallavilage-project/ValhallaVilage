@@ -45,7 +45,8 @@ namespace CrossProject.Core
             builder.Register<ReturnToRoamAreaMobState>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<RoamMobState>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<RoamRotationMobState>(Lifetime.Scoped).AsImplementedInterfaces();
-            builder.Register<DieState>(Lifetime.Scoped).AsImplementedInterfaces();
+            builder.Register<DieMobState>(Lifetime.Scoped).AsImplementedInterfaces();
+            builder.Register<DeadMobState>(Lifetime.Scoped).AsImplementedInterfaces();
         }
 
         private void BindTransitions(IContainerBuilder builder)
@@ -60,7 +61,8 @@ namespace CrossProject.Core
             builder.Register<ReturnToRoamAreaMobTransition>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<RoamMobTransition>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<RoamRotationMobTransition>(Lifetime.Scoped).AsImplementedInterfaces();
-            builder.Register<DieTransition>(Lifetime.Scoped).AsImplementedInterfaces();
+            builder.Register<DieMobTransition>(Lifetime.Scoped).AsImplementedInterfaces();
+            builder.Register<DeadMobTransition>(Lifetime.Scoped).AsImplementedInterfaces();
         }
         
         private void BindStateBindings(IContainerBuilder builder)
@@ -75,6 +77,8 @@ namespace CrossProject.Core
             builder.Register<NoticeEnemyArea>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<RoamSphereArea>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<RotateAbility>(Lifetime.Scoped).AsImplementedInterfaces();
+            builder.Register<DieAbility>(Lifetime.Scoped).AsImplementedInterfaces();
+            builder.Register<AgroArea>(Lifetime.Scoped).AsImplementedInterfaces();
         }
 
         private void BindConfigs(IContainerBuilder builder)

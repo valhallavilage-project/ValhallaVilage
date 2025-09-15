@@ -25,7 +25,10 @@ namespace CrossProject.Core
 
         [Header("Heath")]
         [SerializeField] private float _health = 50;
-
+        
+        [Header("Lifetime")]
+        [SerializeField] private float _corpseDecayTime;
+        
         public float MaxSpeed => _maxSpeed;
         public float Acceleration => _acceleration;
         public float MaxAcceleration => _maxAcceleration;
@@ -39,5 +42,6 @@ namespace CrossProject.Core
         public float RoamingMinAngleBeforeForceRotate => _roamingMinAngleBeforeForceRotate;
         public float AttackDamage => _attackDamage;
         public float TorqueStrength => _torqueStrength;
+        public float CorpseDecayTime => _corpseDecayTime;
     }
 }

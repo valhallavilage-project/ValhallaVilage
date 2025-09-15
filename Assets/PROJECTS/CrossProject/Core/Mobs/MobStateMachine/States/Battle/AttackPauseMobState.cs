@@ -6,15 +6,15 @@ namespace CrossProject.Core
     public class AttackPauseMobState : BaseMobState
     {
         private readonly IRotateAbility _rotateAbility;
-        private readonly INoticeEnemyArea _noticeEnemyArea;
+        private readonly IAgroArea _agroArea;
         private readonly IMobPerUpdateData _perUpdateData;
 
         public override MobState State => MobState.AttackPause;
 
-        public AttackPauseMobState(IRotateAbility rotateAbility, INoticeEnemyArea noticeEnemyArea, IMobPerUpdateData perUpdateData)
+        public AttackPauseMobState(IRotateAbility rotateAbility, IAgroArea agroArea, IMobPerUpdateData perUpdateData)
         {
             _rotateAbility = rotateAbility;
-            _noticeEnemyArea = noticeEnemyArea;
+            _agroArea = agroArea;
             _perUpdateData = perUpdateData;
         }
 
@@ -22,7 +22,7 @@ namespace CrossProject.Core
         {
             await base.HandleControl();
 
-            var distance = Vector3.ProjectOnPlane(_noticeEnemyArea.Enemy.position - _perUpdateData.Position, Vector3.up);
+            var distance = Vector3.ProjectOnPlane(_agroArea.Enemy.position - _perUpdateData.Position, Vector3.up);
 
             _rotateAbility.ForceRotate(distance.normalized);
         }

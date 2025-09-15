@@ -1891,6 +1891,10 @@ PrefabInstance:
       propertyPath: m_FillOrigin
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5995064144105461079, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _corpsePrefab
+      value: 
+      objectReference: {fileID: 7253512334740030181, guid: 174fa3eb064cc794a98388229e2153d1, type: 3}
     - target: {fileID: 6160681993543075045, guid: 3b21045f701005542a8588b2ff413744, type: 3}
       propertyPath: _rigidbody
       value: 

@@ -25,3 +25,4 @@ MonoBehaviour:
   _attackDistance: 3
   _attackDamage: 8
   _health: 50
+  _corpseDecayTime: 5
