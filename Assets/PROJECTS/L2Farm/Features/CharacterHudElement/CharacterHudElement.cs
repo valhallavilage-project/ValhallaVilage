@@ -33,17 +33,17 @@ namespace L2Farm.Scripts.CharacterHudElement
         {
             _mainCharacterSharedData = mainCharacterSharedData;
 
-            mainCharacterSharedData.CurrentEnergy.ForEachAsync(OnEnergyChanged, gameObject.GetCancellationTokenOnDestroy()).Forget();
-            mainCharacterSharedData.CurrentHealth.ForEachAsync(OnHealthChanged, gameObject.GetCancellationTokenOnDestroy()).Forget();
+            mainCharacterSharedData.CurrentEnergy.ForEachAsync(ChangeEnergy, gameObject.GetCancellationTokenOnDestroy()).Forget();
+            mainCharacterSharedData.CurrentHealth.ForEachAsync(ChangeHealth, gameObject.GetCancellationTokenOnDestroy()).Forget();
         }
 
-        private void OnEnergyChanged(float current)
+        private void ChangeEnergy(float current)
         {
             manaBarFill.fillAmount = current / _mainCharacterSharedData.MaxEnergy.Value;
             manaLabel.text = $"{Mathf.RoundToInt(current)}/{_mainCharacterSharedData.MaxEnergy.Value}";
         }
 
-        private void OnHealthChanged(float current)
+        private void ChangeHealth(float current)
         {
             healthBarFill.fillAmount = current / _mainCharacterSharedData.MaxHealth.Value;
             _healthLabel.text = $"{Mathf.RoundToInt(current)}/{_mainCharacterSharedData.MaxHealth.Value}";

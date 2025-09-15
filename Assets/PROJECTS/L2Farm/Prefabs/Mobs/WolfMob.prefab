@@ -1831,6 +1831,22 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 22100000, guid: 65567978885a2a343998be7b805743c3, type: 2}
+    - target: {fileID: 2556264402222102554, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2556264402222102554, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2556264402222102554, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 3.67
+      objectReference: {fileID: 0}
+    - target: {fileID: 2556264402222102554, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3018869327203395264, guid: 3b21045f701005542a8588b2ff413744, type: 3}
       propertyPath: m_Name
       value: WolfMob
@@ -1847,6 +1863,10 @@ PrefabInstance:
       propertyPath: highLight
       value: 
       objectReference: {fileID: 261960317435009766}
+    - target: {fileID: 3858784027777965667, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _healthLabel
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3932151714328623469, guid: 3b21045f701005542a8588b2ff413744, type: 3}
       propertyPath: _data._serializedList.Array.size
       value: 11
@@ -1863,6 +1883,14 @@ PrefabInstance:
       propertyPath: _eyesPosition
       value: 
       objectReference: {fileID: 8303092062893930332}
+    - target: {fileID: 5498057052163135851, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5498057052163135851, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: m_FillOrigin
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6160681993543075045, guid: 3b21045f701005542a8588b2ff413744, type: 3}
       propertyPath: _rigidbody
       value: 
@@ -1883,8 +1911,13 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9195223499515698301, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: m_VertexColorAlwaysGammaSpace
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3006881255006521080, guid: 3b21045f701005542a8588b2ff413744, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 2395233195736315930, guid: 3b21045f701005542a8588b2ff413744, type: 3}
       insertIndex: -1

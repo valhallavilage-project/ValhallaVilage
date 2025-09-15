@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zoomHandle: {fileID: 2274457467994452515}
   cameraConfig: {fileID: 11400000, guid: 685fe8371cc184f0e80e135576799c21, type: 2}
+  _mainCamera: {fileID: 8641571181393404290}
 --- !u!1 &6995593363932096197
 GameObject:
   m_ObjectHideFlags: 0
