@@ -27,7 +27,7 @@ namespace CrossProject.Core
         public AgroArea(INoticeEnemyArea noticeEnemyArea, IDieAbility dieAbility)
         {
             noticeEnemyArea.EnemyNoticed.WithoutCurrent().ForEachAsync(NoticeEnemy, _disposeCts.Token).Forget();
-            dieAbility.Dead.WithoutCurrent().ForEachAsync(Die, _disposeCts.Token).Forget();
+            dieAbility.DeathCompleted.WithoutCurrent().ForEachAsync(Die, _disposeCts.Token).Forget();
         }
 
         public void Init(Collider agroZone)

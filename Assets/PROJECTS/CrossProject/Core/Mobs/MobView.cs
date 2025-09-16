@@ -46,7 +46,7 @@ namespace CrossProject.Core
             healthHandler.Init(config.Health, config.Health);
             moveAbility.Init(config.Acceleration, config.MaxAcceleration);
             rotateAbility.Init(config.RotationSpeed, config.RotationDamper);
-            dieAbility.Dead.WithoutCurrent().ForEachAsync(MobDie, gameObject.GetCancellationTokenOnDestroy()).Forget();
+            dieAbility.DeathCompleted.WithoutCurrent().ForEachAsync(MobDie, gameObject.GetCancellationTokenOnDestroy()).Forget();
         }
 
         private void FixedUpdate()

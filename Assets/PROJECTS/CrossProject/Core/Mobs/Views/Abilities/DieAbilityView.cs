@@ -16,7 +16,7 @@ namespace CrossProject.Core
         {
             _config = config;
             
-            dieAbility.Dead.WithoutCurrent().ForEachAsync(MobDie, gameObject.GetCancellationTokenOnDestroy()).Forget();
+            dieAbility.DeathCompleted.WithoutCurrent().ForEachAsync(MobDie, gameObject.GetCancellationTokenOnDestroy()).Forget();
         }
 
         private void MobDie(bool _)
