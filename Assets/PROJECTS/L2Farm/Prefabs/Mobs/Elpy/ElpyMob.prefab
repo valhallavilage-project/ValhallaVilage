@@ -1605,6 +1605,18 @@ PrefabInstance:
       propertyPath: _corpsePrefab
       value: 
       objectReference: {fileID: 4214326770956178113, guid: d39a9f591cf522f4284f3487113f3015, type: 3}
+    - target: {fileID: 8233332576332186640, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: m_Height
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8233332576332186640, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: m_Radius
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 8233332576332186640, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: m_Center.y
+      value: 0.75
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 3243107956217781481, guid: 3b21045f701005542a8588b2ff413744, type: 3}

@@ -36,7 +36,7 @@
         {
             return _roamArea.IsInside(_perUpdateData.Position)
                 ? Condition()
-                : (_agroArea.Enemy.position - _perUpdateData.Position).magnitude < _config.MinDistanceToApproach;
+                : _agroArea.Enemy != null && (_agroArea.Enemy.position - _perUpdateData.Position).magnitude < _config.MinDistanceToApproach;
         }
     }
 }
