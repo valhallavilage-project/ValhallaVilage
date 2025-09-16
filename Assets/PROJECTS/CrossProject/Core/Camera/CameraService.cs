@@ -10,7 +10,8 @@ namespace CrossProject.Core.Camera
 
         [SerializeField] private Transform zoomHandle;
         [SerializeField] private CameraConfig cameraConfig;
-
+        [SerializeField] private UnityEngine.Camera _mainCamera;
+        
         public bool IsInitialized { get; private set; }
 
         public float XRotation
@@ -48,6 +49,8 @@ namespace CrossProject.Core.Camera
                 return direction;
             }
         }
+
+        public UnityEngine.Camera MainCamera => _mainCamera;
 
         private void OnDrawGizmosSelected()
         {

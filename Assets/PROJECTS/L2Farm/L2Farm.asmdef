@@ -1,0 +1,27 @@
+{
+    "name": "L2Farm",
+    "rootNamespace": "",
+    "references": [
+        "GUID:ba3d232eb13d74dc58639a52e4a2037b",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
+        "GUID:593a5b492d29ac6448b1ebf7f035ef33",
+        "GUID:5c01796d064528144a599661eaab93a6",
+        "GUID:b0214a6008ed146ff8f122a6a9c2f6cc",
+        "GUID:e952d5572bb4746b78fd0e332131ddab",
+        "GUID:cc95048359aa543fc83307c725c64e29",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:bcc75752368a72b4aba4043ea13b2a1a",
+        "GUID:024e234984bc44f1fbb452978a3c3abd",
+        "GUID:029c1c1b674aaae47a6841a0b89ad80e",
+        "GUID:84651a3751eca9349aac36a66bba901b"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

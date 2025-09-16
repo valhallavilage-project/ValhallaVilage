@@ -88,14 +88,14 @@ namespace RUNNER.Scripts
                 ChangeVerticalAngle();
         }
 
-        public void AddBlock(object blockRequester)
+        public void AddBlock(Type blockRequester)
         {
-            _blockers.Add(blockRequester.GetType());
+            _blockers.Add(blockRequester);
         }
 
-        public void RemoveBlock(object blockRequester)
+        public void RemoveBlock(Type blockRequester)
         {
-            _blockers.Remove(blockRequester.GetType());
+            _blockers.Remove(blockRequester);
         }
 
         public bool IsBlocked => _blockers.Count > 0;

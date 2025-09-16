@@ -1,6 +1,7 @@
 using CrossProject.Core;
-using CrossProject.Core.Energy;
 using CrossProject.Ui.Core;
+using Cysharp.Threading.Tasks;
+using Cysharp.Threading.Tasks.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,45 +11,42 @@ namespace L2Farm.Scripts.CharacterHudElement
 {
     public class CharacterHudElement : HudElementView<CharacterHudElementModel>
     {
-        private IEnergyProvider _energyProvider;
-
         [SerializeField] private Image portrait;
-
         [SerializeField] private Image healthBarFill;
-
+        [SerializeField] private TMP_Text _healthLabel;
         [SerializeField] private Image manaBarFill;
-
         [SerializeField] private TMP_Text manaLabel;
-
         [SerializeField] private Image frame;
-
         [SerializeField] private Sprite premiumFrame;
 
-        private void Start()
-        {
-            Injector.Instance?.Inject(this);
-        }
-
-        [Inject]
-        private void Construct(
-            IEnergyProvider energyProvider)
-        {
-            _energyProvider = energyProvider;
-            _energyProvider.OnEnergyChanged += OnEnergyChanged;
-        }
+        private IMainCharacterSharedDataHolder _mainCharacterSharedData;
 
         public void SetPortrait(Sprite sprite) => portrait.sprite = sprite;
 
-        private void OnEnergyChanged(int old, int current)
+        private void Start()
         {
-            manaBarFill.fillAmount = (float)current/_energyProvider.MaxValue;
-            manaLabel.text = $"{current}/{_energyProvider.MaxValue}";
+            Injector.Instance.Inject(this);
         }
 
-        public void SetPremium(bool value)
+        [Inject]
+        private void Construct(IMainCharacterSharedDataHolder mainCharacterSharedData)
         {
-            if (value)
-                frame.sprite = premiumFrame;
+            _mainCharacterSharedData = mainCharacterSharedData;
+
+            mainCharacterSharedData.CurrentEnergy.ForEachAsync(ChangeEnergy, gameObject.GetCancellationTokenOnDestroy()).Forget();
+            mainCharacterSharedData.CurrentHealth.ForEachAsync(ChangeHealth, gameObject.GetCancellationTokenOnDestroy()).Forget();
+        }
+
+        private void ChangeEnergy(float current)
+        {
+            manaBarFill.fillAmount = current / _mainCharacterSharedData.MaxEnergy.Value;
+            manaLabel.text = $"{Mathf.RoundToInt(current)}/{_mainCharacterSharedData.MaxEnergy.Value}";
+        }
+
+        private void ChangeHealth(float current)
+        {
+            healthBarFill.fillAmount = current / _mainCharacterSharedData.MaxHealth.Value;
+            _healthLabel.text = $"{Mathf.RoundToInt(current)}/{_mainCharacterSharedData.MaxHealth.Value}";
         }
     }
 }

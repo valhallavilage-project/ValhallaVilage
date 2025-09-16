@@ -18,6 +18,8 @@ namespace CrossProject.Core.Interactions
 
         private SphereCollider _collider;
 
+        protected SphereCollider Collider => _collider;
+
         private void Awake()
         {
             _collider = GetComponent<SphereCollider>();

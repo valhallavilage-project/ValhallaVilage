@@ -189,9 +189,7 @@ namespace L2Farm.Scripts
                 .AsSelf()
                 .AsImplementedInterfaces();
 
-            builder.RegisterComponentInHierarchy<Interactor>()
-                .AsSelf()
-                .AsImplementedInterfaces();
+            builder.Register<InteractionHandler>(Lifetime.Singleton).AsImplementedInterfaces();
 
             builder.Register<InteractButtonController>(Lifetime.Singleton)
                 .AsSelf()
@@ -221,6 +219,9 @@ namespace L2Farm.Scripts
                 .AsSelf()
                 .AsImplementedInterfaces();
 
+            builder.Register<MainCharacterSharedDataHolder>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<LocalTimeService>(Lifetime.Singleton).AsImplementedInterfaces();
+            
             builder.Register<ProductionService>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();

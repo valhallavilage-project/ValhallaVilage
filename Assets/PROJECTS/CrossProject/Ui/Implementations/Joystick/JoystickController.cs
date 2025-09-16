@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CrossProject.Core;
 using CrossProject.Core.SimpleMovement;
 using CrossProject.Ui.Core;
@@ -8,7 +9,7 @@ using VContainer.Unity;
 
 namespace CrossProject.Ui.Implementations
 {
-    public class JoystickController : IInitializable, ITickable, IBlockable, IJoystickValueProvider
+    public class JoystickController : IInitializable, ITickable, IBlockable, IJoystickValueProvider, IDisposable
     {
         private readonly UiService _uiService;
         private readonly AddressablesManager _addressablesManager;
@@ -29,6 +30,7 @@ namespace CrossProject.Ui.Implementations
                     return Vector3.zero;
 
                 var value = _view.NormalizedValue;
+
                 return new Vector3(value.x, 0, value.y);
             }
         }
@@ -58,7 +60,17 @@ namespace CrossProject.Ui.Implementations
             IsInitialized = true;
         }
 
-        public void AddBlock(object blockRequester)
+        private void AddBlock(IUiView view)
+        {
+            AddBlock(view.GetType());
+        }
+
+        private void RemoveBlock(IUiView view)
+        {
+            RemoveBlock(view.GetType());
+        }
+
+        public void AddBlock(Type blockRequester)
         {
             if (_blockers.Count == 0)
                 _uiService.HideHudElement<JoystickModel>();
@@ -66,7 +78,7 @@ namespace CrossProject.Ui.Implementations
             _blockers.Add(blockRequester);
         }
 
-        public void RemoveBlock(object blockRequester)
+        public void RemoveBlock(Type blockRequester)
         {
             _blockers.Remove(blockRequester);
 
@@ -111,6 +123,17 @@ namespace CrossProject.Ui.Implementations
                 _view.EndDrag();
                 _isDragActive = false;
             }
+        }
+
+        public void Dispose()
+        {
+            var screenRule = _uiService.GetRule(typeof(ScreenModel));
+            screenRule.OnOpen -= AddBlock;
+            screenRule.OnClose -= RemoveBlock;
+
+            var popupRule = _uiService.GetRule(typeof(PopupModel));
+            popupRule.OnOpen -= AddBlock;
+            popupRule.OnClose -= RemoveBlock;
         }
     }
 }

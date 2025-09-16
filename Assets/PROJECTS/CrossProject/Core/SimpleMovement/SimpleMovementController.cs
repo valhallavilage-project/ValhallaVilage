@@ -45,14 +45,14 @@ namespace CrossProject.Core.SimpleMovement
 
         private Skin LocalAccessCurrentSkin => ((IPlayerSkinProvider)this).CurrentSkin;
 
-        public void AddBlock(object blockRequester)
+        public void AddBlock(Type blockRequester)
         {
-            _blockers.Add(blockRequester.GetType());
+            _blockers.Add(blockRequester);
         }
 
-        public void RemoveBlock(object blockRequester)
+        public void RemoveBlock(Type blockRequester)
         {
-            _blockers.Remove(blockRequester.GetType());
+            _blockers.Remove(blockRequester);
         }
 
         private void Awake()

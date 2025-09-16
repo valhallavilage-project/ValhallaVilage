@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ead8de74ccae401c9090a8a533f0fc44, type: 3}
+  m_Name: ElpyMobConfig
+  m_EditorClassIdentifier: 
+  _maxSpeed: 4
+  _acceleration: 70
+  _maxAcceleration: 100
+  _rotationSpeed: 30
+  _rotationDamper: 1
+  _torqueStrength: 1
+  _minDistanceToApproach: 2
+  _roamingMaxSpeed: 2
+  _roamingMinPathLength: 2
+  _roamingMinAngleBeforeForceRotate: 2
+  _attackDistance: 3
+  _attackDamage: 8
+  _health: 50
+  _corpseDecayTime: 5
