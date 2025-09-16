@@ -1851,29 +1851,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: WolfMob
       objectReference: {fileID: 0}
-    - target: {fileID: 3018869327203395264, guid: 3b21045f701005542a8588b2ff413744, type: 3}
-      propertyPath: m_TagString
-      value: Mob
-      objectReference: {fileID: 0}
     - target: {fileID: 3059706982767682208, guid: 3b21045f701005542a8588b2ff413744, type: 3}
       propertyPath: m_Name
       value: Mesh
       objectReference: {fileID: 0}
-    - target: {fileID: 3432701046361914719, guid: 3b21045f701005542a8588b2ff413744, type: 3}
-      propertyPath: highLight
-      value: 
-      objectReference: {fileID: 261960317435009766}
     - target: {fileID: 3858784027777965667, guid: 3b21045f701005542a8588b2ff413744, type: 3}
       propertyPath: _healthLabel
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3932151714328623469, guid: 3b21045f701005542a8588b2ff413744, type: 3}
-      propertyPath: _data._serializedList.Array.size
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 3932151714328623469, guid: 3b21045f701005542a8588b2ff413744, type: 3}
-      propertyPath: _data._serializedList.Array.data[10].Key
-      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4869117256860943273, guid: 3b21045f701005542a8588b2ff413744, type: 3}
       propertyPath: m_IsActive
@@ -1883,14 +1867,6 @@ PrefabInstance:
       propertyPath: _eyesPosition
       value: 
       objectReference: {fileID: 8303092062893930332}
-    - target: {fileID: 5498057052163135851, guid: 3b21045f701005542a8588b2ff413744, type: 3}
-      propertyPath: m_FillAmount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5498057052163135851, guid: 3b21045f701005542a8588b2ff413744, type: 3}
-      propertyPath: m_FillOrigin
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5995064144105461079, guid: 3b21045f701005542a8588b2ff413744, type: 3}
       propertyPath: _corpsePrefab
       value: 
@@ -1903,18 +1879,6 @@ PrefabInstance:
       propertyPath: _rigidbody
       value: 
       objectReference: {fileID: 7604930180804360738}
-    - target: {fileID: 8314276254205720222, guid: 3b21045f701005542a8588b2ff413744, type: 3}
-      propertyPath: m_Radius
-      value: 2.74
-      objectReference: {fileID: 0}
-    - target: {fileID: 8314276254205720222, guid: 3b21045f701005542a8588b2ff413744, type: 3}
-      propertyPath: m_Center.y
-      value: 1.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8314276254205720222, guid: 3b21045f701005542a8588b2ff413744, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 9195223499515698301, guid: 3b21045f701005542a8588b2ff413744, type: 3}
       propertyPath: m_VertexColorAlwaysGammaSpace
       value: 1
@@ -1931,11 +1895,6 @@ PrefabInstance:
       addedObject: {fileID: 739591906731078565}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b21045f701005542a8588b2ff413744, type: 3}
---- !u!1 &261960317435009766 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9220415675785670067, guid: 3b21045f701005542a8588b2ff413744, type: 3}
-  m_PrefabInstance: {fileID: 8959863844064442197}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6175271926224933269 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3018869327203395264, guid: 3b21045f701005542a8588b2ff413744, type: 3}

@@ -188,8 +188,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _expectedObjectTag: Mob
-  _attackCollider: {fileID: 5718611414090028443}
-  _attackTimeOffset: 1
+  _attackCollider: {fileID: 8999091373602720307}
+  _attackTimeOffset: 1.2
 --- !u!1 &2238760104479563126
 GameObject:
   m_ObjectHideFlags: 0
@@ -524,14 +524,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 548660376028181068}
-  - component: {fileID: 5718611414090028443}
+  - component: {fileID: 8999091373602720307}
   m_Layer: 0
-  m_Name: AttackSphere
+  m_Name: AttackCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &548660376028181068
 Transform:
   m_ObjectHideFlags: 0
@@ -547,8 +547,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1595792172146833938}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &5718611414090028443
-SphereCollider:
+--- !u!65 &8999091373602720307
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -566,8 +566,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1.5
-  m_Center: {x: 0.32, y: 0.68, z: 0}
+  m_Size: {x: 1, y: 2, z: 3.5}
+  m_Center: {x: 0, y: 1, z: 2.25}
 --- !u!1 &4581526648322502399
 GameObject:
   m_ObjectHideFlags: 0

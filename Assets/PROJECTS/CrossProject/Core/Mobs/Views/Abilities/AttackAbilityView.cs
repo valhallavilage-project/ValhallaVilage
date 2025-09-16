@@ -21,21 +21,23 @@ namespace CrossProject.Core
         {
             _damageInfoProvider = damageInfoProvider;
 
-            attackAbility.AttackBegin.WithoutCurrent().ForEachAsync(AttackBegan, gameObject.GetCancellationTokenOnDestroy()).Forget();
+            attackAbility.AttackBegin.WithoutCurrent().ForEachAwaitAsync(AttackBegan, gameObject.GetCancellationTokenOnDestroy()).Forget();
             attackAbility.AttackEnd.WithoutCurrent().ForEachAsync(AttackEnded, gameObject.GetCancellationTokenOnDestroy()).Forget();
 
             _attackCollider.GetAsyncTriggerEnterTrigger().ForEachAsync(TriggerEnter, gameObject.GetCancellationTokenOnDestroy()).Forget();
+
+            _attackCollider.gameObject.SetActive(false);
+            _attackCollider.isTrigger = true;
         }
 
-        private void AttackBegan(bool obj)
+        private async UniTask AttackBegan(bool _)
         {
-            UniTask.Delay(TimeSpan.FromSeconds(_attackTimeOffset)).ContinueWith(() =>
-            {
-                _attackCollider.gameObject.SetActive(true);
-            }).Forget();
+            await UniTask.Delay(TimeSpan.FromSeconds(_attackTimeOffset));
+            
+            _attackCollider.gameObject.SetActive(true);
         }
 
-        private void AttackEnded(bool obj)
+        private void AttackEnded(bool _)
         {
             _attackCollider.gameObject.SetActive(false);
         }

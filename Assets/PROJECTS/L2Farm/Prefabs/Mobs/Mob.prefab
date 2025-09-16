@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 5783224551172637568}
   m_Layer: 0
   m_Name: Mob
-  m_TagString: Untagged
+  m_TagString: Mob
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -139,7 +139,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 1575687046254431607}
   _state: 0
-  _health: 0
 --- !u!114 &1593941606815285941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -348,6 +347,11 @@ MonoBehaviour:
         _layer: 0
         _signalToLayer: 
         _transitions: []
+    - Key: 10
+      Value:
+        _layer: 0
+        _signalToLayer: 
+        _transitions: []
 --- !u!1 &3243107956217781481
 GameObject:
   m_ObjectHideFlags: 0
@@ -497,7 +501,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3400744256613252157
 Transform:
   m_ObjectHideFlags: 0
@@ -696,7 +700,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be19876cf3364d7dbf86f08b784a8adf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rigidbody: {fileID: 0}
+  _rigidbody: {fileID: 1575687046254431607}
 --- !u!1 &7909382004266680815
 GameObject:
   m_ObjectHideFlags: 0
@@ -745,7 +749,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -768,7 +772,7 @@ MonoBehaviour:
   buttonSprite: {fileID: 21300000, guid: bd6a954c3467e4309881a90c8c60ab46, type: 3}
   animation: 0
   viewRoot: {fileID: 3018869327203395264}
-  highLight: {fileID: 0}
+  highLight: {fileID: 9220415675785670067}
 --- !u!1 &9140375608080352775
 GameObject:
   m_ObjectHideFlags: 0
@@ -813,7 +817,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfc8639a0a7748609fd150e7bf4c4072, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rigidbody: {fileID: 0}
+  _rigidbody: {fileID: 1575687046254431607}
 --- !u!1 &9220415675785670067
 GameObject:
   m_ObjectHideFlags: 0
