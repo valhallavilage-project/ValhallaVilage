@@ -52,5 +52,8 @@ namespace L2Farm.Features.Buildings
 
         [FoldoutGroup("$id")]
         public QuestId questToLaunchOnComplete;
+
+        [FoldoutGroup("$id")]
+        public float completeBuildingXpReward;
     }
 }

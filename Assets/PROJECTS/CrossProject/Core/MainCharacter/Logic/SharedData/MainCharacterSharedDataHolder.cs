@@ -8,6 +8,9 @@ namespace CrossProject.Core
         AsyncReactiveProperty<float> MaxHealth { get; }
         AsyncReactiveProperty<float> CurrentEnergy { get; }
         AsyncReactiveProperty<float> MaxEnergy { get; }
+        AsyncReactiveProperty<float> CurrentExperience { get; }
+        AsyncReactiveProperty<float> MaxExperience { get; }
+        AsyncReactiveProperty<int> CurrentLevel { get; }
     }
 
     public class MainCharacterSharedDataHolder : IMainCharacterSharedDataHolder
@@ -16,5 +19,8 @@ namespace CrossProject.Core
         public AsyncReactiveProperty<float> MaxHealth { get; } = new(default);
         public AsyncReactiveProperty<float> CurrentEnergy { get; } = new(default);
         public AsyncReactiveProperty<float> MaxEnergy { get; } = new(default);
+        public AsyncReactiveProperty<float> CurrentExperience { get; } = new(default);
+        public AsyncReactiveProperty<float> MaxExperience { get; } = new(default);
+        public AsyncReactiveProperty<int> CurrentLevel { get; } = new(default);
     }
 }

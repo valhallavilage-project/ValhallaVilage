@@ -18,6 +18,7 @@ namespace L2Farm.Features.Buildings
         private readonly ConditionService _conditionService;
         private readonly SpawnPointService _spawnPointService;
         private readonly GameStateManager _gameStateManager;
+        private readonly IMainCharacterGlobalExperienceGainHandler _mainCharacterGlobalExperienceGainHandler;
 
         private BuildingSetConfig _buildingSetConfig;
 
@@ -29,12 +30,14 @@ namespace L2Farm.Features.Buildings
             AddressablesManager addressablesManager,
             ConditionService conditionService,
             SpawnPointService spawnPointService,
-            GameStateManager gameStateManager)
+            GameStateManager gameStateManager,
+            IMainCharacterGlobalExperienceGainHandler mainCharacterGlobalExperienceGainHandler)
         {
             _addressablesManager = addressablesManager;
             _conditionService = conditionService;
             _spawnPointService = spawnPointService;
             _gameStateManager = gameStateManager;
+            _mainCharacterGlobalExperienceGainHandler = mainCharacterGlobalExperienceGainHandler;
         }
 
         public async UniTask Initialize()
@@ -116,6 +119,8 @@ namespace L2Farm.Features.Buildings
 
             if (_buildings.TryGetValue(id, out var building) && !building.IsReady)
                 Object.Destroy(building.gameObject);
+            
+            _mainCharacterGlobalExperienceGainHandler.GainXp(config.completeBuildingXpReward);
 
             SpawnBuildingInternal(config).Forget();
         }

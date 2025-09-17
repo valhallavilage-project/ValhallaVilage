@@ -1,7 +1,6 @@
 using CrossProject.Core.Camera;
 using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Linq;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using VContainer;

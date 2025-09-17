@@ -16,8 +16,8 @@ namespace L2Farm.Scripts.CharacterHudElement
         [SerializeField] private TMP_Text _healthLabel;
         [SerializeField] private Image manaBarFill;
         [SerializeField] private TMP_Text manaLabel;
-        [SerializeField] private Image frame;
-        [SerializeField] private Sprite premiumFrame;
+        [SerializeField] private Image _experienceBarFill;
+        [SerializeField] private TMP_Text _levelLabel;
 
         private IMainCharacterSharedDataHolder _mainCharacterSharedData;
 
@@ -35,6 +35,8 @@ namespace L2Farm.Scripts.CharacterHudElement
 
             mainCharacterSharedData.CurrentEnergy.ForEachAsync(ChangeEnergy, gameObject.GetCancellationTokenOnDestroy()).Forget();
             mainCharacterSharedData.CurrentHealth.ForEachAsync(ChangeHealth, gameObject.GetCancellationTokenOnDestroy()).Forget();
+            mainCharacterSharedData.CurrentExperience.ForEachAsync(ChangeExperience, gameObject.GetCancellationTokenOnDestroy()).Forget();
+            mainCharacterSharedData.CurrentLevel.ForEachAsync(ChangeLevel, gameObject.GetCancellationTokenOnDestroy()).Forget();
         }
 
         private void ChangeEnergy(float current)
@@ -47,6 +49,16 @@ namespace L2Farm.Scripts.CharacterHudElement
         {
             healthBarFill.fillAmount = current / _mainCharacterSharedData.MaxHealth.Value;
             _healthLabel.text = $"{Mathf.RoundToInt(current)}/{_mainCharacterSharedData.MaxHealth.Value}";
+        }
+
+        private void ChangeExperience(float current)
+        {
+            _experienceBarFill.fillAmount = current / _mainCharacterSharedData.MaxExperience.Value;
+        }
+
+        private void ChangeLevel(int current)
+        {
+            _levelLabel.text = current.ToString();
         }
     }
 }

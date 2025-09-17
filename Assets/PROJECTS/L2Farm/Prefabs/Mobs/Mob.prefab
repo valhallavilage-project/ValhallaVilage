@@ -156,12 +156,6 @@ MonoBehaviour:
   autoRun: 1
   autoInjectGameObjects:
   - {fileID: 3018869327203395264}
-  - {fileID: 3059706982767682208}
-  - {fileID: 7119913355427998852}
-  - {fileID: 9140375608080352775}
-  - {fileID: 3243107956217781481}
-  - {fileID: 4232391970187707880}
-  - {fileID: 6449944856407399100}
   _mobConfig: {fileID: 0}
   _mobStateTime: {fileID: 0}
   _mobTransitionsConfig: {fileID: 0}
@@ -1001,10 +995,5 @@ PrefabInstance:
 --- !u!224 &1515141678971445637 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1747892325644963618, guid: 0498690d22c81c249b12019042d76101, type: 3}
-  m_PrefabInstance: {fileID: 956768198043659943}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &4232391970187707880 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4033929534578977615, guid: 0498690d22c81c249b12019042d76101, type: 3}
   m_PrefabInstance: {fileID: 956768198043659943}
   m_PrefabAsset: {fileID: 0}
