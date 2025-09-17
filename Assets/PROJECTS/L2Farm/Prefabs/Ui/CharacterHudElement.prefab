@@ -267,8 +267,8 @@ MonoBehaviour:
   _healthLabel: {fileID: 6716161932400960014}
   manaBarFill: {fileID: 8223610182722300355}
   manaLabel: {fileID: 4849739658788724092}
-  frame: {fileID: 1261017839355825107}
-  premiumFrame: {fileID: 21300000, guid: af8b0d7a4ae3e4b13b7fb78fd1b03996, type: 3}
+  _experienceBarFill: {fileID: 2438150365998592796}
+  _levelLabel: {fileID: 3521448575287967571}
 --- !u!1 &1647794836728379458
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,8 +305,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 178.3, y: -57.3}
-  m_SizeDelta: {x: 258, y: 20}
+  m_AnchoredPosition: {x: 164.51051, y: -57.3}
+  m_SizeDelta: {x: 271.7895, y: 20}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &4127810263888312851
 CanvasRenderer:

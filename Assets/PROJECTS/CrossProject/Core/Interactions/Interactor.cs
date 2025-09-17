@@ -17,13 +17,16 @@ namespace CrossProject.Core.Interactions
         private SphereCollider _collider;
         private IEnergyHandler _energyHandler;
         private IInteractionHandler _interactionHandler;
+        private IExperienceHandler _experienceHandler;
 
         [Inject]
-        private void Construct(IPlayerSkinProvider playerSkinProvider, IEnergyHandler energyHandler, IInteractionHandler interactionHandler)
+        private void Construct(IPlayerSkinProvider playerSkinProvider, IEnergyHandler energyHandler,
+            IInteractionHandler interactionHandler, IExperienceHandler experienceHandler)
         {
             _playerSkinProvider = playerSkinProvider;
             _energyHandler = energyHandler;
             _interactionHandler = interactionHandler;
+            _experienceHandler = experienceHandler;
 
             interactionHandler.InteractionLaunched.WithoutCurrent().ForEachAwaitAsync(Interact, gameObject.GetCancellationTokenOnDestroy()).Forget();
         }
@@ -122,6 +125,11 @@ namespace CrossProject.Core.Interactions
                 && resourceData != null)
             {
                 _energyHandler.Spend(resourceData.EnergyRequired);
+            }
+
+            if (_interactionHandler.Closest.Value is IExperienceData experienceGiver)
+            {
+                _experienceHandler.GainXp(experienceGiver.PerformedTaskExperience);
             }
 
             if (animationName != InteractionAnimation.Attack)

@@ -97,12 +97,10 @@ MonoBehaviour:
     TypeName: L2Farm.Scripts.L2FarmLifetimeScope
   autoRun: 1
   autoInjectGameObjects:
-  - {fileID: 322585332926425311}
-  - {fileID: 4124864569335157055}
-  - {fileID: 2570459038346040679}
   - {fileID: 243141173245693883}
   _mainCharacterSets: {fileID: 11400000, guid: 49217c23db55e44478a1bc4eca107d72, type: 2}
   _energyRestorationConfig: {fileID: 11400000, guid: e64fd9210b3334384ad8a4876adc527f, type: 2}
+  _levelProgressionConfig: {fileID: 11400000, guid: 781fc4b49d927eb4f9d09be528735d46, type: 2}
 --- !u!114 &1295095151255340298
 MonoBehaviour:
   m_ObjectHideFlags: 0

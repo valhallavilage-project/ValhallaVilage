@@ -218,13 +218,14 @@ namespace L2Farm.Scripts
             builder.Register<ClaimedResourcesHintController>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
-
-            builder.Register<MainCharacterSharedDataHolder>(Lifetime.Singleton).AsImplementedInterfaces();
-            builder.Register<LocalTimeService>(Lifetime.Singleton).AsImplementedInterfaces();
             
             builder.Register<ProductionService>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
+
+            builder.Register<MainCharacterSharedDataHolder>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<MainCharacterGlobalExperienceGainHandler>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<LocalTimeService>(Lifetime.Singleton).AsImplementedInterfaces();
 
             RegisterConditionsAndActions(builder);
             RegisterCheats(builder);

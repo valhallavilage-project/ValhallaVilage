@@ -10,18 +10,20 @@ using VContainer;
 
 namespace L2Farm.Features.ResourceHolder
 {
-    public class ResourceHolderInteractiveObject : AbstractInteractiveObject, IResourceData
+    public class ResourceHolderInteractiveObject : AbstractInteractiveObject, IResourceData, IExperienceData
     {
         [SerializeField] private ResourceContent content;
         [SerializeField] private int energyRequired;
         [SerializeField] private int respawnInSeconds = 60;
         [SerializeField] private AudioSource audio;
         [SerializeField] private NavMeshObstacle obstacle;
+        [SerializeField] private float _experienceReward = 5;
 
         private IMainCharacterSharedDataHolder _mainCharacterSharedData;
-        private GameStateManager _gameStateManager;
+        private IResourcesService _resourcesService;
 
         public int EnergyRequired => energyRequired;
+        public float PerformedTaskExperience => _experienceReward;
 
         public override bool CanInteract() => _mainCharacterSharedData.CurrentEnergy.Value >= energyRequired && viewRoot.activeSelf && !isBusy;
 
@@ -32,10 +34,10 @@ namespace L2Farm.Features.ResourceHolder
 
         [Inject]
         private void Construct(
-            GameStateManager gameStateManager,
+            IResourcesService resourcesService,
             IMainCharacterSharedDataHolder mainCharacterSharedData)
         {
-            _gameStateManager = gameStateManager;
+            _resourcesService = resourcesService;
             _mainCharacterSharedData = mainCharacterSharedData;
         }
 
@@ -51,9 +53,7 @@ namespace L2Farm.Features.ResourceHolder
 
         protected override async UniTask AfterInteraction()
         {
-            var part = _gameStateManager.State.Get<ResourceContentPart>();
-            part.Edit(content.Resource, content.Amount);
-            _gameStateManager.Save();
+            _resourcesService.ChangeResourceValue(content.Resource, content.Amount);
 
             audio.Play();
             DOTween.Kill(this);

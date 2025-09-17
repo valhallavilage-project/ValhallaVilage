@@ -1,45 +1,52 @@
+using System;
+using System.Threading;
 using CrossProject.Core.InGameResources;
 using CrossProject.Core.SaveLoad;
 using CrossProject.Ui.Core;
 using Cysharp.Threading.Tasks;
+using Cysharp.Threading.Tasks.Linq;
 using VContainer.Unity;
 
 namespace L2Farm.Features.ClaimerResourcesHint
 {
-    public class ClaimedResourcesHintController : IInitializable
+    public class ClaimedResourcesHintController : IInitializable, IDisposable
     {
         private readonly UiService _uiService;
         private readonly ResourcesService _resourcesService;
-        private readonly GameStateManager _gameStateManager;
+        private readonly CancellationTokenSource _disposeCts = new();
 
         private ClaimedResourcesHint _view;
 
         public bool IsInitialized { get; private set; }
 
-        public ClaimedResourcesHintController(
-            UiService uiService,
-            ResourcesService resourcesService,
-            GameStateManager gameStateManager)
+        public ClaimedResourcesHintController(UiService uiService, ResourcesService resourcesService)
         {
             _uiService = uiService;
             _resourcesService = resourcesService;
-            _gameStateManager = gameStateManager;
+            
+            resourcesService.ResourceChanged.WithoutCurrent().ForEachAsync(ResourceChanged, _disposeCts.Token).Forget();
         }
 
-        private void OnResourceChange(ResourceId id, int amount)
+        private void ResourceChanged((ResourceId id, int amount) data)
         {
-            if (amount < 1)
+            if (data.amount < 1)
+            {
                 return;
+            }
 
-            _view.Spawn(_resourcesService.GetSprite(id), amount);
+            _view.Spawn(_resourcesService.GetSprite(data.id), data.amount);
         }
 
         public async UniTask Initialize()
         {
             _view = await _uiService.TryOpen(new ClaimedResourcesHintModel()) as ClaimedResourcesHint;
-            var part = _gameStateManager.State.Get<ResourceContentPart>();
-            part.OnResourceChange += OnResourceChange;
             IsInitialized = true;
+        }
+
+        public void Dispose()
+        {
+            _disposeCts.Cancel();
+            _disposeCts.Dispose();
         }
     }
 }
