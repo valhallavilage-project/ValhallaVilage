@@ -2447,6 +2447,14 @@ PrefabInstance:
       propertyPath: m_Center.y
       value: 1.25
       objectReference: {fileID: 0}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[0].Key
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
