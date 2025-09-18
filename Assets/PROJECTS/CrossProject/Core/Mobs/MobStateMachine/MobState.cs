@@ -13,6 +13,7 @@ namespace CrossProject.Core
         RoamRotation = 8,
         WaitForTarget = 9,
         Die = 10,
-        Dead = 11
+        Dead = 11,
+        ResponsiveNotice = 12
     }
 }
