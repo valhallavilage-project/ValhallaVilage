@@ -27,7 +27,7 @@ namespace CrossProject.Core
         {
             builder.Register<MobPersistentData>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<MobPerUpdateData>(Lifetime.Scoped).AsImplementedInterfaces();
-            
+
             builder.Register<MobStateMachine>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<MobStateTimingHandler>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<MobTransitionsHolder>(Lifetime.Scoped).AsImplementedInterfaces();
@@ -47,6 +47,7 @@ namespace CrossProject.Core
             builder.Register<RoamRotationMobState>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<DieMobState>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<DeadMobState>(Lifetime.Scoped).AsImplementedInterfaces();
+            builder.Register<ResponsiveNoticeMobState>(Lifetime.Scoped).AsImplementedInterfaces();
         }
 
         private void BindTransitions(IContainerBuilder builder)
@@ -63,8 +64,9 @@ namespace CrossProject.Core
             builder.Register<RoamRotationMobTransition>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<DieMobTransition>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<DeadMobTransition>(Lifetime.Scoped).AsImplementedInterfaces();
+            builder.Register<ResponsiveNoticeMobTransition>(Lifetime.Scoped).AsImplementedInterfaces();
         }
-        
+
         private void BindStateBindings(IContainerBuilder builder)
         {
             builder.Register<MobAnimationHandler>(Lifetime.Scoped).AsImplementedInterfaces();

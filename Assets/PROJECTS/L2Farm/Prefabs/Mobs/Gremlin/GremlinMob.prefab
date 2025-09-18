@@ -2351,6 +2351,10 @@ PrefabInstance:
       propertyPath: _mobTransitionsConfig
       value: 
       objectReference: {fileID: 11400000, guid: 5a274bad64566464391b6a2520082661, type: 2}
+    - target: {fileID: 2247942719660338974, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: m_Radius
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2368761319862340645, guid: 3b21045f701005542a8588b2ff413744, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2405,7 +2409,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3400744256613252157, guid: 3b21045f701005542a8588b2ff413744, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.4417758
+      value: 0.44177577
       objectReference: {fileID: 0}
     - target: {fileID: 3400744256613252157, guid: 3b21045f701005542a8588b2ff413744, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2442,6 +2446,14 @@ PrefabInstance:
     - target: {fileID: 8233332576332186640, guid: 3b21045f701005542a8588b2ff413744, type: 3}
       propertyPath: m_Center.y
       value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[0].Key
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -22,7 +22,8 @@ MonoBehaviour:
   _roamingMaxSpeed: 2
   _roamingMinPathLength: 2
   _roamingMinAngleBeforeForceRotate: 2
-  _attackDistance: 3
+  _attackDistance: 2
   _attackDamage: 8
   _health: 50
   _corpseDecayTime: 5
+  _experienceReward: 15

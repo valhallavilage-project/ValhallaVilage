@@ -1,9 +1,16 @@
-using System;
 using UnityEngine;
 
 namespace CrossProject.Core.Audio
 {
-    public class AudioManager : MonoBehaviour
+    public interface IAudioHandler
+    {
+        void PlayOneShot(AudioClip clip, float volume = 1f, float pitch = 1f, Transform parent = null);
+        void PlayBGM(AudioClip clip = null);
+        void ToggleSFX();
+        void ToggleBGM();
+    }
+
+    public class AudioManager : MonoBehaviour, IAudioHandler
     {
         [SerializeField]
         private AudioSource _bgm;
