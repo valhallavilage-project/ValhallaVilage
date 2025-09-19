@@ -3,15 +3,13 @@ using Cysharp.Threading.Tasks;
 
 namespace CrossProject.Core
 {
-    public interface IEnergyHandler : IBoxedValueHandler<float>
+    public interface IEnergyHandler : ILifetimeParameterHandler
     {
         IReadOnlyAsyncReactiveProperty<float> MaxEnergy { get; }
         IReadOnlyAsyncReactiveProperty<float> Energy { get; }
-        IReadOnlyAsyncReactiveProperty<float> MinEnergy { get; }
         bool IsFullyRestored { get; }
 
         void Init(float maxEnergy, float currentEnergy);
-        void Restore(float value);
         void Spend(float value);
         void IncreaseMaxEnergy(float value);
         void ReduceMaxEnergy(float value);
@@ -21,7 +19,6 @@ namespace CrossProject.Core
     {
         public IReadOnlyAsyncReactiveProperty<float> MaxEnergy => _maxValue;
         public IReadOnlyAsyncReactiveProperty<float> Energy => _currentValue;
-        public IReadOnlyAsyncReactiveProperty<float> MinEnergy => _minValue;
 
         public bool IsFullyRestored => Math.Abs(Energy.Value - MaxEnergy.Value) < float.Epsilon;
 

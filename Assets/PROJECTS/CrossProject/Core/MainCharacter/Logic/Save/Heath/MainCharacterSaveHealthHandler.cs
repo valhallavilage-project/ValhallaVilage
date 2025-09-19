@@ -1,64 +1,50 @@
-using System;
-using System.Threading;
 using CrossProject.Core.SaveLoad;
 using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Linq;
-using VContainer.Unity;
 
 namespace CrossProject.Core
 {
-    public class MainCharacterSaveHealthHandler : IInitializable, IDisposable
+    public class MainCharacterSaveHealthHandler : BaseSaveRestorableParameterHandler<EnergyStatePart>, IMainCharacterSaveEnergyHandler
     {
-        private readonly IRestoreEnergyHandler _restoreEnergyHandler;
-        private readonly IHealthHandler _healthHandler;
-        private readonly GameStateManager _gameStateManager;
-        private readonly IMainCharacterClothesSetsService _clothesSetsService;
-        private readonly CancellationTokenSource _disposeCts = new();
+        private readonly IRestoreHealthHandler _restoreHandler;
+        private readonly IHealthHandler _parameterHandler;
+        private readonly IMainCharacterClothesSetsService _mainCharacterClothesSetsService;
 
-        public bool IsInitialized { get; private set; }
-
-        public MainCharacterSaveHealthHandler(IHealthHandler healthHandler, GameStateManager gameStateManager,
-            IMainCharacterClothesSetsService clothesSetsService)
+        public MainCharacterSaveHealthHandler(IRestoreHealthHandler restoreHandler, IHealthHandler parameterHandler,
+            GameStateManager gameStateManager, HealthRestorationConfig restorationConfig, ITimeService timeService,
+            IMainCharacterClothesSetsService mainCharacterClothesSetsService)
+            : base(parameterHandler, gameStateManager, restorationConfig, timeService)
         {
-            _healthHandler = healthHandler;
-            _gameStateManager = gameStateManager;
-            _clothesSetsService = clothesSetsService;
+            _restoreHandler = restoreHandler;
+            _parameterHandler = parameterHandler;
+            _mainCharacterClothesSetsService = mainCharacterClothesSetsService;
         }
 
-        public UniTask Initialize()
+        public override async UniTask Initialize()
         {
-            if (!_gameStateManager.State.TryGet<HealthStatePart>(out var healthStatePart))
-            {
-                healthStatePart = new HealthStatePart
-                {
-                    Value = _clothesSetsService.GetTotalHealth()
-                };
+            await UniTask.WaitUntil(() => _mainCharacterClothesSetsService.IsInitialized);
 
-                _gameStateManager.State.Set(healthStatePart);
-                _gameStateManager.Save();
-            }
-
-            _healthHandler.Init(_clothesSetsService.GetTotalHealth(), healthStatePart.Value);
-            
-            _healthHandler.Health.WithoutCurrent().ForEachAsync(HealthChanged, _disposeCts.Token).Forget();
-
-            IsInitialized = true;
-
-            return UniTask.CompletedTask;
+            await base.Initialize();
         }
 
-        private void HealthChanged(float newValue)
+        protected override float GetInitialParameterValue()
         {
-            var healthStatePart =_gameStateManager.State.Get<HealthStatePart>();
-
-            healthStatePart.Value = newValue;
-
-            _gameStateManager.Save();
+            return _mainCharacterClothesSetsService.GetTotalHealth();
         }
 
-        public void Dispose()
+        protected override float GetMaxParameterValue()
         {
-            _disposeCts?.Dispose();
+            return _mainCharacterClothesSetsService.GetTotalHealth();
+        }
+
+        protected override float GetMinParameterValue()
+        {
+            return 0;
+        }
+
+        protected override void SubscribeOnValueChanged()
+        {
+            _parameterHandler.Health.WithoutCurrent().ForEachAsync(v => ParameterChanged(v, _restoreHandler.LastRestoreTime), DisposeToken).Forget();
         }
     }
 }

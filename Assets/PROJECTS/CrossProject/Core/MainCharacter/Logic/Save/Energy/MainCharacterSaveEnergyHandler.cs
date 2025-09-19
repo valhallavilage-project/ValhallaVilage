@@ -1,76 +1,54 @@
-using System;
-using System.Threading;
 using CrossProject.Core.SaveLoad;
 using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Linq;
-using UnityEngine;
-using VContainer.Unity;
 
 namespace CrossProject.Core
 {
-    public class MainCharacterSaveEnergyHandler : IDisposable, IInitializable
+    public interface IMainCharacterSaveEnergyHandler : ISaveRestorableParameterHandler
     {
-        private readonly IRestoreEnergyHandler _restoreEnergyHandler;
-        private readonly IEnergyHandler _energyHandler;
-        private readonly GameStateManager _gameStateManager;
-        private readonly IMainCharacterClothesSetsService _clothesSetsService;
-        private readonly EnergyRestorationConfig _energyRestorationConfig;
-        private readonly ITimeService _timeService;
-        private readonly CancellationTokenSource _disposeCts = new();
+    }
 
-        public bool IsInitialized { get; private set; }
+    public class MainCharacterSaveEnergyHandler : BaseSaveRestorableParameterHandler<EnergyStatePart>, IMainCharacterSaveEnergyHandler
+    {
+        private readonly IRestoreEnergyHandler _restoreHandler;
+        private readonly IEnergyHandler _parameterHandler;
+        private readonly IMainCharacterClothesSetsService _mainCharacterClothesSetsService;
 
-        public MainCharacterSaveEnergyHandler(IRestoreEnergyHandler restoreEnergyHandler, IEnergyHandler energyHandler,
-            GameStateManager gameStateManager, IMainCharacterClothesSetsService clothesSetsService, EnergyRestorationConfig energyRestorationConfig,
-            ITimeService timeService)
+        public MainCharacterSaveEnergyHandler(IRestoreEnergyHandler restoreHandler, IEnergyHandler parameterHandler,
+            GameStateManager gameStateManager, EnergyRestorationConfig restorationConfig, ITimeService timeService,
+            IMainCharacterClothesSetsService mainCharacterClothesSetsService)
+            : base(parameterHandler, gameStateManager, restorationConfig, timeService)
         {
-            _restoreEnergyHandler = restoreEnergyHandler;
-            _energyHandler = energyHandler;
-            _gameStateManager = gameStateManager;
-            _clothesSetsService = clothesSetsService;
-            _energyRestorationConfig = energyRestorationConfig;
-            _timeService = timeService;
+            _restoreHandler = restoreHandler;
+            _parameterHandler = parameterHandler;
+            _mainCharacterClothesSetsService = mainCharacterClothesSetsService;
         }
 
-        public async UniTask Initialize()
+        public override async UniTask Initialize()
         {
-            await UniTask.WaitUntil(() => _clothesSetsService.IsInitialized);
+            await UniTask.WaitUntil(() => _mainCharacterClothesSetsService.IsInitialized);
 
-            if (!_gameStateManager.State.TryGet<EnergyStatePart>(out var energyStatePart))
-            {
-                energyStatePart = new EnergyStatePart
-                {
-                    Value = _clothesSetsService.GetTotalEnergy(),
-                    LastRestoreTime = _timeService.Now
-                };
-
-                _gameStateManager.State.Set(energyStatePart);
-                _gameStateManager.Save();
-            }
-
-            var timesToRestore = (float)(_timeService.Now - energyStatePart.LastRestoreTime).TotalSeconds / _energyRestorationConfig.IntervalInSeconds;
-            var energyAmountAfterRestoration = Mathf.Clamp(energyStatePart.Value + timesToRestore * _energyRestorationConfig.EnergyToRestoreForOneInterval, 0, _clothesSetsService.GetTotalEnergy());
-
-            _energyHandler.Init(_clothesSetsService.GetTotalEnergy(), energyAmountAfterRestoration);
-            
-            _energyHandler.Energy.WithoutCurrent().ForEachAsync(EnergyChanged, _disposeCts.Token).Forget();
-
-            IsInitialized = true;
+            await base.Initialize();
         }
 
-        private void EnergyChanged(float newValue)
+        protected override float GetInitialParameterValue()
         {
-            var energyStatePart =_gameStateManager.State.Get<EnergyStatePart>();
-            
-            energyStatePart.Value = newValue;
-            energyStatePart.LastRestoreTime = _restoreEnergyHandler.LastRestoreTime;
-            
-            _gameStateManager.Save();
+            return _mainCharacterClothesSetsService.GetTotalEnergy();
         }
 
-        public void Dispose()
+        protected override float GetMaxParameterValue()
         {
-            _disposeCts?.Dispose();
+            return _mainCharacterClothesSetsService.GetTotalEnergy();
+        }
+
+        protected override float GetMinParameterValue()
+        {
+            return 0;
+        }
+
+        protected override void SubscribeOnValueChanged()
+        {
+            _parameterHandler.Energy.WithoutCurrent().ForEachAsync(v => ParameterChanged(v, _restoreHandler.LastRestoreTime), DisposeToken).Forget();
         }
     }
 }
