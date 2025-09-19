@@ -53,6 +53,7 @@ MonoBehaviour:
     m_Address: Assets/PROJECTS/L2Farm/Configs/MainCharacterSets/MainCharacterClothesSetConfigFacade.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5e518e359fe984cf6aaabb4ab6b90551
     m_Address: ProductionSetConfig
     m_ReadOnly: 0
@@ -104,12 +105,6 @@ MonoBehaviour:
     m_Address: Assets/PROJECTS/L2Farm/Configs/MainCharacterSets/DefaultClothesSetConfig.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e64fd9210b3334384ad8a4876adc527f
-    m_Address: EnergyRestorationConfig
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - prewarm
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e761a6584d71449569ad185b9864f32b
     m_Address: CharacterSetConfig

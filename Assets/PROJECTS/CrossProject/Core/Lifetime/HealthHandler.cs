@@ -1,15 +1,15 @@
+using System;
 using Cysharp.Threading.Tasks;
 
 namespace CrossProject.Core
 {
-    public interface IHealthHandler : IBoxedValueHandler<float>
+    public interface IHealthHandler : ILifetimeParameterHandler
     {
         IReadOnlyAsyncReactiveProperty<float> MaxHealth { get; }
         IReadOnlyAsyncReactiveProperty<float> Health { get; }
 
         void Init(float maxHealth, float currentHealth);
         void Damage(float value);
-        void Restore(float value);
         void IncreaseMaxHealth(float value);
         void ReduceMaxHealth(float value);
     }
@@ -23,6 +23,8 @@ namespace CrossProject.Core
         {
             base.Init(maxHealth, currentHealth, 0);
         }
+
+        public bool IsFullyRestored => Math.Abs(Health.Value - MaxHealth.Value) < float.Epsilon;
 
         public void Restore(float value)
         {
