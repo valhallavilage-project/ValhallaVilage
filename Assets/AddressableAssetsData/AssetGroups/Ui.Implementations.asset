@@ -32,6 +32,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 30e3b8a36e9aa5b4a81fff9f2bdb289a
+    m_Address: MainCharacterDeathScreen
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 3c6fa3754f34e40228bf537ea9b7b07b
     m_Address: InventoryScreen
     m_ReadOnly: 0

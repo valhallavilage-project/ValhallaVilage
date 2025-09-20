@@ -19,7 +19,7 @@ namespace L2Farm.Features.ResourceHolder
         [SerializeField] private NavMeshObstacle obstacle;
         [SerializeField] private float _experienceReward = 5;
 
-        private IMainCharacterSharedDataHolder _mainCharacterSharedData;
+        private IMainCharacterFacade _mainCharacterSharedData;
         private IResourcesService _resourcesService;
 
         public int EnergyRequired => energyRequired;
@@ -35,7 +35,7 @@ namespace L2Farm.Features.ResourceHolder
         [Inject]
         private void Construct(
             IResourcesService resourcesService,
-            IMainCharacterSharedDataHolder mainCharacterSharedData)
+            IMainCharacterFacade mainCharacterSharedData)
         {
             _resourcesService = resourcesService;
             _mainCharacterSharedData = mainCharacterSharedData;

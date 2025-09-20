@@ -7,6 +7,7 @@ namespace CrossProject.Core
     {
         IReadOnlyAsyncReactiveProperty<float> MaxHealth { get; }
         IReadOnlyAsyncReactiveProperty<float> Health { get; }
+        bool IsDied { get; }
 
         void Init(float maxHealth, float currentHealth);
         void Damage(float value);
@@ -25,6 +26,7 @@ namespace CrossProject.Core
         }
 
         public bool IsFullyRestored => Math.Abs(Health.Value - MaxHealth.Value) < float.Epsilon;
+        public bool IsDied => Health.Value <= _minValue.Value;
 
         public void Restore(float value)
         {

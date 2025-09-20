@@ -19,6 +19,7 @@ using CrossProject.Ui.Core;
 using CrossProject.Ui.Implementations;
 using CrossProject.Ui.Implementations.InteractButton;
 using CrossProject.Ui.Implementations.SettingsPopup;
+using L2Farm.Features;
 using L2Farm.Features.Buildings;
 using L2Farm.Features.Buildings.Actions;
 using L2Farm.Features.ClaimerResourcesHint;
@@ -223,9 +224,11 @@ namespace L2Farm.Scripts
                 .AsSelf()
                 .AsImplementedInterfaces();
 
-            builder.Register<MainCharacterSharedDataHolder>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<MainCharacterFacade>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<MainCharacterGlobalExperienceGainHandler>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<LocalTimeService>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<MainCharacterDeathScreenController>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
+            builder.Register<MainCharacterReviveGlobalHandler>(Lifetime.Singleton).AsImplementedInterfaces();
 
             RegisterConditionsAndActions(builder);
             RegisterCheats(builder);

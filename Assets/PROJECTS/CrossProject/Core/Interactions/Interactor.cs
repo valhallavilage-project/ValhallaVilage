@@ -21,14 +21,26 @@ namespace CrossProject.Core.Interactions
 
         [Inject]
         private void Construct(IPlayerSkinProvider playerSkinProvider, IEnergyHandler energyHandler,
-            IInteractionHandler interactionHandler, IExperienceHandler experienceHandler)
+            IInteractionHandler interactionHandler, IExperienceHandler experienceHandler, IDieAbility dieAbility)
         {
             _playerSkinProvider = playerSkinProvider;
             _energyHandler = energyHandler;
             _interactionHandler = interactionHandler;
             _experienceHandler = experienceHandler;
 
+            dieAbility.DeathBegan.WithoutCurrent().ForEachAsync(MainCharacterDeathBegan, gameObject.GetCancellationTokenOnDestroy()).Forget();
             interactionHandler.InteractionLaunched.WithoutCurrent().ForEachAwaitAsync(Interact, gameObject.GetCancellationTokenOnDestroy()).Forget();
+        }
+
+        private void MainCharacterDeathBegan(bool _)
+        {
+            foreach (var interactiveObject in _objects)
+            {
+                interactiveObject.Deselect();
+            }
+            
+            _objects.Clear();
+            _interactionHandler.SetClosestObject(null);
         }
 
         private void Awake()

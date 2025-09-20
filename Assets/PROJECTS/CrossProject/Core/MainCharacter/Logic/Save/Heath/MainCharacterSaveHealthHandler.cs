@@ -4,7 +4,11 @@ using Cysharp.Threading.Tasks.Linq;
 
 namespace CrossProject.Core
 {
-    public class MainCharacterSaveHealthHandler : BaseSaveRestorableParameterHandler<EnergyStatePart>, IMainCharacterSaveEnergyHandler
+    public interface IMainCharacterSaveHealthHandler : ISaveRestorableParameterHandler
+    {
+    }
+
+    public class MainCharacterSaveHealthHandler : BaseSaveRestorableParameterHandler<HealthStatePart>, IMainCharacterSaveHealthHandler
     {
         private readonly IRestoreHealthHandler _restoreHandler;
         private readonly IHealthHandler _parameterHandler;

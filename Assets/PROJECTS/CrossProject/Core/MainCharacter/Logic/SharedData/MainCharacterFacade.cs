@@ -2,7 +2,7 @@ using Cysharp.Threading.Tasks;
 
 namespace CrossProject.Core
 {
-    public interface IMainCharacterSharedDataHolder
+    public interface IMainCharacterFacade
     {
         AsyncReactiveProperty<float> CurrentHealth { get; }
         AsyncReactiveProperty<float> MaxHealth { get; }
@@ -11,9 +11,10 @@ namespace CrossProject.Core
         AsyncReactiveProperty<float> CurrentExperience { get; }
         AsyncReactiveProperty<float> MaxExperience { get; }
         AsyncReactiveProperty<int> CurrentLevel { get; }
+        AsyncReactiveProperty<bool> IsDied { get; }
     }
 
-    public class MainCharacterSharedDataHolder : IMainCharacterSharedDataHolder
+    public class MainCharacterFacade : IMainCharacterFacade
     {
         public AsyncReactiveProperty<float> CurrentHealth { get; } = new(default);
         public AsyncReactiveProperty<float> MaxHealth { get; } = new(default);
@@ -22,5 +23,6 @@ namespace CrossProject.Core
         public AsyncReactiveProperty<float> CurrentExperience { get; } = new(default);
         public AsyncReactiveProperty<float> MaxExperience { get; } = new(default);
         public AsyncReactiveProperty<int> CurrentLevel { get; } = new(default);
+        public AsyncReactiveProperty<bool> IsDied { get; } = new(default);
     }
 }
