@@ -5,7 +5,7 @@ using VContainer;
 
 namespace CrossProject.Core
 {
-    public class DieAbilityView : MonoBehaviour
+    public class MobDieAbilityView : MonoBehaviour
     {
         [SerializeField] private MobCorpseView _corpsePrefab;
 

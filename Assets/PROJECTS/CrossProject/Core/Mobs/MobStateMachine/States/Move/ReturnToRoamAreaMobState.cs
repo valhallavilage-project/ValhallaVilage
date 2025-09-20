@@ -27,7 +27,7 @@ namespace CrossProject.Core
         {
             await base.Enter();
             
-            _agroArea.ForgotEnemy();
+            _agroArea.ForgetEnemy();
         }
 
         protected override async UniTask HandleControl()

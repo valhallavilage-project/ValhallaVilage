@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Linq;
 using Cysharp.Threading.Tasks.Triggers;
 using UnityEngine;
+using VContainer.Unity;
 
 namespace CrossProject.Core
 {
@@ -11,15 +12,16 @@ namespace CrossProject.Core
     {
         public bool IsEnemyInsideArea { get; }
         public Transform Enemy { get; }
-        
+
         void Init(Collider agroZone);
-        void ForgotEnemy();
+        void ForgetEnemy();
     }
 
-    public class AgroArea : IAgroArea, IDisposable
+    public class AgroArea : IAgroArea, IDisposable, ITickable
     {
         private CancellationTokenSource _disposeCts = new();
         private CancellationTokenSource _agroZoneCts = new();
+        private Collider _agroZone;
 
         public bool IsEnemyInsideArea { get; private set; }
         public Transform Enemy { get; private set; }
@@ -32,9 +34,7 @@ namespace CrossProject.Core
 
         public void Init(Collider agroZone)
         {
-            var linkedCts = CancellationTokenSource.CreateLinkedTokenSource(_agroZoneCts.Token, _disposeCts.Token);
-            
-            agroZone.GetAsyncTriggerExitTrigger().ForEachAsync(EnemyLeave, linkedCts.Token).Forget();
+            _agroZone = agroZone;
         }
 
         private void NoticeEnemy(Transform enemy)
@@ -43,19 +43,26 @@ namespace CrossProject.Core
             Enemy = enemy;
         }
 
-        private void EnemyLeave(Collider exitObject)
+        public void ForgetEnemy()
         {
-            if (!IsEnemyInsideArea || !exitObject.gameObject.CompareTag(Enemy.tag))
+            Enemy = null;
+        }
+
+        public void Tick()
+        {
+            if (!IsEnemyInsideArea)
             {
                 return;
             }
             
-            IsEnemyInsideArea = false;
+            IsEnemyInsideArea = Enemy.gameObject.activeInHierarchy && IsInside(_agroZone, Enemy);
         }
 
-        public void ForgotEnemy()
+        private bool IsInside(Collider zone, Transform target)
         {
-            Enemy = null;
+            var closest = zone.ClosestPoint(target.position);
+
+            return closest == target.position;
         }
 
         private void Die(bool _)
