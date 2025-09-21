@@ -1,4 +1,5 @@
 using System;
+using Cysharp.Threading.Tasks;
 
 namespace CrossProject.Core.Actions
 {
@@ -6,6 +7,6 @@ namespace CrossProject.Core.Actions
     {
         Type ConfigType { get; }
         void SetConfig(IActionConfig actionConfig);
-        void Execute();
+        UniTask Execute();
     }
 }

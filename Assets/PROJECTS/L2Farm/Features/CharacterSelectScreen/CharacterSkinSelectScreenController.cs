@@ -76,7 +76,7 @@ namespace PROJECTS.L2Farm.Scripts.CharacterSkinSelect
             _charactersService.Select(_selectedCharacterId);
             _skinService.Select(_skinService.GetDefaultSkinFor(_selectedCharacterId));
             _uiService.Close(_view);
-            _questService.TryLaunch(new QuestId("HelloWorld"));
+            _questService.TryLaunch(new QuestId("HelloWorld")).Forget();
         }
     }
 }

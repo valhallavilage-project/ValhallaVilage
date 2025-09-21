@@ -1,4 +1,5 @@
 using CrossProject.Core.Quests;
+using Cysharp.Threading.Tasks;
 
 namespace CrossProject.Core.Actions.Implementations
 {
@@ -11,7 +12,7 @@ namespace CrossProject.Core.Actions.Implementations
             _questService = questService;
         }
 
-        public override void Execute()
+        public override async UniTask Execute()
         {
             _questService.ForceLose(config.questId);
         }

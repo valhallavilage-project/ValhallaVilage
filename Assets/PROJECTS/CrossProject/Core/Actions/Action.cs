@@ -1,4 +1,5 @@
 using System;
+using Cysharp.Threading.Tasks;
 
 namespace CrossProject.Core.Actions
 {
@@ -16,6 +17,6 @@ namespace CrossProject.Core.Actions
             config = tconfig;
         }
 
-        public abstract void Execute();
+        public abstract UniTask Execute();
     }
 }

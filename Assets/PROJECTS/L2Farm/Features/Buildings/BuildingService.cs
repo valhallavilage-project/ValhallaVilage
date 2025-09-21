@@ -84,7 +84,7 @@ namespace L2Farm.Features.Buildings
                 var timerInstance = Object.Instantiate(timerPrefab, building.transform.position + config.buildingVFXOffset, Quaternion.identity);
                 var timer = timerInstance.GetComponent<BuildingTimer>();
                 int remainingTime = Mathf.Clamp(config.timeToBuildInSeconds - elapsedSeconds, 0, config.timeToBuildInSeconds);
-                timer.Setup(remainingTime, config.id, config.questToLaunchOnComplete, config.buildingVFXScale);
+                timer.Setup(remainingTime, (BuildingId)config.id, config.questToLaunchOnComplete, config.buildingVFXScale);
             }
 
             //Debug.Log($"[{nameof(BuildingService)}] : spawned {config.id} with asset : {key}!");
@@ -102,7 +102,7 @@ namespace L2Farm.Features.Buildings
             timerInstance.GetComponent<BuildingTimer>().Setup(_buildingSetConfig.GetSecondsFor(id), id, _buildingSetConfig.GetQuestFor(id), config.buildingVFXScale);
         }
 
-        public void SpawnReadyBuilding(BuildingId id)
+        public async UniTask SpawnReadyBuilding(BuildingId id)
         {
             var config = _buildingSetConfig.items.FirstOrDefault(x => id == x.id);
             if (config == null)
@@ -122,7 +122,7 @@ namespace L2Farm.Features.Buildings
             
             _mainCharacterGlobalExperienceGainHandler.GainXp(config.completeBuildingXpReward);
 
-            SpawnBuildingInternal(config).Forget();
+            await SpawnBuildingInternal(config);
         }
 
         public Vector3 GetVFXPositionFor(BuildingId buildingId)

@@ -16,8 +16,8 @@ namespace PROJECTS.L2Farm.Editor
             string[] assetUIDs = AssetDatabase.FindAssets($"t:{nameof(ProductionSetConfig)}");
             return assetUIDs
                 .Select(AssetDatabase.GUIDToAssetPath)
-                .Select(AssetDatabase.LoadAssetAtPath<IndicationTypeSetConfig>)
-                .SelectMany(x => x.items)
+                .Select(AssetDatabase.LoadAssetAtPath<ProductionSetConfig>)
+                .SelectMany(x => x.productionConfigs)
                 .Select(x => x.id);
         }
     }

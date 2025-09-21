@@ -18,4 +18,4 @@ MonoBehaviour:
     buildingId:
       value: House
     finishQuest:
-      value: Production_Wheat_Finish
+      value: Flour_Production_Finished

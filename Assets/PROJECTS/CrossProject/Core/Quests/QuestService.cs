@@ -49,27 +49,28 @@ namespace CrossProject.Core.Quests
         {
             _questSetConfig = await _addressablesManager.LoadAssetAsync<QuestSetConfig>();
             await UniTask.WaitUntil(() => _spawnPointService.IsInitialized);
-            LoadQuests();
+            await LoadQuests();
             IsInitialized = true;
         }
 
-        private void LoadQuests()
+        private async UniTask LoadQuests()
         {
             var part = _gameStateManager.State.Get<QuestsLogPart>();
 
             var newList = part.launchedQuests.ToList();
             foreach (var log in newList)
-                TryLaunch(log.Key, log.Value);
+                await TryLaunch(log.Key, log.Value);
         }
 
         #endregion
 
-        public bool TryLaunch(QuestId id, int stepIndex = 0)
+        public async UniTask<bool> TryLaunch(QuestId id, int stepIndex = 0)
         {
             //Debug.Log($"[{nameof(QuestService)}] : Try to Launch {id}");
             if (string.IsNullOrEmpty(id))
             {
                 Debug.LogError($"[{nameof(QuestService)}] : Trying to Launch quest with id NULL");
+
                 return false;
             }
 
@@ -78,9 +79,11 @@ namespace CrossProject.Core.Quests
 
             //TODO : VM : queue of non-launched, but fired quests?
             var config = _questSetConfig.Get(id);
+
             if (config == null)
             {
                 Debug.LogError($"[{nameof(QuestService)}] : cannot find config for {id}!");
+
                 return false;
             }
 
@@ -88,11 +91,12 @@ namespace CrossProject.Core.Quests
             var part = _gameStateManager.State.Get<QuestsLogPart>();
             part.launchedQuests[id] = stepIndex;
             _gameStateManager.Save();
-            _actionService.Execute(config.launchActions);
+            await _actionService.Execute(config.launchActions);
             OnQuestLaunch?.Invoke(id);
             Debug.Log($"[{nameof(QuestService)}] : Launch : {id}");
             if (config.proceedAfterLaunch)
-                TryProceedStepsOf(id);
+                await TryProceedStepsOf(id);
+
             return true;
         }
 
@@ -101,65 +105,75 @@ namespace CrossProject.Core.Quests
             if (!_launchedQuests.TryGetValue(id, out var stepIndex))
             {
                 Debug.LogError($"[{nameof(QuestService)}] : {id} is not launched!");
+
                 return false;
             }
 
             var questConfig = _questSetConfig.Get(id);
+
             if (stepIndex >= questConfig.steps.Count)
             {
                 Debug.Log($"[{nameof(QuestService)}] : CanProceed : {id} : true");
+
                 return true;
             }
 
             var step = questConfig.steps[stepIndex];
             var result = _conditionService.Check(step.winCondition);
             Debug.Log($"[{nameof(QuestService)}] : CanProceed : {id} : {result}");
+
             return result;
         }
 
-        public bool TryProceedStepsOf(QuestId id)
+        public async UniTask<bool> TryProceedStepsOf(QuestId id)
         {
             Debug.Log($"[{nameof(QuestService)}] : TryProceed : {id}");
 
             if (!_launchedQuests.TryGetValue(id, out var stepIndex))
             {
                 Debug.LogError($"[{nameof(QuestService)}] : {id} is not launched!");
+
                 return false;
             }
 
             var questConfig = _questSetConfig.Get(id);
+
             if (stepIndex >= questConfig.steps.Count)
             {
-                ForceWin(id);
+                await ForceWin(id);
+
                 return true;
             }
 
             var step = questConfig.steps[stepIndex];
-            _actionService.Execute(step.stepAction);
+            await _actionService.Execute(step.stepAction);
 
             if (_conditionService.Check(step.loseCondition))
             {
-                _actionService.Execute(step.loseActions);
+                await _actionService.Execute(step.loseActions);
                 Debug.Log($"[{nameof(QuestService)}] : {id} at step {stepIndex} Lose");
+
                 return false;
             }
 
             if (!_conditionService.Check(step.winCondition))
             {
                 Debug.Log($"[{nameof(QuestService)}] : {id} at step {stepIndex} can't proceed");
+
                 return false;
             }
 
-            _actionService.Execute(step.winActions);
+            await _actionService.Execute(step.winActions);
             _launchedQuests[id]++;
             OnQuestProceed?.Invoke(id, _launchedQuests[id]);
             _gameStateManager.State.Get<QuestsLogPart>().launchedQuests[id]++;
             _gameStateManager.Save();
             Debug.Log($"[{nameof(QuestService)}] : Step proceed : {id} : {_launchedQuests[id] - 1} ---> {_launchedQuests[id]}");
+
             return true;
         }
 
-        public void ForceLose(QuestId id, QuestConfig config = null)
+        public async UniTask ForceLose(QuestId id, QuestConfig config = null)
         {
             config ??= _questSetConfig.Get(id);
 
@@ -169,12 +183,12 @@ namespace CrossProject.Core.Quests
             _gameStateManager.Save();
 
             _launchedQuests.Remove(id);
-            _actionService.Execute(config.loseActions);
+            await _actionService.Execute(config.loseActions);
             OnQuestLose?.Invoke(id);
             Debug.Log($"[{nameof(QuestService)}] : {id} Quest Lose :-(");
         }
 
-        public void ForceWin(QuestId id, QuestConfig config = null)
+        public async UniTask ForceWin(QuestId id, QuestConfig config = null)
         {
             config ??= _questSetConfig.Get(id);
 
@@ -185,7 +199,7 @@ namespace CrossProject.Core.Quests
 
             _launchedQuests.Remove(id);
             Debug.Log($"[{nameof(QuestService)}] : {id} Quest Win :-)");
-            _actionService.Execute(config.winActions);
+            await _actionService.Execute(config.winActions);
             OnQuestWin?.Invoke(id);
         }
 

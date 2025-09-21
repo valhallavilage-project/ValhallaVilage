@@ -12,9 +12,9 @@ namespace L2Farm.Features.Buildings.Actions
             _buildingService = buildingService;
         }
 
-        public override void Execute()
+        public override async UniTask Execute()
         {
-            _buildingService.StartUpgradeProcess(config.buildingId).Forget();
+            await _buildingService.StartUpgradeProcess(config.buildingId);
         }
     }
 }

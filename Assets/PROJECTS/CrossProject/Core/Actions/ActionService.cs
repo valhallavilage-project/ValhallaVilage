@@ -53,19 +53,19 @@ namespace CrossProject.Core.Actions
             }
         }
 
-        public void Execute(IActionConfig config)
+        public async UniTask Execute(IActionConfig config)
         {
             if (!_actionMap.TryGetValue(config.GetType(), out var action))
                 throw new Exception($"Can't find {config.GetType().Name} in actions map!");
 
             action.SetConfig(config);
-            action.Execute();
+            await action.Execute();
         }
 
-        public void Execute(IEnumerable<IActionConfig> configs)
+        public async UniTask Execute(IEnumerable<IActionConfig> configs)
         {
             foreach (var actionConfig in configs)
-                Execute(actionConfig);
+                await Execute(actionConfig);
         }
     }
 }

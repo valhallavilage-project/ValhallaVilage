@@ -1,6 +1,7 @@
 using CrossProject.Core.Actions;
 using CrossProject.Core.InGameResources;
 using CrossProject.Core.SaveLoad;
+using Cysharp.Threading.Tasks;
 
 namespace L2Farm.Scripts.Actions.SpendResources
 {
@@ -13,7 +14,7 @@ namespace L2Farm.Scripts.Actions.SpendResources
             _gameStateManager = gameStateManager;
         }
 
-        public override void Execute()
+        public override async UniTask Execute()
         {
             var part = _gameStateManager.State.Get<ResourceContentPart>();
             foreach (var resourceCondition in config.resourceConditions)
