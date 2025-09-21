@@ -50,13 +50,26 @@ namespace L2Farm.Features.Buildings
 
         private void Awake()
         {
-            Injector.Instance?.Inject(this);
+            Injector.Instance.Inject(this);
         }
 
         public void Setup(int seconds, BuildingId buildingId, QuestId questId, float vfxScale)
         {
-            _seconds = _secondsLeft = seconds;
             _buildingId = buildingId;
+            
+            Setup(seconds, questId, vfxScale);
+        }
+
+        public void Setup(int seconds, ProductionId productionId, QuestId questId, float vfxScale)
+        {
+            _productionId = productionId;
+            
+            Setup(seconds, questId, vfxScale);
+        }
+
+        private void Setup(int seconds, QuestId questId, float vfxScale)
+        {
+            _seconds = _secondsLeft = seconds;
             _questId = questId;
             _cameraService.AlignWithCamera(uiRoot);
             vfxRoot.GetChild(0).localScale = Vector3.one * vfxScale;
@@ -75,13 +88,13 @@ namespace L2Farm.Features.Buildings
         private async UniTask Routine()
         {
             await UniTask.Delay(TimeSpan.FromSeconds(_seconds));
-            _actionService.Execute(new LaunchQuestActionConfig
+            await _actionService.Execute(new LaunchQuestActionConfig
             {
                 questId = _questId
             });
-            if (!string.IsNullOrEmpty(_buildingId))
+            if (_buildingId != null && !string.IsNullOrEmpty(_buildingId))
                 _gameStateManager.State.Get<BuildingPart>().requests.Remove(_buildingId);
-            if (!string.IsNullOrEmpty(_productionId))
+            if (_productionId != null && !string.IsNullOrEmpty(_productionId))
                 _gameStateManager.State.Get<ProductionPart>().requests.Remove(_productionId);
         }
 

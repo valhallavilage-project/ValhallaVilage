@@ -20,7 +20,7 @@ namespace L2Farm.Features.NPC
         protected override async UniTask AfterInteraction()
         {
             if (questId != null)
-                _questService.TryProceedStepsOf(questId);
+                await _questService.TryProceedStepsOf(questId);
         }
 
         public void SetQuest(QuestId id, QuestService questService)

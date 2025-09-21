@@ -1,4 +1,5 @@
 using CrossProject.Core.Actions;
+using Cysharp.Threading.Tasks;
 using L2Farm.Features.NPC;
 
 namespace L2Farm.Scripts.Actions
@@ -12,7 +13,7 @@ namespace L2Farm.Scripts.Actions
             _npcService = npcService;
         }
 
-        public override void Execute()
+        public override async UniTask Execute()
         {
             _npcService.DespawnNPC(config.npcId);
         }

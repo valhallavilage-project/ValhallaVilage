@@ -5,6 +5,7 @@ using CrossProject.Core.InGameResources;
 using CrossProject.Core.Quests;
 using CrossProject.Core.SaveLoad;
 using CrossProject.Ui.Core;
+using Cysharp.Threading.Tasks;
 using L2Farm.Scripts.Conditions;
 using UnityEngine;
 
@@ -34,7 +35,7 @@ namespace L2Farm.Features.SimpleMonolog
             _gameStateManager = gameStateManager;
         }
 
-        public override async void Execute()
+        public override async UniTask Execute()
         {
             var characterConfig = _charactersService.GetConfigFor(config.speaker);
             if (characterConfig == null)
@@ -69,7 +70,7 @@ namespace L2Farm.Features.SimpleMonolog
                 {
                     _uiService.Close(_view);
                     if (canProceed)
-                        _questService.TryProceedStepsOf(config.questId);
+                        _questService.TryProceedStepsOf(config.questId).Forget();
                 }
             };
             _view = await _uiService.TryOpen(model) as SimpleMonologPopup;

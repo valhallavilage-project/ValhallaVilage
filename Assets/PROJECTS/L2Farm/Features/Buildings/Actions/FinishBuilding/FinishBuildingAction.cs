@@ -1,4 +1,5 @@
 using CrossProject.Core.Actions;
+using Cysharp.Threading.Tasks;
 
 namespace L2Farm.Features.Buildings.Actions
 {
@@ -11,9 +12,9 @@ namespace L2Farm.Features.Buildings.Actions
             _buildingService = buildingService;
         }
 
-        public override void Execute()
+        public override async UniTask Execute()
         {
-            _buildingService.SpawnReadyBuilding(config.buildingId);
+            await _buildingService.SpawnReadyBuilding(config.buildingId);
         }
     }
 }

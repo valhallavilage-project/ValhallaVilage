@@ -48,7 +48,7 @@ namespace L2Farm.Features.ResourceProduction
             var timerPrefab = await _addressablesManager.LoadAssetAsync<GameObject>(nameof(BuildingTimer));
             var timerInstance = Object.Instantiate(timerPrefab, _buildingService.GetVFXPositionFor(productionConfig.buildingId), Quaternion.identity);
             var vfxScale = _buildingService.GetVFXScaleFor(productionConfig.buildingId);
-            timerInstance.GetComponent<BuildingTimer>().Setup(productionConfig.timeToProduceInSeconds, null, productionConfig.finishQuest, vfxScale);
+            timerInstance.GetComponent<BuildingTimer>().Setup(productionConfig.timeToProduceInSeconds, (ProductionId)productionConfig.id, productionConfig.finishQuest, vfxScale);
         }
     }
 }

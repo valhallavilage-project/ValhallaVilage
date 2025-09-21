@@ -71,9 +71,12 @@ namespace CrossProject.Core.Conditions
 
         public bool Check<TConditionConfig>(TConditionConfig conditionConfig) where TConditionConfig : class, IConditionConfig
         {
-            //If there is no condition set -> there is no blockers
             if (conditionConfig == null)
-                return true;
+            {
+                Debug.LogError("Condition config can't be null. Choose true condition if it is always must be positive");
+                
+                return false;
+            }
 
             var condition = GetCondition(conditionConfig);
             condition.SetConfig(conditionConfig);

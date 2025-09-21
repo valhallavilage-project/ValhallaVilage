@@ -1,6 +1,7 @@
 using CrossProject.Core.Actions;
 using CrossProject.Core.InGameResources;
 using CrossProject.Core.SaveLoad;
+using Cysharp.Threading.Tasks;
 
 namespace L2Farm.Features.ResourceProduction.GiveResources
 {
@@ -8,7 +9,12 @@ namespace L2Farm.Features.ResourceProduction.GiveResources
     {
         private readonly GameStateManager _gameStateManager;
 
-        public override void Execute()
+        public GiveResourcesAction(GameStateManager gameStateManager)
+        {
+            _gameStateManager = gameStateManager;
+        }
+
+        public override async UniTask Execute()
         {
             var part = _gameStateManager.State.Get<ResourceContentPart>();
             if (part.Resources.ContainsKey(config.resourceId))

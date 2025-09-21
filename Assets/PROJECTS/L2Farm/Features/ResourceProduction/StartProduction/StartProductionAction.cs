@@ -12,9 +12,9 @@ namespace L2Farm.Features.ResourceProduction.Actions
             _productionService = productionService;
         }
 
-        public override void Execute()
+        public override async UniTask Execute()
         {
-            _productionService.StartProduction(config.productionId).Forget();
+            await _productionService.StartProduction(config.productionId);
         }
     }
 }
