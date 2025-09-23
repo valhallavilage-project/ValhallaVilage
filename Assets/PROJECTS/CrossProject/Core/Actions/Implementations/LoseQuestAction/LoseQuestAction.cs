@@ -14,7 +14,7 @@ namespace CrossProject.Core.Actions.Implementations
 
         public override async UniTask Execute()
         {
-            _questService.ForceLose(config.questId);
+            await _questService.ForceLose(config.questId);
         }
     }
 }
