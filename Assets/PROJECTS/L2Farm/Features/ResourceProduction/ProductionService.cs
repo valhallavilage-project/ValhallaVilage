@@ -15,6 +15,7 @@ namespace L2Farm.Features.ResourceProduction
         private readonly AddressablesManager _addressablesManager;
         private readonly BuildingService _buildingService;
         private readonly GameStateManager _gameStateManager;
+        private readonly ITimeService _timeService;
 
         private ProductionSetConfig _productionSetConfig;
 
@@ -23,11 +24,13 @@ namespace L2Farm.Features.ResourceProduction
         public ProductionService(
             AddressablesManager addressablesManager,
             BuildingService buildingService,
-            GameStateManager gameStateManager)
+            GameStateManager gameStateManager,
+            ITimeService timeService)
         {
             _addressablesManager = addressablesManager;
             _buildingService = buildingService;
             _gameStateManager = gameStateManager;
+            _timeService = timeService;
         }
 
         public async UniTask Initialize()
@@ -39,16 +42,25 @@ namespace L2Farm.Features.ResourceProduction
 
         public async UniTask StartProduction(ProductionId productionId)
         {
-            Debug.Log($"[{nameof(ProductionService)}] : start production : {productionId}");
-            var part = _gameStateManager.State.Get<ProductionPart>();
-            part.requests.Add(productionId, DateTime.Now);
-            _gameStateManager.Save();
+            await UniTask.WaitUntil(() => IsInitialized);
 
+            Debug.Log($"[{nameof(ProductionService)}] : start production : {productionId}");
+            
             var productionConfig = _productionSetConfig.productionConfigs.First(x => x.id == productionId);
+            var part = _gameStateManager.State.Get<ProductionPart>();
+
+            if (!part.requests.ContainsKey(productionId))
+            {
+                part.requests.Add(productionId, _timeService.Now.AddSeconds(productionConfig.timeToProduceInSeconds));
+                _gameStateManager.Save();
+            }
+            
+            var timeLeft = (int)Math.Clamp((part.requests[productionId] - _timeService.Now).TotalSeconds, 0, productionConfig.timeToProduceInSeconds);
+
             var timerPrefab = await _addressablesManager.LoadAssetAsync<GameObject>(nameof(BuildingTimer));
             var timerInstance = Object.Instantiate(timerPrefab, _buildingService.GetVFXPositionFor(productionConfig.buildingId), Quaternion.identity);
             var vfxScale = _buildingService.GetVFXScaleFor(productionConfig.buildingId);
-            timerInstance.GetComponent<BuildingTimer>().Setup(productionConfig.timeToProduceInSeconds, (ProductionId)productionConfig.id, productionConfig.finishQuest, vfxScale);
+            timerInstance.GetComponent<BuildingTimer>().Setup(timeLeft, (ProductionId)productionConfig.id, productionConfig.finishQuest, vfxScale);
         }
     }
 }

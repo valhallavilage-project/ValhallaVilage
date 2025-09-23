@@ -94,6 +94,7 @@ namespace CrossProject.Core.Quests
             await _actionService.Execute(config.launchActions);
             OnQuestLaunch?.Invoke(id);
             Debug.Log($"[{nameof(QuestService)}] : Launch : {id}");
+            
             if (config.proceedAfterLaunch)
                 await TryProceedStepsOf(id);
 
@@ -199,8 +200,8 @@ namespace CrossProject.Core.Quests
 
             _launchedQuests.Remove(id);
             Debug.Log($"[{nameof(QuestService)}] : {id} Quest Win :-)");
-            await _actionService.Execute(config.winActions);
             OnQuestWin?.Invoke(id);
+            _actionService.Execute(config.winActions).Forget();
         }
 
         public int GetCurrentStepFor(QuestId id)

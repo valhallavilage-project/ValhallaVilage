@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   productionConfigs:
   - id: House_Production_Flour
-    timeToProduceInSeconds: 60
+    timeToProduceInSeconds: 10
     buildingId:
       value: House
     finishQuest:

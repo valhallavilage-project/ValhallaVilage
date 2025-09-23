@@ -346,11 +346,12 @@ MonoBehaviour:
         questIndication:
           value: Quest_Ready
         launchActions:
+        - rid: 3322170499779788803
         - rid: 3322170452733329461
         steps:
         - rid: 3322170452733329462
         winActions:
-        - rid: 3322170452733329475
+        - rid: 3322170499779788802
         loseActions: []
     - rid: 3322170452733329461
       type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
@@ -408,6 +409,7 @@ MonoBehaviour:
         - rid: 3322170452733329473
         steps:
         - rid: 3322170452733329476
+        - rid: 3322170499779788806
         winActions: []
         loseActions: []
     - rid: 3322170452733329469
@@ -434,18 +436,13 @@ MonoBehaviour:
           value: NPC_Farmer
         questId:
           value: Start_Flour_Production
-    - rid: 3322170452733329475
-      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
-      data:
-        questId:
-          value: Start_Flour_Production
     - rid: 3322170452733329476
       type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
       data:
         stepAction:
           rid: 3322170452733329478
         winCondition:
-          rid: 3322170452733329479
+          rid: 3322170499779788807
         winActions: []
         loseCondition:
           rid: 3322170452733329480
@@ -459,12 +456,35 @@ MonoBehaviour:
         questId:
           value: Start_Flour_Production
         stepIndexWithResourceCondition: -1
-    - rid: 3322170452733329479
-      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
-      data: 
     - rid: 3322170452733329480
       type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
       data: 
+    - rid: 3322170499779788802
+      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Start_Flour_Production
+    - rid: 3322170499779788803
+      type: {class: LoseQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Start_Flour_Production
+    - rid: 3322170499779788806
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: -2
+        winCondition:
+          rid: -2
+        winActions: []
+        loseCondition:
+          rid: -2
+        loseActions: []
+    - rid: 3322170499779788807
+      type: {class: ProductionCompletedConditionConfig, ns: L2Farm.Scripts.Conditions, asm: L2Farm}
+      data:
+        _production:
+          value: House_Production_Flour
     - rid: 4482425490423152640
       type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
       data:

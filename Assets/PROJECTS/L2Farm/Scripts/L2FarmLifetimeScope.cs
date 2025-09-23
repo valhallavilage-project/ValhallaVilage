@@ -73,6 +73,7 @@ namespace L2Farm.Scripts
             builder.Register<QuestNotCompletedCondition>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<FalseCondition>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<TrueCondition>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            builder.Register<ProductionCompletedCondition>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
 
             builder.Register<ConditionService>(Lifetime.Singleton)
                 .AsSelf()
