@@ -53,7 +53,6 @@ MonoBehaviour:
           able to assist us?
         questId:
           value: HelloWorld
-        stepIndexWithResourceCondition: -1
     - rid: 1309964113527177217
       type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
       data: 
@@ -65,7 +64,6 @@ MonoBehaviour:
         message: Me? Um... Well, let's try. What kind of help do you need?
         questId:
           value: HelloWorld
-        stepIndexWithResourceCondition: -1
     - rid: 1309964113527177219
       type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
       data: 
@@ -78,7 +76,6 @@ MonoBehaviour:
           after the earthquake.
         questId:
           value: HelloWorld
-        stepIndexWithResourceCondition: -1
     - rid: 1309964113527177221
       type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
       data: 
@@ -105,7 +102,6 @@ MonoBehaviour:
           cannot help them!
         questId:
           value: HelloWorld
-        stepIndexWithResourceCondition: -1
     - rid: 1309964113527177225
       type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
       data: 
@@ -143,7 +139,6 @@ MonoBehaviour:
           years.
         questId:
           value: HelloWorld
-        stepIndexWithResourceCondition: -1
     - rid: 1309964113527177230
       type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
       data: 
@@ -159,7 +154,6 @@ MonoBehaviour:
           the field. Please help us, and we will reward you!
         questId:
           value: HelloWorld
-        stepIndexWithResourceCondition: -1
     - rid: 1309964113527177233
       type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
       data: 
@@ -185,7 +179,6 @@ MonoBehaviour:
         message: Ok. I will try to do everything in my power.
         questId:
           value: HelloWorld
-        stepIndexWithResourceCondition: -1
     - rid: 1309964113527177237
       type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
       data: 
@@ -211,7 +204,6 @@ MonoBehaviour:
         message: Thank you
         questId:
           value: HelloWorld
-        stepIndexWithResourceCondition: -1
     - rid: 1309964113527177241
       type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
       data: 
@@ -226,7 +218,6 @@ MonoBehaviour:
         message: Bla2
         questId:
           value: Tutorial_1_Gather
-        stepIndexWithResourceCondition: -1
     - rid: 1309964113527177250
       type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
       data:
@@ -272,7 +263,6 @@ MonoBehaviour:
         message: Need resources
         questId:
           value: Tutorial_1_Gather
-        stepIndexWithResourceCondition: 1
     - rid: 3322170452733329437
       type: {class: HasEnoughResourcesConditionConfig, ns: L2Farm.Scripts.Conditions, asm: L2Farm}
       data:
@@ -320,7 +310,6 @@ MonoBehaviour:
         message: House is ready
         questId:
           value: Tutorial_1_Build_Home
-        stepIndexWithResourceCondition: -1
     - rid: 3322170452733329453
       type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
       data: 
@@ -368,7 +357,7 @@ MonoBehaviour:
         stepAction:
           rid: 3322170452733329463
         winCondition:
-          rid: 3322170452733329464
+          rid: 3322170547157860352
         winActions:
         - rid: 3322170452733329465
         loseCondition:
@@ -379,13 +368,9 @@ MonoBehaviour:
       data:
         speaker:
           value: NPC_Farmer
-        message: Flour ready!
+        message: Flour is ready!
         questId:
           value: Flour_Production_Finished
-        stepIndexWithResourceCondition: -1
-    - rid: 3322170452733329464
-      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
-      data: 
     - rid: 3322170452733329465
       type: {class: GiveResourceActionConfig, ns: L2Farm.Features.ResourceProduction.GiveResources, asm: L2Farm}
       data:
@@ -455,7 +440,6 @@ MonoBehaviour:
         message: Let's wait some time...
         questId:
           value: Start_Flour_Production
-        stepIndexWithResourceCondition: -1
     - rid: 3322170452733329480
       type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
       data: 
@@ -485,6 +469,13 @@ MonoBehaviour:
       data:
         _production:
           value: House_Production_Flour
+    - rid: 3322170547157860352
+      type: {class: GiveResourcesConditionConfig, ns: L2Farm.Scripts, asm: L2Farm}
+      data:
+        _resourceConditions:
+        - resourceId:
+            value: Resource_Flour
+          neededQuantity: 40
     - rid: 4482425490423152640
       type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
       data:

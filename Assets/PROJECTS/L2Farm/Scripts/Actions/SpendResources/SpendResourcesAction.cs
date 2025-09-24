@@ -19,7 +19,7 @@ namespace L2Farm.Scripts.Actions.SpendResources
             var part = _gameStateManager.State.Get<ResourceContentPart>();
             foreach (var resourceCondition in config.resourceConditions)
             {
-                part.Resources[resourceCondition.resourceId] -= resourceCondition.neededQuantity;
+                part.Resources[resourceCondition.Id] -= resourceCondition.NeededAmount;
             }
             _gameStateManager.Save();
         }
