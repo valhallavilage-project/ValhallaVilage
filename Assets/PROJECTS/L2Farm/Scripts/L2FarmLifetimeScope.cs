@@ -74,6 +74,7 @@ namespace L2Farm.Scripts
             builder.Register<FalseCondition>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<TrueCondition>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<ProductionCompletedCondition>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            builder.Register<GiveResourcesCondition>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
 
             builder.Register<ConditionService>(Lifetime.Singleton)
                 .AsSelf()

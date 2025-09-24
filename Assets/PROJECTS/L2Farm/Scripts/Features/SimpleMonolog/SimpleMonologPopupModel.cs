@@ -9,7 +9,7 @@ namespace L2Farm.Features.SimpleMonolog
         public Sprite portrait;
         public string personName;
         public string message;
-        public List<ResourceRequirementData> resourcesData;
+        public List<MonologResourceData> resourcesData;
         public System.Action close;
         public System.Action next;
     }

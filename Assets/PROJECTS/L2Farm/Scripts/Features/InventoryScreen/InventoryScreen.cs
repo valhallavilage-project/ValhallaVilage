@@ -10,25 +10,18 @@ namespace L2Farm.Features.InventoryScreen
     public class InventoryScreen : ScreenView<InventoryScreenModel>
     {
         [SerializeField] private List<InventoryItem> _slots = new();
-        [SerializeField] private Canvas _canvas;
-        [SerializeField] private GridLayoutGroup _gridLayoutGroup;
         [SerializeField] private Button _closeBtn;
 
         protected override void OnBind()
         {
             _closeBtn.SetUniqueCallback(Model.Close);
             var list = Model.gameStatePart.Resources.ToList();
-            for (int i = 0; i < Model.gameStatePart.Resources.Count; i++)
+
+            for (var i = 0; i < Model.gameStatePart.Resources.Count; i++)
             {
                 var pair = list[i];
                 _slots[i].Setup(Model.resourcesService.GetSprite(pair.Key), pair.Value);
             }
-        }
-
-        private void OnEnable()
-        {
-            _gridLayoutGroup.cellSize /= _canvas.scaleFactor;
-            _gridLayoutGroup.cellSize *= 0.975f;
         }
     }
 }

@@ -1,6 +1,6 @@
 {
     "name": "L2Farm",
-    "rootNamespace": "",
+    "rootNamespace": "L2Farm",
     "references": [
         "GUID:ba3d232eb13d74dc58639a52e4a2037b",
         "GUID:f51ebe6a0ceec4240a699833d6309b23",

@@ -20,12 +20,12 @@ namespace L2Farm.Scripts.Conditions
         {
             var part = _gameStateManager.State.Get<ResourceContentPart>();
 
-            foreach (var condition in config.resourceConditions)
+            foreach (var resourceCondition in config.ResourceConditions)
             {
-                if (!part.Resources.TryGetValue(condition.resourceId, out int count))
+                if (!part.Resources.TryGetValue(resourceCondition.Id, out int count))
                     return false;
 
-                if (count < condition.neededQuantity)
+                if (count < resourceCondition.NeededAmount)
                     return false;
             }
 

@@ -6,6 +6,8 @@ using CrossProject.Core.Quests;
 using CrossProject.Core.SaveLoad;
 using CrossProject.Ui.Core;
 using Cysharp.Threading.Tasks;
+using L2Farm.Features.ResourceProduction.GiveResources;
+using L2Farm.Scripts;
 using L2Farm.Scripts.Conditions;
 using UnityEngine;
 
@@ -38,27 +40,20 @@ namespace L2Farm.Features.SimpleMonolog
         public override async UniTask Execute()
         {
             var characterConfig = _charactersService.GetConfigFor(config.speaker);
+
             if (characterConfig == null)
             {
                 Debug.LogError($"[{nameof(ShowMonologAction)}] : no character for : {config.speaker}");
+
                 return;
             }
-            var data = new List<ResourceRequirementData>();
 
-            var resourceConditions = config.stepIndexWithResourceCondition >= 0
-                ? ((HasEnoughResourcesConditionConfig)_questService.GetConfigFor(config.questId).steps[config.stepIndexWithResourceCondition].winCondition).resourceConditions
-                : new HasEnoughResourcesConditionConfig().resourceConditions;
+            var currentQuestStep = _questService.GetCurrentStepFor(config.questId);
 
-            foreach (var resourceCondition in resourceConditions)
-            {
-                data.Add(new ResourceRequirementData
-                {
-                    icon = _resourcesService.GetSprite(resourceCondition.resourceId),
-                    has = _gameStateManager.State.Get<ResourceContentPart>().Has(resourceCondition.resourceId),
-                    need = resourceCondition.neededQuantity
-                });
-            }
+            var data = ProcessConditionResources(currentQuestStep);
+
             var canProceed = _questService.CanProceed(config.questId);
+            
             var model = new SimpleMonologPopupModel
             {
                 portrait = characterConfig.portrait,
@@ -74,6 +69,49 @@ namespace L2Farm.Features.SimpleMonolog
                 }
             };
             _view = await _uiService.TryOpen(model) as SimpleMonologPopup;
+        }
+
+        private List<MonologResourceData> ProcessConditionResources(int currentQuestStep)
+        {
+            var data = new List<MonologResourceData>();
+
+            var winCondition = _questService.GetConfigFor(config.questId).steps[currentQuestStep].winCondition;
+            
+            switch (winCondition)
+            {
+                case HasEnoughResourcesConditionConfig hasEnoughResourcesConditionConfig:
+                {
+                    foreach (var resourceCondition in hasEnoughResourcesConditionConfig.ResourceConditions)
+                    {
+                        data.Add(new MonologResourceData
+                        {
+                            Icon = _resourcesService.GetSprite(resourceCondition.Id),
+                            MainCharacterAmount = _gameStateManager.State.Get<ResourceContentPart>().Has(resourceCondition.Id),
+                            Amount = resourceCondition.NeededAmount,
+                            ResourcesType = MonologResourcesType.Demand
+                        });
+                    }
+
+                    break;
+                }
+                case GiveResourcesConditionConfig giveResourcesConditionConfig:
+                {
+                    foreach (var resourceCondition in giveResourcesConditionConfig.ResourceConditions)
+                    {
+                        data.Add(new MonologResourceData
+                        {
+                            Icon = _resourcesService.GetSprite(resourceCondition.Id),
+                            MainCharacterAmount = _gameStateManager.State.Get<ResourceContentPart>().Has(resourceCondition.Id),
+                            Amount = resourceCondition.NeededAmount,
+                            ResourcesType = MonologResourcesType.Give
+                        });
+                    }
+
+                    break;
+                }
+            }
+
+            return data;
         }
     }
 }
