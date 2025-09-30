@@ -22,7 +22,7 @@ namespace L2Farm.Features
         {
             _uiService = uiService;
             _reviveGlobalHandler = reviveGlobalHandler;
-            mainCharacterFacade.IsDied.WithoutCurrent().ForEachAsync(MainCharacterDied, _disposeCts.Token).Forget();
+            mainCharacterFacade.IsDied.WithoutCurrent().ForEachAwaitAsync(MainCharacterDied, _disposeCts.Token).Forget();
         }
 
         public async UniTask Initialize()
@@ -30,12 +30,12 @@ namespace L2Farm.Features
             IsInitialized = true;
         }
 
-        private void MainCharacterDied(bool _)
+        private async UniTask MainCharacterDied(bool _)
         {
-            OpenScreen();
+            await OpenScreen();
         }
 
-        private async void OpenScreen()
+        private async UniTask OpenScreen()
         {
             _deathScreen = await _uiService.TryOpen(new MainCharacterDeathScreenModel()
             {
