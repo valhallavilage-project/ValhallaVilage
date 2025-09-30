@@ -231,6 +231,8 @@ namespace L2Farm.Scripts
             builder.Register<LocalTimeService>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<MainCharacterDeathScreenController>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             builder.Register<MainCharacterReviveGlobalHandler>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<ConfirmPopupController>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<ConfirmPopupOpenHandler>(Lifetime.Singleton).AsImplementedInterfaces();
 
             RegisterConditionsAndActions(builder);
             RegisterCheats(builder);
