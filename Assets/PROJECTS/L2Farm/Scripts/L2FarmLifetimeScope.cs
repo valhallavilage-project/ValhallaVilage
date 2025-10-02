@@ -8,7 +8,6 @@ using CrossProject.Core.Cheats;
 using CrossProject.Core.Conditions;
 using CrossProject.Core.Conditions.ConditionsImplementations;
 using CrossProject.Core.InGameResources;
-using CrossProject.Core.Interactions;
 using CrossProject.Core.PROJECTS.CrossProject.Core;
 using CrossProject.Core.Quests;
 using CrossProject.Core.SaveLoad;
@@ -27,7 +26,6 @@ using L2Farm.Features.DayNight;
 using L2Farm.Features.InventoryScreen;
 using L2Farm.Features.NPC;
 using L2Farm.Features.QuestIndication;
-using L2Farm.Features.QuestsScreen;
 using L2Farm.Features.ResourceProduction;
 using L2Farm.Features.ResourceProduction.Actions;
 using L2Farm.Features.ResourceProduction.GiveResources;
@@ -213,7 +211,7 @@ namespace L2Farm.Scripts
                 .AsSelf()
                 .AsImplementedInterfaces();
 
-            builder.Register<QuestsPopupController>(Lifetime.Singleton)
+            builder.Register<ActiveQuestsController>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
 
