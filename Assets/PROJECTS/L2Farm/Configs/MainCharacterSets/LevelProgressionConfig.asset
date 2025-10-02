@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: LevelProgressionConfig
   m_EditorClassIdentifier: 
   _progression: 00000000e8030000d0070000
+  _defaultExperienceRange: 1000
+  _levelCap: 99
