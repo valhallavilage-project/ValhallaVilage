@@ -51,12 +51,12 @@ MonoBehaviour:
     assetIdBroken: Farm_Broken
     assetIdReady: Farm_Ready
     spawnReadyCondition:
-      rid: 3322170452733329448
+      rid: 7520422092813631510
     buildingVFXScale: 1
     buildingVFXOffset: {x: 0, y: 0, z: 0}
     timeToBuildInSeconds: 60
     questToLaunchOnComplete:
-      value: 
+      value: Build_Farm_Finish
     completeBuildingXpReward: 400
   - id: Fishing
     sceneId:
@@ -96,10 +96,10 @@ MonoBehaviour:
     assetIdBroken: Mill_Broken
     assetIdReady: Mill_Ready
     spawnReadyCondition:
-      rid: 4482425896350515246
+      rid: 1309964340451868699
     buildingVFXScale: 1
     buildingVFXOffset: {x: 0, y: 0, z: 0}
-    timeToBuildInSeconds: 60
+    timeToBuildInSeconds: 10
     questToLaunchOnComplete:
       value: Build_Mill
     completeBuildingXpReward: 400
@@ -111,12 +111,12 @@ MonoBehaviour:
     assetIdBroken: Sawmill_Broken
     assetIdReady: Sawmill_Ready
     spawnReadyCondition:
-      rid: 4482425896350515247
+      rid: 7520422080207913023
     buildingVFXScale: 1
     buildingVFXOffset: {x: 0, y: 0, z: 0}
     timeToBuildInSeconds: 60
     questToLaunchOnComplete:
-      value: 
+      value: Build_Sawmill_Finish
     completeBuildingXpReward: 400
   - id: Smithy
     sceneId:
@@ -126,7 +126,7 @@ MonoBehaviour:
     assetIdBroken: Smithy_Broken
     assetIdReady: Smithy_Ready
     spawnReadyCondition:
-      rid: 4482425896350515248
+      rid: 4482425896350515246
     buildingVFXScale: 1
     buildingVFXOffset: {x: 0, y: 0, z: 0}
     timeToBuildInSeconds: 60
@@ -138,9 +138,11 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 3322170452733329448
-      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
-      data: 
+    - rid: 1309964340451868699
+      type: {class: QuestCompletedConditionConfig, ns: L2Farm.Scripts.Conditions.QuestCompleted, asm: L2Farm}
+      data:
+        questId:
+          value: Build_Mill
     - rid: 3322170452733329449
       type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
       data: 
@@ -162,13 +164,13 @@ MonoBehaviour:
       data:
         questId:
           value: Build_Bakery
-    - rid: 4482425896350515247
-      type: {class: QuestCompletedConditionConfig, ns: L2Farm.Scripts.Conditions.QuestCompleted, asm: Assembly-CSharp}
+    - rid: 7520422080207913023
+      type: {class: QuestCompletedConditionConfig, ns: L2Farm.Scripts.Conditions.QuestCompleted, asm: L2Farm}
       data:
         questId:
-          value: Build_Farm
-    - rid: 4482425896350515248
-      type: {class: QuestCompletedConditionConfig, ns: L2Farm.Scripts.Conditions.QuestCompleted, asm: Assembly-CSharp}
+          value: Build_Sawmill_Finish
+    - rid: 7520422092813631510
+      type: {class: QuestCompletedConditionConfig, ns: L2Farm.Scripts.Conditions.QuestCompleted, asm: L2Farm}
       data:
         questId:
-          value: Build_Fishing
+          value: Build_Farm_Finish
