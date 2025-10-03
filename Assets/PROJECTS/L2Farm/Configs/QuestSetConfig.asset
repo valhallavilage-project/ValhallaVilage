@@ -18,14 +18,29 @@ MonoBehaviour:
   - rid: 4482425896350515200
   - rid: 77259970479915008
   - rid: 4482425896350515235
-  - rid: 4482425896350515210
-  - rid: 4482425896350515215
-  - rid: 4482425896350515220
-  - rid: 4482425896350515225
+  - rid: 1309964348824485917
   - rid: 4482425896350515230
+  - rid: 7520422070541090860
+  - rid: 7520422070541090877
+  - rid: 7520422070541090887
+  - rid: 4482425896350515220
+  - rid: 7520422092813631489
   - rid: 4482425896350515240
-  - rid: 3322170452733329460
+  - rid: 4482425896350515225
+  - rid: 4482425896350515215
+  - rid: 4482425896350515210
+  - rid: 1309964326185730048
   - rid: 3322170452733329468
+  - rid: 3322170452733329460
+  - rid: 1309964340451868715
+  - rid: 1309964348824485892
+  - rid: 1309964348824485893
+  - rid: 7520422080207912960
+  - rid: 7520422080207912961
+  - rid: 7520422080207912962
+  - rid: 7520422080207912983
+  - rid: 7520422080207912984
+  - rid: 7520422080207912985
   references:
     version: 2
     RefIds:
@@ -37,12 +52,18 @@ MonoBehaviour:
         id: Tutorial_2
         proceedAfterLaunch: 0
         targetSpawnPoint:
-          value: NPC_Farmer
+          value: NPC_Valentine
         questIndication:
-          value: 
-        launchActions: []
-        steps: []
-        winActions: []
+          value: Quest_Active
+        launchActions:
+        - rid: 1309964326185730057
+        steps:
+        - rid: 1309964326185730058
+        - rid: 1309964340451868684
+        - rid: 1309964340451868685
+        - rid: 1309964340451868686
+        winActions:
+        - rid: 1309964340451868697
         loseActions: []
     - rid: 1309964113527177216
       type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
@@ -215,7 +236,8 @@ MonoBehaviour:
       data:
         speaker:
           value: NPC_Farmer
-        message: Bla2
+        message: Hello, traveler. My house was completely destroyed. My granddaughter
+          and I managed to restore it somehow, but it is still far from ideal.
         questId:
           value: Tutorial_1_Gather
     - rid: 1309964113527177250
@@ -227,6 +249,540 @@ MonoBehaviour:
           value: NPC_Farmer
         questId:
           value: Tutorial_1_Gather
+    - rid: 1309964326185730048
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Farmer_Production
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: NPC_Farmer
+        questIndication:
+          value: Production_Wheat
+        launchActions:
+        - rid: 1309964326185730049
+        steps:
+        - rid: 1309964326185730050
+        winActions:
+        - rid: 1309964326185730055
+        loseActions: []
+    - rid: 1309964326185730049
+      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
+      data:
+        npcId:
+          value: Farmer
+        spawnPointId:
+          value: NPC_Farmer
+        questId:
+          value: Farmer_Production
+    - rid: 1309964326185730050
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 1309964326185730051
+        winCondition:
+          rid: 1309964326185730052
+        winActions:
+        - rid: 1309964326185730053
+        loseCondition:
+          rid: 1309964326185730054
+        loseActions: []
+    - rid: 1309964326185730051
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_Farmer
+        message: For the wheat, I need seeds.
+        questId:
+          value: Farmer_Production
+    - rid: 1309964326185730052
+      type: {class: HasEnoughResourcesConditionConfig, ns: L2Farm.Scripts.Conditions, asm: L2Farm}
+      data:
+        resourceConditions:
+        - resourceId:
+            value: Resource_Seeds
+          neededQuantity: 1
+    - rid: 1309964326185730053
+      type: {class: SpendResourcesActionConfig, ns: L2Farm.Scripts.Actions.SpendResources, asm: L2Farm}
+      data:
+        resourceConditions:
+        - resourceId:
+            value: Resource_Seeds
+          neededQuantity: 1
+    - rid: 1309964326185730054
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 1309964326185730055
+      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Farmer_Production_Start
+    - rid: 1309964326185730056
+      type: {class: LoseQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Farmer_Production_Start
+    - rid: 1309964326185730057
+      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
+      data:
+        npcId:
+          value: Valentine
+        spawnPointId:
+          value: NPC_Valentine
+        questId:
+          value: Tutorial_2
+    - rid: 1309964326185730058
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 1309964326185730059
+        winCondition:
+          rid: 1309964326185730060
+        winActions: []
+        loseCondition:
+          rid: 1309964326185730061
+        loseActions: []
+    - rid: 1309964326185730059
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_Valentine
+        message: Good to see you! I heard you helped my grandfather; now we'll be
+          able to grow wheat.
+        questId:
+          value: Tutorial_2
+    - rid: 1309964326185730060
+      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 1309964326185730061
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 1309964340451868672
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 1309964340451868673
+        winCondition:
+          rid: 1309964340451868674
+        winActions: []
+        loseCondition:
+          rid: 1309964340451868675
+        loseActions: []
+    - rid: 1309964340451868673
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: MC
+        message: I met your granddaughter on the way. She said that a misfortune
+          had struck your town. How can I help?
+        questId:
+          value: Tutorial_1_Gather
+    - rid: 1309964340451868674
+      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 1309964340451868675
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 1309964340451868676
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 1309964340451868678
+        winCondition:
+          rid: 1309964340451868679
+        winActions: []
+        loseCondition:
+          rid: 1309964340451868680
+        loseActions: []
+    - rid: 1309964340451868677
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 1309964340451868681
+        winCondition:
+          rid: 1309964340451868682
+        winActions: []
+        loseCondition:
+          rid: 1309964340451868683
+        loseActions: []
+    - rid: 1309964340451868678
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_Farmer
+        message: Oh, that's wonderful. Help me rebuild the house, and I will be able
+          to sow the field with wheat. The town needs food now more than ever.
+        questId:
+          value: Tutorial_1_Gather
+    - rid: 1309964340451868679
+      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 1309964340451868680
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 1309964340451868681
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: MC
+        message: Alright, tell me what you need?
+        questId:
+          value: Tutorial_1_Gather
+    - rid: 1309964340451868682
+      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 1309964340451868683
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 1309964340451868684
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 1309964340451868687
+        winCondition:
+          rid: 1309964340451868688
+        winActions: []
+        loseCondition:
+          rid: 1309964340451868689
+        loseActions: []
+    - rid: 1309964340451868685
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 1309964340451868690
+        winCondition:
+          rid: 1309964340451868691
+        winActions: []
+        loseCondition:
+          rid: 1309964340451868692
+        loseActions: []
+    - rid: 1309964340451868686
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 1309964340451868693
+        winCondition:
+          rid: 1309964340451868694
+        winActions:
+        - rid: 1309964340451868698
+        loseCondition:
+          rid: 1309964340451868695
+        loseActions: []
+    - rid: 1309964340451868687
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_Valentine
+        message: But to turn the wheat into flour, we will need to restore the mill.
+          Can I count on you?
+        questId:
+          value: Tutorial_2
+    - rid: 1309964340451868688
+      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 1309964340451868689
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 1309964340451868690
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: MC
+        message: Yes, what can I do?
+        questId:
+          value: Tutorial_2
+    - rid: 1309964340451868691
+      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 1309964340451868692
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 1309964340451868693
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_Valentine
+        message: We will need the following resources.
+        questId:
+          value: Tutorial_2
+    - rid: 1309964340451868694
+      type: {class: HasEnoughResourcesConditionConfig, ns: L2Farm.Scripts.Conditions, asm: L2Farm}
+      data:
+        resourceConditions:
+        - resourceId:
+            value: Resource_Wood
+          neededQuantity: 1
+        - resourceId:
+            value: Resource_Stone
+          neededQuantity: 1
+    - rid: 1309964340451868695
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 1309964340451868697
+      type: {class: StartBuildingActionConfig, ns: L2Farm.Features.Buildings.Actions, asm: L2Farm}
+      data:
+        buildingId:
+          value: Mill
+    - rid: 1309964340451868698
+      type: {class: SpendResourcesActionConfig, ns: L2Farm.Scripts.Actions.SpendResources, asm: L2Farm}
+      data:
+        resourceConditions:
+        - resourceId:
+            value: Resource_Wood
+          neededQuantity: 1
+        - resourceId:
+            value: Resource_Stone
+          neededQuantity: 1
+    - rid: 1309964340451868708
+      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
+      data:
+        npcId:
+          value: Valentine
+        spawnPointId:
+          value: NPC_Valentine
+        questId:
+          value: Build_Mill
+    - rid: 1309964340451868709
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_Valentine
+        message: Thank you! The mill is working again. Now we will be able to make
+          flour for the town. Go to the guard at the entrance; he will tell you who
+          else needs help!
+        questId:
+          value: Build_Mill
+    - rid: 1309964340451868710
+      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 1309964340451868711
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 1309964340451868712
+      type: {class: FinishBuildingActionConfig, ns: L2Farm.Features.Buildings.Actions, asm: L2Farm}
+      data:
+        buildingId:
+          value: Mill
+    - rid: 1309964340451868713
+      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Guard_City
+    - rid: 1309964340451868714
+      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Valentine_Production
+    - rid: 1309964340451868715
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Valentine_Production
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: NPC_Valentine
+        questIndication:
+          value: Production_Flour
+        launchActions:
+        - rid: 1309964340451868720
+        steps:
+        - rid: 1309964340451868718
+        winActions:
+        - rid: 7520422070541090816
+        loseActions: []
+    - rid: 1309964340451868718
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 1309964348824485890
+        winCondition:
+          rid: 1309964348824485889
+        winActions:
+        - rid: 1309964348824485891
+        loseCondition:
+          rid: 1309964348824485888
+        loseActions: []
+    - rid: 1309964340451868720
+      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
+      data:
+        npcId:
+          value: Valentine
+        spawnPointId:
+          value: NPC_Valentine
+        questId:
+          value: Valentine_Production
+    - rid: 1309964348824485888
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 1309964348824485889
+      type: {class: HasEnoughResourcesConditionConfig, ns: L2Farm.Scripts.Conditions, asm: L2Farm}
+      data:
+        resourceConditions:
+        - resourceId:
+            value: Resource_Wheat
+          neededQuantity: 10
+    - rid: 1309964348824485890
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_Valentine
+        message: For the flour, we need wheat. Did grandfather give it to you?
+        questId:
+          value: Valentine_Production
+    - rid: 1309964348824485891
+      type: {class: SpendResourcesActionConfig, ns: L2Farm.Scripts.Actions.SpendResources, asm: L2Farm}
+      data:
+        resourceConditions:
+        - resourceId:
+            value: Resource_Wheat
+          neededQuantity: 10
+    - rid: 1309964348824485892
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Valentine_Production_Start
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: NPC_Valentine
+        questIndication:
+          value: Production_Flour
+        launchActions:
+        - rid: 1309964348824485894
+        - rid: 1309964348824485895
+        steps:
+        - rid: 1309964348824485896
+        winActions: []
+        loseActions: []
+    - rid: 1309964348824485893
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Valentine_Production_Finished
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: NPC_Valentine
+        questIndication:
+          value: Quest_Ready
+        launchActions:
+        - rid: 1309964348824485903
+        - rid: 1309964348824485908
+        steps:
+        - rid: 1309964348824485909
+        winActions:
+        - rid: 1309964348824485915
+        loseActions: []
+    - rid: 1309964348824485894
+      type: {class: StartProductionActionConfig, ns: L2Farm.Features.ResourceProduction.Actions, asm: L2Farm}
+      data:
+        productionId:
+          value: Mill_Production_Flour
+    - rid: 1309964348824485895
+      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
+      data:
+        npcId:
+          value: Valentine
+        spawnPointId:
+          value: NPC_Valentine
+        questId:
+          value: Valentine_Production_Start
+    - rid: 1309964348824485896
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 1309964348824485897
+        winCondition:
+          rid: 1309964348824485898
+        winActions: []
+        loseCondition:
+          rid: 1309964348824485899
+        loseActions: []
+    - rid: 1309964348824485897
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_Valentine
+        message: Let's wait a little while...
+        questId:
+          value: Valentine_Production_Start
+    - rid: 1309964348824485898
+      type: {class: ProductionCompletedConditionConfig, ns: L2Farm.Scripts.Conditions, asm: L2Farm}
+      data:
+        _production:
+          value: Mill_Production_Flour
+    - rid: 1309964348824485899
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 1309964348824485903
+      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
+      data:
+        npcId:
+          value: Valentine
+        spawnPointId:
+          value: NPC_Valentine
+        questId:
+          value: Valentine_Production_Finished
+    - rid: 1309964348824485908
+      type: {class: LoseQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Valentine_Production_Start
+    - rid: 1309964348824485909
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 1309964348824485910
+        winCondition:
+          rid: 1309964348824485913
+        winActions:
+        - rid: 1309964348824485912
+        loseCondition:
+          rid: 1309964348824485914
+        loseActions: []
+    - rid: 1309964348824485910
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_Valentine
+        message: Everything is ready! Great! If you get any more, come back.
+        questId:
+          value: Valentine_Production_Finished
+    - rid: 1309964348824485912
+      type: {class: GiveResourceActionConfig, ns: L2Farm.Features.ResourceProduction.GiveResources, asm: L2Farm}
+      data:
+        resourceId:
+          value: Resource_Flour
+        amount: 20
+    - rid: 1309964348824485913
+      type: {class: GiveResourcesConditionConfig, ns: L2Farm.Scripts, asm: L2Farm}
+      data:
+        _resourceConditions:
+        - resourceId:
+            value: Resource_Flour
+          neededQuantity: 20
+    - rid: 1309964348824485914
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 1309964348824485915
+      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Valentine_Production
+    - rid: 1309964348824485917
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Guard_City
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: NPC_Guard_1
+        questIndication:
+          value: Quest_Active
+        launchActions:
+        - rid: 7520422070541090835
+        steps:
+        - rid: 7520422070541090822
+        - rid: 7520422070541090824
+        - rid: 7520422070541090825
+        - rid: 7520422070541090826
+        - rid: 7520422070541090827
+        winActions:
+        - rid: 7520422070541090844
+        loseActions: []
     - rid: 3322170113601568768
       type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
       data:
@@ -260,7 +816,8 @@ MonoBehaviour:
       data:
         speaker:
           value: NPC_Farmer
-        message: Need resources
+        message: To rebuild the house, I will need some wood and stone. You can find
+          it all nearby.
         questId:
           value: Tutorial_1_Gather
     - rid: 3322170452733329437
@@ -307,7 +864,8 @@ MonoBehaviour:
       data:
         speaker:
           value: NPC_Farmer
-        message: House is ready
+        message: Thank you! Now the house is ready, and I can tend to the field.
+          If you have any seeds, we can sow the field with wheat.
         questId:
           value: Tutorial_1_Build_Home
     - rid: 3322170452733329453
@@ -328,15 +886,15 @@ MonoBehaviour:
     - rid: 3322170452733329460
       type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
       data:
-        id: Flour_Production_Finished
+        id: Farmer_Production_Finished
         proceedAfterLaunch: 0
         targetSpawnPoint:
           value: NPC_Farmer
         questIndication:
           value: Quest_Ready
         launchActions:
-        - rid: 3322170499779788803
         - rid: 3322170452733329461
+        - rid: 1309964326185730056
         steps:
         - rid: 3322170452733329462
         winActions:
@@ -350,7 +908,7 @@ MonoBehaviour:
         spawnPointId:
           value: NPC_Farmer
         questId:
-          value: Flour_Production_Finished
+          value: Farmer_Production_Finished
     - rid: 3322170452733329462
       type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
       data:
@@ -368,45 +926,44 @@ MonoBehaviour:
       data:
         speaker:
           value: NPC_Farmer
-        message: Flour is ready!
+        message: Wheat is ready! Come back when you have more seeds.
         questId:
-          value: Flour_Production_Finished
+          value: Farmer_Production_Finished
     - rid: 3322170452733329465
       type: {class: GiveResourceActionConfig, ns: L2Farm.Features.ResourceProduction.GiveResources, asm: L2Farm}
       data:
         resourceId:
-          value: Resource_Flour
-        amount: 40
+          value: Resource_Wheat
+        amount: 20
     - rid: 3322170452733329467
       type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
       data: 
     - rid: 3322170452733329468
       type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
       data:
-        id: Start_Flour_Production
+        id: Farmer_Production_Start
         proceedAfterLaunch: 0
         targetSpawnPoint:
           value: NPC_Farmer
         questIndication:
-          value: Production_Flour
+          value: Production_Wheat
         launchActions:
         - rid: 3322170452733329469
         - rid: 3322170452733329473
         steps:
         - rid: 3322170452733329476
-        - rid: 3322170499779788806
         winActions: []
         loseActions: []
     - rid: 3322170452733329469
       type: {class: StartProductionActionConfig, ns: L2Farm.Features.ResourceProduction.Actions, asm: L2Farm}
       data:
         productionId:
-          value: House_Production_Flour
+          value: House_Production_Wheat
     - rid: 3322170452733329470
       type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
       data:
         questId:
-          value: Start_Flour_Production
+          value: Farmer_Production
     - rid: 3322170452733329472
       type: {class: FinishBuildingActionConfig, ns: L2Farm.Features.Buildings.Actions, asm: L2Farm}
       data:
@@ -420,7 +977,7 @@ MonoBehaviour:
         spawnPointId:
           value: NPC_Farmer
         questId:
-          value: Start_Flour_Production
+          value: Farmer_Production_Start
     - rid: 3322170452733329476
       type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
       data:
@@ -437,9 +994,9 @@ MonoBehaviour:
       data:
         speaker:
           value: NPC_Farmer
-        message: Let's wait some time...
+        message: We need to wait a little while...
         questId:
-          value: Start_Flour_Production
+          value: Farmer_Production_Start
     - rid: 3322170452733329480
       type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
       data: 
@@ -447,35 +1004,19 @@ MonoBehaviour:
       type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
       data:
         questId:
-          value: Start_Flour_Production
-    - rid: 3322170499779788803
-      type: {class: LoseQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
-      data:
-        questId:
-          value: Start_Flour_Production
-    - rid: 3322170499779788806
-      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
-      data:
-        stepAction:
-          rid: -2
-        winCondition:
-          rid: -2
-        winActions: []
-        loseCondition:
-          rid: -2
-        loseActions: []
+          value: Farmer_Production
     - rid: 3322170499779788807
       type: {class: ProductionCompletedConditionConfig, ns: L2Farm.Scripts.Conditions, asm: L2Farm}
       data:
         _production:
-          value: House_Production_Flour
+          value: House_Production_Wheat
     - rid: 3322170547157860352
       type: {class: GiveResourcesConditionConfig, ns: L2Farm.Scripts, asm: L2Farm}
       data:
         _resourceConditions:
         - resourceId:
-            value: Resource_Flour
-          neededQuantity: 40
+            value: Resource_Wheat
+          neededQuantity: 20
     - rid: 4482425490423152640
       type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
       data:
@@ -540,6 +1081,9 @@ MonoBehaviour:
         - rid: 1309964113527177250
         steps:
         - rid: 4482425896350515201
+        - rid: 1309964340451868672
+        - rid: 1309964340451868676
+        - rid: 1309964340451868677
         - rid: 3322170452733329435
         winActions:
         - rid: 3322170452733329444
@@ -664,41 +1208,29 @@ MonoBehaviour:
         id: Build_Farm
         proceedAfterLaunch: 0
         targetSpawnPoint:
-          value: NPC_Valentine
+          value: NPC_Cooper
         questIndication:
-          value: 
-        launchActions: []
+          value: Quest_Active
+        launchActions:
+        - rid: 7520422092813631488
         steps:
         - rid: 4482425896350515221
+        - rid: 7520422092813631493
+        - rid: 7520422092813631494
         winActions:
-        - rid: 4482425896350515222
+        - rid: 7520422092813631500
         loseActions: []
     - rid: 4482425896350515221
       type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
       data:
         stepAction:
-          rid: 4482425896350515224
+          rid: 7520422092813631490
         winCondition:
-          rid: -2
+          rid: 7520422092813631491
         winActions: []
         loseCondition:
-          rid: -2
+          rid: 7520422092813631492
         loseActions: []
-    - rid: 4482425896350515222
-      type: {class: UpgradeBuildingActionConfig, ns: L2Farm.Features.Buildings.Actions, asm: Assembly-CSharp}
-      data:
-        buildingId:
-          value: Farm
-    - rid: 4482425896350515224
-      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: Assembly-CSharp}
-      data:
-        speaker:
-          value: NPC_Valentine
-        message: "Great! You\u2019ve been a huge help. Now we have enough resources
-          to rebuild Grandpa\u2019s house."
-        questId:
-          value: Tutorial_1_Build_Home
-        stepIndexWithResourceCondition: -1
     - rid: 4482425896350515225
       type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
       data:
@@ -746,41 +1278,29 @@ MonoBehaviour:
         id: Build_Sawmill
         proceedAfterLaunch: 0
         targetSpawnPoint:
-          value: NPC_Valentine
+          value: NPC_Balmir
         questIndication:
-          value: 
-        launchActions: []
+          value: Quest_Active
+        launchActions:
+        - rid: 7520422070541090846
         steps:
         - rid: 4482425896350515231
+        - rid: 7520422070541090850
+        - rid: 7520422070541090851
         winActions:
-        - rid: 4482425896350515232
+        - rid: 7520422070541090859
         loseActions: []
     - rid: 4482425896350515231
       type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
       data:
         stepAction:
-          rid: 4482425896350515234
+          rid: 7520422070541090847
         winCondition:
-          rid: -2
+          rid: 7520422070541090848
         winActions: []
         loseCondition:
-          rid: -2
+          rid: 7520422070541090849
         loseActions: []
-    - rid: 4482425896350515232
-      type: {class: UpgradeBuildingActionConfig, ns: L2Farm.Features.Buildings.Actions, asm: Assembly-CSharp}
-      data:
-        buildingId:
-          value: Sawmill
-    - rid: 4482425896350515234
-      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: Assembly-CSharp}
-      data:
-        speaker:
-          value: NPC_Valentine
-        message: "Great! You\u2019ve been a huge help. Now we have enough resources
-          to rebuild Grandpa\u2019s house."
-        questId:
-          value: Tutorial_1_Build_Home
-        stepIndexWithResourceCondition: -1
     - rid: 4482425896350515235
       type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
       data:
@@ -789,44 +1309,36 @@ MonoBehaviour:
         targetSpawnPoint:
           value: NPC_Valentine
         questIndication:
-          value: 
+          value: Quest_Ready
         launchActions:
-        - rid: 4482425937018486796
+        - rid: 1309964340451868708
         steps:
         - rid: 4482425896350515236
         winActions:
-        - rid: 4482425937018486798
+        - rid: 1309964340451868712
+        - rid: 1309964340451868713
+        - rid: 1309964340451868714
         loseActions: []
     - rid: 4482425896350515236
       type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
       data:
         stepAction:
-          rid: 4482425896350515239
+          rid: 1309964340451868709
         winCondition:
-          rid: -2
+          rid: 1309964340451868710
         winActions: []
         loseCondition:
-          rid: -2
+          rid: 1309964340451868711
         loseActions: []
-    - rid: 4482425896350515239
-      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: Assembly-CSharp}
-      data:
-        speaker:
-          value: NPC_Valentine
-        message: "Great! You\u2019ve been a huge help. Now we have enough resources
-          to rebuild Grandpa\u2019s house."
-        questId:
-          value: Tutorial_1_Build_Home
-        stepIndexWithResourceCondition: -1
     - rid: 4482425896350515240
       type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
       data:
         id: Build_Smithy
         proceedAfterLaunch: 0
         targetSpawnPoint:
-          value: NPC_Valentine
+          value: NPC_Pushkin
         questIndication:
-          value: 
+          value: Quest_Active
         launchActions: []
         steps:
         - rid: 4482425896350515241
@@ -837,7 +1349,7 @@ MonoBehaviour:
       type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
       data:
         stepAction:
-          rid: 4482425896350515244
+          rid: 7520422092813631509
         winCondition:
           rid: -2
         winActions: []
@@ -849,35 +1361,1147 @@ MonoBehaviour:
       data:
         buildingId:
           value: Smithy
-    - rid: 4482425896350515244
-      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: Assembly-CSharp}
-      data:
-        speaker:
-          value: NPC_Valentine
-        message: "Great! You\u2019ve been a huge help. Now we have enough resources
-          to rebuild Grandpa\u2019s house."
-        questId:
-          value: Tutorial_1_Build_Home
-        stepIndexWithResourceCondition: -1
     - rid: 4482425937018486789
       type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
       data:
         questId:
           value: Tutorial_2
-    - rid: 4482425937018486796
-      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: Assembly-CSharp}
+    - rid: 7520422070541090816
+      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Valentine_Production_Start
+    - rid: 7520422070541090822
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 7520422070541090823
+        winCondition:
+          rid: 7520422070541090836
+        winActions: []
+        loseCondition:
+          rid: 7520422070541090837
+        loseActions: []
+    - rid: 7520422070541090823
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_Guard
+        message: New faces in our lands. I've heard you helped restore the farm and
+          the mill. May I ask for your help?
+        questId:
+          value: Guard_City
+    - rid: 7520422070541090824
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 7520422070541090828
+        winCondition:
+          rid: 7520422070541090838
+        winActions: []
+        loseCondition:
+          rid: 7520422070541090839
+        loseActions: []
+    - rid: 7520422070541090825
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 7520422070541090829
+        winCondition:
+          rid: 7520422070541090840
+        winActions: []
+        loseCondition:
+          rid: 7520422070541090841
+        loseActions: []
+    - rid: 7520422070541090826
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 7520422070541090830
+        winCondition:
+          rid: 7520422070541090842
+        winActions: []
+        loseCondition:
+          rid: 7520422070541090843
+        loseActions: []
+    - rid: 7520422070541090827
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 7520422070541090831
+        winCondition:
+          rid: 7520422070541090833
+        winActions: []
+        loseCondition:
+          rid: 7520422070541090832
+        loseActions: []
+    - rid: 7520422070541090828
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: MC
+        message: Yes, I'd be happy to help.
+        questId:
+          value: Guard_City
+    - rid: 7520422070541090829
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_Guard
+        message: Excellent. The house of the forester and the stonemason brothers
+          has collapsed, and we are critically short of their help. Could you assist
+          them in rebuilding their house?
+        questId:
+          value: Guard_City
+    - rid: 7520422070541090830
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: MC
+        message: Alright, I'll go see them.
+        questId:
+          value: Guard_City
+    - rid: 7520422070541090831
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_Guard
+        message: Alright, I'll be waiting for news.
+        questId:
+          value: Guard_City
+    - rid: 7520422070541090832
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 7520422070541090833
+      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 7520422070541090835
+      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
       data:
         npcId:
-          value: Valentine
+          value: Guard
         spawnPointId:
-          value: NPC_Valentine
+          value: NPC_Guard_1
         questId:
-          value: Build_Mill
-    - rid: 4482425937018486798
-      type: {class: FinishBuildingActionConfig, ns: L2Farm.Features.Buildings.Actions, asm: Assembly-CSharp}
+          value: Guard_City
+    - rid: 7520422070541090836
+      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 7520422070541090837
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 7520422070541090838
+      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 7520422070541090839
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 7520422070541090840
+      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 7520422070541090841
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 7520422070541090842
+      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 7520422070541090843
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 7520422070541090844
+      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Build_Sawmill
+    - rid: 7520422070541090846
+      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
+      data:
+        npcId:
+          value: Balmir
+        spawnPointId:
+          value: NPC_Balmir
+        questId:
+          value: Build_Sawmill
+    - rid: 7520422070541090847
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_Balmir
+        message: Hahaha! The house is barely standing! And here you are. Well, no
+          matter, we'll fix everything now. By the way, if you want to help, bring
+          me a couple of things. I'll help my brother for now, and together with
+          you, we can help the people in the town as well.
+        questId:
+          value: Build_Sawmill
+    - rid: 7520422070541090848
+      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 7520422070541090849
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 7520422070541090850
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 7520422070541090852
+        winCondition:
+          rid: 7520422070541090853
+        winActions: []
+        loseCondition:
+          rid: 7520422070541090854
+        loseActions: []
+    - rid: 7520422070541090851
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 7520422070541090855
+        winCondition:
+          rid: 7520422070541090856
+        winActions:
+        - rid: 7520422070541090857
+        loseCondition:
+          rid: 7520422070541090858
+        loseActions: []
+    - rid: 7520422070541090852
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: MC
+        message: Yes, what exactly do you need for the house?
+        questId:
+          value: Build_Sawmill
+    - rid: 7520422070541090853
+      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 7520422070541090854
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 7520422070541090855
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_Balmir
+        message: Hmm, let me think... Probably that will be enough.
+        questId:
+          value: Build_Sawmill
+    - rid: 7520422070541090856
+      type: {class: HasEnoughResourcesConditionConfig, ns: L2Farm.Scripts.Conditions, asm: L2Farm}
+      data:
+        resourceConditions:
+        - resourceId:
+            value: Resource_Wood
+          neededQuantity: 1
+        - resourceId:
+            value: Resource_Stone
+          neededQuantity: 1
+    - rid: 7520422070541090857
+      type: {class: SpendResourcesActionConfig, ns: L2Farm.Scripts.Actions.SpendResources, asm: L2Farm}
+      data:
+        resourceConditions:
+        - resourceId:
+            value: Resource_Wood
+          neededQuantity: 1
+        - resourceId:
+            value: Resource_Stone
+          neededQuantity: 1
+    - rid: 7520422070541090858
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 7520422070541090859
+      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Build_Sawmill_2
+    - rid: 7520422070541090860
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Build_Sawmill_2
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: NPC_Morgan
+        questIndication:
+          value: Quest_Active
+        launchActions:
+        - rid: 7520422070541090862
+        steps:
+        - rid: 7520422070541090863
+        - rid: 7520422070541090864
+        - rid: 7520422070541090868
+        winActions:
+        - rid: 7520422070541090873
+        loseActions: []
+    - rid: 7520422070541090862
+      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
+      data:
+        npcId:
+          value: Morgan
+        spawnPointId:
+          value: NPC_Morgan
+        questId:
+          value: Build_Sawmill_2
+    - rid: 7520422070541090863
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 7520422070541090865
+        winCondition:
+          rid: 7520422070541090866
+        winActions: []
+        loseCondition:
+          rid: 7520422070541090867
+        loseActions: []
+    - rid: 7520422070541090864
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 7520422070541090869
+        winCondition:
+          rid: 7520422070541090870
+        winActions: []
+        loseCondition:
+          rid: 7520422070541090871
+        loseActions: []
+    - rid: 7520422070541090865
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_Morgan
+        message: Granite slab, 90-degree angle... Hello, sorry I didn't notice you
+          right away. I saw that you helped my brother.
+        questId:
+          value: Build_Sawmill_2
+    - rid: 7520422070541090866
+      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 7520422070541090867
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 7520422070541090868
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 7520422070541090872
+        winCondition:
+          rid: 7520422070541090874
+        winActions:
+        - rid: 7520422070541090875
+        loseCondition:
+          rid: 7520422070541090876
+        loseActions: []
+    - rid: 7520422070541090869
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: MC
+        message: Yes, the sawmill is almost ready.
+        questId:
+          value: Build_Sawmill_2
+    - rid: 7520422070541090870
+      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 7520422070541090871
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 7520422070541090872
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_Morgan
+        message: Good! We're still short a few resources for the house. Please bring
+          these materials.
+        questId:
+          value: Build_Sawmill_2
+    - rid: 7520422070541090873
+      type: {class: StartBuildingActionConfig, ns: L2Farm.Features.Buildings.Actions, asm: L2Farm}
       data:
         buildingId:
-          value: Mill
+          value: Sawmill
+    - rid: 7520422070541090874
+      type: {class: HasEnoughResourcesConditionConfig, ns: L2Farm.Scripts.Conditions, asm: L2Farm}
+      data:
+        resourceConditions:
+        - resourceId:
+            value: Resource_Wood
+          neededQuantity: 1
+        - resourceId:
+            value: Resource_Stone
+          neededQuantity: 1
+    - rid: 7520422070541090875
+      type: {class: SpendResourcesActionConfig, ns: L2Farm.Scripts.Actions.SpendResources, asm: L2Farm}
+      data:
+        resourceConditions:
+        - resourceId:
+            value: Resource_Wood
+          neededQuantity: 1
+        - resourceId:
+            value: Resource_Stone
+          neededQuantity: 1
+    - rid: 7520422070541090876
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 7520422070541090877
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Build_Sawmill_Finish
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: NPC_Morgan
+        questIndication:
+          value: Quest_Ready
+        launchActions:
+        - rid: 7520422070541090878
+        steps:
+        - rid: 7520422070541090879
+        winActions:
+        - rid: 7520422070541090884
+        - rid: 7520422070541090885
+        - rid: 7520422070541090886
+        - rid: 7520422070541090890
+        loseActions: []
+    - rid: 7520422070541090878
+      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
+      data:
+        npcId:
+          value: Morgan
+        spawnPointId:
+          value: NPC_Morgan
+        questId:
+          value: Build_Sawmill_Finish
+    - rid: 7520422070541090879
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 7520422070541090880
+        winCondition:
+          rid: 7520422070541090881
+        winActions: []
+        loseCondition:
+          rid: 7520422070541090882
+        loseActions: []
+    - rid: 7520422070541090880
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_Morgan
+        message: Excellent! The quarry and the sawmill are ready, now we'll get to
+          work. Thank you.
+        questId:
+          value: Build_Sawmill_Finish
+    - rid: 7520422070541090881
+      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 7520422070541090882
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 7520422070541090884
+      type: {class: FinishBuildingActionConfig, ns: L2Farm.Features.Buildings.Actions, asm: L2Farm}
+      data:
+        buildingId:
+          value: Sawmill
+    - rid: 7520422070541090885
+      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Guard_City_2
+    - rid: 7520422070541090886
+      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Wood_Production
+    - rid: 7520422070541090887
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Guard_City_2
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: NPC_Guard_1
+        questIndication:
+          value: Quest_Active
+        launchActions:
+        - rid: 7520422080207913011
+        steps:
+        - rid: 7520422080207913009
+        - rid: 7520422080207913014
+        - rid: 7520422080207913015
+        winActions:
+        - rid: 7520422080207913022
+        loseActions: []
+    - rid: 7520422070541090890
+      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Ore_Production
+    - rid: 7520422080207912960
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Wood_Production
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: NPC_Balmir
+        questIndication:
+          value: Production_Planks
+        launchActions:
+        - rid: 7520422080207912963
+        steps:
+        - rid: 7520422080207912964
+        winActions:
+        - rid: 7520422080207912969
+        loseActions: []
+    - rid: 7520422080207912961
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Wood_Production_Start
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: NPC_Balmir
+        questIndication:
+          value: Production_Planks
+        launchActions:
+        - rid: 7520422080207913025
+        - rid: 7520422080207912970
+        steps:
+        - rid: 7520422080207912971
+        winActions: []
+        loseActions: []
+    - rid: 7520422080207912962
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Wood_Production_Finished
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: NPC_Balmir
+        questIndication:
+          value: Quest_Ready
+        launchActions:
+        - rid: 7520422080207912975
+        - rid: 7520422080207912976
+        steps:
+        - rid: 7520422080207912977
+        winActions:
+        - rid: 7520422080207912982
+        loseActions: []
+    - rid: 7520422080207912963
+      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
+      data:
+        npcId:
+          value: Balmir
+        spawnPointId:
+          value: NPC_Balmir
+        questId:
+          value: Wood_Production
+    - rid: 7520422080207912964
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 7520422080207912965
+        winCondition:
+          rid: 7520422080207912966
+        winActions:
+        - rid: 7520422080207912967
+        loseCondition:
+          rid: 7520422080207912968
+        loseActions: []
+    - rid: 7520422080207912965
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_Balmir
+        message: Bring the timber, and we'll see what we can do.
+        questId:
+          value: Wood_Production
+    - rid: 7520422080207912966
+      type: {class: HasEnoughResourcesConditionConfig, ns: L2Farm.Scripts.Conditions, asm: L2Farm}
+      data:
+        resourceConditions:
+        - resourceId:
+            value: Resource_Wood
+          neededQuantity: 1
+    - rid: 7520422080207912967
+      type: {class: SpendResourcesActionConfig, ns: L2Farm.Scripts.Actions.SpendResources, asm: L2Farm}
+      data:
+        resourceConditions:
+        - resourceId:
+            value: Resource_Wood
+          neededQuantity: 1
+    - rid: 7520422080207912968
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 7520422080207912969
+      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Wood_Production_Start
+    - rid: 7520422080207912970
+      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
+      data:
+        npcId:
+          value: Balmir
+        spawnPointId:
+          value: NPC_Balmir
+        questId:
+          value: Wood_Production_Start
+    - rid: 7520422080207912971
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 7520422080207912972
+        winCondition:
+          rid: 7520422080207912973
+        winActions: []
+        loseCondition:
+          rid: 7520422080207912974
+        loseActions: []
+    - rid: 7520422080207912972
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_Balmir
+        message: Don't rush.
+        questId:
+          value: Wood_Production_Start
+    - rid: 7520422080207912973
+      type: {class: ProductionCompletedConditionConfig, ns: L2Farm.Scripts.Conditions, asm: L2Farm}
+      data:
+        _production:
+          value: Sawmill_Production_Planks
+    - rid: 7520422080207912974
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 7520422080207912975
+      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
+      data:
+        npcId:
+          value: Balmir
+        spawnPointId:
+          value: NPC_Balmir
+        questId:
+          value: Wood_Production_Finished
+    - rid: 7520422080207912976
+      type: {class: LoseQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Wood_Production_Start
+    - rid: 7520422080207912977
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 7520422080207912978
+        winCondition:
+          rid: 7520422080207912979
+        winActions:
+        - rid: 7520422080207912980
+        loseCondition:
+          rid: 7520422080207912981
+        loseActions: []
+    - rid: 7520422080207912978
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_Balmir
+        message: Now these are what I call proper planks!
+        questId:
+          value: Wood_Production_Finished
+    - rid: 7520422080207912979
+      type: {class: GiveResourcesConditionConfig, ns: L2Farm.Scripts, asm: L2Farm}
+      data:
+        _resourceConditions:
+        - resourceId:
+            value: Resource_Planks
+          neededQuantity: 20
+    - rid: 7520422080207912980
+      type: {class: GiveResourceActionConfig, ns: L2Farm.Features.ResourceProduction.GiveResources, asm: L2Farm}
+      data:
+        resourceId:
+          value: Resource_Planks
+        amount: 20
+    - rid: 7520422080207912981
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 7520422080207912982
+      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Wood_Production
+    - rid: 7520422080207912983
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Ore_Production
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: NPC_Morgan
+        questIndication:
+          value: Production_Ore
+        launchActions:
+        - rid: 7520422080207912987
+        steps:
+        - rid: 7520422080207912988
+        winActions:
+        - rid: 7520422080207912993
+        loseActions: []
+    - rid: 7520422080207912984
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Ore_Production_Start
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: NPC_Morgan
+        questIndication:
+          value: Production_Ore
+        launchActions:
+        - rid: 7520422080207913024
+        - rid: 7520422080207912994
+        steps:
+        - rid: 7520422080207912995
+        winActions: []
+        loseActions: []
+    - rid: 7520422080207912985
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Ore_Production_Finished
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: NPC_Morgan
+        questIndication:
+          value: Quest_Ready
+        launchActions:
+        - rid: 7520422080207912999
+        - rid: 7520422080207913000
+        steps:
+        - rid: 7520422080207913003
+        winActions:
+        - rid: 7520422080207913008
+        loseActions: []
+    - rid: 7520422080207912987
+      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
+      data:
+        npcId:
+          value: Morgan
+        spawnPointId:
+          value: NPC_Morgan
+        questId:
+          value: Ore_Production
+    - rid: 7520422080207912988
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 7520422080207912989
+        winCondition:
+          rid: 7520422080207912990
+        winActions:
+        - rid: 7520422080207912991
+        loseCondition:
+          rid: 7520422080207912992
+        loseActions: []
+    - rid: 7520422080207912989
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_Morgan
+        message: If you find good stones, I can extract rare ore from them.
+        questId:
+          value: Ore_Production
+    - rid: 7520422080207912990
+      type: {class: HasEnoughResourcesConditionConfig, ns: L2Farm.Scripts.Conditions, asm: L2Farm}
+      data:
+        resourceConditions:
+        - resourceId:
+            value: Resource_Stone
+          neededQuantity: 1
+    - rid: 7520422080207912991
+      type: {class: SpendResourcesActionConfig, ns: L2Farm.Scripts.Actions.SpendResources, asm: L2Farm}
+      data:
+        resourceConditions:
+        - resourceId:
+            value: Resource_Stone
+          neededQuantity: 1
+    - rid: 7520422080207912992
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 7520422080207912993
+      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Ore_Production_Start
+    - rid: 7520422080207912994
+      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
+      data:
+        npcId:
+          value: Morgan
+        spawnPointId:
+          value: NPC_Morgan
+        questId:
+          value: Ore_Production_Start
+    - rid: 7520422080207912995
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 7520422080207912996
+        winCondition:
+          rid: 7520422080207912997
+        winActions: []
+        loseCondition:
+          rid: 7520422080207912998
+        loseActions: []
+    - rid: 7520422080207912996
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_Morgan
+        message: Excellent stones, just a little more and it will be ready!
+        questId:
+          value: Ore_Production_Start
+    - rid: 7520422080207912997
+      type: {class: ProductionCompletedConditionConfig, ns: L2Farm.Scripts.Conditions, asm: L2Farm}
+      data:
+        _production:
+          value: Sawmill_Production_Ore
+    - rid: 7520422080207912998
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 7520422080207912999
+      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
+      data:
+        npcId:
+          value: Morgan
+        spawnPointId:
+          value: NPC_Morgan
+        questId:
+          value: Ore_Production_Finished
+    - rid: 7520422080207913000
+      type: {class: LoseQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Ore_Production_Start
+    - rid: 7520422080207913003
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 7520422080207913004
+        winCondition:
+          rid: 7520422080207913005
+        winActions:
+        - rid: 7520422080207913006
+        loseCondition:
+          rid: 7520422080207913007
+        loseActions: []
+    - rid: 7520422080207913004
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_Morgan
+        message: Here, if you come across stones like these again, bring them. Glad
+          I could help!
+        questId:
+          value: Ore_Production_Finished
+    - rid: 7520422080207913005
+      type: {class: GiveResourcesConditionConfig, ns: L2Farm.Scripts, asm: L2Farm}
+      data:
+        _resourceConditions:
+        - resourceId:
+            value: Resource_Ore_Silver
+          neededQuantity: 10
+    - rid: 7520422080207913006
+      type: {class: GiveResourceActionConfig, ns: L2Farm.Features.ResourceProduction.GiveResources, asm: L2Farm}
+      data:
+        resourceId:
+          value: Resource_Ore_Silver
+        amount: 10
+    - rid: 7520422080207913007
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 7520422080207913008
+      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Ore_Production
+    - rid: 7520422080207913009
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 7520422080207913010
+        winCondition:
+          rid: 7520422080207913012
+        winActions: []
+        loseCondition:
+          rid: 7520422080207913013
+        loseActions: []
+    - rid: 7520422080207913010
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_Guard
+        message: Excellent, now we have the resources to restore the town. Thank
+          you!
+        questId:
+          value: Guard_City_2
+    - rid: 7520422080207913011
+      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
+      data:
+        npcId:
+          value: Guard
+        spawnPointId:
+          value: NPC_Guard_1
+        questId:
+          value: Guard_City_2
+    - rid: 7520422080207913012
+      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 7520422080207913013
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 7520422080207913014
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 7520422080207913016
+        winCondition:
+          rid: 7520422080207913018
+        winActions: []
+        loseCondition:
+          rid: 7520422080207913019
+        loseActions: []
+    - rid: 7520422080207913015
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 7520422080207913017
+        winCondition:
+          rid: 7520422080207913020
+        winActions: []
+        loseCondition:
+          rid: 7520422080207913021
+        loseActions: []
+    - rid: 7520422080207913016
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_Guard
+        message: There's an animal farm not far from here. Take a walk there; they
+          might need help too.
+        questId:
+          value: Guard_City_2
+    - rid: 7520422080207913017
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: MC
+        message: Alright, I'll find out if they need my help there.
+        questId:
+          value: Guard_City_2
+    - rid: 7520422080207913018
+      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 7520422080207913019
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 7520422080207913020
+      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 7520422080207913021
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 7520422080207913022
+      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Build_Farm
+    - rid: 7520422080207913024
+      type: {class: StartProductionActionConfig, ns: L2Farm.Features.ResourceProduction.Actions, asm: L2Farm}
+      data:
+        productionId:
+          value: Sawmill_Production_Ore
+    - rid: 7520422080207913025
+      type: {class: StartProductionActionConfig, ns: L2Farm.Features.ResourceProduction.Actions, asm: L2Farm}
+      data:
+        productionId:
+          value: Sawmill_Production_Planks
+    - rid: 7520422092813631488
+      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
+      data:
+        npcId:
+          value: Cooper
+        spawnPointId:
+          value: NPC_Cooper
+        questId:
+          value: Build_Farm
+    - rid: 7520422092813631489
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Build_Farm_Finish
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: NPC_Cooper
+        questIndication:
+          value: Quest_Ready
+        launchActions:
+        - rid: 7520422092813631504
+        steps:
+        - rid: 7520422092813631502
+        winActions:
+        - rid: 7520422092813631507
+        - rid: 7520422092813631508
+        loseActions: []
+    - rid: 7520422092813631490
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_Cooper
+        message: Ah, the shed is about to collapse, we definitely can't let the animals
+          in here... Oh, hello, can you help me?
+        questId:
+          value: Build_Farm
+    - rid: 7520422092813631491
+      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 7520422092813631492
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 7520422092813631493
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 7520422092813631495
+        winCondition:
+          rid: 7520422092813631511
+        winActions: []
+        loseCondition:
+          rid: 7520422092813631512
+        loseActions: []
+    - rid: 7520422092813631494
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 7520422092813631496
+        winCondition:
+          rid: 7520422092813631497
+        winActions:
+        - rid: 7520422092813631498
+        loseCondition:
+          rid: 7520422092813631499
+        loseActions: []
+    - rid: 7520422092813631495
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: MC
+        message: Yes, how can I help you?
+        questId:
+          value: Build_Farm
+    - rid: 7520422092813631496
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_Cooper
+        message: The animals need a good shed. Bring me these resources, and then
+          we'll be able to restore it.
+        questId:
+          value: Build_Farm
+    - rid: 7520422092813631497
+      type: {class: HasEnoughResourcesConditionConfig, ns: L2Farm.Scripts.Conditions, asm: L2Farm}
+      data:
+        resourceConditions:
+        - resourceId:
+            value: Resource_Wood
+          neededQuantity: 1
+        - resourceId:
+            value: Resource_Stone
+          neededQuantity: 1
+        - resourceId:
+            value: Resource_Planks
+          neededQuantity: 1
+        - resourceId:
+            value: Resource_Ore_Silver
+          neededQuantity: 1
+        - resourceId:
+            value: Resource_Wheat
+          neededQuantity: 1
+    - rid: 7520422092813631498
+      type: {class: SpendResourcesActionConfig, ns: L2Farm.Scripts.Actions.SpendResources, asm: L2Farm}
+      data:
+        resourceConditions:
+        - resourceId:
+            value: Resource_Wood
+          neededQuantity: 1
+        - resourceId:
+            value: Resource_Stone
+          neededQuantity: 1
+        - resourceId:
+            value: Resource_Planks
+          neededQuantity: 1
+        - resourceId:
+            value: Resource_Ore_Silver
+          neededQuantity: 1
+        - resourceId:
+            value: Resource_Wheat
+          neededQuantity: 1
+    - rid: 7520422092813631499
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 7520422092813631500
+      type: {class: StartBuildingActionConfig, ns: L2Farm.Features.Buildings.Actions, asm: L2Farm}
+      data:
+        buildingId:
+          value: Farm
+    - rid: 7520422092813631502
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 7520422092813631503
+        winCondition:
+          rid: 7520422092813631505
+        winActions: []
+        loseCondition:
+          rid: 7520422092813631506
+        loseActions: []
+    - rid: 7520422092813631503
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_Cooper
+        message: Great, now I'll be able to raise animals again. If you need any
+          help or meat, just let me know. Thank you! By the way, near the sawmill,
+          there's my friend Pushkin, he's a blacksmith. Ask him if he needs any help.
+        questId:
+          value: Build_Farm_Finish
+    - rid: 7520422092813631504
+      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
+      data:
+        npcId:
+          value: Cooper
+        spawnPointId:
+          value: NPC_Cooper
+        questId:
+          value: Build_Farm_Finish
+    - rid: 7520422092813631505
+      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 7520422092813631506
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 7520422092813631507
+      type: {class: FinishBuildingActionConfig, ns: L2Farm.Features.Buildings.Actions, asm: L2Farm}
+      data:
+        buildingId:
+          value: Farm
+    - rid: 7520422092813631508
+      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Build_Smithy
+    - rid: 7520422092813631509
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_Pushkin
+        message: KEKE
+        questId:
+          value: Build_Smithy
+    - rid: 7520422092813631511
+      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 7520422092813631512
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
     - rid: 8603986450289000448
       type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
       data:

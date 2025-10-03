@@ -19,9 +19,18 @@ MonoBehaviour:
   - id: Quest_Ready
     icon: {fileID: 21300000, guid: de8df5f50d5873242bc3acb76489dd3b, type: 3}
     color: {r: 1, g: 0.7882353, b: 0, a: 1}
+  - id: Quest_Boss
+    icon: {fileID: 21300000, guid: cf6478ef684ce7f4c830edba147c7607, type: 3}
+    color: {r: 0.9716981, g: 0.05958529, b: 0.05958529, a: 1}
   - id: Production_Wheat
     icon: {fileID: 21300000, guid: e5cf9015bce7544d1a143d5cac0cffa8, type: 3}
     color: {r: 0, g: 0.5882353, b: 1, a: 1}
   - id: Production_Flour
     icon: {fileID: 21300000, guid: deb920dffba604dd7af79ceac7d4407e, type: 3}
     color: {r: 0, g: 0.58771515, b: 1, a: 1}
+  - id: Production_Planks
+    icon: {fileID: 21300000, guid: 73e65f20f83c0fb43a1100578beec5e3, type: 3}
+    color: {r: 0, g: 0.5882353, b: 1, a: 1}
+  - id: Production_Ore
+    icon: {fileID: 21300000, guid: a514f4c6b63a44b4f9c8b57fd8668f25, type: 3}
+    color: {r: 0, g: 0.5882353, b: 1, a: 1}

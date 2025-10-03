@@ -16,6 +16,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ElpySpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 5525098901684890126, guid: 2ed3d7fed72b84f438722414c4e62e19, type: 3}
+      propertyPath: m_Radius
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8433216792850014386, guid: 2ed3d7fed72b84f438722414c4e62e19, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
