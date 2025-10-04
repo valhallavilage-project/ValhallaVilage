@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1825122278078855657}
   - component: {fileID: 3863237026736658922}
   m_Layer: 0
-  m_Name: ConfirmDialogInteraction
+  m_Name: ConfirmPopupInteraction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
