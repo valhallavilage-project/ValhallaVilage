@@ -167,7 +167,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
     Android: com.WatchTowerGames.ValhallaVillage
-    Standalone: com.WatchTowerGames.ValhallaVillage
+    Standalone: com.WatchTowerGames.Valhalla-Village
     iPhone: com.WatchTowerGames.Valhalla-Village
   buildNumber:
     Standalone: 0
@@ -296,7 +296,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: 10ccad82504c34230a838d1e4aa9c299, type: 3}
+      m_Icon: {fileID: 2800000, guid: 6dfe6e2b9576a12468c70c743de0781e, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0
