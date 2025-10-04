@@ -26,4 +26,4 @@ MonoBehaviour:
   _attackDamage: 8
   _health: 15
   _corpseDecayTime: 5
-  _experienceReward: 1500
+  _experienceReward: 700
