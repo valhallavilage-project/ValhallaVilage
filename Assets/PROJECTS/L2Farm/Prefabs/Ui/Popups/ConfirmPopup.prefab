@@ -607,6 +607,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4025370004277199114, guid: 84f94c9ab61adec4d9dfe6ee67ba8279, type: 3}
+      propertyPath: m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4025370004277199114, guid: 84f94c9ab61adec4d9dfe6ee67ba8279, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c0625855228904ce087201edcb90f51b, type: 3}
+    - target: {fileID: 4025370004277199114, guid: 84f94c9ab61adec4d9dfe6ee67ba8279, type: 3}
+      propertyPath: m_Color.b
+      value: 0.1882353
+      objectReference: {fileID: 0}
+    - target: {fileID: 4025370004277199114, guid: 84f94c9ab61adec4d9dfe6ee67ba8279, type: 3}
+      propertyPath: m_Color.g
+      value: 0.1882353
+      objectReference: {fileID: 0}
+    - target: {fileID: 4025370004277199114, guid: 84f94c9ab61adec4d9dfe6ee67ba8279, type: 3}
+      propertyPath: m_Color.r
+      value: 0.1882353
+      objectReference: {fileID: 0}
     - target: {fileID: 5639570913435837027, guid: 84f94c9ab61adec4d9dfe6ee67ba8279, type: 3}
       propertyPath: m_Name
       value: ConfirmPopup
