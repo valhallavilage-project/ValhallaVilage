@@ -8,11 +8,11 @@ namespace CrossProject.Core
     public class LevelProgressionConfig : ScriptableObject
     {
         [SerializeField] [ListDrawerSettings(ShowIndexLabels = true)] private List<int> _progression;
-        [SerializeField] private float _defaultExperienceRange;
+        [SerializeField] private int _defaultExperienceRange;
         [SerializeField] private int _levelCap;
 
         public List<int> Progression => _progression;
-        public float DefaultExperienceRange => _defaultExperienceRange;
+        public int DefaultExperienceRange => _defaultExperienceRange;
         public int LevelCap => _levelCap;
     }
 }

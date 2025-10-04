@@ -53,7 +53,11 @@ namespace L2Farm.Scripts.CharacterHudElement
 
         private void ChangeExperience(float current)
         {
-            _experienceBarFill.fillAmount = current / _mainCharacterSharedData.MaxExperience.Value;
+            current -= _mainCharacterSharedData.MinExperience.Value;
+
+            var progress = _mainCharacterSharedData.MaxExperience.Value - _mainCharacterSharedData.MinExperience.Value; 
+            
+            _experienceBarFill.fillAmount = current / progress;
         }
 
         private void ChangeLevel(int current)
