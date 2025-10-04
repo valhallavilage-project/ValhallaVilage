@@ -359,7 +359,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Available in the next update
+  m_text: 'SORRY :(
+
+    Available in the next update'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4c2a86390946a43b2ae5f79c150199d6, type: 2}
   m_sharedMaterial: {fileID: 2147912664184731528, guid: 4c2a86390946a43b2ae5f79c150199d6, type: 2}
@@ -707,3 +709,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _text: {fileID: 7643862898335801778}
   _confirmButton: {fileID: 1214144924875163690}
+  _backgroundButton: {fileID: 0}
