@@ -36,6 +36,7 @@ namespace CrossProject.Core
 
             experienceHandler.CurrentExperience.ForEachAsync(v => holder.CurrentExperience.Value = v, _disposeCts.Token).Forget();
             experienceHandler.MaxExperience.ForEachAsync(v => holder.MaxExperience.Value = v, _disposeCts.Token).Forget();
+            experienceHandler.MinExperience.ForEachAsync(v => holder.MinExperience.Value = v, _disposeCts.Token).Forget();
             experienceHandler.CurrentLevel.ForEachAsync(v => holder.CurrentLevel.Value = v, _disposeCts.Token).Forget();
 
             globalExperienceGainHandler.ExperienceGained.WithoutCurrent().ForEachAsync(GainXp, _disposeCts.Token).Forget();

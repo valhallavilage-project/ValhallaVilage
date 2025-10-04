@@ -34,8 +34,28 @@ namespace CrossProject.Core
         {
             _currentLevel.Value = currentLevel;
 
-            var maxXpValue = _levelProgressionConfig.Progression[currentLevel];
-            var minXpValue = _levelProgressionConfig.Progression[currentLevel - 1];
+            var maxXpValue = 0;
+            var minXpValue = 0;
+
+            if (currentLevel < _levelProgressionConfig.Progression.Count)
+            {
+                maxXpValue = _levelProgressionConfig.Progression[currentLevel];
+                minXpValue = _levelProgressionConfig.Progression[currentLevel - 1];
+            }
+            else
+            {
+                var lastKnownLevelValue = _levelProgressionConfig.Progression[^1];
+
+                var lastKnownLevel = _levelProgressionConfig.Progression.Count;
+
+                for (var level = lastKnownLevel + 1; level <= currentLevel; level++)
+                {
+                    minXpValue = lastKnownLevelValue;
+                    maxXpValue = minXpValue + _levelProgressionConfig.DefaultExperienceRange;
+
+                    lastKnownLevelValue = maxXpValue;
+                }
+            }
 
             base.Init(maxXpValue, currentXp, minXpValue);
         }
@@ -58,7 +78,7 @@ namespace CrossProject.Core
 
             if (xpRemains > 0)
             {
-                IncreaseCurrentValue(xpRemains);
+                GainXp(xpRemains);
             }
         }
 

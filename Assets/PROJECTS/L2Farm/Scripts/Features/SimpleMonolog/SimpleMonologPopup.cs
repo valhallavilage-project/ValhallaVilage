@@ -9,35 +9,33 @@ namespace L2Farm.Features.SimpleMonolog
 {
     public class SimpleMonologPopup : PopupView<SimpleMonologPopupModel>
     {
-        [SerializeField] private Image portrait;
-        [SerializeField] private TMP_Text personName;
-        [SerializeField] private TMP_Text message;
-        [SerializeField] private ItemRequirement itemRequirement;
-        [SerializeField] private Transform rootForItemRequirements;
-        [SerializeField] private Button close;
-        [SerializeField] private Button next;
+        [SerializeField] private Image _portrait;
+        [SerializeField] private TMP_Text _personName;
+        [SerializeField] private TMP_Text _message;
+        [SerializeField] private ItemRequirement _itemRequirementPrefab;
+        [SerializeField] private Transform _rootForItemRequirements;
+        [SerializeField] private Button _nextButton;
 
         protected override void OnBind()
         {
-            portrait.sprite = Model.portrait;
-            personName.text = Model.personName;
-            message.text = Model.message;
-            message.maxVisibleCharacters = 0;
-            var totalChars = message.text.Length;
+            _portrait.sprite = Model.portrait;
+            _personName.text = Model.personName;
+            _message.text = Model.message;
+            _message.maxVisibleCharacters = 0;
+            var totalChars = _message.text.Length;
             
-            DOTween.To(() => message.maxVisibleCharacters, x => message.maxVisibleCharacters = x, totalChars, 0.5f)
+            DOTween.To(() => _message.maxVisibleCharacters, x => _message.maxVisibleCharacters = x, totalChars, 0.5f)
                 .SetEase(Ease.Linear);
-
-            close.SetUniqueCallback(Model.close);
-            next.SetUniqueCallback(Model.next);
+           
+            _nextButton.SetUniqueCallback(Model.next);
 
             if (Model.resourcesData is { Count: > 0 })
             {
-                rootForItemRequirements.RemoveAllChildren();
+                _rootForItemRequirements.RemoveAllChildren();
 
                 foreach (var data in Model.resourcesData)
                 {
-                    var instance = Instantiate(itemRequirement, rootForItemRequirements);
+                    var instance = Instantiate(_itemRequirementPrefab, _rootForItemRequirements);
                     instance.SetVisuals(data);
                 }
             }
