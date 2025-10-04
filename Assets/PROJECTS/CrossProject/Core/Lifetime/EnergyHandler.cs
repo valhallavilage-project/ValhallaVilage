@@ -7,7 +7,6 @@ namespace CrossProject.Core
     {
         IReadOnlyAsyncReactiveProperty<float> MaxEnergy { get; }
         IReadOnlyAsyncReactiveProperty<float> Energy { get; }
-        bool IsFullyRestored { get; }
 
         void Init(float maxEnergy, float currentEnergy);
         void Spend(float value);
