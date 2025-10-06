@@ -86,7 +86,7 @@ namespace L2Farm.Features.SimpleMonolog
                         data.Add(new MonologResourceData
                         {
                             Icon = _resourcesService.GetSprite(resourceCondition.Id),
-                            MainCharacterAmount = _gameStateManager.State.Get<ResourceContentPart>().Has(resourceCondition.Id),
+                            MainCharacterAmount = _gameStateManager.State.Get<ResourceContentPart>().Get(resourceCondition.Id),
                             Amount = resourceCondition.NeededAmount,
                             ResourcesType = MonologResourcesType.Demand
                         });
@@ -101,7 +101,7 @@ namespace L2Farm.Features.SimpleMonolog
                         data.Add(new MonologResourceData
                         {
                             Icon = _resourcesService.GetSprite(resourceCondition.Id),
-                            MainCharacterAmount = _gameStateManager.State.Get<ResourceContentPart>().Has(resourceCondition.Id),
+                            MainCharacterAmount = _gameStateManager.State.Get<ResourceContentPart>().Get(resourceCondition.Id),
                             Amount = resourceCondition.NeededAmount,
                             ResourcesType = MonologResourcesType.Give
                         });

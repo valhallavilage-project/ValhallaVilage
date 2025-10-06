@@ -46,9 +46,33 @@ namespace CrossProject.Core.InGameResources
             _resourceChanged.Value = (resourceId, value);
         }
 
+        public void IncreaseResourceValue(ResourceId resourceId)
+        {
+            var part = _gameStateManager.State.Get<ResourceContentPart>();
+            part.Edit(resourceId, 1);
+            _gameStateManager.Save();
+
+            _resourceChanged.Value = (resourceId, 1);
+        }
+
+        public void DecreaseResourceValue(ResourceId resourceId)
+        {
+            var part = _gameStateManager.State.Get<ResourceContentPart>();
+            part.Edit(resourceId, -1);
+
+            if (part.Resources[resourceId] <= 0)
+            {
+                part.Resources.Remove(resourceId);
+            }
+            
+            _gameStateManager.Save();
+
+            _resourceChanged.Value = (resourceId, -1);
+        }
+
         public Sprite GetSprite(ResourceId id)
         {
-            return _resourceSetConfig.items.FirstOrDefault(x => id == new ResourceId(x.id))?.icon;
+            return _resourceSetConfig.items.First(x => id == new ResourceId(x.id))?.icon;
         }
     }
 }

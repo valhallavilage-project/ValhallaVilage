@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+using CrossProject.Core;
 using CrossProject.Core.InGameResources;
 using CrossProject.Core.SaveLoad;
 using CrossProject.Ui.Core;
@@ -13,16 +14,20 @@ namespace L2Farm
     {
         private readonly UiService _uiService;
         private readonly GameStateManager _gameStateManager;
-        private CancellationTokenSource _disposeCts = new();
+        private readonly IMainCharacterGlobalPotionConsumeHandler _mainCharacterPotionConsumeHandler;
+        
+        private readonly CancellationTokenSource _disposeCts = new();
         private ConsumablesHudElement _view;
         private ResourceContentPart _resources;
 
         public bool IsInitialized { get; private set; }
 
-        public ConsumablesHudElementController(UiService uiService, GameStateManager gameStateManager)
+        public ConsumablesHudElementController(UiService uiService, GameStateManager gameStateManager,
+            IMainCharacterGlobalPotionConsumeHandler mainCharacterPotionConsumeHandler)
         {
             _uiService = uiService;
             _gameStateManager = gameStateManager;
+            _mainCharacterPotionConsumeHandler = mainCharacterPotionConsumeHandler;
         }
         
         public async UniTask Initialize()
@@ -38,27 +43,29 @@ namespace L2Farm
             model.Resources = _resources;
 
             _view = await _uiService.TryOpen(model) as ConsumablesHudElement;
-            
+
             IsInitialized = true;
         }
 
         private void HealClicked(bool _)
         {
-            if (_resources.Resources.TryGetValue((ResourceId)"HealPotion", out var potionsCount))
+            if (_resources.Resources.TryGetValue((ResourceId)"Resource_HealPotion", out var potionsCount))
             {
                 if (potionsCount > 0)
                 {
-                    _view.ConsumeHealPotion();
+                    _mainCharacterPotionConsumeHandler.ConsumePotion(PotionType.Health);
+                    _view.HealPotionConsumed();
                 }
             }
         }
 
         private void EnergyClicked(bool _)
         {
-            if (_resources.Resources.TryGetValue((ResourceId)"EnergyPotion", out var potionsCount))
+            if (_resources.Resources.TryGetValue((ResourceId)"Resource_EnergyPotion", out var potionsCount))
             {
                 if (potionsCount > 0)
                 {
+                    _mainCharacterPotionConsumeHandler.ConsumePotion(PotionType.Energy);
                     _view.ConsumeEnergyPotion();
                 }
             }
@@ -66,10 +73,11 @@ namespace L2Farm
 
         private void TimeClicked(bool _)
         {
-            if (_resources.Resources.TryGetValue((ResourceId)"TimePotion", out var potionsCount))
+            if (_resources.Resources.TryGetValue((ResourceId)"Resource_TimePotion", out var potionsCount))
             {
                 if (potionsCount > 0)
                 {
+                    _mainCharacterPotionConsumeHandler.ConsumePotion(PotionType.Time);
                     _view.ConsumeTimePotion();
                 }
             }

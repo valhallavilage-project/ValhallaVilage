@@ -19,9 +19,8 @@ namespace CrossProject.Core
 
         public bool IsInitialized { get; private set; }
 
-        public MainCharacterSharedDataHandler(IMainCharacterFacade holder, IHealthHandler healthHandler, IEnergyHandler energyHandler,
-            IExperienceHandler experienceHandler, IMainCharacterGlobalExperienceGainHandler globalExperienceGainHandler,
-            IMainCharacterReviveGlobalHandler mainCharacterReviveHandler, IReviveAbility reviveAbility)
+        public MainCharacterSharedDataHandler(IMainCharacterFacade holder, IHealthHandler healthHandler, 
+            IEnergyHandler energyHandler, IExperienceHandler experienceHandler)
         {
             _holder = holder;
             _healthHandler = healthHandler;
@@ -38,21 +37,13 @@ namespace CrossProject.Core
             experienceHandler.MinExperience.ForEachAsync(v => holder.MinExperience.Value = v, _disposeCts.Token).Forget();
             experienceHandler.CurrentLevel.ForEachAsync(v => holder.CurrentLevel.Value = v, _disposeCts.Token).Forget();
 
-            globalExperienceGainHandler.ExperienceGained.WithoutCurrent().ForEachAsync(GainXp, _disposeCts.Token).Forget();
-            
-            mainCharacterReviveHandler.Revived.WithoutCurrent().ForEachAsync(_ => reviveAbility.Revive(mainCharacterReviveHandler.RevivePoint.position), _disposeCts.Token).Forget();
-        }
+            }
 
         public UniTask Initialize()
         {
             IsInitialized = true;
 
             return UniTask.CompletedTask;
-        }
-
-        private void GainXp(float experience)
-        {
-            _experienceHandler.GainXp(experience);
         }
 
         private void HealthChanged(float value)

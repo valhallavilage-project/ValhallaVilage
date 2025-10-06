@@ -10,6 +10,7 @@ namespace CrossProject.Core
         [SerializeField] private EnergyRestorationConfig _energyRestorationConfig;
         [SerializeField] private HealthRestorationConfig _healthRestorationConfig;
         [SerializeField] private LevelProgressionConfig _levelProgressionConfig;
+        [SerializeField] private PotionsConfig _potionsConfig;
 
         protected override void Configure(IContainerBuilder builder)
         {
@@ -42,6 +43,8 @@ namespace CrossProject.Core
             builder.Register<MainCharacterSaveEnergyHandler>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<MainCharacterSaveHealthHandler>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<MainCharacterSaveExperienceHandler>(Lifetime.Scoped).AsImplementedInterfaces();
+            
+            builder.Register<MainCharacterGlobalParameterChangesHandler>(Lifetime.Scoped).AsImplementedInterfaces();
         }
 
         private void BindConfigs(IContainerBuilder builder)
@@ -50,6 +53,7 @@ namespace CrossProject.Core
             builder.RegisterInstance(_energyRestorationConfig);
             builder.RegisterInstance(_healthRestorationConfig);
             builder.RegisterInstance(_levelProgressionConfig);
+            builder.RegisterInstance(_potionsConfig);
         }
     }
 }

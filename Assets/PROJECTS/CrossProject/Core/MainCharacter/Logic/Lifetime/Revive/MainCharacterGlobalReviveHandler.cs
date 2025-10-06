@@ -12,7 +12,7 @@ namespace CrossProject.Core
         void InitRevivePoint(Transform transform);
     }
 
-    public class MainCharacterReviveGlobalHandler : IMainCharacterReviveGlobalHandler
+    public class MainCharacterGlobalReviveHandler : IMainCharacterReviveGlobalHandler
     {
         private readonly AsyncReactiveProperty<bool> _revived = new(default);
         public Transform RevivePoint { get; private set; }

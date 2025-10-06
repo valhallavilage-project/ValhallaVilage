@@ -47,6 +47,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4ce0b94bb56b90a4dbe1de2e6a81afdb
+    m_Address: ConsumablesHudElement
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6fed3b1ceea69454a92da15194a881c5
     m_Address: Joystick
     m_ReadOnly: 0
