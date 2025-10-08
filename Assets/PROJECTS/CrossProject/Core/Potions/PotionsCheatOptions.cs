@@ -1,17 +1,16 @@
 using System.ComponentModel;
 using CrossProject.Core.Cheats;
 using CrossProject.Core.InGameResources;
-using CrossProject.Core.SaveLoad;
 
 namespace CrossProject.Core
 {
     public class PotionsCheatOptions : ICheatOptions
     {
-        private readonly GameStateManager _gameState;
+        private readonly ResourcesService _resourcesService;
 
-        public PotionsCheatOptions(GameStateManager gameState)
+        public PotionsCheatOptions(ResourcesService resourcesService)
         {
-            _gameState = gameState;
+            _resourcesService = resourcesService;
         }
 
         [Category("Potions")]
@@ -37,16 +36,7 @@ namespace CrossProject.Core
 
         private void AddResource(ResourceId resource)
         {
-            var part = _gameState.State.Get<ResourceContentPart>();
-
-            if (part.Resources.ContainsKey(resource))
-            {
-                part.Resources[resource]++;
-            }
-            else
-            {
-                part.Resources[resource] = 1;
-            }
+            _resourcesService.IncreaseResourceValue(resource);
         }
     }
 }

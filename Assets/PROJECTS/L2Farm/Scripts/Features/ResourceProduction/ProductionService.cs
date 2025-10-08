@@ -16,6 +16,7 @@ namespace L2Farm.Features.ResourceProduction
         private readonly BuildingService _buildingService;
         private readonly GameStateManager _gameStateManager;
         private readonly ITimeService _timeService;
+        private readonly ITimerCreator _timerCreator;
 
         private ProductionSetConfig _productionSetConfig;
 
@@ -25,12 +26,14 @@ namespace L2Farm.Features.ResourceProduction
             AddressablesManager addressablesManager,
             BuildingService buildingService,
             GameStateManager gameStateManager,
-            ITimeService timeService)
+            ITimeService timeService,
+            ITimerCreator timerCreator)
         {
             _addressablesManager = addressablesManager;
             _buildingService = buildingService;
             _gameStateManager = gameStateManager;
             _timeService = timeService;
+            _timerCreator = timerCreator;
         }
 
         public async UniTask Initialize()
@@ -56,11 +59,13 @@ namespace L2Farm.Features.ResourceProduction
             }
             
             var timeLeft = (int)Math.Clamp((part.requests[productionId] - _timeService.Now).TotalSeconds, 0, productionConfig.timeToProduceInSeconds);
-
-            var timerPrefab = await _addressablesManager.LoadAssetAsync<GameObject>(nameof(BuildingTimer));
-            var timerInstance = Object.Instantiate(timerPrefab, _buildingService.GetVFXPositionFor(productionConfig.buildingId), Quaternion.identity);
             var vfxScale = _buildingService.GetVFXScaleFor(productionConfig.buildingId);
-            timerInstance.GetComponent<BuildingTimer>().Setup(timeLeft, (ProductionId)productionConfig.id, productionConfig.finishQuest, vfxScale);
+
+            _timerCreator.Launch(timeLeft, _buildingService.GetVFXPositionFor(productionConfig.buildingId))
+                .BindProduction(productionConfig.id)
+                .CorrectVfxScale(vfxScale)
+                .BindQuest(productionConfig.finishQuest)
+                .Start();
         }
     }
 }

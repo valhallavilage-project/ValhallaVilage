@@ -241,6 +241,10 @@ namespace L2Farm.Scripts
             builder.Register<MainCharacterGlobalReviveHandler>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<MainCharacterGlobalPotionConsumeHandler>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<ConfirmPopupOpenHandler>(Lifetime.Singleton).AsImplementedInterfaces();
+            
+            builder.Register<TimerCreator>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<TimersHandler>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<TimePotionConsumeHandler>(Lifetime.Singleton).AsImplementedInterfaces();
 
             RegisterConditionsAndActions(builder);
             RegisterCheats(builder);

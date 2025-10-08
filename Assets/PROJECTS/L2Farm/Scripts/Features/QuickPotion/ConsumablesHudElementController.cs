@@ -23,13 +23,15 @@ namespace L2Farm
         public bool IsInitialized { get; private set; }
 
         public ConsumablesHudElementController(UiService uiService, GameStateManager gameStateManager,
-            IMainCharacterGlobalPotionConsumeHandler mainCharacterPotionConsumeHandler)
+            IMainCharacterGlobalPotionConsumeHandler mainCharacterPotionConsumeHandler, ResourcesService resourcesService)
         {
             _uiService = uiService;
             _gameStateManager = gameStateManager;
             _mainCharacterPotionConsumeHandler = mainCharacterPotionConsumeHandler;
+
+            resourcesService.ResourceChanged.WithoutCurrent().ForEachAsync(ResourcesChanged, _disposeCts.Token).Forget();
         }
-        
+
         public async UniTask Initialize()
         {
             var model = new ConsumablesHudElementModel();
@@ -81,6 +83,11 @@ namespace L2Farm
                     _view.ConsumeTimePotion();
                 }
             }
+        }
+
+        private void ResourcesChanged((ResourceId id, int amount) resourceValue)
+        {
+            _view.UpdateResourceTexts();
         }
 
         public void Dispose()

@@ -28,6 +28,11 @@ namespace L2Farm
         {
             base.OnBind();
 
+            UpdateResourceTexts();
+        }
+
+        public void UpdateResourceTexts()
+        {
             UpdateResourceText(_healPotionsAmount, "Resource_HealPotion");
             UpdateResourceText(_energyPotionsAmount, "Resource_EnergyPotion");
             UpdateResourceText(_timePotionsAmount, "Resource_TimePotion");

@@ -19,10 +19,11 @@ namespace L2Farm.Features.Buildings
         private readonly SpawnPointService _spawnPointService;
         private readonly GameStateManager _gameStateManager;
         private readonly IMainCharacterGlobalExperienceGainHandler _mainCharacterGlobalExperienceGainHandler;
+        private readonly ITimerCreator _timerCreator;
 
         private BuildingSetConfig _buildingSetConfig;
 
-        private Dictionary<BuildingId, Building> _buildings = new ();
+        private Dictionary<BuildingId, Building> _buildings = new();
 
         public bool IsInitialized { get; private set; }
 
@@ -31,13 +32,15 @@ namespace L2Farm.Features.Buildings
             ConditionService conditionService,
             SpawnPointService spawnPointService,
             GameStateManager gameStateManager,
-            IMainCharacterGlobalExperienceGainHandler mainCharacterGlobalExperienceGainHandler)
+            IMainCharacterGlobalExperienceGainHandler mainCharacterGlobalExperienceGainHandler,
+            ITimerCreator timerCreator)
         {
             _addressablesManager = addressablesManager;
             _conditionService = conditionService;
             _spawnPointService = spawnPointService;
             _gameStateManager = gameStateManager;
             _mainCharacterGlobalExperienceGainHandler = mainCharacterGlobalExperienceGainHandler;
+            _timerCreator = timerCreator;
         }
 
         public async UniTask Initialize()
@@ -45,6 +48,7 @@ namespace L2Farm.Features.Buildings
             _buildingSetConfig = await _addressablesManager.LoadAssetAsync<BuildingSetConfig>();
 
             var part = _gameStateManager.State.Get<BuildingPart>();
+
             foreach (var buildingConfig in _buildingSetConfig.items)
             {
                 if (!part.requests.TryGetValue(buildingConfig.id, out var time))
@@ -80,14 +84,14 @@ namespace L2Farm.Features.Buildings
 
             if (elapsedSeconds >= 0)
             {
-                var timerPrefab = await _addressablesManager.LoadAssetAsync<GameObject>(nameof(BuildingTimer));
-                var timerInstance = Object.Instantiate(timerPrefab, building.transform.position + config.buildingVFXOffset, Quaternion.identity);
-                var timer = timerInstance.GetComponent<BuildingTimer>();
-                int remainingTime = Mathf.Clamp(config.timeToBuildInSeconds - elapsedSeconds, 0, config.timeToBuildInSeconds);
-                timer.Setup(remainingTime, (BuildingId)config.id, config.questToLaunchOnComplete, config.buildingVFXScale);
+                var timeLeft = Mathf.Clamp(config.timeToBuildInSeconds - elapsedSeconds, 0, config.timeToBuildInSeconds);
+                
+                _timerCreator.Launch(timeLeft, building.transform.position + config.buildingVFXOffset)
+                    .BindBuilding(config.id)
+                    .CorrectVfxScale(config.buildingVFXScale)
+                    .BindQuest(config.questToLaunchOnComplete)
+                    .Start();
             }
-
-            //Debug.Log($"[{nameof(BuildingService)}] : spawned {config.id} with asset : {key}!");
         }
 
         public async UniTask StartUpgradeProcess(BuildingId id)
@@ -96,30 +100,38 @@ namespace L2Farm.Features.Buildings
             var part = _gameStateManager.State.Get<BuildingPart>();
             part.requests.Add(id, DateTime.Now);
             _gameStateManager.Save();
+            
             var config = _buildingSetConfig.items.First(x => x.id == id);
-            var timerPrefab = await _addressablesManager.LoadAssetAsync<GameObject>(nameof(BuildingTimer));
-            var timerInstance = Object.Instantiate(timerPrefab, _buildings[id].transform.position + config.buildingVFXOffset, Quaternion.identity);
-            timerInstance.GetComponent<BuildingTimer>().Setup(_buildingSetConfig.GetSecondsFor(id), id, _buildingSetConfig.GetQuestFor(id), config.buildingVFXScale);
+            var timeLeft = _buildingSetConfig.GetSecondsFor(id);
+            
+            _timerCreator.Launch(timeLeft, _buildings[id].transform.position + config.buildingVFXOffset)
+                .BindBuilding(id)
+                .CorrectVfxScale(config.buildingVFXScale)
+                .BindQuest(_buildingSetConfig.GetQuestFor(id))
+                .Start();
         }
 
         public async UniTask SpawnReadyBuilding(BuildingId id)
         {
             var config = _buildingSetConfig.items.FirstOrDefault(x => id == x.id);
+
             if (config == null)
             {
                 Debug.LogError($"[{nameof(BuildingService)}] : there is no config for {id}");
+
                 return;
             }
 
             if (!_conditionService.Check(config.spawnReadyCondition))
             {
                 Debug.LogError($"[{nameof(BuildingService)}] : building {id} do not satisfy it's condition!");
+
                 return;
             }
 
             if (_buildings.TryGetValue(id, out var building) && !building.IsReady)
                 Object.Destroy(building.gameObject);
-            
+
             _mainCharacterGlobalExperienceGainHandler.GainXp(config.completeBuildingXpReward);
 
             await SpawnBuildingInternal(config);
@@ -128,6 +140,7 @@ namespace L2Farm.Features.Buildings
         public Vector3 GetVFXPositionFor(BuildingId buildingId)
         {
             var offset = _buildingSetConfig.items.First(x => x.id == buildingId).buildingVFXOffset;
+
             return _buildings[buildingId].transform.position + offset;
         }
 
