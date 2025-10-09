@@ -63,6 +63,9 @@ namespace L2Farm.Scripts
 
             builder.Register<DayNightCheatOptions>(Lifetime.Singleton)
                 .AsImplementedInterfaces();
+
+            builder.Register<PotionsCheatOptions>(Lifetime.Singleton)
+                .AsImplementedInterfaces();
         }
 
         private void RegisterConditionsAndActions(IContainerBuilder builder)
@@ -225,14 +228,23 @@ namespace L2Farm.Scripts
             builder.Register<ProductionService>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
+            
+            builder.Register<LocalTimeService>(Lifetime.Singleton).AsImplementedInterfaces();
+            
+            builder.Register<MainCharacterDeathScreenController>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
+            builder.Register<ConsumablesHudElementController>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<ConfirmPopupController>(Lifetime.Singleton).AsImplementedInterfaces();
 
             builder.Register<MainCharacterFacade>(Lifetime.Singleton).AsImplementedInterfaces();
+            
             builder.Register<MainCharacterGlobalExperienceGainHandler>(Lifetime.Singleton).AsImplementedInterfaces();
-            builder.Register<LocalTimeService>(Lifetime.Singleton).AsImplementedInterfaces();
-            builder.Register<MainCharacterDeathScreenController>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
-            builder.Register<MainCharacterReviveGlobalHandler>(Lifetime.Singleton).AsImplementedInterfaces();
-            builder.Register<ConfirmPopupController>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<MainCharacterGlobalReviveHandler>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<MainCharacterGlobalPotionConsumeHandler>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<ConfirmPopupOpenHandler>(Lifetime.Singleton).AsImplementedInterfaces();
+            
+            builder.Register<TimerCreator>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<TimersHandler>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<TimePotionConsumeHandler>(Lifetime.Singleton).AsImplementedInterfaces();
 
             RegisterConditionsAndActions(builder);
             RegisterCheats(builder);

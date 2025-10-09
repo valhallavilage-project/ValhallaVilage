@@ -103,6 +103,7 @@ MonoBehaviour:
   _energyRestorationConfig: {fileID: 11400000, guid: e64fd9210b3334384ad8a4876adc527f, type: 2}
   _healthRestorationConfig: {fileID: 11400000, guid: 09a335324418b3b4791ce823a69ce0c4, type: 2}
   _levelProgressionConfig: {fileID: 11400000, guid: 781fc4b49d927eb4f9d09be528735d46, type: 2}
+  _potionsConfig: {fileID: 11400000, guid: c0e1dd5dc770c5b4088fd8b1f12334b3, type: 2}
 --- !u!114 &1295095151255340298
 MonoBehaviour:
   m_ObjectHideFlags: 0

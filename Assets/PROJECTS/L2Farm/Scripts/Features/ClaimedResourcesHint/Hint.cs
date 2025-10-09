@@ -14,9 +14,7 @@ namespace L2Farm.Features.ClaimerResourcesHint
         public void Setup(Sprite icon, int amount)
         {
             this.icon.sprite = icon;
-            this.amount.text = amount > 1
-                ? amount.ToString()
-                : "";
+            this.amount.text = amount.ToString();
 
             rectTransform.DOAnchorPosY(200, 3);
             this.icon.DOColor(new Color(1, 1, 1, 0), 3);

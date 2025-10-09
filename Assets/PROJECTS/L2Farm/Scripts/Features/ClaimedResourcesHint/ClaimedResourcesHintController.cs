@@ -29,7 +29,7 @@ namespace L2Farm.Features.ClaimerResourcesHint
 
         private void ResourceChanged((ResourceId id, int amount) data)
         {
-            if (data.amount < 1)
+            if (data.amount == 0)
             {
                 return;
             }

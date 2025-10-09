@@ -19,7 +19,7 @@ namespace CrossProject.Core.InGameResources
             }
         }
 
-        public int Has(ResourceId id)
+        public int Get(ResourceId id)
         {
             return Resources.ContainsKey(id) ? Resources[id] : 0;
         }

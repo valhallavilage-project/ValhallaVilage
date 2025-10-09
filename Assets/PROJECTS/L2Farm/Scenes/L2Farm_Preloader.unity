@@ -354,6 +354,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UiService
       objectReference: {fileID: 0}
+    - target: {fileID: 1502509690261748271, guid: f773308a547904a1c85ddcd54574f82f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1604772736314715950, guid: f773308a547904a1c85ddcd54574f82f, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -491,6 +495,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1027721231}
     - target: {fileID: 6682402930863769582, guid: f773308a547904a1c85ddcd54574f82f, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6772865809635858145, guid: f773308a547904a1c85ddcd54574f82f, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
       objectReference: {fileID: 0}
