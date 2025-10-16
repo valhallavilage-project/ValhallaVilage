@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace L2Farm.Features.SimpleMonolog
 {
-    public class MonologResourceData
+    public class ConditionResourceData
     {
         public Sprite Icon { get; set; }
         public int Amount { get; set; }

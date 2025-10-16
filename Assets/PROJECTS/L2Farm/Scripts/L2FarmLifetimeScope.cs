@@ -211,7 +211,7 @@ namespace L2Farm.Scripts
                 .AsSelf()
                 .AsImplementedInterfaces();
 
-            builder.Register<ActiveQuestsController>(Lifetime.Singleton)
+            builder.Register<ActiveQuestsScreenController>(Lifetime.Singleton)
                 .AsSelf()
                 .AsImplementedInterfaces();
 
@@ -228,6 +228,7 @@ namespace L2Farm.Scripts
                 .AsImplementedInterfaces();
             
             builder.Register<LocalTimeService>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<ResourceConditionService>(Lifetime.Singleton).AsImplementedInterfaces();
             
             builder.Register<MainCharacterDeathScreenController>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             builder.Register<ConsumablesHudElementController>(Lifetime.Singleton).AsImplementedInterfaces();

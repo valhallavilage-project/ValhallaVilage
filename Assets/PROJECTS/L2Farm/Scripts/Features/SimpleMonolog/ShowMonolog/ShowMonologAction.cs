@@ -1,14 +1,8 @@
-﻿using System.Collections.Generic;
-using CrossProject.Core.Actions;
+﻿using CrossProject.Core.Actions;
 using CrossProject.Core.Characters;
-using CrossProject.Core.InGameResources;
 using CrossProject.Core.Quests;
-using CrossProject.Core.SaveLoad;
 using CrossProject.Ui.Core;
 using Cysharp.Threading.Tasks;
-using L2Farm.Features.ResourceProduction.GiveResources;
-using L2Farm.Scripts;
-using L2Farm.Scripts.Conditions;
 using UnityEngine;
 
 namespace L2Farm.Features.SimpleMonolog
@@ -18,8 +12,7 @@ namespace L2Farm.Features.SimpleMonolog
         private readonly UiService _uiService;
         private readonly CharactersService _charactersService;
         private readonly QuestService _questService;
-        private readonly ResourcesService _resourcesService;
-        private readonly GameStateManager _gameStateManager;
+        private readonly IResourceConditionService _resourceConditionService;
 
         private SimpleMonologPopup _view;
 
@@ -27,14 +20,12 @@ namespace L2Farm.Features.SimpleMonolog
             UiService uiService,
             CharactersService charactersService,
             QuestService questService,
-            ResourcesService resourcesService,
-            GameStateManager gameStateManager)
+            IResourceConditionService resourceConditionService)
         {
             _uiService = uiService;
             _charactersService = charactersService;
             _questService = questService;
-            _resourcesService = resourcesService;
-            _gameStateManager = gameStateManager;
+            _resourceConditionService = resourceConditionService;
         }
 
         public override async UniTask Execute()
@@ -50,7 +41,7 @@ namespace L2Farm.Features.SimpleMonolog
 
             var currentQuestStep = _questService.GetCurrentStepFor(config.questId);
 
-            var data = ProcessConditionResources(currentQuestStep);
+            var data = _resourceConditionService.ProcessConditionResources(config.questId, currentQuestStep);
 
             var canProceed = _questService.CanProceed(config.questId);
             
@@ -69,49 +60,6 @@ namespace L2Farm.Features.SimpleMonolog
                 }
             };
             _view = await _uiService.TryOpen(model) as SimpleMonologPopup;
-        }
-
-        private List<MonologResourceData> ProcessConditionResources(int currentQuestStep)
-        {
-            var data = new List<MonologResourceData>();
-
-            var winCondition = _questService.GetConfigFor(config.questId).steps[currentQuestStep].winCondition;
-            
-            switch (winCondition)
-            {
-                case HasEnoughResourcesConditionConfig hasEnoughResourcesConditionConfig:
-                {
-                    foreach (var resourceCondition in hasEnoughResourcesConditionConfig.ResourceConditions)
-                    {
-                        data.Add(new MonologResourceData
-                        {
-                            Icon = _resourcesService.GetSprite(resourceCondition.Id),
-                            MainCharacterAmount = _gameStateManager.State.Get<ResourceContentPart>().Get(resourceCondition.Id),
-                            Amount = resourceCondition.NeededAmount,
-                            ResourcesType = MonologResourcesType.Demand
-                        });
-                    }
-
-                    break;
-                }
-                case GiveResourcesConditionConfig giveResourcesConditionConfig:
-                {
-                    foreach (var resourceCondition in giveResourcesConditionConfig.ResourceConditions)
-                    {
-                        data.Add(new MonologResourceData
-                        {
-                            Icon = _resourcesService.GetSprite(resourceCondition.Id),
-                            MainCharacterAmount = _gameStateManager.State.Get<ResourceContentPart>().Get(resourceCondition.Id),
-                            Amount = resourceCondition.NeededAmount,
-                            ResourcesType = MonologResourcesType.Give
-                        });
-                    }
-
-                    break;
-                }
-            }
-
-            return data;
         }
     }
 }

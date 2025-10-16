@@ -8,11 +8,12 @@ using VContainer.Unity;
 
 namespace L2Farm.Features
 {
-    public class ActiveQuestsController : IInitializable, IDisposable
+    public class ActiveQuestsScreenController : IInitializable, IDisposable
     {
         private readonly UiService _uiService;
         private readonly GameStateManager _gameStateManager;
         private readonly QuestService _questService;
+        private readonly IResourceConditionService _resourceConditionService;
         private readonly CancellationTokenSource _disposeCts = new();
 
         private ActiveQuestsScreen _questsScreen;
@@ -20,19 +21,22 @@ namespace L2Farm.Features
 
         public bool IsInitialized { get; private set; }
 
-        public ActiveQuestsController(UiService uiService, GameStateManager gameStateManager, QuestService questService)
+        public ActiveQuestsScreenController(UiService uiService, GameStateManager gameStateManager, QuestService questService,
+            IResourceConditionService resourceConditionService)
         {
             _uiService = uiService;
             _gameStateManager = gameStateManager;
             _questService = questService;
+            _resourceConditionService = resourceConditionService;
         }
 
         private async UniTask OpenPopup()
         {
-            _questsScreen = await _uiService.TryOpen(new ActiveQuestsModel
+            _questsScreen = await _uiService.TryOpen(new ActiveQuestsScreenModel
             {
                 GameStatePart = _gameStateManager.State.Get<QuestsLogPart>(),
                 QuestService = _questService,
+                ResourceConditionService = _resourceConditionService,
                 Close = Close 
             }) as ActiveQuestsScreen;
         }

@@ -13,6 +13,7 @@ namespace CrossProject.Core.Pooling
         [SerializeField] private bool activatePrewarmedElements;
         [SerializeField] private bool activateOnGet;
         [SerializeField] private bool autoExtend = true;
+        [SerializeField] private Transform _elementsParent;
         [SerializeField] [HideIf("$autoExtend")] private bool reuse;
         [SerializeField] [HideIf("$autoExtend")] private int maxCount = 1;
 
@@ -75,6 +76,11 @@ namespace CrossProject.Core.Pooling
 
             _activeElements.Remove(node);
             element.OnReturn();
+
+            if (_elementsParent != null)
+            {
+                poolElement.transform.SetParent(_elementsParent);
+            }
         }
     }
 }
