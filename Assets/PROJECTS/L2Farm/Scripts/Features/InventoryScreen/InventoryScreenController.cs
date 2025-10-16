@@ -1,19 +1,24 @@
+using System;
+using System.Threading;
 using CrossProject.Core.InGameResources;
 using CrossProject.Core.SaveLoad;
 using CrossProject.Ui.Core;
 using Cysharp.Threading.Tasks;
+using Cysharp.Threading.Tasks.Linq;
 using UnityEngine;
 using VContainer.Unity;
 
 namespace L2Farm.Features.InventoryScreen
 {
-    public class InventoryScreenController : IInitializable
+    public class InventoryScreenController : IInitializable, IDisposable
     {
         private readonly UiService _uiService;
         private readonly GameStateManager _gameStateManager;
         private readonly ResourcesService _resourcesService;
+        private readonly CancellationTokenSource _disposeCts = new ();
 
         private InventoryScreen _inventoryScreen;
+        private InventoryButtonModel _buttonModel;
 
         public bool IsInitialized { get; private set; }
 
@@ -27,9 +32,8 @@ namespace L2Farm.Features.InventoryScreen
             _resourcesService = resourcesService;
         }
 
-        private async void OpenScreen()
+        private async UniTask OpenScreen()
         {
-            Debug.Log("Open Inventory Screen");
             _inventoryScreen = await _uiService.TryOpen(new InventoryScreenModel
             {
                 gameStatePart = _gameStateManager.State.Get<ResourceContentPart>(),
@@ -40,8 +44,19 @@ namespace L2Farm.Features.InventoryScreen
 
         public async UniTask Initialize()
         {
-            await _uiService.TryOpen(new InventoryButtonModel(OpenScreen));
+            _buttonModel = new InventoryButtonModel();
+
+            _buttonModel.Clicked.Listen(OpenScreen, _disposeCts.Token);
+            
+            await _uiService.TryOpen(_buttonModel);
+            
             IsInitialized = true;
+        }
+
+        public void Dispose()
+        {
+            _disposeCts.Cancel();
+            _disposeCts.Dispose();
         }
     }
 }

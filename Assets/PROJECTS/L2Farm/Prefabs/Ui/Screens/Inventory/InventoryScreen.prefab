@@ -305,8 +305,6 @@ MonoBehaviour:
   - {fileID: 5612072728151535234}
   - {fileID: 7414162819721747954}
   - {fileID: 9179694634579510382}
-  _canvas: {fileID: 6783480294454836391}
-  _gridLayoutGroup: {fileID: 2986642345148239208}
   _closeBtn: {fileID: 1797816818919088023}
 --- !u!222 &7190889870523618706
 CanvasRenderer:

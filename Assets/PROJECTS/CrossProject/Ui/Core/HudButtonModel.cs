@@ -1,14 +1,16 @@
-using System;
+using Cysharp.Threading.Tasks;
 
 namespace CrossProject.Ui.Core
 {
     public class HudButtonModel : HudElementModel
     {
-        public Action OnClick { get; }
+        private readonly AsyncReactiveProperty<Invoker> _clicked = new(default);
 
-        public HudButtonModel(Action onClick)
+        public IReadOnlyAsyncReactiveProperty<Invoker> Clicked => _clicked;
+
+        public void Click()
         {
-            OnClick = onClick;
+            _clicked.Invoke(); 
         }
     }
 }

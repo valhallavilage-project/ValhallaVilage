@@ -1,11 +1,12 @@
 ﻿using System;
+using CrossProject.Core.Pooling;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace L2Farm.Features.SimpleMonolog
 {
-    public class ItemRequirement : MonoBehaviour
+    public class ItemRequirement : MonoBehaviour, IPoolElement
     {
         [SerializeField] private Image background;
         [SerializeField] private Image icon;
@@ -16,7 +17,9 @@ namespace L2Farm.Features.SimpleMonolog
         [SerializeField] private Color _enough = Color.green;
         [SerializeField] private Color _give = Color.yellow;
 
-        public void SetVisuals(MonologResourceData data)
+        public bool IsAvailableToGet { get; private set; }
+
+        public void SetVisuals(ConditionResourceData data)
         {
             icon.sprite = data.Icon;
 
@@ -35,6 +38,22 @@ namespace L2Farm.Features.SimpleMonolog
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+
+        public void SetPool(IPool pool)
+        {
+        }
+
+        public void OnGet()
+        {
+            IsAvailableToGet = false;
+            gameObject.SetActive(true);
+        }
+
+        public void OnReturn()
+        {
+            IsAvailableToGet = true;
+            gameObject.SetActive(false);
         }
     }
 }

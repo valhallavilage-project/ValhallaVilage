@@ -6,7 +6,6 @@ using Sirenix.OdinInspector;
 
 namespace L2Farm.Scripts.Actions
 {
-    [HideReferenceObjectPicker]
     public class SpawnNPCActionConfig : IActionConfig
     {
         public NPCId npcId;

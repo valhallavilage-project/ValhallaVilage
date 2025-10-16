@@ -23,7 +23,7 @@ namespace L2Farm.Features.ShopScreen
 
         public async UniTask Initialize()
         {
-            await _uiService.TryOpen(new ShopButtonModel(OpenScreen));
+            await _uiService.TryOpen(new ShopButtonModel());
             IsInitialized = true;
         }
     }
