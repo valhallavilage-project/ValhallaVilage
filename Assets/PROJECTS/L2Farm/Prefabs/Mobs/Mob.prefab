@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 8702858723516576628}
   - component: {fileID: 5795455365129794856}
   m_Layer: 0
-  m_Name: AttackAbility
+  m_Name: Attack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -404,7 +404,7 @@ GameObject:
   - component: {fileID: 7944219684971838168}
   - component: {fileID: 5417413934468199986}
   m_Layer: 0
-  m_Name: NoticeAbility
+  m_Name: Notice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -663,7 +663,7 @@ GameObject:
   - component: {fileID: 1536751747458809685}
   - component: {fileID: 5995064144105461079}
   m_Layer: 0
-  m_Name: DieAbility
+  m_Name: Die
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -708,7 +708,7 @@ GameObject:
   - component: {fileID: 7858678292141042373}
   - component: {fileID: 6160681993543075045}
   m_Layer: 0
-  m_Name: MoveAbility
+  m_Name: Move
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -809,7 +809,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionDistance: 3
-  interactionDuration: 2
+  interactionDuration: 1
   buttonSprite: {fileID: 21300000, guid: bd6a954c3467e4309881a90c8c60ab46, type: 3}
   animation: 0
   viewRoot: {fileID: 3018869327203395264}
@@ -825,7 +825,7 @@ GameObject:
   - component: {fileID: 7097397325693133871}
   - component: {fileID: 8237891131279447757}
   m_Layer: 0
-  m_Name: RotateAbility
+  m_Name: Rotate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -4,8 +4,8 @@ namespace CrossProject.Core
 {
     public interface IDieAbility
     {
-        IReadOnlyAsyncReactiveProperty<bool> DeathBegan { get; }
-        IReadOnlyAsyncReactiveProperty<bool> DeathCompleted { get; }
+        IReadOnlyAsyncReactiveProperty<Invoker> DeathBegan { get; }
+        IReadOnlyAsyncReactiveProperty<Invoker> DeathCompleted { get; }
 
         void BeginToDie();
         void DeadCompletely();
@@ -13,20 +13,20 @@ namespace CrossProject.Core
 
     public class DieAbility : IDieAbility
     {
-        private readonly AsyncReactiveProperty<bool> _deathBegan = new(default);
-        private readonly AsyncReactiveProperty<bool> _deathCompleted = new(default);
+        private readonly AsyncReactiveProperty<Invoker> _deathBegan = new(default);
+        private readonly AsyncReactiveProperty<Invoker> _deathCompleted = new(default);
 
-        public IReadOnlyAsyncReactiveProperty<bool> DeathBegan => _deathBegan;
-        public IReadOnlyAsyncReactiveProperty<bool> DeathCompleted => _deathCompleted;
+        public IReadOnlyAsyncReactiveProperty<Invoker> DeathBegan => _deathBegan;
+        public IReadOnlyAsyncReactiveProperty<Invoker> DeathCompleted => _deathCompleted;
 
         public void BeginToDie()
         {
-            _deathBegan.Value = true;
+            _deathBegan.Invoke();
         }
 
         public void DeadCompletely()
         {
-            _deathCompleted.Value = true;
+            _deathCompleted.Invoke();
         }
     }
 }

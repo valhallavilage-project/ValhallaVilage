@@ -12,6 +12,7 @@ namespace CrossProject.Core
     {
         public bool IsEnemyInsideArea { get; }
         public Transform Enemy { get; }
+        bool IsEnemyInactive { get; }
 
         void Init(Collider agroZone);
         void ForgetEnemy();
@@ -24,12 +25,13 @@ namespace CrossProject.Core
         private Collider _agroZone;
 
         public bool IsEnemyInsideArea { get; private set; }
+        public bool IsEnemyInactive { get; private set; }
         public Transform Enemy { get; private set; }
 
         public AgroArea(INoticeEnemyArea noticeEnemyArea, IDieAbility dieAbility)
         {
             noticeEnemyArea.EnemyNoticed.WithoutCurrent().ForEachAsync(NoticeEnemy, _disposeCts.Token).Forget();
-            dieAbility.DeathCompleted.WithoutCurrent().ForEachAsync(Die, _disposeCts.Token).Forget();
+            dieAbility.DeathCompleted.Listen(Die, _disposeCts.Token);
         }
 
         public void Init(Collider agroZone)
@@ -50,6 +52,8 @@ namespace CrossProject.Core
 
         public void Tick()
         {
+            IsEnemyInactive = Enemy == null || !Enemy.gameObject.activeInHierarchy;
+            
             if (!IsEnemyInsideArea)
             {
                 return;
@@ -65,7 +69,7 @@ namespace CrossProject.Core
             return closest == target.position;
         }
 
-        private void Die(bool _)
+        private void Die()
         {
             _agroZoneCts.Cancel();
             _agroZoneCts.Dispose();

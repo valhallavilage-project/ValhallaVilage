@@ -45,6 +45,7 @@ namespace L2Farm.Scripts
 {
     public class L2FarmLifetimeScope : LifetimeScope
     {
+        #if !DISABLE_SRDEBUGGER
         private void RegisterCheats(IContainerBuilder builder)
         {
             builder.Register<CameraCheatOptions>(Lifetime.Singleton)
@@ -65,6 +66,7 @@ namespace L2Farm.Scripts
             builder.Register<PotionsCheatOptions>(Lifetime.Singleton)
                 .AsImplementedInterfaces();
         }
+        #endif
 
         private void RegisterConditionsAndActions(IContainerBuilder builder)
         {
@@ -246,7 +248,10 @@ namespace L2Farm.Scripts
             builder.Register<TimePotionConsumeHandler>(Lifetime.Singleton).AsImplementedInterfaces();
 
             RegisterConditionsAndActions(builder);
+            
+            #if !DISABLE_SRDEBUGGER
             RegisterCheats(builder);
+            #endif
         }
     }
 }

@@ -46,7 +46,7 @@ namespace CrossProject.Core
             healthHandler.Init(config.Health, config.Health);
             moveAbility.Init(config.Acceleration, config.MaxAcceleration);
             rotateAbility.Init(config.RotationSpeed, config.RotationDamper);
-            dieAbility.DeathCompleted.WithoutCurrent().ForEachAsync(MobDie, gameObject.GetCancellationTokenOnDestroy()).Forget();
+            dieAbility.DeathCompleted.Listen(MobDie, gameObject.GetCancellationTokenOnDestroy());
         }
 
         private void FixedUpdate()
@@ -94,7 +94,7 @@ namespace CrossProject.Core
             _agroArea.Init(spawnPoint.AgroZone);
         }
 
-        private void MobDie(bool obj)
+        private void MobDie()
         {
             _pool.Return(this);
         }

@@ -366,6 +366,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7173468639334822965}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &710831565794629955
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4689728073044968518}
+  - component: {fileID: 3257858576383107385}
+  m_Layer: 0
+  m_Name: DropLoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4689728073044968518
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710831565794629955}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4978083115097194765}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3257858576383107385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710831565794629955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d34462f961a74b028e93b78fc7ab1c02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _loot:
+    value: Resource_Gremlin_Horns
 --- !u!1 &749638622870125636
 GameObject:
   m_ObjectHideFlags: 0
@@ -2458,6 +2504,9 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 2029981488885552592, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4689728073044968518}
     - targetCorrespondingSourceObject: {fileID: 2395233195736315930, guid: 3b21045f701005542a8588b2ff413744, type: 3}
       insertIndex: -1
       addedObject: {fileID: 504893122658199524}
@@ -2466,6 +2515,11 @@ PrefabInstance:
       addedObject: {fileID: 7065190311670546976}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+--- !u!4 &4978083115097194765 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2029981488885552592, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+  m_PrefabInstance: {fileID: 6430653594136564957}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8647991803197222087 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2395233195736315930, guid: 3b21045f701005542a8588b2ff413744, type: 3}

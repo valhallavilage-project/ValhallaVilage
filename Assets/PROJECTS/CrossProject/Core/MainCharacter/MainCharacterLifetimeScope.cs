@@ -19,6 +19,10 @@ namespace CrossProject.Core
             BindAbilities(builder);
             BindServices(builder);
             BindConfigs(builder);
+            
+            #if !DISABLE_SRDEBUGGER
+            BindCheats(builder);
+            #endif
         }
 
         private void BindAbilities(IContainerBuilder builder)
@@ -43,7 +47,7 @@ namespace CrossProject.Core
             builder.Register<MainCharacterSaveEnergyHandler>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<MainCharacterSaveHealthHandler>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<MainCharacterSaveExperienceHandler>(Lifetime.Scoped).AsImplementedInterfaces();
-            
+
             builder.Register<MainCharacterGlobalParameterChangesHandler>(Lifetime.Scoped).AsImplementedInterfaces();
         }
 
@@ -55,5 +59,13 @@ namespace CrossProject.Core
             builder.RegisterInstance(_levelProgressionConfig);
             builder.RegisterInstance(_potionsConfig);
         }
+
+        #if !DISABLE_SRDEBUGGER
+        private void BindCheats(IContainerBuilder builder)
+        {
+            builder.Register<MainCharacterCheatOptions>(Lifetime.Singleton)
+                .AsImplementedInterfaces();
+        }
+        #endif
     }
 }

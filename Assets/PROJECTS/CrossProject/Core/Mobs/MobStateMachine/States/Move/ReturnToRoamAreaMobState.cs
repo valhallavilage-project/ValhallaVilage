@@ -33,11 +33,13 @@ namespace CrossProject.Core
         protected override async UniTask HandleControl()
         {
             await base.HandleControl();
-
-            _moveAbility.Move(_persistentData.RoamPathDirection, Config.RoamingMaxSpeed);
-            _rotateAbility.ForceRotate(_persistentData.RoamPathDirection);
-
+            
             var destination = new Vector3(_persistentData.RoamPathDestination.x, _perUpdateData.Position.y, _persistentData.RoamPathDestination.z);
+
+            var direction = (destination - _perUpdateData.Position).normalized;
+            
+            _moveAbility.Move(direction, Config.RoamingMaxSpeed);
+            _rotateAbility.ForceRotate(direction);
 
             Debug.DrawLine(_perUpdateData.Position, destination, Color.red);
         }
