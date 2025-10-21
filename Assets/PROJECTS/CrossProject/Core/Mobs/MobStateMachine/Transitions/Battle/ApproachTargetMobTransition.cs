@@ -32,7 +32,7 @@
 
             ConditionForState[MobState.RotateToTarget] = RotateToTargetCondition;
             ConditionForState[MobState.AttackPause] = () => Condition() && (_agroArea.Enemy.position - _perUpdateData.Position).magnitude > _config.AttackDistance;
-            ConditionForState[MobState.WaitForTarget] = () => (_agroArea.Enemy.position - _perUpdateData.Position).magnitude < _config.MinDistanceToApproach;
+            ConditionForState[MobState.WaitForTarget] = () => !_agroArea.IsEnemyInactive && (_agroArea.Enemy.position - _perUpdateData.Position).magnitude < _config.MinDistanceToApproach;
         }
 
         private bool RotateToTargetCondition()

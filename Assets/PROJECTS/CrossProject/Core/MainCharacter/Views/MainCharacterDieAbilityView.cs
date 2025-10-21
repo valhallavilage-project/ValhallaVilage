@@ -21,10 +21,10 @@ namespace CrossProject.Core
             _interactionHandler = interactionHandler;
             _simpleMovementController = simpleMovementController;
             
-            dieAbility.DeathBegan.WithoutCurrent().ForEachAsync(Died, gameObject.GetCancellationTokenOnDestroy()).Forget();
+            dieAbility.DeathBegan.Listen(Died, gameObject.GetCancellationTokenOnDestroy());
         }
 
-        private void Died(bool _)
+        private void Died()
         {
             _mainCollider.gameObject.SetActive(false);
             _interactionCollider.gameObject.SetActive(false);

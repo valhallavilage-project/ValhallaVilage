@@ -191,7 +191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _expectedObjectTag: Mob
   _attackCollider: {fileID: 8999091373602720307}
-  _attackTimeOffset: 1.2
+  _attackTimeOffset: 0.6
 --- !u!1 &789984638526488427
 GameObject:
   m_ObjectHideFlags: 0

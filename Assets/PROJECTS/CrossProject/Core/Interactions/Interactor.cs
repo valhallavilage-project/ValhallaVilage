@@ -28,11 +28,11 @@ namespace CrossProject.Core.Interactions
             _interactionHandler = interactionHandler;
             _experienceHandler = experienceHandler;
 
-            dieAbility.DeathBegan.WithoutCurrent().ForEachAsync(MainCharacterDeathBegan, gameObject.GetCancellationTokenOnDestroy()).Forget();
+            dieAbility.DeathBegan.Listen(MainCharacterDeathBegan, gameObject.GetCancellationTokenOnDestroy());
             interactionHandler.InteractionLaunched.WithoutCurrent().ForEachAwaitAsync(Interact, gameObject.GetCancellationTokenOnDestroy()).Forget();
         }
 
-        private void MainCharacterDeathBegan(bool _)
+        private void MainCharacterDeathBegan()
         {
             foreach (var interactiveObject in _objects)
             {

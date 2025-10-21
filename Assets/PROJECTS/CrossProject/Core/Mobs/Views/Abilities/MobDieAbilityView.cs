@@ -18,13 +18,17 @@ namespace CrossProject.Core
             _config = config;
 
             _mainCharacterGlobalExperienceGainHandler = mainCharacterGlobalExperienceGainHandler;
-            dieAbility.DeathCompleted.WithoutCurrent().ForEachAsync(MobDie, gameObject.GetCancellationTokenOnDestroy()).Forget();
+            dieAbility.DeathBegan.Listen(MobBeganToDie, gameObject.GetCancellationTokenOnDestroy());
+            dieAbility.DeathCompleted.Listen(MobDie, gameObject.GetCancellationTokenOnDestroy());
         }
 
-        private void MobDie(bool _)
+        private void MobBeganToDie()
         {
             _mainCharacterGlobalExperienceGainHandler.GainXp(_config.ExperienceReward);
-            
+        }
+
+        private void MobDie()
+        {
             var corpse = Instantiate(_corpsePrefab, transform.position, transform.rotation);
             
             corpse.StartDecay(_config.CorpseDecayTime);
