@@ -18,7 +18,7 @@ namespace L2Farm.Features
 
         public bool IsInitialized { get; private set; }
 
-        public MainCharacterDeathScreenController(UiService uiService, IMainCharacterFacade mainCharacterFacade, IMainCharacterReviveGlobalHandler reviveGlobalHandler)
+        public MainCharacterDeathScreenController(UiService uiService, IMainCharacterGlobalFacade mainCharacterFacade, IMainCharacterReviveGlobalHandler reviveGlobalHandler)
         {
             _uiService = uiService;
             _reviveGlobalHandler = reviveGlobalHandler;

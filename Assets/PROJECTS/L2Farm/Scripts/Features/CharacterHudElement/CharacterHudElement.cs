@@ -19,7 +19,7 @@ namespace L2Farm.Scripts.CharacterHudElement
         [SerializeField] private Image _experienceBarFill;
         [SerializeField] private TMP_Text _levelLabel;
 
-        private IMainCharacterFacade _mainCharacterSharedData;
+        private IMainCharacterGlobalFacade _mainCharacterSharedData;
 
         public void SetPortrait(Sprite sprite) => portrait.sprite = sprite;
 
@@ -29,7 +29,7 @@ namespace L2Farm.Scripts.CharacterHudElement
         }
 
         [Inject]
-        private void Construct(IMainCharacterFacade mainCharacterSharedData)
+        private void Construct(IMainCharacterGlobalFacade mainCharacterSharedData)
         {
             _mainCharacterSharedData = mainCharacterSharedData;
 

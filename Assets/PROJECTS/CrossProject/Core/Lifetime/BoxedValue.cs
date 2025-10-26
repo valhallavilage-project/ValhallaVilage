@@ -43,14 +43,12 @@ namespace CrossProject.Core
         {
             var maxValue = _maxValue.Value;
             _maxValue.Value = Addition(maxValue, value);
-            IncreaseCurrentValue(value);
         }
 
         protected void ReduceMaxValue(T value)
         {
             var maxValue = _maxValue.Value;
             _maxValue.Value = MaxValue(Subtraction(maxValue, value), _minValue.Value);
-            ReduceCurrentValue(value);
         }
 
         protected abstract T Subtraction(T minuend, T subtrahend);

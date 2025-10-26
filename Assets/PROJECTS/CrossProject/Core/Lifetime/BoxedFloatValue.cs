@@ -4,6 +4,20 @@ namespace CrossProject.Core
 {
     public class BoxedFloatValue : BoxedValue<float>
     {
+        protected void AssignMaxValue(float value)
+        {
+            var delta = value - _maxValue.Value;
+
+            if (delta > 0)
+            {
+                IncreaseMaxValue(Math.Abs(delta));
+            }
+            else
+            {
+                ReduceMaxValue(Math.Abs(delta));
+            }
+        }
+        
         protected override float Subtraction(float minuend, float subtrahend)
         {
             return minuend - subtrahend;

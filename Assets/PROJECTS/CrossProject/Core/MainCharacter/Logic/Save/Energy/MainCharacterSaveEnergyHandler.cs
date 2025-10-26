@@ -12,33 +12,33 @@ namespace CrossProject.Core
     {
         private readonly IRestoreEnergyHandler _restoreHandler;
         private readonly IEnergyHandler _parameterHandler;
-        private readonly IMainCharacterClothesSetsService _mainCharacterClothesSetsService;
+        private readonly IMainCharacterArmorSetsService _mainCharacterArmorSetsService;
 
         public MainCharacterSaveEnergyHandler(IRestoreEnergyHandler restoreHandler, IEnergyHandler parameterHandler,
             GameStateManager gameStateManager, EnergyRestorationConfig restorationConfig, ITimeService timeService,
-            IMainCharacterClothesSetsService mainCharacterClothesSetsService)
+            IMainCharacterArmorSetsService mainCharacterArmorSetsService)
             : base(parameterHandler, gameStateManager, restorationConfig, timeService)
         {
             _restoreHandler = restoreHandler;
             _parameterHandler = parameterHandler;
-            _mainCharacterClothesSetsService = mainCharacterClothesSetsService;
+            _mainCharacterArmorSetsService = mainCharacterArmorSetsService;
         }
 
         public override async UniTask Initialize()
         {
-            await UniTask.WaitUntil(() => _mainCharacterClothesSetsService.IsInitialized);
+            await UniTask.WaitUntil(() => _mainCharacterArmorSetsService.IsInitialized);
 
             await base.Initialize();
         }
 
         protected override float GetInitialParameterValue()
         {
-            return _mainCharacterClothesSetsService.GetTotalEnergy();
+            return _mainCharacterArmorSetsService.GetTotalEnergy();
         }
 
         protected override float GetMaxParameterValue()
         {
-            return _mainCharacterClothesSetsService.GetTotalEnergy();
+            return _mainCharacterArmorSetsService.GetTotalEnergy();
         }
 
         protected override float GetMinParameterValue()

@@ -5,6 +5,7 @@ using CrossProject.Core.Camera;
 using CrossProject.Core.Skins;
 using CrossProject.Core.SpawnPoints;
 using Cysharp.Threading.Tasks;
+using Cysharp.Threading.Tasks.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 using VContainer;
@@ -67,11 +68,14 @@ namespace CrossProject.Core.SimpleMovement
         private void Construct(
             CameraService cameraService,
             IJoystickValueProvider joystickValueProvider,
-            SpawnPointService spawnPointService)
+            SpawnPointService spawnPointService,
+            IMainCharacterGlobalArmorSetChangeHandler armorSetsService)
         {
             _cameraService = cameraService;
             _joystick = joystickValueProvider;
             _spawnPointService = spawnPointService;
+            
+            armorSetsService.ArmorSetChanged.WithoutCurrent().ForEachAsync(ArmorSetChanged, gameObject.GetCancellationTokenOnDestroy()).Forget();
         }
 
         public void Tick()
@@ -84,9 +88,9 @@ namespace CrossProject.Core.SimpleMovement
             _direction.z *= _joystick.NormalizedVector2.y;
             var inputDir = _direction.normalized;
 
-            bool hasInput = inputDir != Vector3.zero;
-            float targetSpeed = hasInput ? speed : 0;
-            float currentSpeed = _currentVelocity.magnitude;
+            var hasInput = inputDir != Vector3.zero;
+            var targetSpeed = hasInput ? speed : 0;
+            var currentSpeed = _currentVelocity.magnitude;
             currentSpeed = Mathf.MoveTowards(currentSpeed, targetSpeed, (hasInput ? acceleration : deceleration)*Time.deltaTime);
 
             if (!hasInput)
@@ -105,7 +109,7 @@ namespace CrossProject.Core.SimpleMovement
 
             if (LocalAccessCurrentSkin != null && LocalAccessCurrentSkin.Animator != null)
             {
-                float animSpeed = Mathf.InverseLerp(0, speed, _currentVelocity.magnitude);
+                var animSpeed = Mathf.InverseLerp(0, speed, _currentVelocity.magnitude);
                 LocalAccessCurrentSkin.Animator.SetFloat(Speed, animSpeed);
             }
         }
@@ -132,6 +136,11 @@ namespace CrossProject.Core.SimpleMovement
             var targetPos = _spawnPointService.GetPosition(new SpawnPointId("PlayerSpawnPoint"));
             _playerNavMeshAgent.Warp(targetPos);
             IsInitialized = true;
+        }
+
+        private void ArmorSetChanged(MainCharacterArmorSetType armorSet)
+        {
+            LocalAccessCurrentSkin.SelectSet(armorSet);
         }
     }
 }

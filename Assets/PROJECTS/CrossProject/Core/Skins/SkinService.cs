@@ -1,6 +1,4 @@
-using System;
 using System.Linq;
-using System.Threading;
 using CrossProject.Core.Characters;
 using CrossProject.Core.SaveLoad;
 using Cysharp.Threading.Tasks;
@@ -18,9 +16,6 @@ namespace CrossProject.Core.Skins
         private readonly AddressablesManager _addressablesManager;
 
         private SkinSetConfig _skinSetConfig;
-
-        public event Action<SkinId> OnSkinObtained;
-        public event Action<SkinId> OnSkinSelected;
 
         public bool IsInitialized { get; private set; }
 
@@ -53,10 +48,9 @@ namespace CrossProject.Core.Skins
                 part.obtainedSkins.Add(config.owner, new CharacterSkinState());
             part.obtainedSkins[config.owner].ids.Add(skinId);
             part.obtainedSkins[config.owner].currentSkinId = skinId;
-            OnSkinObtained?.Invoke(skinId);
         }
 
-        public async void Select(SkinId skinId)
+        public async UniTask Select(SkinId skinId)
         {
             var skinRoot = _playerSkinProvider.PlayerSkinRoot;
             var count = skinRoot.childCount;
@@ -67,7 +61,6 @@ namespace CrossProject.Core.Skins
             var skinPrefab = await _addressablesManager.LoadAssetAsync<GameObject>(skinId.ToString());
             Object.Instantiate(skinPrefab, skinRoot);
             _gameStateManager.Save();
-            OnSkinSelected?.Invoke(skinId);
         }
 
         public SkinId GetDefaultSkinFor(CharacterId characterId)

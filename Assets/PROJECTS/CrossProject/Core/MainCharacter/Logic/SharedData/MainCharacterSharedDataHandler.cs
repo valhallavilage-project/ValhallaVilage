@@ -12,32 +12,29 @@ namespace CrossProject.Core
 
     public class MainCharacterSharedDataHandler : IMainCharacterSharedDataHandler, IInitializable, IDisposable
     {
-        private readonly IMainCharacterFacade _holder;
+        private readonly IMainCharacterGlobalFacade _holder;
         private readonly IHealthHandler _healthHandler;
-        private readonly IExperienceHandler _experienceHandler;
         private readonly CancellationTokenSource _disposeCts = new();
 
         public bool IsInitialized { get; private set; }
 
-        public MainCharacterSharedDataHandler(IMainCharacterFacade holder, IHealthHandler healthHandler, 
+        public MainCharacterSharedDataHandler(IMainCharacterGlobalFacade holder, IHealthHandler healthHandler,
             IEnergyHandler energyHandler, IExperienceHandler experienceHandler)
         {
             _holder = holder;
             _healthHandler = healthHandler;
-            _experienceHandler = experienceHandler;
 
-            healthHandler.Health.ForEachAsync(HealthChanged, _disposeCts.Token).Forget();
-            healthHandler.MaxHealth.ForEachAsync(v => holder.MaxHealth.Value = v, _disposeCts.Token).Forget();
+            healthHandler.Health.WithoutCurrent().ForEachAsync(HealthChanged, _disposeCts.Token).Forget();
+            healthHandler.MaxHealth.WithoutCurrent().ForEachAsync(v => holder.MaxHealth.Value = v, _disposeCts.Token).Forget();
 
-            energyHandler.Energy.ForEachAsync(v => holder.CurrentEnergy.Value = v, _disposeCts.Token).Forget();
-            energyHandler.MaxEnergy.ForEachAsync(v => holder.MaxEnergy.Value = v, _disposeCts.Token).Forget();
+            energyHandler.Energy.WithoutCurrent().ForEachAsync(v => holder.CurrentEnergy.Value = v, _disposeCts.Token).Forget();
+            energyHandler.MaxEnergy.WithoutCurrent().ForEachAsync(v => holder.MaxEnergy.Value = v, _disposeCts.Token).Forget();
 
-            experienceHandler.CurrentExperience.ForEachAsync(v => holder.CurrentExperience.Value = v, _disposeCts.Token).Forget();
-            experienceHandler.MaxExperience.ForEachAsync(v => holder.MaxExperience.Value = v, _disposeCts.Token).Forget();
-            experienceHandler.MinExperience.ForEachAsync(v => holder.MinExperience.Value = v, _disposeCts.Token).Forget();
-            experienceHandler.CurrentLevel.ForEachAsync(v => holder.CurrentLevel.Value = v, _disposeCts.Token).Forget();
-
-            }
+            experienceHandler.CurrentExperience.WithoutCurrent().ForEachAsync(v => holder.CurrentExperience.Value = v, _disposeCts.Token).Forget();
+            experienceHandler.MaxExperience.WithoutCurrent().ForEachAsync(v => holder.MaxExperience.Value = v, _disposeCts.Token).Forget();
+            experienceHandler.MinExperience.WithoutCurrent().ForEachAsync(v => holder.MinExperience.Value = v, _disposeCts.Token).Forget();
+            experienceHandler.CurrentLevel.WithoutCurrent().ForEachAsync(v => holder.CurrentLevel.Value = v, _disposeCts.Token).Forget();
+        }
 
         public UniTask Initialize()
         {

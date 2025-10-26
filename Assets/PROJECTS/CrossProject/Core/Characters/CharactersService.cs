@@ -17,7 +17,6 @@ namespace CrossProject.Core.Characters
 
         private CharacterSetConfig _characterSetConfig;
 
-        public event Action<CharacterId> OnCharacterObtained;
         public event Action<CharacterId> OnCharacterSelected;
 
         public bool IsInitialized { get; private set; }
@@ -52,7 +51,6 @@ namespace CrossProject.Core.Characters
             _gameStateManager.State.Set(part);
             _skinService.Obtain(_skinService.GetDefaultSkinFor(characterId));
             _gameStateManager.Save();
-            OnCharacterObtained?.Invoke(characterId);
         }
 
         public bool Select(CharacterId characterId)
@@ -68,11 +66,6 @@ namespace CrossProject.Core.Characters
             return true;
         }
 
-        public bool IsObtained(CharacterId characterId)
-        {
-            return _gameStateManager.State.TryGet<ObtainedCharactersPart>(out var part) && part.ObtainedCharacters.Contains(characterId);
-        }
-
         public CharacterConfig GetConfigFor(CharacterId characterId)
         {
             if (characterId == "MC")
@@ -83,8 +76,5 @@ namespace CrossProject.Core.Characters
 
             return _characterSetConfig.items.FirstOrDefault(x => x.id == characterId);
         }
-
-        //TODO : VM : remove
-        //TODO : VM : trial characters
     }
 }

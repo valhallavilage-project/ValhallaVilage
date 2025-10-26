@@ -13,6 +13,7 @@ namespace CrossProject.Core
         void Damage(float value);
         void IncreaseMaxHealth(float value);
         void ReduceMaxHealth(float value);
+        void AssignMaxHealth(float value);
     }
 
     public class HealthHandler : BoxedFloatValue, IHealthHandler
@@ -41,11 +42,32 @@ namespace CrossProject.Core
         public void IncreaseMaxHealth(float value)
         {
             IncreaseMaxValue(value);
+            IncreaseCurrentValue(value);
         }
 
         public void ReduceMaxHealth(float value)
         {
             ReduceMaxValue(value);
+            ReduceCurrentValue(value);
+        }
+
+        public void AssignMaxHealth(float value)
+        {
+            var ratio = _currentValue.Value / _maxValue.Value;
+            
+            AssignMaxValue(value);
+            
+            var newValue = ratio * _maxValue.Value;
+            var delta = newValue  - _currentValue.Value;
+
+            if (delta > 0)
+            {
+                Restore(Math.Abs(delta));
+            }
+            else
+            {
+                Damage(Math.Abs(delta));
+            }
         }
     }
 }

@@ -29,7 +29,7 @@ MonoBehaviour:
     - prewarm
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 28548f18040bd5c408a9ab3c0da4cd74
-    m_Address: Assets/PROJECTS/L2Farm/Configs/MainCharacterSets/SteelArmorSetConfig.asset
+    m_Address: SteelArmorSetConfig
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -50,7 +50,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 49217c23db55e44478a1bc4eca107d72
-    m_Address: Assets/PROJECTS/L2Farm/Configs/MainCharacterSets/MainCharacterClothesSetConfigFacade.asset
+    m_Address: MainCharacterArmorSetsConfg
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -78,6 +78,11 @@ MonoBehaviour:
     m_SerializedLabels:
     - prewarm
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aaa9de2aea8262e478f906ec3b7efecf
+    m_Address: PremiumArmorSetConfig
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b11a4cfbd382846648b76d49b8c979a3
     m_Address: IndicationTypeSetConfig
     m_ReadOnly: 0
@@ -85,7 +90,7 @@ MonoBehaviour:
     - prewarm
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: bd99c4e2bc801b1478cf58046fec62dd
-    m_Address: Assets/PROJECTS/L2Farm/Configs/MainCharacterSets/IronArmorSetConfig.asset
+    m_Address: IronArmorSetConfig
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -102,7 +107,7 @@ MonoBehaviour:
     - prewarm
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e1d91bca80cdffb49a1556d072389cdb
-    m_Address: Assets/PROJECTS/L2Farm/Configs/MainCharacterSets/DefaultClothesSetConfig.asset
+    m_Address: DefaultArmorSetConfig
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

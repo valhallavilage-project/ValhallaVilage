@@ -1,3 +1,4 @@
+using CrossProject.Core;
 using CrossProject.Core.Characters;
 using CrossProject.Core.Quests;
 using CrossProject.Core.SaveLoad;
@@ -15,6 +16,7 @@ namespace PROJECTS.L2Farm.Scripts.CharacterSkinSelect
         private readonly CharactersService _charactersService;
         private readonly SkinService _skinService;
         private readonly QuestService _questService;
+        private readonly IMainCharacterGlobalArmorSetChangeHandler _mainCharacterGlobalArmorSetChangeHandler;
 
         private CharacterSelectScreen _view;
         private CharacterId _selectedCharacterId;
@@ -26,13 +28,15 @@ namespace PROJECTS.L2Farm.Scripts.CharacterSkinSelect
             UiService uiService,
             CharactersService charactersService,
             SkinService skinService,
-            QuestService questService)
+            QuestService questService,
+            IMainCharacterGlobalArmorSetChangeHandler mainCharacterGlobalArmorSetChangeHandler)
         {
             _gameStateManager = gameStateManager;
             _uiService = uiService;
             _charactersService = charactersService;
             _skinService = skinService;
             _questService = questService;
+            _mainCharacterGlobalArmorSetChangeHandler = mainCharacterGlobalArmorSetChangeHandler;
         }
 
         public async UniTask Initialize()
@@ -45,7 +49,15 @@ namespace PROJECTS.L2Farm.Scripts.CharacterSkinSelect
 
                 _gameStateManager.State.TryGet<ObtainedSkinsPart>(out var obtainedSkinsPart);
                 var currentSkin = obtainedSkinsPart.obtainedSkins[currentCharacter].currentSkinId;
-                _skinService.Select(currentSkin);
+                await _skinService.Select(currentSkin);
+                
+                _gameStateManager.State.TryGet<WornArmorSet>(out var wornArmorSetPart);
+
+                if (wornArmorSetPart != null)
+                {
+                    _mainCharacterGlobalArmorSetChangeHandler.ChangeSet(wornArmorSetPart.ArmorSet);
+                }
+                
                 IsInitialized = true;
                 return;
             }

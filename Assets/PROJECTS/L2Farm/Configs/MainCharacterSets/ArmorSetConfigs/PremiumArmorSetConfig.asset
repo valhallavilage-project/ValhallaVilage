@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a236babc6736412ab8aa3b021e26c6bb, type: 3}
-  m_Name: IronArmorSetConfig
+  m_Name: PremiumArmorSetConfig
   m_EditorClassIdentifier: 
-  _clothesSetType: 1
-  _health: 20
-  _energy: 20
-  _damage: 2
+  _armorSetType: 3
+  _health: 300
+  _energy: 300
+  _damage: 100
+  _levelAvailable: 0
