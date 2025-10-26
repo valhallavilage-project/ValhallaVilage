@@ -12,6 +12,7 @@ namespace CrossProject.Core
         void Spend(float value);
         void IncreaseMaxEnergy(float value);
         void ReduceMaxEnergy(float value);
+        void AssignMaxEnergy(float value);
     }
 
     public class EnergyHandler : BoxedFloatValue, IEnergyHandler
@@ -39,11 +40,32 @@ namespace CrossProject.Core
         public void IncreaseMaxEnergy(float value)
         {
             IncreaseMaxValue(value);
+            IncreaseCurrentValue(value);
         }
 
         public void ReduceMaxEnergy(float value)
         {
             ReduceMaxValue(value);
+            ReduceCurrentValue(value);
+        }
+        
+        public void AssignMaxEnergy(float value)
+        {
+            var ratio = _currentValue.Value / _maxValue.Value;
+            
+            AssignMaxValue(value);
+            
+            var newValue = ratio * _maxValue.Value;
+            var delta = newValue  - _currentValue.Value;
+
+            if (delta > 0)
+            {
+                Restore(Math.Abs(delta));
+            }
+            else
+            {
+                Spend(Math.Abs(delta));
+            }
         }
     }
 }

@@ -2,9 +2,9 @@ namespace CrossProject.Core
 {
     public class MainCharacterDamageInfoProvider : BaseDamageInfoProvider
     {
-        private readonly IMainCharacterClothesSetsService _setsService;
+        private readonly IMainCharacterArmorSetsService _setsService;
         
-        public MainCharacterDamageInfoProvider(IMainCharacterClothesSetsService setsService)
+        public MainCharacterDamageInfoProvider(IMainCharacterArmorSetsService setsService)
         {
             _setsService = setsService;
 

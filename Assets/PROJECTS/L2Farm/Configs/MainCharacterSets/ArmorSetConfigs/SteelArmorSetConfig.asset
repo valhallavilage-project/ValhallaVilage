@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a236babc6736412ab8aa3b021e26c6bb, type: 3}
-  m_Name: DefaultClothesSetConfig
+  m_Name: SteelArmorSetConfig
   m_EditorClassIdentifier: 
-  _clothesSetType: 0
-  _health: 100
-  _energy: 100
-  _damage: 10
+  _armorSetType: 2
+  _health: 150
+  _energy: 150
+  _damage: 20
+  _levelAvailable: 20

@@ -236,11 +236,12 @@ namespace L2Farm.Scripts
             builder.Register<ConsumablesHudElementController>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<ConfirmPopupController>(Lifetime.Singleton).AsImplementedInterfaces();
 
-            builder.Register<MainCharacterFacade>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<MainCharacterGlobalFacade>(Lifetime.Singleton).AsImplementedInterfaces();
             
             builder.Register<MainCharacterGlobalExperienceGainHandler>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<MainCharacterGlobalReviveHandler>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<MainCharacterGlobalPotionConsumeHandler>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<MainCharacterGlobalArmorSetChangeHandler>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<ConfirmPopupOpenHandler>(Lifetime.Singleton).AsImplementedInterfaces();
             
             builder.Register<TimerCreator>(Lifetime.Singleton).AsImplementedInterfaces();

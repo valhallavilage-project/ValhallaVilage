@@ -6,7 +6,7 @@ namespace CrossProject.Core
 {
     public class MainCharacterLifetimeScope : LifetimeScope
     {
-        [SerializeField] private MainCharacterClothesSetConfigFacade _mainCharacterSets;
+        [SerializeField] private MainCharacterArmorSetsConfig _mainCharacterSets;
         [SerializeField] private EnergyRestorationConfig _energyRestorationConfig;
         [SerializeField] private HealthRestorationConfig _healthRestorationConfig;
         [SerializeField] private LevelProgressionConfig _levelProgressionConfig;
@@ -42,7 +42,7 @@ namespace CrossProject.Core
 
             builder.Register<MainCharacterAttackInteractionHandler>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<MainCharacterDamageInfoProvider>(Lifetime.Scoped).AsImplementedInterfaces();
-            builder.Register<MainCharacterClothesSetsService>(Lifetime.Scoped).AsImplementedInterfaces();
+            builder.Register<MainCharacterArmorSetsService>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<MainCharacterSharedDataHandler>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<MainCharacterSaveEnergyHandler>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<MainCharacterSaveHealthHandler>(Lifetime.Scoped).AsImplementedInterfaces();

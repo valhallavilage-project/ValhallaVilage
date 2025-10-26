@@ -12,33 +12,33 @@ namespace CrossProject.Core
     {
         private readonly IRestoreHealthHandler _restoreHandler;
         private readonly IHealthHandler _parameterHandler;
-        private readonly IMainCharacterClothesSetsService _mainCharacterClothesSetsService;
+        private readonly IMainCharacterArmorSetsService _mainCharacterArmorSetsService;
 
         public MainCharacterSaveHealthHandler(IRestoreHealthHandler restoreHandler, IHealthHandler parameterHandler,
             GameStateManager gameStateManager, HealthRestorationConfig restorationConfig, ITimeService timeService,
-            IMainCharacterClothesSetsService mainCharacterClothesSetsService)
+            IMainCharacterArmorSetsService mainCharacterArmorSetsService)
             : base(parameterHandler, gameStateManager, restorationConfig, timeService)
         {
             _restoreHandler = restoreHandler;
             _parameterHandler = parameterHandler;
-            _mainCharacterClothesSetsService = mainCharacterClothesSetsService;
+            _mainCharacterArmorSetsService = mainCharacterArmorSetsService;
         }
 
         public override async UniTask Initialize()
         {
-            await UniTask.WaitUntil(() => _mainCharacterClothesSetsService.IsInitialized);
+            await UniTask.WaitUntil(() => _mainCharacterArmorSetsService.IsInitialized);
 
             await base.Initialize();
         }
 
         protected override float GetInitialParameterValue()
         {
-            return _mainCharacterClothesSetsService.GetTotalHealth();
+            return _mainCharacterArmorSetsService.GetTotalHealth();
         }
 
         protected override float GetMaxParameterValue()
         {
-            return _mainCharacterClothesSetsService.GetTotalHealth();
+            return _mainCharacterArmorSetsService.GetTotalHealth();
         }
 
         protected override float GetMinParameterValue()
