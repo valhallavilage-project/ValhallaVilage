@@ -10,17 +10,17 @@ namespace CrossProject.Core
 
     public class DamageReceiver : MonoBehaviour, IDamageReceiver
     {
-        private IHealthHandler _healthHandler;
+        private IDamageReceiveHandler _damageReceiveHandler;
 
         [Inject]
-        public void AddDependencies(IHealthHandler hitHandler)
+        public void AddDependencies(IDamageReceiveHandler damageReceiveHandler)
         {
-            _healthHandler = hitHandler;
+            _damageReceiveHandler = damageReceiveHandler;
         }
 
         public void ReceiveDamage(float damage)
         {
-            _healthHandler.Damage(damage);
+            _damageReceiveHandler.ReceiveDamage(damage);
         }
     }
 }

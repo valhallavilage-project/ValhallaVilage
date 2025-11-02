@@ -27,6 +27,8 @@ namespace CrossProject.Core
 
         private void BindAbilities(IContainerBuilder builder)
         {
+            builder.Register<ReviveAbility>(Lifetime.Scoped).AsImplementedInterfaces();
+            builder.Register<DieAbility>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<AttackAbility>(Lifetime.Scoped).AsImplementedInterfaces();
         }
 
@@ -37,8 +39,6 @@ namespace CrossProject.Core
             builder.Register<EnergyHandler>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<RestoreEnergyHandler>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<ExperienceHandler>(Lifetime.Scoped).AsImplementedInterfaces();
-            builder.Register<ReviveAbility>(Lifetime.Scoped).AsImplementedInterfaces();
-            builder.Register<DieAbility>(Lifetime.Scoped).AsImplementedInterfaces();
 
             builder.Register<MainCharacterAttackInteractionHandler>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<MainCharacterDamageInfoProvider>(Lifetime.Scoped).AsImplementedInterfaces();
@@ -49,6 +49,8 @@ namespace CrossProject.Core
             builder.Register<MainCharacterSaveExperienceHandler>(Lifetime.Scoped).AsImplementedInterfaces();
 
             builder.Register<MainCharacterGlobalParameterChangesHandler>(Lifetime.Scoped).AsImplementedInterfaces();
+            builder.Register<DamageReceiveHandler>(Lifetime.Scoped).AsImplementedInterfaces();
+            builder.Register<AudioService>(Lifetime.Scoped).AsImplementedInterfaces();
         }
 
         private void BindConfigs(IContainerBuilder builder)

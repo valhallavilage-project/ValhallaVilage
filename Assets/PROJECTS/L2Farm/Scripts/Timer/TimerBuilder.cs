@@ -1,3 +1,4 @@
+using CrossProject.Core;
 using CrossProject.Core.Actions;
 using CrossProject.Core.Quests;
 using CrossProject.Core.SaveLoad;
@@ -61,6 +62,13 @@ namespace L2Farm
         public TimerBuilder CorrectPosition(Vector3 position)
         {
             _timerSetupData.WorldPosition = position;
+
+            return this;
+        }
+
+        public TimerBuilder BindSoundFx(AudioData soundFx)
+        {
+            _timerSetupData.SoundFx = soundFx;
 
             return this;
         }

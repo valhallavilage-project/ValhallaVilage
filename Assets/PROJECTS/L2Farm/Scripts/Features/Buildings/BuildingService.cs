@@ -108,6 +108,7 @@ namespace L2Farm.Features.Buildings
                 .BindBuilding(id)
                 .CorrectVfxScale(config.buildingVFXScale)
                 .BindQuest(_buildingSetConfig.GetQuestFor(id))
+                .BindSoundFx(config.buildingSound)
                 .Start();
         }
 

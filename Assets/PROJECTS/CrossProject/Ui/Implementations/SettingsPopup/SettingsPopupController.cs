@@ -46,8 +46,8 @@ namespace CrossProject.Ui.Implementations.SettingsPopup
             {
                 Close = () => _uiService.Close(_popupView),
                 SetZoom = x => _cameraService.Zoom = x,
-                ToggleBGM = _audioManager.ToggleBGM,
-                ToggleSFX = _audioManager.ToggleSFX
+                ToggleBGM = _audioManager.ToggleBackgroundTrack,
+                ToggleSFX = _audioManager.ToggleSfx
             };
             return result;
         }

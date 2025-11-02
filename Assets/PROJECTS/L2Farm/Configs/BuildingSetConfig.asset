@@ -28,6 +28,10 @@ MonoBehaviour:
     questToLaunchOnComplete:
       value: 
     completeBuildingXpReward: 400
+    buildingSound:
+      _clip: {fileID: 8300000, guid: bcaf169ff2afcff4a8f2c9daed529fdb, type: 3}
+      _isLoop: 1
+      _isStopPreviousClip: 0
   - id: Bakery
     sceneId:
       value: L2Farm_FirstTown
@@ -43,6 +47,10 @@ MonoBehaviour:
     questToLaunchOnComplete:
       value: 
     completeBuildingXpReward: 400
+    buildingSound:
+      _clip: {fileID: 8300000, guid: bcaf169ff2afcff4a8f2c9daed529fdb, type: 3}
+      _isLoop: 1
+      _isStopPreviousClip: 0
   - id: Farm
     sceneId:
       value: L2Farm_FirstTown
@@ -58,6 +66,10 @@ MonoBehaviour:
     questToLaunchOnComplete:
       value: Build_Farm_Finish
     completeBuildingXpReward: 400
+    buildingSound:
+      _clip: {fileID: 8300000, guid: bcaf169ff2afcff4a8f2c9daed529fdb, type: 3}
+      _isLoop: 1
+      _isStopPreviousClip: 0
   - id: Fishing
     sceneId:
       value: L2Farm_FirstTown
@@ -73,6 +85,10 @@ MonoBehaviour:
     questToLaunchOnComplete:
       value: 
     completeBuildingXpReward: 400
+    buildingSound:
+      _clip: {fileID: 0}
+      _isLoop: 0
+      _isStopPreviousClip: 0
   - id: House
     sceneId:
       value: L2Farm_FirstTown
@@ -88,6 +104,10 @@ MonoBehaviour:
     questToLaunchOnComplete:
       value: Tutorial_1_Build_Home
     completeBuildingXpReward: 400
+    buildingSound:
+      _clip: {fileID: 8300000, guid: bcaf169ff2afcff4a8f2c9daed529fdb, type: 3}
+      _isLoop: 1
+      _isStopPreviousClip: 0
   - id: Mill
     sceneId:
       value: L2Farm_FirstTown
@@ -103,6 +123,10 @@ MonoBehaviour:
     questToLaunchOnComplete:
       value: Build_Mill
     completeBuildingXpReward: 400
+    buildingSound:
+      _clip: {fileID: 8300000, guid: bcaf169ff2afcff4a8f2c9daed529fdb, type: 3}
+      _isLoop: 1
+      _isStopPreviousClip: 0
   - id: Sawmill
     sceneId:
       value: L2Farm_FirstTown
@@ -118,6 +142,10 @@ MonoBehaviour:
     questToLaunchOnComplete:
       value: Build_Sawmill_Finish
     completeBuildingXpReward: 400
+    buildingSound:
+      _clip: {fileID: 8300000, guid: bcaf169ff2afcff4a8f2c9daed529fdb, type: 3}
+      _isLoop: 1
+      _isStopPreviousClip: 0
   - id: Smithy
     sceneId:
       value: L2Farm_FirstTown
@@ -133,6 +161,10 @@ MonoBehaviour:
     questToLaunchOnComplete:
       value: Build_Smithy
     completeBuildingXpReward: 400
+    buildingSound:
+      _clip: {fileID: 8300000, guid: bcaf169ff2afcff4a8f2c9daed529fdb, type: 3}
+      _isLoop: 1
+      _isStopPreviousClip: 0
   references:
     version: 2
     RefIds:

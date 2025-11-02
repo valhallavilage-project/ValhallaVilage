@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using CrossProject.Core.Audio;
 using CrossProject.Core.Camera;
+using CrossProject.Core.Interactions;
 using CrossProject.Core.Skins;
 using CrossProject.Core.SpawnPoints;
 using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Linq;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.AI;
 using VContainer;
@@ -25,6 +28,7 @@ namespace CrossProject.Core.SimpleMovement
         [SerializeField] private float deceleration = 10f;
         [SerializeField, Range(0, 180)] private float instantTurnAngle = 90f;
         [SerializeField] private Transform skinRoot;
+        [SerializeField][FoldoutGroup("Sounds")] private AudioClip _steps;
 
         private NavMeshAgent _playerNavMeshAgent;
         private Transform _transform;
@@ -35,6 +39,8 @@ namespace CrossProject.Core.SimpleMovement
 
         private static readonly int Speed = Animator.StringToHash("Speed");
         private readonly HashSet<Type> _blockers = new();
+        private IMainCharacterMovingHandler _movingHandler;
+        private bool _isIdling;
 
         public bool IsBlocked => _blockers.Count > 0;
         public Vector3 Velocity => _playerNavMeshAgent.velocity;
@@ -69,13 +75,18 @@ namespace CrossProject.Core.SimpleMovement
             CameraService cameraService,
             IJoystickValueProvider joystickValueProvider,
             SpawnPointService spawnPointService,
-            IMainCharacterGlobalArmorSetChangeHandler armorSetsService)
+            IMainCharacterGlobalArmorSetChangeHandler armorSetsService,
+            IMainCharacterMovingHandler movingHandler,
+            IInteractionHandler interactionHandler)
         {
+            _movingHandler = movingHandler;
             _cameraService = cameraService;
             _joystick = joystickValueProvider;
             _spawnPointService = spawnPointService;
             
             armorSetsService.ArmorSetChanged.WithoutCurrent().ForEachAsync(ArmorSetChanged, gameObject.GetCancellationTokenOnDestroy()).Forget();
+            interactionHandler.InteractionStarted.WithoutCurrent().ForEachAsync(InteractionStarted, gameObject.GetCancellationTokenOnDestroy()).Forget();
+            interactionHandler.InteractionFinished.WithoutCurrent().ForEachAsync(InteractionFinished, gameObject.GetCancellationTokenOnDestroy()).Forget();
         }
 
         public void Tick()
@@ -103,6 +114,17 @@ namespace CrossProject.Core.SimpleMovement
                 _currentVelocity = inputDir * currentSpeed;
             }
 
+            if (currentSpeed == 0 && !_isIdling)
+            {
+                _isIdling = true;
+                _movingHandler.StopMove();
+            }
+            else if (currentSpeed > 0 && _isIdling)
+            {
+                _isIdling = false;
+                _movingHandler.BeginMove();
+            }
+
             _playerNavMeshAgent.velocity = _currentVelocity;
             _playerNavMeshAgent.nextPosition = _transform.position + _currentVelocity * Time.deltaTime;
             _transform.position = _playerNavMeshAgent.nextPosition;
@@ -118,7 +140,11 @@ namespace CrossProject.Core.SimpleMovement
         {
             var direction = target - _transform.position;
             if (direction != Vector3.zero)
+            {
                 _transform.forward = direction;
+                _isIdling = false;
+            }
+
             _playerNavMeshAgent.SetDestination(target);
             LocalAccessCurrentSkin.Animator.SetFloat(Speed, 1);
             await UniTask.WaitUntil(() => !_playerNavMeshAgent.pathPending &&
@@ -141,6 +167,16 @@ namespace CrossProject.Core.SimpleMovement
         private void ArmorSetChanged(MainCharacterArmorSetType armorSet)
         {
             LocalAccessCurrentSkin.SelectSet(armorSet);
+        }
+
+        private void InteractionStarted(InteractionType interaction)
+        {
+            LocalAccessCurrentSkin.ActivateTool(interaction);
+        }
+
+        private void InteractionFinished(InteractionType interaction)
+        {
+            LocalAccessCurrentSkin.DeactivateTool();
         }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace CrossProject.Core
@@ -7,11 +8,13 @@ namespace CrossProject.Core
     public struct AudioData
     {
         [SerializeField] private AudioClip _clip;
-        [SerializeField] private float _volume;
-        [SerializeField] private float _pitch;
+        [SerializeField] private bool _isLoop;
+        [SerializeField] [HideIf(nameof(_isLoop))] private bool _isStopPreviousClip;
 
         public AudioClip Clip => _clip;
-        public float Volume => _volume;
-        public float Pitch => _pitch;
+        public bool IsLoop => _isLoop;
+        public bool IsStopPreviousClip => _isStopPreviousClip;
+
+        public bool IsEmpty => _clip == null;
     }
 }

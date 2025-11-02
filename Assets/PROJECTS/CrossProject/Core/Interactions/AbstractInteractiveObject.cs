@@ -9,7 +9,7 @@ namespace CrossProject.Core.Interactions
         public float interactionDistance = 1;
         public float interactionDuration;
         public Sprite buttonSprite;
-        public InteractionAnimation animation;
+        public InteractionType animation;
 
         [SerializeField] protected GameObject viewRoot;
         [SerializeField] private GameObject highLight;

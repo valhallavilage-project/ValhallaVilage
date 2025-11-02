@@ -2494,12 +2494,196 @@ PrefabInstance:
       value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _receiveDamage._clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 8bc67e56d45e361468fd95842d921454, type: 3}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _receiveDamage._pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _receiveDamage._volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
       propertyPath: _data._serializedList.Array.size
-      value: 0
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
       propertyPath: _data._serializedList.Array.data[0].Key
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[1].Key
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[2].Key
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[3].Key
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[4].Key
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[5].Key
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[6].Key
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[7].Key
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[8].Key
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[0].Value._clip
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[1].Value._clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 503335ad4b1791f4aa89002b477ecf39, type: 3}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[2].Value._clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 503335ad4b1791f4aa89002b477ecf39, type: 3}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[3].Value._clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 503335ad4b1791f4aa89002b477ecf39, type: 3}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[4].Value._clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 503335ad4b1791f4aa89002b477ecf39, type: 3}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[5].Value._clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 503335ad4b1791f4aa89002b477ecf39, type: 3}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[6].Value._clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4d848eba3a6dd16448fd2ef001366688, type: 3}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[7].Value._clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 51d72c461ef537e49ac782ee9f568ac3, type: 3}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[8].Value._clip
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[0].Value._pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[1].Value._pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[2].Value._pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[3].Value._pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[4].Value._pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[5].Value._pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[6].Value._pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[0].Value._isLoop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[0].Value._volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[1].Value._isLoop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[1].Value._volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[2].Value._isLoop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[2].Value._volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[3].Value._isLoop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[3].Value._volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[4].Value._isLoop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[4].Value._volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[5].Value._isLoop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[5].Value._volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[6].Value._volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[0].Value._isStopPreviousClip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[4].Value._isStopPreviousClip
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[5].Value._isStopPreviousClip
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[6].Value._isStopPreviousClip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[7].Value._isStopPreviousClip
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8917614266890597975, guid: 3b21045f701005542a8588b2ff413744, type: 3}
+      propertyPath: _data._serializedList.Array.data[8].Value._isStopPreviousClip
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
