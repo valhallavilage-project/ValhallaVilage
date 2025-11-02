@@ -31,9 +31,9 @@ namespace CrossProject.Core
             return UniTask.CompletedTask;
         }
 
-        private void InteractionStarted(InteractionAnimation interaction)
+        private void InteractionStarted(InteractionType interaction)
         {
-            if (interaction != InteractionAnimation.Attack)
+            if (interaction != InteractionType.Attack)
             {
                 return;
             }
@@ -41,9 +41,9 @@ namespace CrossProject.Core
             _attackAbility.BeginAttack();
         }
 
-        private void InteractionFinished(InteractionAnimation interaction)
+        private void InteractionFinished(InteractionType interaction)
         {
-            if (interaction != InteractionAnimation.Attack)
+            if (interaction != InteractionType.Attack)
             {
                 return;
             }

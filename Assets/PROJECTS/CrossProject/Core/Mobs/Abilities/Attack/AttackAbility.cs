@@ -4,8 +4,8 @@ namespace CrossProject.Core
 {
     public interface IAttackAbility
     {
-        IReadOnlyAsyncReactiveProperty<bool> AttackBegin { get; }
-        IReadOnlyAsyncReactiveProperty<bool> AttackEnd { get; }
+        IReadOnlyAsyncReactiveProperty<Invoker> AttackBegin { get; }
+        IReadOnlyAsyncReactiveProperty<Invoker> AttackEnd { get; }
         
         void BeginAttack();
         void EndAttack();
@@ -13,20 +13,20 @@ namespace CrossProject.Core
 
     public class AttackAbility : IAttackAbility
     {
-        private readonly AsyncReactiveProperty<bool> _attackBegin = new(default);
-        private readonly AsyncReactiveProperty<bool> _attackEnd = new(default);
+        private readonly AsyncReactiveProperty<Invoker> _attackBegin = new(default);
+        private readonly AsyncReactiveProperty<Invoker> _attackEnd = new(default);
 
-        public IReadOnlyAsyncReactiveProperty<bool> AttackBegin => _attackBegin;
-        public IReadOnlyAsyncReactiveProperty<bool> AttackEnd => _attackEnd;
+        public IReadOnlyAsyncReactiveProperty<Invoker> AttackBegin => _attackBegin;
+        public IReadOnlyAsyncReactiveProperty<Invoker> AttackEnd => _attackEnd;
         
         public void BeginAttack()
         {
-            _attackBegin.Value = true;
+            _attackBegin.Invoke();
         }
 
         public void EndAttack()
         {
-            _attackEnd.Value = true;
+            _attackEnd.Invoke();
         }
     }
 }

@@ -97,6 +97,8 @@ MonoBehaviour:
       Value:
         _armorMesh: {fileID: 8560592724372423027}
         _weaponMesh: {fileID: 9013823204865114590}
+  _axeMesh: {fileID: 0}
+  _pickAxeMesh: {fileID: 0}
 --- !u!114 &4858107233024246284
 MonoBehaviour:
   m_ObjectHideFlags: 0

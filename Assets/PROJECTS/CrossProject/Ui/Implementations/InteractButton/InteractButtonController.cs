@@ -54,7 +54,7 @@ namespace CrossProject.Ui.Implementations.InteractButton
             _joystickController.AddBlock(GetType());
             _simpleMovementController.AddBlock(GetType());
             await _simpleMovementController.MoveTo(_interactionHandler.Closest.Value.transform.position, cancellationToken, _interactionHandler.Closest.Value.interactionDistance);
-            await _interactionHandler.Interact();
+            await _interactionHandler.QueueInteraction();
             _interactionHandler.RemoveBlock(GetType());
             _joystickController.RemoveBlock(GetType());
             _simpleMovementController.RemoveBlock(GetType());

@@ -213,6 +213,10 @@ PrefabInstance:
       propertyPath: m_Extents.z
       value: 2.75
       objectReference: {fileID: 0}
+    - target: {fileID: 5515660737414241578, guid: 862ae5e2f85c0491fad751ad5724a0cb, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1bc981490a0eb804787218979ba995ac, type: 3}
     - target: {fileID: 6641572915589553689, guid: 862ae5e2f85c0491fad751ad5724a0cb, type: 3}
       propertyPath: m_IsActive
       value: 0

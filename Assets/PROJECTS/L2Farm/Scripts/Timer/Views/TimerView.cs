@@ -17,6 +17,7 @@ namespace L2Farm
         [SerializeField] private Transform uiRoot;
         [SerializeField] private TMP_Text timerLabel;
         [SerializeField] private Image progressBar;
+        [SerializeField] private AudioSource audioSource;
 
         private CameraService _cameraService;
         private ITimersHandler _timersHandler;
@@ -46,6 +47,13 @@ namespace L2Farm
 
             _cameraService.AlignWithCamera(uiRoot);
 
+            if (!data.SoundFx.IsEmpty)
+            {
+                audioSource.clip = data.SoundFx.Clip;
+                audioSource.loop = data.SoundFx.IsLoop;
+                audioSource.Play();
+            }
+
             var linkedCts = CancellationTokenSource.CreateLinkedTokenSource(gameObject.GetCancellationTokenOnDestroy(), _elapsedCts.Token);
 
             _timersHandler.TimerElapsed.WithoutCurrent().Where(id => id.Equals(timerId)).ForEachAsync(Elapsed, linkedCts.Token).Forget();
@@ -56,6 +64,7 @@ namespace L2Farm
             progressBar.fillAmount = 1;
             timerLabel.text = "DONE";
             progressBar.color = Color.green;
+            audioSource.Stop();
             
             _elapsedCts.Cancel();
             _elapsedCts.Dispose();

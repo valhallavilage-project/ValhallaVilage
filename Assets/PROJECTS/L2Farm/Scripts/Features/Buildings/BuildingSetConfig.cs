@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using CrossProject.Core;
 using CrossProject.Core.Conditions;
 using CrossProject.Core.Quests;
 using CrossProject.Core.SpawnPoints;
@@ -55,5 +56,8 @@ namespace L2Farm.Features.Buildings
 
         [FoldoutGroup("$id")]
         public float completeBuildingXpReward = 400;
+
+        [FoldoutGroup("$id")]
+        public AudioData buildingSound;
     }
 }

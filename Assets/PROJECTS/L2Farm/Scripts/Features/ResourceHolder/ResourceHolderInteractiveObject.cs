@@ -1,7 +1,6 @@
 using CrossProject.Core;
 using CrossProject.Core.InGameResources;
 using CrossProject.Core.Interactions;
-using CrossProject.Core.SaveLoad;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
@@ -15,7 +14,6 @@ namespace L2Farm.Features.ResourceHolder
         [SerializeField] private ResourceContent content;
         [SerializeField] private int energyRequired;
         [SerializeField] private int respawnInSeconds = 60;
-        [SerializeField] private AudioSource audio;
         [SerializeField] private NavMeshObstacle obstacle;
         [SerializeField] private float _experienceReward = 5;
 
@@ -55,7 +53,6 @@ namespace L2Farm.Features.ResourceHolder
         {
             _resourcesService.ChangeResourceValue(content.Resource, content.Amount);
 
-            audio.Play();
             DOTween.Kill(this);
             await viewRoot.transform.DOScale(new Vector3(1.5f, 1.5f, 1.5f), 0.2f);
             await viewRoot.transform.DOScale(Vector3.zero, 0.2f);

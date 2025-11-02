@@ -29,7 +29,7 @@ namespace CrossProject.Core.Interactions
             _experienceHandler = experienceHandler;
 
             dieAbility.DeathBegan.Listen(MainCharacterDeathBegan, gameObject.GetCancellationTokenOnDestroy());
-            interactionHandler.InteractionLaunched.WithoutCurrent().ForEachAwaitAsync(Interact, gameObject.GetCancellationTokenOnDestroy()).Forget();
+            interactionHandler.InteractionQueued.WithoutCurrent().ForEachAwaitAsync(Interact, gameObject.GetCancellationTokenOnDestroy()).Forget();
         }
 
         private void MainCharacterDeathBegan()
@@ -118,7 +118,7 @@ namespace CrossProject.Core.Interactions
         {
             var animationName = _interactionHandler.Closest.Value.animation;
 
-            if (animationName != InteractionAnimation.Talk)
+            if (animationName != InteractionType.Talk)
             {
                 _playerSkinProvider.CurrentSkin.Animator.SetBool(animationName.ToString(), true);
                 _interactionHandler.StartInteraction(animationName);
@@ -126,14 +126,14 @@ namespace CrossProject.Core.Interactions
 
             IResourceData resourceData = null;
 
-            if (animationName is InteractionAnimation.Chop or InteractionAnimation.Gather or InteractionAnimation.Pickaxe)
+            if (animationName is InteractionType.Chop or InteractionType.Gather or InteractionType.Pickaxe)
             {
                 resourceData = _interactionHandler.Closest.Value as IResourceData;
             }
 
             await _interactionHandler.Closest.Value.Interaction();
 
-            if (animationName is InteractionAnimation.Chop or InteractionAnimation.Gather or InteractionAnimation.Pickaxe
+            if (animationName is InteractionType.Chop or InteractionType.Gather or InteractionType.Pickaxe
                 && resourceData != null)
             {
                 _energyHandler.Spend(resourceData.EnergyRequired);
@@ -144,12 +144,12 @@ namespace CrossProject.Core.Interactions
                 _experienceHandler.GainXp(experienceGiver.PerformedTaskExperience);
             }
 
-            if (animationName != InteractionAnimation.Attack)
+            if (animationName != InteractionType.Attack)
             {
                 _interactionHandler.Closest.Value.Deselect();
             }
 
-            if (animationName != InteractionAnimation.Talk)
+            if (animationName != InteractionType.Talk)
             {
                 _playerSkinProvider.CurrentSkin.Animator.SetBool(animationName.ToString(), false);
                 _interactionHandler.FinishInteraction(animationName);

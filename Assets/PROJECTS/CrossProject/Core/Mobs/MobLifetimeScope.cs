@@ -94,6 +94,8 @@ namespace CrossProject.Core
         {
             builder.Register<HealthHandler>(Lifetime.Scoped).AsImplementedInterfaces();
             builder.Register<MobDamageInfoProvider>(Lifetime.Scoped).AsImplementedInterfaces();
+            builder.Register<DamageReceiveHandler>(Lifetime.Scoped).AsImplementedInterfaces();
+            builder.Register<AudioService>(Lifetime.Scoped).AsImplementedInterfaces();
         }
     }
 }

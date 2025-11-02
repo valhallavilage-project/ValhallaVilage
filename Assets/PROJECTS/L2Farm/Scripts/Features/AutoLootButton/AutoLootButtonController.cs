@@ -59,7 +59,7 @@ namespace L2Farm.Scripts.AutoLootButton
                     break;
 
                 await _simpleMovementController.MoveTo(_interactionHandler.Closest.Value.transform.position, cancellationToken, _interactionHandler.Closest.Value.interactionDistance);
-                await _interactionHandler.Interact();
+                await _interactionHandler.QueueInteraction();
 
                 await UniTask.DelayFrame(1, PlayerLoopTiming.PostLateUpdate, cancellationToken);
             }
