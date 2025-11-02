@@ -62,6 +62,7 @@ namespace CrossProject.Core
         public void Stop()
         {
             _audioSource.Stop();
+            _audioSource.clip = null;
         }
     }
 }
