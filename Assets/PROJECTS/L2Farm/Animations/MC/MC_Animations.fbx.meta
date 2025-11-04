@@ -104,6 +104,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Tool_Sword_Skin2
     second: {fileID: 2100000, guid: b6e32cf450b142942ada892ed7399d79, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: axe
+    second: {fileID: 2100000, guid: 9cbaeeee5516af34ea34998cb2048330, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
