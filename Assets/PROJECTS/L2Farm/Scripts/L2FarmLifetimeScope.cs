@@ -250,6 +250,7 @@ namespace L2Farm.Scripts
             builder.Register<TimePotionConsumeHandler>(Lifetime.Singleton).AsImplementedInterfaces();
             
             builder.Register<AudioSettings>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<MobsSpawnsService>(Lifetime.Singleton).AsImplementedInterfaces();
 
             RegisterConditionsAndActions(builder);
             

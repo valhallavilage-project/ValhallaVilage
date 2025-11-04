@@ -1,8 +1,7 @@
 using System;
 using Cysharp.Threading.Tasks;
-using Cysharp.Threading.Tasks.Linq;
-using Cysharp.Threading.Tasks.Triggers;
 using UnityEngine;
+using VContainer;
 using Random = UnityEngine.Random;
 
 namespace CrossProject.Core
@@ -14,14 +13,28 @@ namespace CrossProject.Core
         [SerializeField] private float _spawnRadius = 5f;
         [SerializeField] private float _spawnInterval = 2f;
         [SerializeField] private int _maxMobs = 10;
+        [SerializeField] private bool _isMobsFiniteAmount;
         [SerializeField] private SphereCollider _roamZone;
         [SerializeField] private SphereCollider _agroZone;
+        [SerializeField] private string _id;
 
         private MobsPool _pool;
         private int _spawnedMobs;
-        
+        private IMobsSpawnsService _mobsSpawnsService;
+
         public SphereCollider AgroZone => _agroZone;
         public SphereCollider RoamZone => _roamZone;
+
+        [Inject]
+        private void AddDependencies(IMobsSpawnsService mobsSpawnsService)
+        {
+            _mobsSpawnsService = mobsSpawnsService;
+
+            if (_isMobsFiniteAmount)
+            {
+                _spawnedMobs = _mobsSpawnsService.GetMobsSpawned(_id);
+            }
+        }
 
         private void Awake()
         {
@@ -41,9 +54,10 @@ namespace CrossProject.Core
                 if (_spawnedMobs >= _maxMobs)
                 {
                     await UniTask.Yield();
+
                     continue;
                 }
-                
+
                 await UniTask.Delay(TimeSpan.FromSeconds(_spawnInterval), cancellationToken: gameObject.GetCancellationTokenOnDestroy());
 
                 if (_spawnedMobs >= _maxMobs)
@@ -57,7 +71,7 @@ namespace CrossProject.Core
 
         private void SpawnMob()
         {
-            var randomPos = transform.position + Random.insideUnitSphere*_spawnRadius;
+            var randomPos = transform.position + Random.insideUnitSphere * _spawnRadius;
             randomPos.y = transform.position.y;
 
             var mobComponent = _pool.Get();
@@ -68,11 +82,19 @@ namespace CrossProject.Core
             mobComponent.BindSpawnPoint(this);
 
             _spawnedMobs++;
+
+            if (_isMobsFiniteAmount)
+            {
+                _mobsSpawnsService.IncrementSpawnedMob(_id);
+            }
         }
 
         public void RemoveMob()
         {
-            _spawnedMobs--;
+            if (!_isMobsFiniteAmount)
+            {
+                _spawnedMobs--;
+            }
         }
 
         private void OnValidate()
@@ -83,6 +105,14 @@ namespace CrossProject.Core
             }
 
             _roamZone.radius = _spawnRadius;
+
+#if UNITY_EDITOR
+            if (string.IsNullOrEmpty(_id) && !Application.isPlaying && !UnityEditor.PrefabUtility.IsPartOfPrefabAsset(this) &&
+                UnityEditor.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage() == null)
+            {
+                _id = Guid.NewGuid().ToString();
+            }
+  #endif
         }
     }
 }
