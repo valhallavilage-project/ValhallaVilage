@@ -27,6 +27,16 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: MC_Female_Body_Skin3
+    second: {fileID: 2100000, guid: fcb97ba5254a9ac4b8112e3a5b5b2341, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MC_Female_Body_Skin5
+    second: {fileID: 2100000, guid: 2d8c6b649b991724b8aa3695f1345c67, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: MC_Female_Head
     second: {fileID: 2100000, guid: 05c984b84b8b1d644ac38b1e755816e4, type: 2}
   - first:
@@ -52,6 +62,16 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: MC_Male_Body_Skin3
+    second: {fileID: 2100000, guid: fcb97ba5254a9ac4b8112e3a5b5b2341, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MC_Male_Body_Skin5
+    second: {fileID: 2100000, guid: 2d8c6b649b991724b8aa3695f1345c67, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: MC_Male_Head
     second: {fileID: 2100000, guid: a8a955edc5efc477096908e72093eb14, type: 2}
   - first:
@@ -62,8 +82,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Tool_Sword_S1
+    second: {fileID: 2100000, guid: 051eee90381cbf44ea4d8da9f681a9ce, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Tool_Sword_S2
     second: {fileID: 2100000, guid: b6e32cf450b142942ada892ed7399d79, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tool_Sword_S3
+    second: {fileID: 2100000, guid: 34a14d3ec1fc27f4caf01ad1df179b53, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
