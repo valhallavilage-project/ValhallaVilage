@@ -17,6 +17,10 @@ PrefabInstance:
       value: WolfSpawner
       objectReference: {fileID: 0}
     - target: {fileID: 1912891978903675311, guid: 2ed3d7fed72b84f438722414c4e62e19, type: 3}
+      propertyPath: _id
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1912891978903675311, guid: 2ed3d7fed72b84f438722414c4e62e19, type: 3}
       propertyPath: _maxMobs
       value: 6
       objectReference: {fileID: 0}

@@ -65,6 +65,7 @@ GameObject:
   - component: {fileID: 1912891978903675311}
   - component: {fileID: 246349359930359583}
   - component: {fileID: 5525098901684890126}
+  - component: {fileID: 5459934425037048158}
   m_Layer: 0
   m_Name: MobSpawner
   m_TagString: Untagged
@@ -103,7 +104,10 @@ MonoBehaviour:
   _spawnRadius: 10
   _spawnInterval: 2
   _maxMobs: 10
+  _isMobsFiniteAmount: 0
+  _roamZone: {fileID: 5525098901684890126}
   _agroZone: {fileID: 2003520452258206860}
+  _id: 
 --- !u!114 &246349359930359583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,6 +125,7 @@ MonoBehaviour:
   activatePrewarmedElements: 0
   activateOnGet: 1
   autoExtend: 1
+  _elementsParent: {fileID: 0}
   reuse: 0
   maxCount: 1
 --- !u!135 &5525098901684890126
@@ -144,3 +149,20 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5459934425037048158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1350937362474062329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b2c62ac3bcd44fb9e09835581422057, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentReference:
+    TypeName: L2Farm.Scripts.L2FarmLifetimeScope
+  autoRun: 1
+  autoInjectGameObjects:
+  - {fileID: 1350937362474062329}
