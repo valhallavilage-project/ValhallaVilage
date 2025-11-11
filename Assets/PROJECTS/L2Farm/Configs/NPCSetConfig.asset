@@ -73,3 +73,9 @@ MonoBehaviour:
     defaultSpawnPoint:
       value: NPC_Cooper
     prefab: {fileID: 5111460455862272033, guid: b001fbf978c4a4843859306ea0e43154, type: 3}
+  - id: Vendor
+    characterId:
+      value: Npc_Vendor
+    defaultSpawnPoint:
+      value: NPC_Vendor
+    prefab: {fileID: 3394070386784087573, guid: 25c31a146601818408ef6b0379b6c6e7, type: 3}

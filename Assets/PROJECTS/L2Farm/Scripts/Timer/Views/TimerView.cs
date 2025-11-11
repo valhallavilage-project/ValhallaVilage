@@ -1,7 +1,6 @@
 using System.Threading;
 using CrossProject.Core.Camera;
 using CrossProject.Core.Pooling;
-using CrossProject.Extensions;
 using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Linq;
 using TMPro;

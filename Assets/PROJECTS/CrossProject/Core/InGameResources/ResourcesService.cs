@@ -9,8 +9,9 @@ namespace CrossProject.Core.InGameResources
     public interface IResourcesService
     {
         Sprite GetSprite(ResourceId id);
-        void ChangeResourceValue(ResourceId resourceId, int value);
+        void SetNewResourceValue(ResourceId resourceId, int value);
         IReadOnlyAsyncReactiveProperty<(ResourceId, int)> ResourceChanged { get; }
+        void ChangeResource(ResourceId resourceId, int changeValue);
     }
 
     public class ResourcesService : IResourcesService, IInitializable
@@ -37,28 +38,29 @@ namespace CrossProject.Core.InGameResources
             IsInitialized = true;
         }
 
-        public void ChangeResourceValue(ResourceId resourceId, int value)
+        public void SetNewResourceValue(ResourceId resourceId, int value)
         {
             var part = _gameStateManager.State.Get<ResourceContentPart>();
-            part.Edit(resourceId, value);
-            _gameStateManager.Save();
 
-            _resourceChanged.Value = (resourceId, value);
+            var oldValue = part.Get(resourceId);
+
+            ChangeResource(resourceId, value - oldValue);
         }
 
         public void IncreaseResourceValue(ResourceId resourceId)
         {
-            var part = _gameStateManager.State.Get<ResourceContentPart>();
-            part.Edit(resourceId, 1);
-            _gameStateManager.Save();
-
-            _resourceChanged.Value = (resourceId, 1);
+            ChangeResource(resourceId, 1);
         }
 
         public void DecreaseResourceValue(ResourceId resourceId)
         {
+            ChangeResource(resourceId, -1);
+        }
+
+        public void ChangeResource(ResourceId resourceId, int changeValue)
+        {
             var part = _gameStateManager.State.Get<ResourceContentPart>();
-            part.Edit(resourceId, -1);
+            part.Edit(resourceId, changeValue);
 
             if (part.Resources[resourceId] <= 0)
             {
@@ -67,7 +69,7 @@ namespace CrossProject.Core.InGameResources
             
             _gameStateManager.Save();
 
-            _resourceChanged.Value = (resourceId, -1);
+            _resourceChanged.Value = (resourceId, changeValue);
         }
 
         public Sprite GetSprite(ResourceId id)

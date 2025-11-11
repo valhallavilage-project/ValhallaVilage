@@ -19,20 +19,20 @@ namespace L2Farm.Features.SimpleMonolog
 
         public bool IsAvailableToGet { get; private set; }
 
-        public void SetVisuals(ConditionResourceData data)
+        public void Setup(ConditionResourceData data)
         {
             icon.sprite = data.Icon;
 
             switch (data.ResourcesType)
             {
                 case MonologResourcesType.Demand:
-                    background.color = data.MainCharacterAmount >= data.Amount ? _enough : _notEnough;
-                    count.text = $"{data.MainCharacterAmount}/{data.Amount}";
+                    background.color = data.MainCharacterAmount >= data.Count ? _enough : _notEnough;
+                    count.text = $"{data.MainCharacterAmount}/{data.Count}";
 
                     break;
                 case MonologResourcesType.Give:
                     background.color = _give;
-                    count.text = $"{data.Amount}";
+                    count.text = $"{data.Count}";
 
                     break;
                 default:

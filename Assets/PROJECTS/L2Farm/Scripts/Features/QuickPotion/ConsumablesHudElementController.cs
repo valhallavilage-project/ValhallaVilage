@@ -23,7 +23,7 @@ namespace L2Farm
         public bool IsInitialized { get; private set; }
 
         public ConsumablesHudElementController(UiService uiService, GameStateManager gameStateManager,
-            IMainCharacterGlobalPotionConsumeHandler mainCharacterPotionConsumeHandler, ResourcesService resourcesService)
+            IMainCharacterGlobalPotionConsumeHandler mainCharacterPotionConsumeHandler, IResourcesService resourcesService)
         {
             _uiService = uiService;
             _gameStateManager = gameStateManager;

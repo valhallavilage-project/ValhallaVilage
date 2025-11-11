@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using CrossProject.Extensions;
 using CrossProject.Ui.Core;
 using UnityEngine;
 using UnityEngine.UI;

@@ -37,12 +37,12 @@ namespace L2Farm.Features
             _components.Add(_productionItem);
         }
 
-        public void Init(ActiveQuestsScreenModel model, QuestConfig config, QuestItemType questType,
+        public void Setup(ActiveQuestsScreenModel model, QuestConfig config, QuestItemType questType,
             ItemRequirementPool itemRequirementPool)
         {
             _itemRequirementPool = itemRequirementPool;
+            
             TurnOffElements();
-
             InitializeContent(model, config, questType);
         }
 
@@ -91,7 +91,6 @@ namespace L2Farm.Features
             if (config.launchActions.FirstOrDefault(a => a is SpawnNPCActionConfig) is SpawnNPCActionConfig npcAction)
             {
                 var characterId = _npcConfig.items.First(npc => npc.id == npcAction.npcId).characterId;
-
                 var characterConfig = _charactersConfig.items.First(ch => ch.id == characterId);
 
                 _npcImage.sprite = characterConfig.portrait;
@@ -107,14 +106,13 @@ namespace L2Farm.Features
             _itemRequirementsPanel.gameObject.SetActive(true);
 
             var step = model.QuestService.GetCurrentStepFor(config.id);
-
             var resources = model.ResourceConditionService.ProcessConditionResources(config.id, step);
 
             foreach (var resourceData in resources)
             {
                 var item = _itemRequirementPool.Get();
 
-                item.SetVisuals(resourceData);
+                item.Setup(resourceData);
                 item.transform.SetParent(_itemRequirementsPanel.transform);
 
                 _itemRequirements.Add(item);

@@ -93,6 +93,7 @@ namespace L2Farm.Scripts
             builder.Register<ShowMonologAction>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<LaunchQuestAction>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<LoseQuestAction>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            builder.Register<OpenTradeScreenAction>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
 
             builder.Register<ActionService>(Lifetime.Singleton)
                 .AsSelf()
@@ -235,6 +236,8 @@ namespace L2Farm.Scripts
             builder.Register<MainCharacterDeathScreenController>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             builder.Register<ConsumablesHudElementController>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<ConfirmPopupController>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<TradeScreenController>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<SoftCurrencyHudElementController>(Lifetime.Singleton).AsImplementedInterfaces();
 
             builder.Register<MainCharacterGlobalFacade>(Lifetime.Singleton).AsImplementedInterfaces();
             
@@ -251,6 +254,9 @@ namespace L2Farm.Scripts
             
             builder.Register<AudioSettings>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<MobsSpawnsService>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<SoftCurrencyHolder>(Lifetime.Singleton).AsImplementedInterfaces();
+            
+            builder.Register<GlobalOpenTradeScreenHandler>(Lifetime.Singleton).AsImplementedInterfaces();
 
             RegisterConditionsAndActions(builder);
             

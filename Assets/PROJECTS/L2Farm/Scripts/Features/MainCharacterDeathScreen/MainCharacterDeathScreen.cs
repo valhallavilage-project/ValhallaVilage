@@ -1,4 +1,3 @@
-using CrossProject.Extensions;
 using CrossProject.Ui.Core;
 using UnityEngine;
 using UnityEngine.UI;

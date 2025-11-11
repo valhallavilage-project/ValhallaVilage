@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4371797627301771392}
   - component: {fileID: 5443214668893783672}
   m_Layer: 5
-  m_Name: ArmorTearButton
+  m_Name: ArmorTierButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

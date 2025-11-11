@@ -77,6 +77,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9f04415f18dd25a4a8ed9fa2cb008a9e
+    m_Address: TradeScreen
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a67e2c4db06434032a171a3fd285964a
     m_Address: NoInternetScreen
     m_ReadOnly: 0
@@ -89,6 +94,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c280f40aa18e341d6bee2401b9f16824
     m_Address: L2Farm_Joystick
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c8dc4d4fe637f2e438332d86d2833f9d
+    m_Address: SoftCurrencyHudElement
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

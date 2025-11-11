@@ -51,7 +51,7 @@ namespace L2Farm.Features.ResourceHolder
 
         protected override async UniTask AfterInteraction()
         {
-            _resourcesService.ChangeResourceValue(content.Resource, content.Amount);
+            _resourcesService.SetNewResourceValue(content.Resource, content.Amount);
 
             DOTween.Kill(this);
             await viewRoot.transform.DOScale(new Vector3(1.5f, 1.5f, 1.5f), 0.2f);

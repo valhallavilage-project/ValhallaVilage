@@ -1,5 +1,4 @@
-﻿using CrossProject.Extensions;
-using CrossProject.Ui.Core;
+﻿using CrossProject.Ui.Core;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -36,7 +35,7 @@ namespace L2Farm.Features.SimpleMonolog
                 foreach (var data in Model.resourcesData)
                 {
                     var instance = Instantiate(_itemRequirementPrefab, _rootForItemRequirements);
-                    instance.SetVisuals(data);
+                    instance.Setup(data);
                 }
             }
         }

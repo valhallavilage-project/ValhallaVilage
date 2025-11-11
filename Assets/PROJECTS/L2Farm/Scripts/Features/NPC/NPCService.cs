@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CrossProject.Core;
+using CrossProject.Core.Actions;
 using CrossProject.Core.Quests;
 using CrossProject.Core.SpawnPoints;
 using Cysharp.Threading.Tasks;
@@ -18,14 +19,17 @@ namespace L2Farm.Features.NPC
         private NPCSetConfig _npcSetConfig;
 
         private Dictionary<NPCId, (SpawnPointId spawnPointId, NPCInteractiveObject instance)> _npcs = new ();
+        private ActionService _actionService;
 
         public bool IsInitialized { get; private set; }
 
         public NPCService(
             AddressablesManager addressablesManager,
             SpawnPointService spawnPointService,
-            QuestService questService)
+            QuestService questService,
+            ActionService actionService)
         {
+            _actionService = actionService;
             _addressablesManager = addressablesManager;
             _spawnPointService = spawnPointService;
             _questService = questService;
@@ -61,7 +65,7 @@ namespace L2Farm.Features.NPC
                 var spawnPointRotation = _spawnPointService.GetEulerAngles(spawnPointId);
                 var instance = Object.Instantiate(config.prefab, spawnPointPosition, Quaternion.Euler(spawnPointRotation));
                 var component = instance.GetComponent<NPCInteractiveObject>();
-                component.SetQuest(questId, _questService);
+                component.SetQuest(questId, _questService, _actionService);
                 _npcs[id] = (spawnPointId, component);
                 //Debug.Log($"[{nameof(NPCService)}] : Spawned NPC with id : {id} at {spawnPointId} with quest :{questId}.");
                 return;
@@ -69,7 +73,7 @@ namespace L2Farm.Features.NPC
 
             if (pair.instance.CurrentQuestId != questId)
             {
-                pair.instance.SetQuest(questId, _questService);
+                pair.instance.SetQuest(questId, _questService, _actionService);
                 Debug.Log($"[{nameof(NPCService)}] : Updated quest for {id} at {spawnPointId} with : {questId}.");
             }
         }
