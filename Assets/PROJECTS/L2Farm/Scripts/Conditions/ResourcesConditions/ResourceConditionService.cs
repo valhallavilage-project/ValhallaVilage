@@ -53,7 +53,7 @@ namespace L2Farm
                         {
                             Icon = _resourcesService.GetSprite(resourceCondition.Id),
                             MainCharacterAmount = _gameStateManager.State.Get<ResourceContentPart>().Get(resourceCondition.Id),
-                            Amount = resourceCondition.NeededAmount,
+                            Count = resourceCondition.NeededAmount,
                             ResourcesType = MonologResourcesType.Demand
                         });
                     }
@@ -68,7 +68,7 @@ namespace L2Farm
                         {
                             Icon = _resourcesService.GetSprite(resourceCondition.Id),
                             MainCharacterAmount = _gameStateManager.State.Get<ResourceContentPart>().Get(resourceCondition.Id),
-                            Amount = resourceCondition.NeededAmount,
+                            Count = resourceCondition.NeededAmount,
                             ResourcesType = MonologResourcesType.Give
                         });
                     }

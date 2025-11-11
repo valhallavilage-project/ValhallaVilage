@@ -1,8 +1,5 @@
 using CrossProject.Ui.Core;
-using DG.Tweening;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace L2Farm.Features.ClaimerResourcesHint
 {

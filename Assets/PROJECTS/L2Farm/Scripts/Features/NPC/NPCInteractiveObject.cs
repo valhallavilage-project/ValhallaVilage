@@ -1,31 +1,37 @@
-using CrossProject.Core;
+using CrossProject.Core.Actions;
 using CrossProject.Core.Interactions;
 using CrossProject.Core.Quests;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using VContainer;
 
 namespace L2Farm.Features.NPC
 {
     public class NPCInteractiveObject : AbstractInteractiveObject
     {
-        private QuestService _questService;
-
         [SerializeField] private NpcQuestMarker _marker;
+        [SerializeField] private AdditionalNpcActions _additionalNpcActions;
+        
+        private QuestService _questService;
+        private QuestId _questId;
+        private ActionService _actionService;
 
-        private QuestId questId;
-
-        public QuestId CurrentQuestId => questId;
+        public QuestId CurrentQuestId => _questId;
 
         protected override async UniTask AfterInteraction()
         {
-            if (questId != null)
-                await _questService.TryProceedStepsOf(questId);
+            if (_questId != null)
+                await _questService.TryProceedStepsOf(_questId);
+
+            if (_additionalNpcActions != null)
+            {
+                await _additionalNpcActions.Launch(_actionService);
+            }
         }
 
-        public void SetQuest(QuestId id, QuestService questService)
+        public void SetQuest(QuestId id, QuestService questService, ActionService actionService)
         {
-            questId = id;
+            _actionService = actionService;
+            _questId = id;
             _questService = questService;
             _questService.OnQuestWin += HandleCurrentQuestWin;
             _marker.Setup(id, _questService);
@@ -33,8 +39,8 @@ namespace L2Farm.Features.NPC
 
         private void HandleCurrentQuestWin(QuestId id)
         {
-            if (id == questId)
-                questId = null;
+            if (id == _questId)
+                _questId = null;
         }
     }
 }

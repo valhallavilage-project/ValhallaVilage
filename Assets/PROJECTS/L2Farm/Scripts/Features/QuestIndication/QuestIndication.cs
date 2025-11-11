@@ -3,7 +3,6 @@ using System.Linq;
 using CrossProject.Core;
 using CrossProject.Core.Quests;
 using CrossProject.Core.SpawnPoints;
-using CrossProject.Extensions;
 using UnityEngine;
 using VContainer;
 

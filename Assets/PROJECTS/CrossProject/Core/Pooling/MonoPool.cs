@@ -80,6 +80,7 @@ namespace CrossProject.Core.Pooling
             if (_elementsParent != null)
             {
                 poolElement.transform.SetParent(_elementsParent);
+                poolElement.transform.localPosition = Vector3.zero;
             }
         }
     }
