@@ -58,17 +58,15 @@ namespace CrossProject.Core.Skins
             switch (interaction)
             {
                 case InteractionType.Chop:
-                    if (_axeMesh != null)
-                    {
-                        _axeMesh.SetActive(true);
-                    }
+                    _axeMesh.SetActive(true);
 
                     break;
                 case InteractionType.Pickaxe:
-                    if (_pickAxeMesh != null)
-                    {
-                        _pickAxeMesh.SetActive(true);
-                    }
+                    _pickAxeMesh.SetActive(true);
+
+                    break;
+                case InteractionType.Attack:
+                    _armorSets[_currentArmorSet].SetActive(true);
 
                     break;
             }
@@ -77,16 +75,9 @@ namespace CrossProject.Core.Skins
         public void DeactivateTool()
         {
             _armorSets[_currentArmorSet].SetActive(true);
-
-            if (_axeMesh != null)
-            {
-                _axeMesh.SetActive(false);
-            }
-
-            if (_pickAxeMesh != null)
-            {
-                _pickAxeMesh.SetActive(false);
-            }
+            
+            _axeMesh.SetActive(false);
+            _pickAxeMesh.SetActive(false);
         }
     }
 }
