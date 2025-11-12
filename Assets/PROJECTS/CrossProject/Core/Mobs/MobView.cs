@@ -1,6 +1,5 @@
 using CrossProject.Core.Pooling;
 using Cysharp.Threading.Tasks;
-using Cysharp.Threading.Tasks.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using VContainer;
@@ -9,8 +8,10 @@ namespace CrossProject.Core
 {
     public class MobView : MonoBehaviour, IPoolElement
     {
-        [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] [ReadOnly] private MobState _state;
+        [SerializeField] private Rigidbody _rigidbody;
+        [SerializeField] private GameObject _spawnFx;
+        
 
         private MobsSpawnPoint _spawnPoint;
         private IMobStateMachine _mobStateMachine;
@@ -78,6 +79,7 @@ namespace CrossProject.Core
             IsAvailableToGet = false;
             _healthHandler.Init(_config.Health, _config.Health);
             _mobStateMachine.ToDefaultState();
+            _spawnFx.SetActive(true);
         }
 
         public void OnReturn()
@@ -85,6 +87,7 @@ namespace CrossProject.Core
             gameObject.SetActive(false);
             _spawnPoint.RemoveMob();
             IsAvailableToGet = true;
+            _spawnFx.SetActive(false);
         }
 
         public void BindSpawnPoint(MobsSpawnPoint spawnPoint)
