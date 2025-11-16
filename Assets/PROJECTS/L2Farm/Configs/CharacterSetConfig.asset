@@ -49,6 +49,9 @@ MonoBehaviour:
   - id: NPC_Cooper
     portrait: {fileID: 21300000, guid: 4d3160286b21548e488bec6f86cb5557, type: 3}
     personName: Cooper
-  - id: Npc_Vendor
+  - id: NPC_Vendor
     portrait: {fileID: 0}
     personName: Vendor
+  - id: NPC_SeedsTraider
+    portrait: {fileID: 0}
+    personName: 

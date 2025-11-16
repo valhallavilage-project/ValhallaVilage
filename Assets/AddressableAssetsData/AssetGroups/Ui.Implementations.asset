@@ -62,6 +62,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 79d7a7eb487adfe4e88da03311dae64d
+    m_Address: FarmStoreScreen
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7a0b0cfad739148adb28ed9719b4dbc2
     m_Address: SimpleMonologPopup
     m_ReadOnly: 0

@@ -17,7 +17,7 @@ namespace L2Farm
             
             Model.SoftCurrencyHolder.AmountChanged.WithoutCurrent().ForEachAsync(CurrencyAmountChanged, gameObject.GetCancellationTokenOnDestroy()).Forget();
 
-            _coinsCount.text = Model.SoftCurrencyHolder.Get().ToString();
+            _coinsCount.text = Model.SoftCurrencyHolder.Amount.ToString();
         }
 
         private void CurrencyAmountChanged(int newValue)

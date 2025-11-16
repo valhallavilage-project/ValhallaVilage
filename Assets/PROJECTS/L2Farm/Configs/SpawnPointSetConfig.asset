@@ -123,3 +123,8 @@ MonoBehaviour:
       value: L2Farm_FirstTown
     position: {x: -18.42, y: 0, z: -24.54}
     eulerAngles: {x: 0, y: 158.466, z: 0}
+  - id: NPC_SeedsTraider
+    sceneId:
+      value: L2Farm_FirstTown
+    position: {x: -102, y: 0, z: -223}
+    eulerAngles: {x: 0, y: 145.721, z: 0}

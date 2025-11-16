@@ -7,7 +7,7 @@ namespace CrossProject.Core
     {
         IReadOnlyAsyncReactiveProperty<int> AmountChanged { get; }
         
-        int Get();
+        int Amount { get; }
         void ChangeValue(int delta);
     }
 
@@ -24,11 +24,14 @@ namespace CrossProject.Core
             _gameStateManager = gameStateManager;
         }
 
-        public int Get()
+        public int Amount
         {
-            var statePart = _gameStateManager.State.Get<SoftCurrencyStatePart>();
+            get
+            {
+                var statePart = _gameStateManager.State.Get<SoftCurrencyStatePart>();
 
-            return statePart.Amount;
+                return statePart.Amount;
+            }
         }
 
         public void ChangeValue(int delta)
