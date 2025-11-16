@@ -760,7 +760,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _offersConfig: {fileID: 11400000, guid: 4455ab29eb65b564993ba9b83da1e5e5, type: 2}
-  _offersPanel: {fileID: 6445246853131656951}
+  _scroll: {fileID: 4277948012528517326}
   _tradeOfferViewPool: {fileID: 6637495173334476545}
   _itemRequirementPool: {fileID: 2856603845518814089}
   _closeBtn: {fileID: 4260097386665941543}

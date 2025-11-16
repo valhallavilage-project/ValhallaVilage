@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using CrossProject.Ui.Core;
 using UnityEngine;
 using UnityEngine.UI;
