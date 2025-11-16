@@ -157,11 +157,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 8141558040729825153}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 393}
-  m_SizeDelta: {x: 494.81, y: 120}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: -87}
+  m_SizeDelta: {x: -160, y: 173}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &5001875361591915710
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -220,12 +220,12 @@ MonoBehaviour:
   m_fontSize: 120
   m_fontSizeBase: 120
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 120
   m_fontStyle: 16
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -760,7 +760,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _offersConfig: {fileID: 11400000, guid: 4455ab29eb65b564993ba9b83da1e5e5, type: 2}
-  _offersPanel: {fileID: 6445246853131656951}
+  _scroll: {fileID: 4277948012528517326}
   _tradeOfferViewPool: {fileID: 6637495173334476545}
   _itemRequirementPool: {fileID: 2856603845518814089}
   _closeBtn: {fileID: 4260097386665941543}

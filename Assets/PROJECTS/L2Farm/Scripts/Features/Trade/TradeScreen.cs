@@ -1,55 +1,57 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using CrossProject.Core;
-using CrossProject.Core.SaveLoad;
 using CrossProject.Ui.Core;
 using UnityEngine;
 using UnityEngine.UI;
-using VContainer;
 using Random = UnityEngine.Random;
 
 namespace L2Farm
 {
-    public class TradeScreen : ScreenView<TradeScreenModel>
+    public class TradeScreen : ScreenView<TradeScreenModel>, LoopScrollPrefabSource, LoopScrollDataSource
     {
         [SerializeField] private TradeOffersConfig _offersConfig;
-        [SerializeField] private GameObject _offersPanel;
+        [SerializeField] private LoopScrollRect _scroll;
         [SerializeField] private TradeOfferViewPool _tradeOfferViewPool;
         [SerializeField] private ItemRequirementPool _itemRequirementPool;
         [SerializeField] private Button _closeBtn;
         [SerializeField] private GameObject _noTradeOffersState;
-        
-        private GameStateManager _gameStateManager;
-        private ITimeService _timeService;
-        
-        private readonly List<TradeOfferView> _createdOfferViews = new();
 
-        [Inject]
-        private void AddDependencies(GameStateManager gameStateManager, ITimeService timeService)
-        {
-            _timeService = timeService;
-            _gameStateManager = gameStateManager;
-        }
-        
+        private readonly List<TradeOffer> _activeOffers = new();
+
         protected override void OnBind()
         {
             base.OnBind();
-            
-            _closeBtn.SetUniqueCallback(Model.Close);
 
-            var offersStatePart = _gameStateManager.State.Get<TradeOffersStatePart>();
+            _closeBtn.SetUniqueCallback(Model.Close);
+        }
+
+        private void Start()
+        {
+            FilterOffers();
+
+            _scroll.prefabSource = this;
+            _scroll.dataSource = this;
+            _scroll.totalCount = _activeOffers.Count;
+            _scroll.RefillCells();
+
+            _noTradeOffersState.SetActive(_activeOffers.Count == 0);
+        }
+
+        private void FilterOffers()
+        {
+            var offersStatePart = Model.GameStateManager.State.Get<TradeOffersStatePart>();
 
             var lastOffersUpdateDate = offersStatePart.LastOffersUpdateDate;
 
             var offers = new List<TradeOffer>();
 
-            if (_timeService.Now.DayOfYear > lastOffersUpdateDate.DayOfYear)
+            if (Model.TimeService.Now.DayOfYear > lastOffersUpdateDate.DayOfYear)
             {
                 offersStatePart.DailyOffers.Clear();
-                
+
                 var maxOffers = Math.Min(_offersConfig.Offers.Count, _offersConfig.OffersPerDay);
-                
+
                 while (offers.Count < maxOffers)
                 {
                     var offer = _offersConfig.Offers[(int)(Random.value * _offersConfig.Offers.Count)];
@@ -60,46 +62,50 @@ namespace L2Farm
                         offersStatePart.DailyOffers.Add(offer.Id);
                     }
                 }
-                
-                _gameStateManager.Save();
+
+                Model.GameStateManager.Save();
             }
             else
             {
                 foreach (var offerId in offersStatePart.DailyOffers)
                 {
                     var configOffer = _offersConfig.Offers.First(o => o.Id == offerId);
-                    
+
                     offers.Add(configOffer);
                 }
             }
-            
+
             foreach (var tradeOffer in offers)
             {
-                if (offersStatePart.FinishedOffers.Any(fo => fo.Id == tradeOffer.Id && fo.DateFinished.DayOfYear >= _timeService.Now.DayOfYear))
+                if (offersStatePart.FinishedOffers.Any(fo => fo.Id == tradeOffer.Id &&
+                                                             fo.DateFinished.DayOfYear >= Model.TimeService.Now.DayOfYear))
                 {
                     continue;
                 }
-                
-                var tradeOfferView = _tradeOfferViewPool.Get();
-                
-                tradeOfferView.transform.SetParent(_offersPanel.transform);
-                tradeOfferView.Setup(tradeOffer, _itemRequirementPool);
-                
-                _createdOfferViews.Add(tradeOfferView);
+
+                _activeOffers.Add(tradeOffer);
             }
-            
-            _noTradeOffersState.SetActive(_createdOfferViews.Count == 0);
         }
 
-        public void Clear()
+        public GameObject GetObject(int index)
         {
-            foreach (var tradeOfferView in _createdOfferViews)
-            {
-                if (tradeOfferView.transform.parent == _offersPanel.transform)
-                {
-                    _tradeOfferViewPool.Return(tradeOfferView);
-                }
-            }
+            var offerView = _tradeOfferViewPool.Get();
+
+            return offerView.gameObject;
+        }
+
+        public void ReturnObject(Transform poolObjectTransform)
+        {
+            var offerView = poolObjectTransform.GetComponent<TradeOfferView>();
+
+            _tradeOfferViewPool.Return(offerView);
+        }
+
+        public void ProvideData(Transform poolObjectTransform, int index)
+        {
+            var offerView = poolObjectTransform.GetComponent<TradeOfferView>();
+
+            offerView.Setup(_activeOffers[index], _itemRequirementPool);
         }
     }
 }

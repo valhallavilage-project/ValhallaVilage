@@ -94,6 +94,7 @@ namespace L2Farm.Scripts
             builder.Register<LaunchQuestAction>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<LoseQuestAction>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<OpenTradeScreenAction>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            builder.Register<OpenFarmStoreScreenAction>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
 
             builder.Register<ActionService>(Lifetime.Singleton)
                 .AsSelf()
@@ -238,6 +239,7 @@ namespace L2Farm.Scripts
             builder.Register<ConfirmPopupController>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<TradeScreenController>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<SoftCurrencyHudElementController>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<FarmStoreScreenController>(Lifetime.Singleton).AsImplementedInterfaces();
 
             builder.Register<MainCharacterGlobalFacade>(Lifetime.Singleton).AsImplementedInterfaces();
             
@@ -257,6 +259,7 @@ namespace L2Farm.Scripts
             builder.Register<SoftCurrencyHolder>(Lifetime.Singleton).AsImplementedInterfaces();
             
             builder.Register<GlobalOpenTradeScreenHandler>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<GlobalOpenFarmStoreScreenHandler>(Lifetime.Singleton).AsImplementedInterfaces();
 
             RegisterConditionsAndActions(builder);
             

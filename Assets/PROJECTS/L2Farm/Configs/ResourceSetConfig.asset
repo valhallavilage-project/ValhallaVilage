@@ -93,3 +93,27 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: 85390185c5a1b744c9d5588109fe4326, type: 3}
     isUnique: 0
     maxStackCapacity: 1024
+  - id: Resource_CabbageSeeds
+    icon: {fileID: 21300000, guid: fa4a3dea13d28344a8bcc77a1a7e2fcf, type: 3}
+    isUnique: 0
+    maxStackCapacity: 64
+  - id: Resource_TomatoSeeds
+    icon: {fileID: 21300000, guid: fa4a3dea13d28344a8bcc77a1a7e2fcf, type: 3}
+    isUnique: 0
+    maxStackCapacity: 64
+  - id: Resource_OnionSeeds
+    icon: {fileID: 21300000, guid: fa4a3dea13d28344a8bcc77a1a7e2fcf, type: 3}
+    isUnique: 0
+    maxStackCapacity: 64
+  - id: Resource_CarrotSeeds
+    icon: {fileID: 21300000, guid: fa4a3dea13d28344a8bcc77a1a7e2fcf, type: 3}
+    isUnique: 0
+    maxStackCapacity: 64
+  - id: Resource_PumpkinSeeds
+    icon: {fileID: 21300000, guid: fa4a3dea13d28344a8bcc77a1a7e2fcf, type: 3}
+    isUnique: 0
+    maxStackCapacity: 64
+  - id: Resource_PotatoSeeds
+    icon: {fileID: 21300000, guid: fa4a3dea13d28344a8bcc77a1a7e2fcf, type: 3}
+    isUnique: 0
+    maxStackCapacity: 64

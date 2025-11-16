@@ -75,7 +75,13 @@ MonoBehaviour:
     prefab: {fileID: 5111460455862272033, guid: b001fbf978c4a4843859306ea0e43154, type: 3}
   - id: Vendor
     characterId:
-      value: Npc_Vendor
+      value: NPC_Vendor
     defaultSpawnPoint:
       value: NPC_Vendor
     prefab: {fileID: 3394070386784087573, guid: 25c31a146601818408ef6b0379b6c6e7, type: 3}
+  - id: SeedsTraider
+    characterId:
+      value: NPC_SeedsTraider
+    defaultSpawnPoint:
+      value: NPC_SeedsTraider
+    prefab: {fileID: 3394070386784087573, guid: 245ad1382a255e24cb08465e7bcd513d, type: 3}
