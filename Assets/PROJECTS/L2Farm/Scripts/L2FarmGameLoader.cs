@@ -7,6 +7,7 @@ using Cysharp.Threading.Tasks;
 using Sirenix.Utilities;
 using VContainer;
 using VContainer.Unity;
+using UnityEngine;
 
 namespace L2Farm.Scripts
 {
@@ -45,6 +46,8 @@ namespace L2Farm.Scripts
                 .Resolve<IEnumerable<ICheatOptions>>()
                 .ForEach(x => SRDebug.Instance.AddOptionContainer(x));
             #endif
+
+            bool success = await _uiService.LogIn();
 
             _uiService.Load(PrepareGameLoad()).Forget();
             IsInitialized = true;
