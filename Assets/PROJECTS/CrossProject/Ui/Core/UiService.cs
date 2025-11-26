@@ -15,6 +15,7 @@ namespace CrossProject.Ui.Core
         [SerializeField] private RectTransform screenRoot;
         [SerializeField] private RectTransform popupRoot;
         [SerializeField] private LoadingScreen loadingScreen;
+        [SerializeField] private LogInScreen logInScreen;
 
         private AddressablesManager _addressablesManager;
 
@@ -45,6 +46,8 @@ namespace CrossProject.Ui.Core
             DontDestroyOnLoad(this);
             ApplySafeAreaTo(hudRoot);
         }
+
+        public LogInData LogInData => logInScreen.LogInData;
 
         public void ApplySafeAreaTo(RectTransform rectTransform, bool left = true, bool top = true, bool right = true, bool bottom = true)
         {
@@ -109,6 +112,11 @@ namespace CrossProject.Ui.Core
         {
             //TODO : VM : alpha zero
             var rule = GetRule(typeof(THudElementModel));
+        }
+
+        public async UniTask<bool> LogIn()
+        {
+            return await logInScreen.LogIn();
         }
 
         public async UniTask Load(IReadOnlyList<UniTask> tasks)
