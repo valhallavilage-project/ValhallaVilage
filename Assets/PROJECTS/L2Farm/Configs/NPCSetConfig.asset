@@ -85,3 +85,9 @@ MonoBehaviour:
     defaultSpawnPoint:
       value: NPC_SeedsTraider
     prefab: {fileID: 3394070386784087573, guid: 245ad1382a255e24cb08465e7bcd513d, type: 3}
+  - id: NPC_HeadGuard
+    characterId:
+      value: NPC_HeadGuard
+    defaultSpawnPoint:
+      value: NPC_HeadGuard
+    prefab: {fileID: 3394070386784087573, guid: dca30d68898e62c4a8124daa99cfb837, type: 3}

@@ -128,3 +128,8 @@ MonoBehaviour:
       value: L2Farm_FirstTown
     position: {x: -102, y: 0, z: -223}
     eulerAngles: {x: 0, y: 145.721, z: 0}
+  - id: NPC_HeadGuard
+    sceneId:
+      value: L2Farm_FirstTown
+    position: {x: 37.4082, y: 0, z: -54.31558}
+    eulerAngles: {x: 0, y: 105, z: 0}

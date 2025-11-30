@@ -55,3 +55,6 @@ MonoBehaviour:
   - id: NPC_SeedsTraider
     portrait: {fileID: 0}
     personName: 
+  - id: NPC_HeadGuard
+    portrait: {fileID: 0}
+    personName: Head of the Guard
