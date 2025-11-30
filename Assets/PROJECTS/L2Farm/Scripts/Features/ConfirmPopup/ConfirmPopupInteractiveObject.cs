@@ -20,7 +20,7 @@ namespace L2Farm
         
         protected override async UniTask AfterInteraction()
         {
-            _confirmPopupOpenHandler.Open(_text);
+            _confirmPopupOpenHandler.Open(new ConfirmPopupData(_text, ConfirmPopupButtonsType.Ok));
 
             UniTask.WaitForEndOfFrame(this).ContinueWith(Select).Forget();
         }

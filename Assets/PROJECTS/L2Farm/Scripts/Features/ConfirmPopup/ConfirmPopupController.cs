@@ -10,31 +10,45 @@ namespace L2Farm.Features
 {
     public class ConfirmPopupController : IInitializable, IDisposable
     {
-        private ConfirmPopup _popup;
         private readonly UiService _uiService;
         private readonly CancellationTokenSource _disposeCts = new();
+        private readonly IConfirmPopupOpenHandler _confirmPopupOpenHandler;
+        
+        private ConfirmPopup _popup;
+        private ConfirmPopupModel _model;
 
         public bool IsInitialized { get; private set; }
-        
+
         public ConfirmPopupController(UiService uiService, IConfirmPopupOpenHandler confirmPopupOpenHandler)
         {
+            _confirmPopupOpenHandler = confirmPopupOpenHandler;
             _uiService = uiService;
-            
+
             confirmPopupOpenHandler.Opened.WithoutCurrent().ForEachAwaitAsync(OpenScreen, _disposeCts.Token).Forget();
         }
 
         public async UniTask Initialize()
         {
             IsInitialized = true;
-        }
-
-        private async UniTask OpenScreen(string text)
-        {
-            _popup = await _uiService.TryOpen(new ConfirmPopupModel
+            
+            _model = new ConfirmPopupModel
             {
                 Close = () => _uiService.Close(_popup),
-                Text = text
-            }) as ConfirmPopup;
+            };
+            
+            _model.Result.WithoutCurrent().ForEachAsync(PopupResultSet, _disposeCts.Token).Forget();
+        }
+
+        private async UniTask OpenScreen(ConfirmPopupData data)
+        {
+            _model.Data = data;
+            
+            _popup = await _uiService.TryOpen(_model) as ConfirmPopup;
+        }
+
+        private void PopupResultSet(bool result)
+        {
+            _confirmPopupOpenHandler.SetPopupResult(result);
         }
 
         public void Dispose()

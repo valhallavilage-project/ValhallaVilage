@@ -6,6 +6,8 @@ namespace CrossProject.Core.Interactions
         Chop,
         Pickaxe,
         Gather,
-        Talk
+        Talk,
+        ClearGarden,
+        PlantSeeds
     }
 }

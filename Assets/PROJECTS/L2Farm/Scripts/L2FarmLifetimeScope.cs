@@ -65,6 +65,9 @@ namespace L2Farm.Scripts
 
             builder.Register<PotionsCheatOptions>(Lifetime.Singleton)
                 .AsImplementedInterfaces();
+
+            builder.Register<GardenCheatOptions>(Lifetime.Singleton)
+                .AsImplementedInterfaces();
         }
         #endif
 
@@ -95,6 +98,7 @@ namespace L2Farm.Scripts
             builder.Register<LoseQuestAction>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<OpenTradeScreenAction>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
             builder.Register<OpenFarmStoreScreenAction>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
+            builder.Register<ActivateGardenAction>(Lifetime.Singleton).AsSelf().AsImplementedInterfaces();
 
             builder.Register<ActionService>(Lifetime.Singleton)
                 .AsSelf()
@@ -247,6 +251,7 @@ namespace L2Farm.Scripts
             builder.Register<MainCharacterGlobalReviveHandler>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<MainCharacterGlobalPotionConsumeHandler>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<MainCharacterGlobalArmorSetChangeHandler>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<MainCharacterGlobalCleanGardenBedHandler>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<MainCharacterMovingHandler>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<ConfirmPopupOpenHandler>(Lifetime.Singleton).AsImplementedInterfaces();
             
@@ -260,6 +265,7 @@ namespace L2Farm.Scripts
             
             builder.Register<GlobalOpenTradeScreenHandler>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<GlobalOpenFarmStoreScreenHandler>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<GlobalActivateGardenHandler>(Lifetime.Singleton).AsImplementedInterfaces();
 
             RegisterConditionsAndActions(builder);
             

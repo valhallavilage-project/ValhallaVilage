@@ -18,24 +18,29 @@ namespace CrossProject.Core
         private readonly IEnergyHandler _energyHandler;
         private readonly PotionsConfig _potionsConfig;
         private readonly ResourcesService _resourcesService;
-        private CancellationTokenSource _disposeCts = new();
+        private readonly GardenConfig _gardenConfig;
+        private readonly CancellationTokenSource _disposeCts = new();
 
         public bool IsInitialized { get; private set; }
 
         public MainCharacterGlobalParameterChangesHandler(
             IMainCharacterReviveGlobalHandler globalReviveHandler, IReviveAbility reviveAbility,
             IMainCharacterGlobalExperienceGainHandler globalExperienceGainHandler, IExperienceHandler experienceHandler,
-            IMainCharacterGlobalPotionConsumeHandler globalPotionConsumeHandler, IHealthHandler healthHandler,
-            IEnergyHandler energyHandler, PotionsConfig potionsConfig, ResourcesService resourcesService)
+            IMainCharacterGlobalPotionConsumeHandler globalPotionConsumeHandler,
+            IMainCharacterGlobalCleanGardenBedHandler globalCleanGardenBedHandler, IHealthHandler healthHandler,
+            IEnergyHandler energyHandler, PotionsConfig potionsConfig, ResourcesService resourcesService,
+            GardenConfig gardenConfig)
         {
             _healthHandler = healthHandler;
             _energyHandler = energyHandler;
             _potionsConfig = potionsConfig;
             _resourcesService = resourcesService;
+            _gardenConfig = gardenConfig;
 
             globalExperienceGainHandler.ExperienceGained.WithoutCurrent().ForEachAsync(xp => experienceHandler.GainXp(xp), _disposeCts.Token).Forget();
             globalReviveHandler.Revived.WithoutCurrent().ForEachAsync(_ => reviveAbility.Revive(globalReviveHandler.RevivePoint.position), _disposeCts.Token).Forget();
             globalPotionConsumeHandler.PotionConsumed.WithoutCurrent().ForEachAsync(PotionConsumed, _disposeCts.Token).Forget();
+            globalCleanGardenBedHandler.GardenBedCleared.Listen(GardenBedCleared, _disposeCts.Token);
         }
 
         public async UniTask Initialize()
@@ -65,6 +70,11 @@ namespace CrossProject.Core
         private void Consume(ResourceId resource)
         {
             _resourcesService.DecreaseResourceValue(resource);
+        }
+
+        private void GardenBedCleared()
+        {
+            _energyHandler.Spend(_gardenConfig.GardenBedClearEnergy);
         }
 
         public void Dispose()
