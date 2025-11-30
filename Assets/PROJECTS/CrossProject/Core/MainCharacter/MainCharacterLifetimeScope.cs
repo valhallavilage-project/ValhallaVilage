@@ -11,6 +11,7 @@ namespace CrossProject.Core
         [SerializeField] private HealthRestorationConfig _healthRestorationConfig;
         [SerializeField] private LevelProgressionConfig _levelProgressionConfig;
         [SerializeField] private PotionsConfig _potionsConfig;
+        [SerializeField] private GardenConfig _gardenConfig;
 
         protected override void Configure(IContainerBuilder builder)
         {
@@ -60,6 +61,7 @@ namespace CrossProject.Core
             builder.RegisterInstance(_healthRestorationConfig);
             builder.RegisterInstance(_levelProgressionConfig);
             builder.RegisterInstance(_potionsConfig);
+            builder.RegisterInstance(_gardenConfig);
         }
 
         #if !DISABLE_SRDEBUGGER
