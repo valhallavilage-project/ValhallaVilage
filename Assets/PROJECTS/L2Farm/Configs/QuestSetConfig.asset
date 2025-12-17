@@ -2951,7 +2951,7 @@ MonoBehaviour:
       type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
       data:
         questId:
-          value: Daily_Horns
+          value: Daily_Horns_Early
     - rid: 9209226123114184718
       type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
       data:
@@ -2990,4 +2990,4 @@ MonoBehaviour:
       type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
       data:
         questId:
-          value: Daily_Veg
+          value: Daily_Veg_Early
