@@ -47,6 +47,8 @@ MonoBehaviour:
   - rid: 9209225786981613570
   - rid: 9209226077287219203
   - rid: 9209226077287219204
+  - rid: 9209226123114184708
+  - rid: 9209226123114184709
   references:
     version: 2
     RefIds:
@@ -2800,9 +2802,9 @@ MonoBehaviour:
         stepAction:
           rid: 9209226077287219213
         winCondition:
-          rid: 9209226077287219214
+          rid: 9209226123114184704
         winActions:
-        - rid: 9209226077287219215
+        - rid: 9209226123114184705
         loseCondition:
           rid: 9209226077287219216
         loseActions: []
@@ -2815,19 +2817,6 @@ MonoBehaviour:
           lesson.
         questId:
           value: Daily_Horns
-    - rid: 9209226077287219214
-      type: {class: GiveResourcesConditionConfig, ns: L2Farm.Scripts, asm: L2Farm}
-      data:
-        _resourceConditions:
-        - resourceId:
-            value: Resource_Gremlin_Horns
-          neededQuantity: 1
-    - rid: 9209226077287219215
-      type: {class: GiveResourceActionConfig, ns: L2Farm.Features.ResourceProduction.GiveResources, asm: L2Farm}
-      data:
-        resourceId:
-          value: Resource_Gremlin_Horns
-        amount: 1
     - rid: 9209226077287219216
       type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
       data: 
@@ -2842,9 +2831,9 @@ MonoBehaviour:
         stepAction:
           rid: 9209226077287219219
         winCondition:
-          rid: 9209226077287219220
+          rid: 9209226123114184706
         winActions:
-        - rid: 9209226077287219221
+        - rid: 9209226123114184707
         loseCondition:
           rid: 9209226077287219222
         loseActions: []
@@ -2856,23 +2845,148 @@ MonoBehaviour:
         message: ' Wow! That''s a great harvest. See you tomorrow!'
         questId:
           value: Daily_Veg
-    - rid: 9209226077287219220
-      type: {class: GiveResourcesConditionConfig, ns: L2Farm.Scripts, asm: L2Farm}
-      data:
-        _resourceConditions:
-        - resourceId:
-            value: Resource_Veg
-          neededQuantity: 1
-    - rid: 9209226077287219221
-      type: {class: GiveResourceActionConfig, ns: L2Farm.Features.ResourceProduction.GiveResources, asm: L2Farm}
-      data:
-        resourceId:
-          value: Resource_Veg
-        amount: 1
     - rid: 9209226077287219222
       type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
       data: 
     - rid: 9209226077287219223
+      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Daily_Veg
+    - rid: 9209226123114184704
+      type: {class: HasEnoughResourcesConditionConfig, ns: L2Farm.Scripts.Conditions, asm: L2Farm}
+      data:
+        resourceConditions:
+        - resourceId:
+            value: Resource_Gremlin_Horns
+          neededQuantity: 1
+    - rid: 9209226123114184705
+      type: {class: SpendResourcesActionConfig, ns: L2Farm.Scripts.Actions.SpendResources, asm: L2Farm}
+      data:
+        resourceConditions:
+        - resourceId:
+            value: Resource_Gremlin_Horns
+          neededQuantity: 1
+    - rid: 9209226123114184706
+      type: {class: HasEnoughResourcesConditionConfig, ns: L2Farm.Scripts.Conditions, asm: L2Farm}
+      data:
+        resourceConditions:
+        - resourceId:
+            value: Resource_Veg
+          neededQuantity: 1
+    - rid: 9209226123114184707
+      type: {class: SpendResourcesActionConfig, ns: L2Farm.Scripts.Actions.SpendResources, asm: L2Farm}
+      data:
+        resourceConditions:
+        - resourceId:
+            value: Resource_Veg
+          neededQuantity: 1
+    - rid: 9209226123114184708
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Daily_Horns_Early
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: NPC_HeadGuard
+        questIndication:
+          value: Quest_Active
+        launchActions:
+        - rid: 9209226123114184713
+        steps:
+        - rid: 9209226123114184712
+        winActions:
+        - rid: 9209226123114184717
+        loseActions: []
+    - rid: 9209226123114184709
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Daily_Veg_Early
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: NPC_FarmBuilder
+        questIndication:
+          value: Quest_Active
+        launchActions:
+        - rid: 9209226123114184718
+        steps:
+        - rid: 9209226123114184719
+        winActions:
+        - rid: 9209226123114184723
+        loseActions: []
+    - rid: 9209226123114184712
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 9209226123114184714
+        winCondition:
+          rid: 9209226123114184715
+        winActions: []
+        loseCondition:
+          rid: 9209226123114184716
+        loseActions: []
+    - rid: 9209226123114184713
+      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
+      data:
+        npcId:
+          value: HeadGuard
+        spawnPointId:
+          value: NPC_HeadGuard
+        questId:
+          value: Daily_Horns_Early
+    - rid: 9209226123114184714
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_HeadGuard
+        message: That's all for today. I'll be waiting for you again tomorrow.
+        questId:
+          value: Daily_Horns_Early
+    - rid: 9209226123114184715
+      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 9209226123114184716
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 9209226123114184717
+      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Daily_Horns
+    - rid: 9209226123114184718
+      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
+      data:
+        npcId:
+          value: NPC_FarmBuilder
+        spawnPointId:
+          value: NPC_FarmBuilder
+        questId:
+          value: Daily_Veg_Early
+    - rid: 9209226123114184719
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 9209226123114184720
+        winCondition:
+          rid: 9209226123114184721
+        winActions: []
+        loseCondition:
+          rid: 9209226123114184722
+        loseActions: []
+    - rid: 9209226123114184720
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_FarmBuilder
+        message: That's all for today. I'll be waiting for you again tomorrow.
+        questId:
+          value: Daily_Veg_Early
+    - rid: 9209226123114184721
+      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 9209226123114184722
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 9209226123114184723
       type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
       data:
         questId:
