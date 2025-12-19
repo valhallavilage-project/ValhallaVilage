@@ -30,7 +30,7 @@ namespace CrossProject.Core
 
         public void Play(AudioData audioData)
         {
-            Debug.Log($"[AudioService] Play called: clip={audioData.Clip?.name}, isLoop={audioData.IsLoop}, isSynced={audioData.IsSyncedToAnimation}, cycleDuration={audioData.AnimationCycleDuration}");
+            Debug.Log($"[AudioService] Play called: clip={audioData.Clip?.name ?? "null"}, isLoop={audioData.IsLoop}, isSynced={audioData.IsSyncedToAnimation}, cycleDuration={audioData.AnimationCycleDuration}");
 
             // If sound is synced to animation cycle - use ticking logic
             if (audioData.IsSyncedToAnimation)
