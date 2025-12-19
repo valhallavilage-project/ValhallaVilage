@@ -153,6 +153,13 @@ namespace CrossProject.Core.SimpleMovement
                 }
             }
 
+            // DEBUG: Check NavMesh state
+            if (_playerNavMeshAgent.hasPath)
+            {
+                Debug.Log($"[DEBUG Tick] hasPath=TRUE, velocity={_playerNavMeshAgent.velocity.magnitude:F2}, " +
+                         $"remainingDist={_playerNavMeshAgent.remainingDistance:F2}");
+            }
+
             _playerNavMeshAgent.velocity = _currentVelocity;
             _playerNavMeshAgent.nextPosition = _transform.position + _currentVelocity * Time.deltaTime;
             _transform.position = _playerNavMeshAgent.nextPosition;
