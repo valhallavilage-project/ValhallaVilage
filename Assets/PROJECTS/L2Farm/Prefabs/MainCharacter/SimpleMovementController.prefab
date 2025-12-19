@@ -730,7 +730,7 @@ MonoBehaviour:
     _clip: {fileID: 8300000, guid: 58f814dece952654a854979983b986cc, type: 3}
     _isLoop: 1
     _isStopPreviousClip: 0
-    _animationCycleDuration: 1
+    _animationCycleDuration: 0.5
   _attackSound:
     _clip: {fileID: 8300000, guid: 09169f7b24f0a6045bb1f22b6cfd69c5, type: 3}
     _isLoop: 0
@@ -745,17 +745,17 @@ MonoBehaviour:
     _clip: {fileID: 8300000, guid: 6932401b7799b49148afe5a1c005360d, type: 3}
     _isLoop: 1
     _isStopPreviousClip: 1
-    _animationCycleDuration: 0.6
+    _animationCycleDuration: 0.5
   _axeSound:
     _clip: {fileID: 8300000, guid: ce103ad419467de46a3596592c08686a, type: 3}
     _isLoop: 1
     _isStopPreviousClip: 0
-    _animationCycleDuration: 1
+    _animationCycleDuration: 1.5
   _pickAxeSound:
     _clip: {fileID: 8300000, guid: 1bc981490a0eb804787218979ba995ac, type: 3}
     _isLoop: 1
     _isStopPreviousClip: 0
-    _animationCycleDuration: 0.8
+    _animationCycleDuration: 1.7
   _attackSoundOffset: 0.3
 --- !u!1 &4124864569335157055
 GameObject:

@@ -30,8 +30,6 @@ namespace CrossProject.Core
 
         public void Play(AudioData audioData)
         {
-            Debug.Log($"[AudioService] Play called: clip={audioData.Clip?.name ?? "null"}, isLoop={audioData.IsLoop}, isSynced={audioData.IsSyncedToAnimation}, cycleDuration={audioData.AnimationCycleDuration}");
-
             // If sound is synced to animation cycle - use ticking logic
             if (audioData.IsSyncedToAnimation)
             {
@@ -52,7 +50,6 @@ namespace CrossProject.Core
             // IMPORTANT: Cancel previous animation-synced sound FIRST to prevent multiple loops (echo)
             if (_animationSyncCts != null)
             {
-                Debug.Log("[AudioService] Cancelling previous synced sound loop to prevent echo");
                 _animationSyncCts.Cancel();
                 _animationSyncCts.Dispose();
                 // Wait a frame for cancellation to complete
@@ -61,8 +58,6 @@ namespace CrossProject.Core
 
             _animationSyncCts = new CancellationTokenSource();
 
-            Debug.Log($"[AudioService] Starting NEW synced sound loop, cycleDuration={audioData.AnimationCycleDuration}s");
-
             try
             {
                 // Play sound in loop synced to animation cycle duration
@@ -70,7 +65,6 @@ namespace CrossProject.Core
                 {
                     if (audioData.Clip != null)
                     {
-                        Debug.Log($"[AudioService] Playing tick: {audioData.Clip.name}");
                         _audioSource.PlayOneShot(audioData.Clip, _audioSettings.SoundVolume);
                     }
 
@@ -81,7 +75,7 @@ namespace CrossProject.Core
             }
             catch (System.OperationCanceledException)
             {
-                Debug.Log("[AudioService] Synced sound cancelled (normal stop)");
+                // Normal cancellation when stopping movement/interaction
             }
         }
 
@@ -116,8 +110,6 @@ namespace CrossProject.Core
 
         public void Stop()
         {
-            Debug.Log("[AudioService] Stop called");
-
             // Cancel animation-synced sound loop
             _animationSyncCts?.Cancel();
             _animationSyncCts?.Dispose();
