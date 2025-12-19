@@ -147,8 +147,25 @@ namespace CrossProject.Core.SimpleMovement
 
             _playerNavMeshAgent.SetDestination(target);
             LocalAccessCurrentSkin.Animator.SetFloat(Speed, 1);
-            await UniTask.WaitUntil(() => !_playerNavMeshAgent.pathPending &&
-                                          _playerNavMeshAgent.remainingDistance <= targetDistance, PlayerLoopTiming.Update, cancellationToken);
+
+            // Fix: Keep rotating towards target while moving (no more running backwards)
+            while (!cancellationToken.IsCancellationRequested &&
+                   (!_playerNavMeshAgent.pathPending && _playerNavMeshAgent.remainingDistance > targetDistance))
+            {
+                // Update rotation to face movement direction
+                if (_playerNavMeshAgent.velocity.sqrMagnitude > 0.1f)
+                {
+                    var moveDirection = _playerNavMeshAgent.velocity;
+                    moveDirection.y = 0;
+                    if (moveDirection != Vector3.zero)
+                    {
+                        _transform.rotation = Quaternion.Slerp(_transform.rotation,
+                            Quaternion.LookRotation(moveDirection), Time.deltaTime * 10f);
+                    }
+                }
+                await UniTask.Yield(PlayerLoopTiming.Update, cancellationToken);
+            }
+
             _playerNavMeshAgent.ResetPath();
             _playerNavMeshAgent.velocity = Vector3.zero;
             _currentVelocity = Vector3.zero;
