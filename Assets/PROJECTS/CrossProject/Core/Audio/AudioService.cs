@@ -49,12 +49,19 @@ namespace CrossProject.Core
 
         private async UniTask PlaySyncedToAnimation(AudioData audioData)
         {
-            // Cancel previous animation-synced sound if any
-            _animationSyncCts?.Cancel();
-            _animationSyncCts?.Dispose();
+            // IMPORTANT: Cancel previous animation-synced sound FIRST to prevent multiple loops (echo)
+            if (_animationSyncCts != null)
+            {
+                Debug.Log("[AudioService] Cancelling previous synced sound loop to prevent echo");
+                _animationSyncCts.Cancel();
+                _animationSyncCts.Dispose();
+                // Wait a frame for cancellation to complete
+                await UniTask.Yield();
+            }
+
             _animationSyncCts = new CancellationTokenSource();
 
-            Debug.Log($"[AudioService] Starting synced sound loop, cycleDuration={audioData.AnimationCycleDuration}s");
+            Debug.Log($"[AudioService] Starting NEW synced sound loop, cycleDuration={audioData.AnimationCycleDuration}s");
 
             try
             {
