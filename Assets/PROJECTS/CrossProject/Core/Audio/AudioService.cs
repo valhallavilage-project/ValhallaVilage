@@ -17,12 +17,13 @@ namespace CrossProject.Core
         private readonly IAudioSettings _audioSettings;
         private AudioSource _audioSource;
         private CancellationTokenSource _animationSyncCts;
+        private readonly object _syncLock = new object();
 
         public AudioService(IAudioSettings audioSettings)
         {
             _audioSettings = audioSettings;
         }
-        
+
         public void Init(AudioSource audioSource)
         {
             _audioSource = audioSource;
@@ -33,7 +34,16 @@ namespace CrossProject.Core
             // If sound is synced to animation cycle - use ticking logic
             if (audioData.IsSyncedToAnimation)
             {
-                // Stop any previous loop sound first
+                // CRITICAL: Stop previous loop AFTER canceling CTS to prevent race condition
+                lock (_syncLock)
+                {
+                    // Cancel any existing animation-synced loop first
+                    _animationSyncCts?.Cancel();
+                    _animationSyncCts?.Dispose();
+                    _animationSyncCts = new CancellationTokenSource();
+                }
+
+                // Stop AudioSource AFTER canceling token - this ensures old loop is stopped
                 _audioSource.Stop();
                 _audioSource.clip = null;
 
@@ -47,21 +57,22 @@ namespace CrossProject.Core
 
         private async UniTask PlaySyncedToAnimation(AudioData audioData)
         {
-            // IMPORTANT: Cancel previous animation-synced sound FIRST to prevent multiple loops (echo)
-            if (_animationSyncCts != null)
+            // Capture the token inside the lock to ensure we're using the correct CTS
+            CancellationToken token;
+            lock (_syncLock)
             {
-                _animationSyncCts.Cancel();
-                _animationSyncCts.Dispose();
-                // Wait a frame for cancellation to complete
-                await UniTask.Yield();
+                if (_animationSyncCts == null || _animationSyncCts.IsCancellationRequested)
+                {
+                    return; // Already cancelled
+                }
+                token = _animationSyncCts.Token;
             }
-
-            _animationSyncCts = new CancellationTokenSource();
 
             try
             {
                 // Play sound in loop synced to animation cycle duration
-                while (!_animationSyncCts.Token.IsCancellationRequested)
+                // Use local token variable - _animationSyncCts may be replaced by another call
+                while (!token.IsCancellationRequested)
                 {
                     if (audioData.Clip != null)
                     {
@@ -70,7 +81,7 @@ namespace CrossProject.Core
 
                     // Wait for animation cycle to complete before next tick
                     await UniTask.Delay(System.TimeSpan.FromSeconds(audioData.AnimationCycleDuration),
-                        cancellationToken: _animationSyncCts.Token);
+                        cancellationToken: token);
                 }
             }
             catch (System.OperationCanceledException)
@@ -111,9 +122,12 @@ namespace CrossProject.Core
         public void Stop()
         {
             // Cancel animation-synced sound loop
-            _animationSyncCts?.Cancel();
-            _animationSyncCts?.Dispose();
-            _animationSyncCts = null;
+            lock (_syncLock)
+            {
+                _animationSyncCts?.Cancel();
+                _animationSyncCts?.Dispose();
+                _animationSyncCts = null;
+            }
 
             _audioSource.Stop();
             _audioSource.clip = null;
