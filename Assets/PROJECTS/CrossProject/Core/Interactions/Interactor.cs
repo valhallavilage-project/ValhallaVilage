@@ -118,6 +118,20 @@ namespace CrossProject.Core.Interactions
         {
             var animationName = _interactionHandler.Closest.Value.animation;
 
+            // Fix: Rotate player to face the interaction object before starting animation
+            if (_interactionHandler.Closest.Value != null)
+            {
+                var targetPosition = _interactionHandler.Closest.Value.transform.position;
+                var direction = (targetPosition - transform.position);
+                direction.y = 0; // Keep rotation on horizontal plane only
+
+                if (direction.sqrMagnitude > 0.01f) // Only rotate if not too close
+                {
+                    var targetRotation = Quaternion.LookRotation(direction);
+                    transform.rotation = targetRotation;
+                }
+            }
+
             if (animationName != InteractionType.Talk)
             {
                 _playerSkinProvider.CurrentSkin.Animator.SetBool(animationName.ToString(), true);
