@@ -128,7 +128,8 @@ namespace CrossProject.Core.Interactions
                 if (direction.sqrMagnitude > 0.01f) // Only rotate if not too close
                 {
                     var targetRotation = Quaternion.LookRotation(direction);
-                    transform.rotation = targetRotation;
+                    // Rotate player transform (parent of Interactor)
+                    transform.parent.rotation = Quaternion.Slerp(transform.parent.rotation, targetRotation, 1f);
                 }
             }
 
