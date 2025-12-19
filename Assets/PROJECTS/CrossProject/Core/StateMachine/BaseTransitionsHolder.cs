@@ -44,7 +44,9 @@ namespace CrossProject.Core
                 else
                 {
                     _transitionsForState[stateInt] = _transitionsConfig.GetTransitions(state)
-                        .Select(transition => _transitions.First(a => CompareTransitions(a.Transition, transition))).ToArray();
+                        .Select(transition => _transitions.FirstOrDefault(a => CompareTransitions(a.Transition, transition)))
+                        .Where(t => t != null)
+                        .ToArray();
                 }
             }
 
