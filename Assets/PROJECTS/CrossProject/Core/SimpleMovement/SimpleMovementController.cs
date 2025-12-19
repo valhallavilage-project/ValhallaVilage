@@ -133,7 +133,8 @@ namespace CrossProject.Core.SimpleMovement
                 if (moveDirection != Vector3.zero)
                 {
                     var targetRotation = Quaternion.LookRotation(moveDirection);
-                    _transform.rotation = Quaternion.Slerp(_transform.rotation, targetRotation, Time.deltaTime * 10f);
+                    // Increased rotation speed from 10 to 20 for sharper turns (curved paths around obstacles)
+                    _transform.rotation = Quaternion.Slerp(_transform.rotation, targetRotation, Time.deltaTime * 20f);
                 }
             }
 
