@@ -1,3 +1,5 @@
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace CrossProject.Core
@@ -14,6 +16,7 @@ namespace CrossProject.Core
     {
         private readonly IAudioSettings _audioSettings;
         private AudioSource _audioSource;
+        private CancellationTokenSource _animationSyncCts;
 
         public AudioService(IAudioSettings audioSettings)
         {
@@ -27,7 +30,43 @@ namespace CrossProject.Core
 
         public void Play(AudioData audioData)
         {
-            Play(audioData.Clip, audioData.IsLoop, audioData.IsStopPreviousClip);
+            // If sound is synced to animation cycle - use ticking logic
+            if (audioData.IsSyncedToAnimation)
+            {
+                PlaySyncedToAnimation(audioData).Forget();
+            }
+            else
+            {
+                Play(audioData.Clip, audioData.IsLoop, audioData.IsStopPreviousClip);
+            }
+        }
+
+        private async UniTask PlaySyncedToAnimation(AudioData audioData)
+        {
+            // Cancel previous animation-synced sound if any
+            _animationSyncCts?.Cancel();
+            _animationSyncCts?.Dispose();
+            _animationSyncCts = new CancellationTokenSource();
+
+            try
+            {
+                // Play sound in loop synced to animation cycle duration
+                while (!_animationSyncCts.Token.IsCancellationRequested)
+                {
+                    if (audioData.Clip != null)
+                    {
+                        _audioSource.PlayOneShot(audioData.Clip, _audioSettings.SoundVolume);
+                    }
+
+                    // Wait for animation cycle to complete before next tick
+                    await UniTask.Delay(System.TimeSpan.FromSeconds(audioData.AnimationCycleDuration),
+                        cancellationToken: _animationSyncCts.Token);
+                }
+            }
+            catch (System.OperationCanceledException)
+            {
+                // Normal cancellation when stopping
+            }
         }
 
         public void Play(AudioClip clip, bool isLoop, bool isStopPreviousClip = false)
@@ -61,6 +100,11 @@ namespace CrossProject.Core
 
         public void Stop()
         {
+            // Cancel animation-synced sound loop
+            _animationSyncCts?.Cancel();
+            _animationSyncCts?.Dispose();
+            _animationSyncCts = null;
+
             _audioSource.Stop();
             _audioSource.clip = null;
         }
