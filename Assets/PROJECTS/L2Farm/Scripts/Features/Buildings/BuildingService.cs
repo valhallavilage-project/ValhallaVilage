@@ -101,7 +101,13 @@ namespace L2Farm.Features.Buildings
             part.requests.Add(id, DateTime.Now);
             _gameStateManager.Save();
             
-            var config = _buildingSetConfig.items.First(x => x.id == id);
+            var config = _buildingSetConfig.items.FirstOrDefault(x => x.id == id);
+            if (config == null)
+            {
+                Debug.LogError($"[BuildingService] Building config not found: {id}");
+                return;
+            }
+
             var timeLeft = _buildingSetConfig.GetSecondsFor(id);
             
             _timerCreator.Launch(timeLeft, _buildings[id].transform.position + config.buildingVFXOffset)
@@ -140,14 +146,22 @@ namespace L2Farm.Features.Buildings
 
         public Vector3 GetVFXPositionFor(BuildingId buildingId)
         {
-            var offset = _buildingSetConfig.items.First(x => x.id == buildingId).buildingVFXOffset;
+            var config = _buildingSetConfig.items.FirstOrDefault(x => x.id == buildingId);
+            if (config == null)
+            {
+                Debug.LogError($"[BuildingService] Building config not found for VFX position: {buildingId}");
+                return _buildings.ContainsKey(buildingId)
+                    ? _buildings[buildingId].transform.position
+                    : Vector3.zero;
+            }
 
-            return _buildings[buildingId].transform.position + offset;
+            return _buildings[buildingId].transform.position + config.buildingVFXOffset;
         }
 
         public float GetVFXScaleFor(BuildingId buildingId)
         {
-            return _buildingSetConfig.items.First(x => x.id == buildingId).buildingVFXScale;
+            var config = _buildingSetConfig.items.FirstOrDefault(x => x.id == buildingId);
+            return config?.buildingVFXScale ?? 1f;
         }
     }
 }
