@@ -125,6 +125,18 @@ namespace CrossProject.Core.SimpleMovement
                 _movingHandler.BeginMove();
             }
 
+            // Fix: Rotate character towards NavMesh path direction (no more moving backwards)
+            if (_playerNavMeshAgent.hasPath && _playerNavMeshAgent.velocity.sqrMagnitude > 0.1f)
+            {
+                var moveDirection = _playerNavMeshAgent.velocity;
+                moveDirection.y = 0;
+                if (moveDirection != Vector3.zero)
+                {
+                    var targetRotation = Quaternion.LookRotation(moveDirection);
+                    _transform.rotation = Quaternion.Slerp(_transform.rotation, targetRotation, Time.deltaTime * 10f);
+                }
+            }
+
             _playerNavMeshAgent.velocity = _currentVelocity;
             _playerNavMeshAgent.nextPosition = _transform.position + _currentVelocity * Time.deltaTime;
             _transform.position = _playerNavMeshAgent.nextPosition;
