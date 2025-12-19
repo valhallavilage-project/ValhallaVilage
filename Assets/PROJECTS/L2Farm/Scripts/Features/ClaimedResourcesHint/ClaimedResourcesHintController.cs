@@ -29,9 +29,13 @@ namespace L2Farm.Features.ClaimerResourcesHint
 
         private void ResourceChanged((ResourceId id, int amount) data)
         {
-            // Only show hints for POSITIVE changes (collecting resources)
-            // Don't show for negative changes (spending resources)
-            if (data.amount <= 0)
+            if (data.amount == 0)
+            {
+                return;
+            }
+
+            // Only show positive numbers (collecting), skip negative (spending)
+            if (data.amount < 0)
             {
                 return;
             }
