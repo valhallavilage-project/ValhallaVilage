@@ -125,40 +125,7 @@ namespace CrossProject.Core.SimpleMovement
                 _movingHandler.BeginMove();
             }
 
-            // Fix: Rotate character towards NavMesh path direction (no more moving backwards)
-            if (_playerNavMeshAgent.hasPath && _playerNavMeshAgent.velocity.sqrMagnitude > 0.1f)
-            {
-                var moveDirection = _playerNavMeshAgent.velocity;
-                moveDirection.y = 0;
-                if (moveDirection != Vector3.zero)
-                {
-                    var targetRotation = Quaternion.LookRotation(moveDirection);
-
-                    // Calculate angle difference for adaptive rotation speed
-                    var angleDiff = Quaternion.Angle(_transform.rotation, targetRotation);
-
-                    // DEBUG: Log rotation info
-                    Debug.Log($"[NavMesh Rotation] hasPath={_playerNavMeshAgent.hasPath}, " +
-                             $"velocity={_playerNavMeshAgent.velocity.magnitude:F2}, " +
-                             $"angleDiff={angleDiff:F1}°, " +
-                             $"currentRotation={_transform.rotation.eulerAngles.y:F1}°, " +
-                             $"targetRotation={targetRotation.eulerAngles.y:F1}°");
-
-                    // Adaptive rotation: sharp turns = instant, gradual turns = smooth
-                    // If angle > 45 degrees (sharp turn) = instant rotation
-                    // If angle < 45 degrees = smooth Slerp
-                    var rotationSpeed = angleDiff > 45f ? 1f : Time.deltaTime * 20f;
-
-                    _transform.rotation = Quaternion.Slerp(_transform.rotation, targetRotation, rotationSpeed);
-                }
-            }
-
-            // DEBUG: Check NavMesh state
-            if (_playerNavMeshAgent.hasPath)
-            {
-                Debug.Log($"[DEBUG Tick] hasPath=TRUE, velocity={_playerNavMeshAgent.velocity.magnitude:F2}, " +
-                         $"remainingDist={_playerNavMeshAgent.remainingDistance:F2}");
-            }
+            // Rotation during manual movement (joystick) handled above in line 113: _transform.forward = inputDir
 
             _playerNavMeshAgent.velocity = _currentVelocity;
             _playerNavMeshAgent.nextPosition = _transform.position + _currentVelocity * Time.deltaTime;
