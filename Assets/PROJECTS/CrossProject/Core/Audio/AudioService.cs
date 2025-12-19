@@ -30,9 +30,15 @@ namespace CrossProject.Core
 
         public void Play(AudioData audioData)
         {
+            Debug.Log($"[AudioService] Play called: clip={audioData.Clip?.name}, isLoop={audioData.IsLoop}, isSynced={audioData.IsSyncedToAnimation}, cycleDuration={audioData.AnimationCycleDuration}");
+
             // If sound is synced to animation cycle - use ticking logic
             if (audioData.IsSyncedToAnimation)
             {
+                // Stop any previous loop sound first
+                _audioSource.Stop();
+                _audioSource.clip = null;
+
                 PlaySyncedToAnimation(audioData).Forget();
             }
             else
@@ -48,6 +54,8 @@ namespace CrossProject.Core
             _animationSyncCts?.Dispose();
             _animationSyncCts = new CancellationTokenSource();
 
+            Debug.Log($"[AudioService] Starting synced sound loop, cycleDuration={audioData.AnimationCycleDuration}s");
+
             try
             {
                 // Play sound in loop synced to animation cycle duration
@@ -55,6 +63,7 @@ namespace CrossProject.Core
                 {
                     if (audioData.Clip != null)
                     {
+                        Debug.Log($"[AudioService] Playing tick: {audioData.Clip.name}");
                         _audioSource.PlayOneShot(audioData.Clip, _audioSettings.SoundVolume);
                     }
 
@@ -65,7 +74,7 @@ namespace CrossProject.Core
             }
             catch (System.OperationCanceledException)
             {
-                // Normal cancellation when stopping
+                Debug.Log("[AudioService] Synced sound cancelled (normal stop)");
             }
         }
 
@@ -100,6 +109,8 @@ namespace CrossProject.Core
 
         public void Stop()
         {
+            Debug.Log("[AudioService] Stop called");
+
             // Cancel animation-synced sound loop
             _animationSyncCts?.Cancel();
             _animationSyncCts?.Dispose();
