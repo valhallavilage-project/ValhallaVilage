@@ -183,10 +183,27 @@ namespace CrossProject.Core.SimpleMovement
             _playerNavMeshAgent.SetDestination(target);
             LocalAccessCurrentSkin.Animator.SetFloat(Speed, 1);
 
-            // FIXED: Use original WaitUntil - it properly waits for path to calculate AND reach target
-            // My while loop was wrong - pathPending blocks entry, then remainingDistance already 0
-            await UniTask.WaitUntil(() => !_playerNavMeshAgent.pathPending &&
-                                          _playerNavMeshAgent.remainingDistance <= targetDistance, PlayerLoopTiming.Update, cancellationToken);
+            // ATTEMPT #3: Proper rotation during NavMesh movement
+            // Step 1: Wait for path to calculate first
+            await UniTask.WaitUntil(() => !_playerNavMeshAgent.pathPending,
+                PlayerLoopTiming.Update, cancellationToken);
+
+            // Step 2: Now rotate while moving to target
+            while (!cancellationToken.IsCancellationRequested &&
+                   _playerNavMeshAgent.remainingDistance > targetDistance)
+            {
+                // Rotate towards actual movement direction (NavMesh velocity)
+                if (_playerNavMeshAgent.velocity.sqrMagnitude > 0.1f)
+                {
+                    var moveDir = _playerNavMeshAgent.velocity;
+                    moveDir.y = 0;
+                    if (moveDir != Vector3.zero)
+                    {
+                        _transform.rotation = Quaternion.LookRotation(moveDir);
+                    }
+                }
+                await UniTask.Yield(PlayerLoopTiming.Update, cancellationToken);
+            }
 
             _playerNavMeshAgent.ResetPath();
             _playerNavMeshAgent.velocity = Vector3.zero;
