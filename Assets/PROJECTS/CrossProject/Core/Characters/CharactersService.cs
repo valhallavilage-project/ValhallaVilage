@@ -70,7 +70,14 @@ namespace CrossProject.Core.Characters
         {
             if (characterId == "MC")
             {
-                var id = _gameStateManager.State.Get<ObtainedCharactersPart>().ObtainedCharacters.First();
+                var obtainedCharacters = _gameStateManager.State.Get<ObtainedCharactersPart>().ObtainedCharacters;
+                if (obtainedCharacters == null || obtainedCharacters.Count == 0)
+                {
+                    Debug.LogError("[CharactersService] No obtained characters found for MC");
+                    return null;
+                }
+
+                var id = obtainedCharacters.First();
                 return _characterSetConfig.items.FirstOrDefault(x => x.id == id);
             }
 
