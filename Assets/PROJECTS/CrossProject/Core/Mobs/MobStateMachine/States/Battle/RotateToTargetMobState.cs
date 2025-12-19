@@ -36,6 +36,14 @@ namespace CrossProject.Core
         {
             await base.HandleControl();
 
+            // Fix: Check if Enemy exists before accessing position
+            if (_agroArea.Enemy == null)
+            {
+                Debug.LogWarning("[RotateToTargetMobState] Enemy is null, cannot rotate to target");
+                _persistentData.IsRotationToTargetFinished = true;
+                return;
+            }
+
             const float differenceAngles = 1;
             const float directionsMinDifference = 1 - differenceAngles * Mathf.Deg2Rad;
 
