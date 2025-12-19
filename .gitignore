@@ -71,6 +71,19 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
+# Analysis reports and documentation (not for production)
+*_ANALYSIS.html
+*_REPORT.html
+*_REVIEW.html
+*_REVIEW.md
+*ANALYSIS*.md
+*CHECKLIST.md
+ROTATION_*.md
+NAVMESH_*.md
+BUILDING_*.md
+REFACTORING_*.md
+compile.log
+
 /.idea
 /.idea/*
 *.idea/*
