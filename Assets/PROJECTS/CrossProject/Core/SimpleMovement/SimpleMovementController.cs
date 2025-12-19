@@ -137,6 +137,13 @@ namespace CrossProject.Core.SimpleMovement
                     // Calculate angle difference for adaptive rotation speed
                     var angleDiff = Quaternion.Angle(_transform.rotation, targetRotation);
 
+                    // DEBUG: Log rotation info
+                    Debug.Log($"[NavMesh Rotation] hasPath={_playerNavMeshAgent.hasPath}, " +
+                             $"velocity={_playerNavMeshAgent.velocity.magnitude:F2}, " +
+                             $"angleDiff={angleDiff:F1}°, " +
+                             $"currentRotation={_transform.rotation.eulerAngles.y:F1}°, " +
+                             $"targetRotation={targetRotation.eulerAngles.y:F1}°");
+
                     // Adaptive rotation: sharp turns = instant, gradual turns = smooth
                     // If angle > 45 degrees (sharp turn) = instant rotation
                     // If angle < 45 degrees = smooth Slerp
