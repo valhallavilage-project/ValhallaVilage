@@ -133,8 +133,16 @@ namespace CrossProject.Core.SimpleMovement
                 if (moveDirection != Vector3.zero)
                 {
                     var targetRotation = Quaternion.LookRotation(moveDirection);
-                    // Increased rotation speed from 10 to 20 for sharper turns (curved paths around obstacles)
-                    _transform.rotation = Quaternion.Slerp(_transform.rotation, targetRotation, Time.deltaTime * 20f);
+
+                    // Calculate angle difference for adaptive rotation speed
+                    var angleDiff = Quaternion.Angle(_transform.rotation, targetRotation);
+
+                    // Adaptive rotation: sharp turns = instant, gradual turns = smooth
+                    // If angle > 45 degrees (sharp turn) = instant rotation
+                    // If angle < 45 degrees = smooth Slerp
+                    var rotationSpeed = angleDiff > 45f ? 1f : Time.deltaTime * 20f;
+
+                    _transform.rotation = Quaternion.Slerp(_transform.rotation, targetRotation, rotationSpeed);
                 }
             }
 
