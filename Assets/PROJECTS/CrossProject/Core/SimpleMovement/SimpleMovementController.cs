@@ -41,6 +41,8 @@ namespace CrossProject.Core.SimpleMovement
         private readonly HashSet<Type> _blockers = new();
         private IMainCharacterMovingHandler _movingHandler;
         private bool _isIdling;
+        private Vector3 _lastPosition;
+        private float _stuckTimer;
 
         public bool IsBlocked => _blockers.Count > 0;
         public Vector3 Velocity => _playerNavMeshAgent.velocity;
@@ -114,52 +116,157 @@ namespace CrossProject.Core.SimpleMovement
                 _currentVelocity = inputDir * currentSpeed;
             }
 
-            if (currentSpeed == 0 && !_isIdling)
+            // Apply obstacle sliding - project movement along obstacles
+            if (hasInput && currentSpeed > 0)
             {
-                _isIdling = true;
-                _movingHandler.StopMove();
+                _currentVelocity = GetSlideVelocity(_currentVelocity);
             }
-            else if (currentSpeed > 0 && _isIdling)
-            {
-                _isIdling = false;
-                _movingHandler.BeginMove();
-            }
-
-            // Rotation during manual movement (joystick) handled above in line 113: _transform.forward = inputDir
 
             _playerNavMeshAgent.velocity = _currentVelocity;
             _playerNavMeshAgent.nextPosition = _transform.position + _currentVelocity * Time.deltaTime;
             _transform.position = _playerNavMeshAgent.nextPosition;
 
+            // Check actual movement (not just intended velocity)
+            var actualDelta = (_transform.position - _lastPosition).sqrMagnitude;
+            var intendedMovement = _currentVelocity.sqrMagnitude > 0.01f;
+            var actuallyMoving = actualDelta > 0.0001f; // Actually moved this frame
+
+            // Track stuck state - if we want to move but can't
+            if (intendedMovement && !actuallyMoving)
+            {
+                _stuckTimer += Time.deltaTime;
+            }
+            else
+            {
+                _stuckTimer = 0f;
+            }
+
+            // Consider stuck after 0.1 seconds of no movement while trying to move
+            var isStuck = _stuckTimer > 0.1f;
+
+            if ((isStuck || !intendedMovement) && !_isIdling)
+            {
+                _isIdling = true;
+                _movingHandler.StopMove();
+            }
+            else if (!isStuck && intendedMovement && _isIdling)
+            {
+                _isIdling = false;
+                _movingHandler.BeginMove();
+            }
+
+            _lastPosition = _transform.position;
+
             if (LocalAccessCurrentSkin != null && LocalAccessCurrentSkin.Animator != null)
             {
-                var animSpeed = Mathf.InverseLerp(0, speed, _currentVelocity.magnitude);
+                // Use 0 speed when stuck
+                var animSpeed = isStuck ? 0f : Mathf.InverseLerp(0, speed, _currentVelocity.magnitude);
                 LocalAccessCurrentSkin.Animator.SetFloat(Speed, animSpeed);
             }
         }
 
+        private Vector3 GetSlideVelocity(Vector3 desiredVelocity)
+        {
+            var moveDir = desiredVelocity.normalized;
+            var checkDistance = 0.8f;
+            var sphereRadius = 0.4f;
+            var origin = _transform.position + Vector3.up * 0.5f;
+
+            // Use Physics.AllLayers to check everything, ignore triggers
+            var queryTrigger = QueryTriggerInteraction.Ignore;
+            var layerMask = ~0; // All layers
+
+            // Try multiple rays for better detection
+            var hitDetected = false;
+            RaycastHit bestHit = default;
+
+            // Center ray
+            if (Physics.Raycast(origin, moveDir, out var centerHit, checkDistance, layerMask, queryTrigger))
+            {
+                if (!IsOwnCollider(centerHit.collider))
+                {
+                    hitDetected = true;
+                    bestHit = centerHit;
+                }
+            }
+
+            // SphereCast as backup
+            if (!hitDetected && Physics.SphereCast(origin, sphereRadius, moveDir, out var sphereHit, checkDistance, layerMask, queryTrigger))
+            {
+                if (!IsOwnCollider(sphereHit.collider))
+                {
+                    hitDetected = true;
+                    bestHit = sphereHit;
+                }
+            }
+
+            if (!hitDetected)
+            {
+                return desiredVelocity;
+            }
+
+            // Hit something - calculate slide direction
+            var normal = bestHit.normal;
+            normal.y = 0;
+            if (normal.sqrMagnitude < 0.01f)
+            {
+                return Vector3.zero;
+            }
+
+            normal.Normalize();
+            var slideDir = Vector3.ProjectOnPlane(moveDir, normal).normalized;
+
+            if (slideDir.sqrMagnitude > 0.01f)
+            {
+                // Check if slide direction is clear
+                if (!Physics.Raycast(origin, slideDir, checkDistance, layerMask, queryTrigger))
+                {
+                    var slideDot = Vector3.Dot(moveDir, slideDir);
+                    return slideDir * desiredVelocity.magnitude * Mathf.Max(slideDot, 0.4f);
+                }
+            }
+
+            // Stuck - stop movement completely
+            return Vector3.zero;
+        }
+
+        private bool IsOwnCollider(Collider collider)
+        {
+            return collider.transform.IsChildOf(_transform) || collider.transform == _transform;
+        }
+
         public async UniTask MoveTo(Vector3 target, CancellationToken cancellationToken, float targetDistance = 1)
         {
+            // Rotate towards target immediately
             var direction = target - _transform.position;
             if (direction != Vector3.zero)
             {
-                _transform.forward = direction;
+                direction.y = 0;
+                _transform.forward = direction.normalized;
                 _isIdling = false;
             }
 
             _playerNavMeshAgent.SetDestination(target);
-            LocalAccessCurrentSkin.Animator.SetFloat(Speed, 1);
 
-            // ATTEMPT #3: Proper rotation during NavMesh movement
-            // Step 1: Wait for path to calculate first
+            // Wait for path calculation first (don't animate yet!)
             await UniTask.WaitUntil(() => !_playerNavMeshAgent.pathPending,
                 PlayerLoopTiming.Update, cancellationToken);
 
-            // Step 2: Now rotate while moving to target
+            // Check if path is valid
+            if (_playerNavMeshAgent.pathStatus == NavMeshPathStatus.PathInvalid)
+            {
+                return;
+            }
+
+            // Move and animate based on actual velocity
             while (!cancellationToken.IsCancellationRequested &&
                    _playerNavMeshAgent.remainingDistance > targetDistance)
             {
-                // Rotate towards actual movement direction (NavMesh velocity)
+                var actualSpeed = _playerNavMeshAgent.velocity.magnitude;
+                var animSpeed = Mathf.InverseLerp(0, speed, actualSpeed);
+                LocalAccessCurrentSkin.Animator.SetFloat(Speed, animSpeed);
+
+                // Rotate towards actual movement direction
                 if (_playerNavMeshAgent.velocity.sqrMagnitude > 0.1f)
                 {
                     var moveDir = _playerNavMeshAgent.velocity;
