@@ -264,6 +264,7 @@ MonoBehaviour:
     _clip: {fileID: 0}
     _isLoop: 0
     _isStopPreviousClip: 0
+    _animationCycleDuration: 0
 --- !u!1 &3018869327203395264
 GameObject:
   m_ObjectHideFlags: 0
@@ -278,6 +279,7 @@ GameObject:
   - component: {fileID: 1575687046254431607}
   - component: {fileID: 8233332576332186640}
   - component: {fileID: 5783224551172637568}
+  - component: {fileID: 8240239901726156077}
   m_Layer: 0
   m_Name: Mob
   m_TagString: Mob
@@ -351,7 +353,7 @@ Rigidbody:
   m_GameObject: {fileID: 3018869327203395264}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 5
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -404,6 +406,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 039d0932499a45d8b2d95d4d567209e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8240239901726156077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3018869327203395264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2caa03fb796fed9459aa8bb691da4f48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rigidbody: {fileID: 1575687046254431607}
+  _avoidanceRadius: 4
+  _avoidanceForce: 8
 --- !u!1 &3059706982767682208
 GameObject:
   m_ObjectHideFlags: 0

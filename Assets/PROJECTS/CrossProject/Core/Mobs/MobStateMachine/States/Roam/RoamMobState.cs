@@ -1,4 +1,4 @@
-﻿using Cysharp.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace CrossProject.Core
@@ -9,6 +9,8 @@ namespace CrossProject.Core
         private readonly IMobPerUpdateData _perUpdateData;
         private readonly IMobPersistentData _persistentData;
         private readonly IRotateAbility _rotateAbility;
+
+        private float _stateEnterTime;
 
         public override MobState State => MobState.Roam;
 
@@ -21,9 +23,24 @@ namespace CrossProject.Core
             _rotateAbility = rotateAbility;
         }
 
+        public override async UniTask Enter()
+        {
+            await base.Enter();
+            _stateEnterTime = Time.time;
+        }
+
         protected override async UniTask HandleControl()
         {
             await base.HandleControl();
+
+            // Minimum time in state to prevent jittering when mobs collide
+            var timeInState = Time.time - _stateEnterTime;
+            if (timeInState < Config.RoamingMinTimeInState)
+            {
+                _moveAbility.Move(_persistentData.RoamPathDirection, Config.RoamingMaxSpeed);
+                _rotateAbility.ForceRotate(_persistentData.RoamPathDirection);
+                return;
+            }
 
             if (_perUpdateData.Position.IsDestinationReached(_persistentData.RoamPathDestination, _persistentData.RoamPathStart, 0.1f, true))
             {
