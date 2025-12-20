@@ -727,10 +727,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 4072498806787465068}
   _walkSound:
-    _clip: {fileID: 8300000, guid: 6f895fcbc8f403944b3214ae6850edcf, type: 3}
+    _clip: {fileID: 8300000, guid: 58f814dece952654a854979983b986cc, type: 3}
     _isLoop: 1
     _isStopPreviousClip: 0
-    _animationCycleDuration: 0.5
+    _animationCycleDuration: 0.6
   _attackSound:
     _clip: {fileID: 8300000, guid: 09169f7b24f0a6045bb1f22b6cfd69c5, type: 3}
     _isLoop: 0
