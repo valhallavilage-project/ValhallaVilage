@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+using UnityEngine;
+using UnityEngine.AI;
 
 namespace CrossProject.Core
 {
@@ -8,6 +9,9 @@ namespace CrossProject.Core
 
     public class RoamBoxArea : IRoamBoxArea
     {
+        private const int MaxNavMeshSampleAttempts = 10;
+        private const float NavMeshSampleRadius = 5f;
+
         private BoxCollider _area;
 
         public float MinRoamPathLength { get; private set; }
@@ -27,19 +31,34 @@ namespace CrossProject.Core
         {
             var bounds = _area.bounds;
 
-            var point = new Vector3(
-                Random.Range(bounds.min.x, bounds.max.x),
-                0,
-                Random.Range(bounds.min.z, bounds.max.z)
-            );
-
-            if (point != _area.ClosestPoint(point))
+            for (var i = 0; i < MaxNavMeshSampleAttempts; i++)
             {
-                Debug.Log("Out of the collider! Looking for the other point...");
-                point = GetPointInside();
+                var point = new Vector3(
+                    Random.Range(bounds.min.x, bounds.max.x),
+                    bounds.center.y,
+                    Random.Range(bounds.min.z, bounds.max.z)
+                );
+
+                // Check if point is inside collider
+                if (point != _area.ClosestPoint(point))
+                {
+                    continue;
+                }
+
+                // Sample NavMesh to get valid walkable position
+                if (NavMesh.SamplePosition(point, out var hit, NavMeshSampleRadius, NavMesh.AllAreas))
+                {
+                    return hit.position;
+                }
             }
 
-            return point;
+            // Fallback: return center of bounds sampled on NavMesh
+            if (NavMesh.SamplePosition(bounds.center, out var centerHit, NavMeshSampleRadius * 2, NavMesh.AllAreas))
+            {
+                return centerHit.position;
+            }
+
+            return bounds.center;
         }
     }
 }
