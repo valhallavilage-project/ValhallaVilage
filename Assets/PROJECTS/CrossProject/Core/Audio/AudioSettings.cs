@@ -8,7 +8,7 @@ namespace CrossProject.Core
 
     public class AudioSettings : IAudioSettings
     {
-        public float SoundVolume { get; } = 1;
+        public float SoundVolume { get; } = 0.5f;
         public float MusicVolume { get; } = 1;
     }
 }
