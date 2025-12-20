@@ -248,41 +248,47 @@ namespace CrossProject.Core.SimpleMovement
 
             _playerNavMeshAgent.SetDestination(target);
 
-            // Wait for path calculation first (don't animate yet!)
-            await UniTask.WaitUntil(() => !_playerNavMeshAgent.pathPending,
-                PlayerLoopTiming.Update, cancellationToken);
-
-            // Check if path is valid
-            if (_playerNavMeshAgent.pathStatus == NavMeshPathStatus.PathInvalid)
+            try
             {
-                return;
-            }
+                // Wait for path calculation first (don't animate yet!)
+                await UniTask.WaitUntil(() => !_playerNavMeshAgent.pathPending,
+                    PlayerLoopTiming.Update, cancellationToken);
 
-            // Move and animate based on actual velocity
-            while (!cancellationToken.IsCancellationRequested &&
-                   _playerNavMeshAgent.remainingDistance > targetDistance)
-            {
-                var actualSpeed = _playerNavMeshAgent.velocity.magnitude;
-                var animSpeed = Mathf.InverseLerp(0, speed, actualSpeed);
-                LocalAccessCurrentSkin.Animator.SetFloat(Speed, animSpeed);
-
-                // Rotate towards actual movement direction
-                if (_playerNavMeshAgent.velocity.sqrMagnitude > 0.1f)
+                // Check if path is valid
+                if (_playerNavMeshAgent.pathStatus == NavMeshPathStatus.PathInvalid)
                 {
-                    var moveDir = _playerNavMeshAgent.velocity;
-                    moveDir.y = 0;
-                    if (moveDir != Vector3.zero)
-                    {
-                        _transform.rotation = Quaternion.LookRotation(moveDir);
-                    }
+                    return;
                 }
-                await UniTask.Yield(PlayerLoopTiming.Update, cancellationToken);
-            }
 
-            _playerNavMeshAgent.ResetPath();
-            _playerNavMeshAgent.velocity = Vector3.zero;
-            _currentVelocity = Vector3.zero;
-            LocalAccessCurrentSkin.Animator.SetFloat(Speed, 0);
+                // Move and animate based on actual velocity
+                while (!cancellationToken.IsCancellationRequested &&
+                       _playerNavMeshAgent.remainingDistance > targetDistance)
+                {
+                    var actualSpeed = _playerNavMeshAgent.velocity.magnitude;
+                    var animSpeed = Mathf.InverseLerp(0, speed, actualSpeed);
+                    LocalAccessCurrentSkin.Animator.SetFloat(Speed, animSpeed);
+
+                    // Rotate towards actual movement direction
+                    if (_playerNavMeshAgent.velocity.sqrMagnitude > 0.1f)
+                    {
+                        var moveDir = _playerNavMeshAgent.velocity;
+                        moveDir.y = 0;
+                        if (moveDir != Vector3.zero)
+                        {
+                            _transform.rotation = Quaternion.LookRotation(moveDir);
+                        }
+                    }
+                    await UniTask.Yield(PlayerLoopTiming.Update, cancellationToken);
+                }
+            }
+            finally
+            {
+                // Always stop movement and reset animation, even on cancellation
+                _playerNavMeshAgent.ResetPath();
+                _playerNavMeshAgent.velocity = Vector3.zero;
+                _currentVelocity = Vector3.zero;
+                LocalAccessCurrentSkin.Animator.SetFloat(Speed, 0);
+            }
         }
 
         public async UniTask Initialize()

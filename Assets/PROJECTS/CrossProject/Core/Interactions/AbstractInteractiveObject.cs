@@ -1,3 +1,4 @@
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -43,12 +44,22 @@ namespace CrossProject.Core.Interactions
 
         protected abstract UniTask AfterInteraction();
 
-        public async UniTask Interaction()
+        public async UniTask Interaction(CancellationToken cancellationToken = default)
         {
             isBusy = true;
-            await UniTask.WaitForSeconds(interactionDuration);
-            await AfterInteraction();
-            isBusy = false;
+            try
+            {
+                await UniTask.WaitForSeconds(interactionDuration, cancellationToken: cancellationToken);
+
+                // Check cancellation before giving rewards
+                cancellationToken.ThrowIfCancellationRequested();
+
+                await AfterInteraction();
+            }
+            finally
+            {
+                isBusy = false;
+            }
         }
     }
 }

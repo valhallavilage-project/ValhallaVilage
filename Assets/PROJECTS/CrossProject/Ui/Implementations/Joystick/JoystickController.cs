@@ -13,6 +13,7 @@ namespace CrossProject.Ui.Implementations
     {
         private readonly UiService _uiService;
         private readonly AddressablesManager _addressablesManager;
+        private readonly IInteractionHandler _interactionHandler;
 
         private Joystick _view;
         private bool _isDragActive;
@@ -39,10 +40,12 @@ namespace CrossProject.Ui.Implementations
 
         public JoystickController(
             UiService uiService,
-            AddressablesManager addressablesManager)
+            AddressablesManager addressablesManager,
+            IInteractionHandler interactionHandler)
         {
             _uiService = uiService;
             _addressablesManager = addressablesManager;
+            _interactionHandler = interactionHandler;
         }
 
         public async UniTask Initialize()
@@ -99,18 +102,28 @@ namespace CrossProject.Ui.Implementations
                 return;
             }
 
+            // Check for interaction cancellation via joystick touch - works even when blocked
+            if (Input.GetMouseButtonDown(0) && _view.IsTouchInZone)
+            {
+                if (_interactionHandler.IsInteractionInProcess || _interactionHandler.IsMovingToTarget)
+                {
+                    _interactionHandler.CancelInteraction();
+                    Debug.Log("[JoystickController] Cancelled interaction via joystick");
+                }
+
+                if (!IsBlocked)
+                {
+                    _isDragActive = true;
+                    _view.StartDrag();
+                }
+            }
+
             if (IsBlocked)
             {
                 if (_view.NormalizedValue != Vector2.zero)
                     _view.EndDrag();
 
                 return;
-            }
-
-            if (Input.GetMouseButtonDown(0) && _view.IsTouchInZone)
-            {
-                _isDragActive = true;
-                _view.StartDrag();
             }
 
             if (Input.GetMouseButton(0) && _isDragActive)
