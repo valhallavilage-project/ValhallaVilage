@@ -9,8 +9,8 @@ namespace CrossProject.Core
     /// <summary>
     /// NavMesh-based movement for mobs. Replaces physics-based MoveAbilityView.
     /// Uses NavMeshAgent for pathfinding and obstacle avoidance.
+    /// Note: NavMeshAgent should be on the root object (with Rigidbody), this component can be on a child.
     /// </summary>
-    [RequireComponent(typeof(NavMeshAgent))]
     public class NavMeshMoveAbilityView : MonoBehaviour
     {
         [SerializeField] private NavMeshAgent _agent;
@@ -42,11 +42,8 @@ namespace CrossProject.Core
                 _rigidbody = GetComponent<Rigidbody>();
             }
 
-            // NavMeshAgent will handle movement, disable Rigidbody physics movement
-            if (_rigidbody != null)
-            {
-                _rigidbody.isKinematic = true;
-            }
+            // Don't set kinematic - RotateAbilityView needs angularVelocity
+            // NavMeshAgent will override physics movement anyway
 
             // Configure agent for mob behavior
             _agent.updateRotation = false; // We handle rotation via RotateAbility
@@ -69,8 +66,9 @@ namespace CrossProject.Core
             _agent.speed = _targetSpeed;
             _agent.isStopped = false;
 
-            // Calculate target position in movement direction
-            var targetPosition = transform.position + _targetDirection * 10f;
+            // Calculate target position in movement direction (use agent's transform, not this child object)
+            var agentPosition = _agent.transform.position;
+            var targetPosition = agentPosition + _targetDirection * 10f;
 
             // Sample valid NavMesh position
             if (NavMesh.SamplePosition(targetPosition, out var hit, 15f, NavMesh.AllAreas))
@@ -80,7 +78,7 @@ namespace CrossProject.Core
             else
             {
                 // If no valid NavMesh point, try shorter distance
-                targetPosition = transform.position + _targetDirection * 2f;
+                targetPosition = agentPosition + _targetDirection * 2f;
                 if (NavMesh.SamplePosition(targetPosition, out hit, 5f, NavMesh.AllAreas))
                 {
                     _agent.SetDestination(hit.position);
@@ -106,7 +104,8 @@ namespace CrossProject.Core
         private void OnEnable()
         {
             // Warp agent to current position when enabled (for pooling)
-            if (_agent != null && NavMesh.SamplePosition(transform.position, out var hit, 5f, NavMesh.AllAreas))
+            // Use agent's transform position, not this child object's position
+            if (_agent != null && NavMesh.SamplePosition(_agent.transform.position, out var hit, 5f, NavMesh.AllAreas))
             {
                 _agent.Warp(hit.position);
             }

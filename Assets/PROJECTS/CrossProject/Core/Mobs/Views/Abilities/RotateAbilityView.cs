@@ -33,6 +33,17 @@ namespace CrossProject.Core
 
         private void DirectionChanged(Vector3 direction)
         {
+            // If rigidbody is kinematic (NavMeshAgent active), use direct rotation
+            if (_rigidbody.isKinematic)
+            {
+                var targetRotation = Quaternion.LookRotation(direction);
+                _rigidbody.transform.rotation = Quaternion.Slerp(
+                    _rigidbody.transform.rotation,
+                    targetRotation,
+                    _rotateAbility.Parameters.RotationSpeed * Time.fixedDeltaTime);
+                return;
+            }
+
             var rotation = GetRotation(direction, transform.rotation, _rigidbody.angularVelocity,
                 _rotateAbility.Parameters.RotationSpeed, _rotateAbility.Parameters.RotationDamper);
 
@@ -53,7 +64,11 @@ namespace CrossProject.Core
 
         private void ForceRotate(Vector3 direction)
         {
-            _rigidbody.angularVelocity = Vector3.zero;
+            // Only set angularVelocity if rigidbody is not kinematic (NavMeshAgent makes it kinematic)
+            if (!_rigidbody.isKinematic)
+            {
+                _rigidbody.angularVelocity = Vector3.zero;
+            }
             _rigidbody.transform.rotation = Quaternion.LookRotation(direction);
         }
 
