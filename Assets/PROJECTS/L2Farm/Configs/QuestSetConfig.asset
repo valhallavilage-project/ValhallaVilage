@@ -2824,7 +2824,7 @@ MonoBehaviour:
       type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
       data:
         questId:
-          value: Daily_Horns
+          value: Daily_Horns_Early
     - rid: 9209226077287219218
       type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
       data:
@@ -2852,7 +2852,7 @@ MonoBehaviour:
       type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
       data:
         questId:
-          value: Daily_Veg
+          value: Daily_Veg_Early
     - rid: 9209226123114184704
       type: {class: HasEnoughResourcesConditionConfig, ns: L2Farm.Scripts.Conditions, asm: L2Farm}
       data:

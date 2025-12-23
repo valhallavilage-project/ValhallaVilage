@@ -183,8 +183,10 @@ namespace CrossProject.Core.Quests
             part.lostQuests.Add(id);
             _gameStateManager.Save();
 
-            _launchedQuests.Remove(id);
-            await _actionService.Execute(config.loseActions);
+            if (_launchedQuests.Remove(id))
+            {
+                await _actionService.Execute(config.loseActions);
+            }
             OnQuestLose?.Invoke(id);
             Debug.Log($"[{nameof(QuestService)}] : {id} Quest Lose :-(");
         }

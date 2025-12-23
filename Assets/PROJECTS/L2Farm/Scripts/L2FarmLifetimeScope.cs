@@ -177,6 +177,10 @@ namespace L2Farm.Scripts
                 .AsSelf()
                 .AsImplementedInterfaces();
 
+            builder.RegisterComponentInHierarchy<ServerService>()
+                .AsSelf()
+                .AsImplementedInterfaces();
+
             builder.RegisterComponentInHierarchy<UiService>()
                 .AsSelf()
                 .AsImplementedInterfaces();

@@ -4,13 +4,14 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 using TMPro;
+using CrossProject.Core;
 
 namespace CrossProject.Ui.Core
 {
     [Serializable]
     public class LogInData
     {
-        public string serverId = "13";
+        public string serverId;
         public string email;
         public string password;
     }
@@ -23,7 +24,7 @@ namespace CrossProject.Ui.Core
 
     public class LogInScreen : MonoBehaviour
     {
-        private const string mainURL = "https://site-1.valka.fans/app/";
+        [SerializeField] private ServerService serverService;
         [SerializeField] private string launcherKey;
         [SerializeField] private TMP_InputField logInField;
         [SerializeField] private TMP_InputField passwordField;
@@ -32,13 +33,15 @@ namespace CrossProject.Ui.Core
 
         public LogInData LogInData { get; private set; }
 
+        public event Action OnLoginedIn;
+
         private void Awake()
         {
             logInButton.onClick.AddListener(() =>
             {
                 if (!string.IsNullOrEmpty(logInField.text) && !string.IsNullOrEmpty(passwordField.text))
                 {
-                    LogInData = new LogInData { email = logInField.text, password = passwordField.text, serverId = "13" };
+                    LogInData = new LogInData { email = logInField.text, password = passwordField.text, serverId = ServerService.ServerId };
                     logInGroup.interactable = false;
                 }
             });
@@ -64,6 +67,7 @@ namespace CrossProject.Ui.Core
                 PlayerPrefs.SetString("Password", LogInData.password);
                 PlayerPrefs.SetString("ServerId", LogInData.serverId);
                 Close(true);
+                serverService.Activate();
             }
             return success;
         }
@@ -126,7 +130,7 @@ namespace CrossProject.Ui.Core
             form.AddField("password", LogInData.password);
             form.AddField("sid", LogInData.serverId);
 
-            using var request = UnityWebRequest.Post(mainURL + "signin", form);
+            using var request = UnityWebRequest.Post(ServerService.MainURL + "signin", form);
             request.SetRequestHeader("Accept", "application/json");
 
             await request.SendWebRequest().ToUniTask();
