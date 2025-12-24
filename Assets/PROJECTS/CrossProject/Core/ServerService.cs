@@ -49,6 +49,7 @@ namespace CrossProject.Core
 
     public class ServerService : MonoBehaviour, IInitializable
     {
+        [SerializeField] private DailyServerScreen dailyServerScreen;
         [SerializeField] private string launcherKey;
         [SerializeField] private DailyIdToName[] dailyIdToNames;
 
@@ -70,6 +71,7 @@ namespace CrossProject.Core
 
         private void Awake()
         {
+            dailyServerScreen.Close();
             DontDestroyOnLoad(this);
         }
 
@@ -107,7 +109,10 @@ namespace CrossProject.Core
                     {
                         if (dailyTask.id == item.id && questId.ToString() == item.name)
                         {
-                            await TryToPostDailyTasks(dailyInfo, dailyTask);
+                            dailyServerScreen.Open();
+                            int index = await dailyServerScreen.GetIndex(dailyInfo.server_list);
+                            await TryToPostDailyTasks(dailyInfo, dailyTask, dailyInfo.server_list[index].id);
+                            dailyServerScreen.Close();
                             break;
                         }
                     }
@@ -139,7 +144,7 @@ namespace CrossProject.Core
             }
         }
 
-        private async UniTask TryToPostDailyTasks(DailyInfo dailyInfo, DailyTasks dailyTask)
+        private async UniTask TryToPostDailyTasks(DailyInfo dailyInfo, DailyTasks dailyTask, int serverId)
         {
             if (dailyInfo.server_list.Length > 0)
             {
@@ -147,7 +152,7 @@ namespace CrossProject.Core
                 form.AddField("launcher_key", launcherKey);
                 form.AddField("id", dailyTask.id);
                 form.AddField("value", dailyTask.key);
-                form.AddField("server_id", dailyInfo.server_list[0].id);
+                form.AddField("server_id", serverId);
 
 
                 using var request = UnityWebRequest.Post(MainURL + "daily_tasks", form);
