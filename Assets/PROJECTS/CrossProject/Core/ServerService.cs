@@ -58,6 +58,7 @@ namespace CrossProject.Core
         public const string ServerId = "13";
 
         private QuestService _questService;
+        private PlayerDailyTaskCheck _playerDailyTaskCheck;
 
         public bool IsInitialized { get; private set; }
 
@@ -87,13 +88,31 @@ namespace CrossProject.Core
             {
                 await UniTask.Yield();
             }
-
+            
             _questService.OnQuestWin += (QuestId questId) =>
             {
                 SendQuest(questId);
             };
 
             await LaunchQuests();
+
+            await UniTask.Delay(1000);
+            _playerDailyTaskCheck = FindAnyObjectByType<PlayerDailyTaskCheck>();
+            while (!_playerDailyTaskCheck)
+            {
+                await UniTask.Yield();
+                _playerDailyTaskCheck = FindAnyObjectByType<PlayerDailyTaskCheck>();
+            }
+            _playerDailyTaskCheck.OnHitDailyMaster += (string masterName) =>
+            {
+                foreach (var item in dailyIdToNames)
+                {
+                    if(item.name == masterName)
+                    {
+                        LaunchQuests();
+                    }
+                }
+            };
         }
 
         private async UniTask SendQuest(QuestId questId)

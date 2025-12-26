@@ -92,6 +92,8 @@ GameObject:
   - component: {fileID: 4616817066327550145}
   - component: {fileID: 4380457264677689087}
   - component: {fileID: 4607797014688708071}
+  - component: {fileID: 3323782562226521586}
+  - component: {fileID: 4847491321459812845}
   m_Layer: 0
   m_Name: NPCInteractiveObject
   m_TagString: Untagged
@@ -157,6 +159,41 @@ MonoBehaviour:
   viewRoot: {fileID: 640253144641687989}
   highLight: {fileID: 7003444743326263387}
   _marker: {fileID: 4113158968298077809}
+  _additionalNpcActions: {fileID: 0}
+--- !u!135 &3323782562226521586
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3195300209068427173}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 20
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4847491321459812845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3195300209068427173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ded651130b9ba42028ed6dcb4745c57f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _name: 
 --- !u!1001 &5270774035598867428
 PrefabInstance:
   m_ObjectHideFlags: 0
