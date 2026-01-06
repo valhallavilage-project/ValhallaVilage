@@ -26,6 +26,7 @@ MonoBehaviour:
   - rid: 4482425896350515220
   - rid: 7520422092813631489
   - rid: 4482425896350515240
+  - rid: 9209226049766555651
   - rid: 4482425896350515225
   - rid: 4482425896350515215
   - rid: 4482425896350515210
@@ -41,6 +42,13 @@ MonoBehaviour:
   - rid: 7520422080207912983
   - rid: 7520422080207912984
   - rid: 7520422080207912985
+  - rid: 9209225786981613568
+  - rid: 9209225786981613569
+  - rid: 9209225786981613570
+  - rid: 9209226077287219203
+  - rid: 9209226077287219204
+  - rid: 9209226123114184708
+  - rid: 9209226123114184709
   references:
     version: 2
     RefIds:
@@ -1314,10 +1322,13 @@ MonoBehaviour:
         - rid: 1309964340451868708
         steps:
         - rid: 4482425896350515236
+        - rid: 9209226077287219205
         winActions:
         - rid: 1309964340451868712
         - rid: 1309964340451868713
         - rid: 1309964340451868714
+        - rid: 9209226077287219201
+        - rid: 9209226077287219202
         loseActions: []
     - rid: 4482425896350515236
       type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
@@ -1338,12 +1349,14 @@ MonoBehaviour:
         targetSpawnPoint:
           value: NPC_Pushkin
         questIndication:
-          value: Quest_Active
-        launchActions: []
+          value: Quest_Ready
+        launchActions:
+        - rid: 9209225853358047234
         steps:
         - rid: 4482425896350515241
+        - rid: 9209225853358047237
         winActions:
-        - rid: 4482425896350515242
+        - rid: 9209226049766555650
         loseActions: []
     - rid: 4482425896350515241
       type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
@@ -1351,16 +1364,11 @@ MonoBehaviour:
         stepAction:
           rid: 7520422092813631509
         winCondition:
-          rid: -2
+          rid: 9209225853358047235
         winActions: []
         loseCondition:
-          rid: -2
+          rid: 9209225853358047236
         loseActions: []
-    - rid: 4482425896350515242
-      type: {class: UpgradeBuildingActionConfig, ns: L2Farm.Features.Buildings.Actions, asm: Assembly-CSharp}
-      data:
-        buildingId:
-          value: Smithy
     - rid: 4482425937018486789
       type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
       data:
@@ -2340,6 +2348,7 @@ MonoBehaviour:
         winActions:
         - rid: 7520422092813631507
         - rid: 7520422092813631508
+        - rid: 9209225853358047232
         loseActions: []
     - rid: 7520422092813631490
       type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
@@ -2493,7 +2502,9 @@ MonoBehaviour:
       data:
         speaker:
           value: NPC_Pushkin
-        message: KEKE
+        message: Well at least the anvil is whole...Hello traveler, I'm not ready
+          to accept orders yet, I need to deal with the rubble. If you bring me this,
+          it will speed up the work
         questId:
           value: Build_Smithy
     - rid: 7520422092813631511
@@ -2510,3 +2521,473 @@ MonoBehaviour:
     - rid: 8603986450289000449
       type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
       data: 
+    - rid: 9209225786981613568
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Meat_Production
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: 
+        questIndication:
+          value: 
+        launchActions: []
+        steps: []
+        winActions: []
+        loseActions: []
+    - rid: 9209225786981613569
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Meat_Production_Start
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: 
+        questIndication:
+          value: 
+        launchActions: []
+        steps: []
+        winActions: []
+        loseActions: []
+    - rid: 9209225786981613570
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Meat_Production_Finish
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: 
+        questIndication:
+          value: 
+        launchActions: []
+        steps: []
+        winActions: []
+        loseActions: []
+    - rid: 9209225853358047232
+      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Meat_Production
+    - rid: 9209225853358047234
+      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
+      data:
+        npcId:
+          value: Pushkin
+        spawnPointId:
+          value: NPC_Pushkin
+        questId:
+          value: Build_Smithy
+    - rid: 9209225853358047235
+      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 9209225853358047236
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 9209225853358047237
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 9209225853358047238
+        winCondition:
+          rid: 9209225853358047239
+        winActions:
+        - rid: 9209226049766555648
+        loseCondition:
+          rid: 9209226049766555649
+        loseActions: []
+    - rid: 9209225853358047238
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: MC
+        message: Okay, I'm hoping you can help me with the metalworking when we're
+          done.
+        questId:
+          value: Build_Smithy
+    - rid: 9209225853358047239
+      type: {class: HasEnoughResourcesConditionConfig, ns: L2Farm.Scripts.Conditions, asm: L2Farm}
+      data:
+        resourceConditions:
+        - resourceId:
+            value: Resource_Meat
+          neededQuantity: 1
+        - resourceId:
+            value: Resource_Ore_Silver
+          neededQuantity: 1
+        - resourceId:
+            value: Resource_Planks
+          neededQuantity: 1
+        - resourceId:
+            value: Resource_Stone
+          neededQuantity: 1
+    - rid: 9209226049766555648
+      type: {class: SpendResourcesActionConfig, ns: L2Farm.Scripts.Actions.SpendResources, asm: L2Farm}
+      data:
+        resourceConditions:
+        - resourceId:
+            value: Resource_Meat
+          neededQuantity: 1
+        - resourceId:
+            value: Resource_Ore_Silver
+          neededQuantity: 1
+        - resourceId:
+            value: Resource_Planks
+          neededQuantity: 1
+        - resourceId:
+            value: Resource_Stone
+          neededQuantity: 1
+    - rid: 9209226049766555649
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 9209226049766555650
+      type: {class: StartBuildingActionConfig, ns: L2Farm.Features.Buildings.Actions, asm: L2Farm}
+      data:
+        buildingId:
+          value: Smithy
+    - rid: 9209226049766555651
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Build_Smithy_Finish
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: NPC_Pushkin
+        questIndication:
+          value: Quest_Ready
+        launchActions:
+        - rid: 9209226049766555652
+        steps:
+        - rid: 9209226049766555653
+        winActions:
+        - rid: 9209226049766555657
+        - rid: 9209226049766555658
+        - rid: 9209226049766555659
+        loseActions: []
+    - rid: 9209226049766555652
+      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
+      data:
+        npcId:
+          value: Pushkin
+        spawnPointId:
+          value: NPC_Pushkin
+        questId:
+          value: Build_Smithy_Finish
+    - rid: 9209226049766555653
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 9209226049766555654
+        winCondition:
+          rid: 9209226049766555655
+        winActions: []
+        loseCondition:
+          rid: 9209226049766555656
+        loseActions: []
+    - rid: 9209226049766555654
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_Pushkin
+        message: Great, my forge is in excellent condition again! Thank you. Bring
+          me some metal, and I'll make you some ingots. Oh, and by the way! There's
+          a fishing cabin behind the farm, and they might need your help.
+        questId:
+          value: Build_Smithy_Finish
+    - rid: 9209226049766555655
+      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 9209226049766555656
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 9209226049766555657
+      type: {class: FinishBuildingActionConfig, ns: L2Farm.Features.Buildings.Actions, asm: L2Farm}
+      data:
+        buildingId:
+          value: Smithy
+    - rid: 9209226049766555658
+      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Build_Fishing
+    - rid: 9209226049766555659
+      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Build_Bakery
+    - rid: 9209226077287219201
+      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Daily_Horns
+    - rid: 9209226077287219202
+      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Daily_Veg
+    - rid: 9209226077287219203
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Daily_Horns
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: NPC_HeadGuard
+        questIndication:
+          value: Quest_Active
+        launchActions:
+        - rid: 9209226077287219211
+        steps:
+        - rid: 9209226077287219212
+        winActions:
+        - rid: 9209226077287219217
+        loseActions: []
+    - rid: 9209226077287219204
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Daily_Veg
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: NPC_FarmBuilder
+        questIndication:
+          value: Quest_Active
+        launchActions:
+        - rid: 9209226077287219209
+        steps:
+        - rid: 9209226077287219218
+        winActions:
+        - rid: 9209226077287219223
+        loseActions: []
+    - rid: 9209226077287219205
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 9209226077287219206
+        winCondition:
+          rid: 9209226077287219207
+        winActions: []
+        loseCondition:
+          rid: 9209226077287219208
+        loseActions: []
+    - rid: 9209226077287219206
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_Valentine
+        message: By the way, visit my friends at the farm and the garrison; they
+          might need your help.
+        questId:
+          value: Build_Mill
+    - rid: 9209226077287219207
+      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 9209226077287219208
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 9209226077287219209
+      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
+      data:
+        npcId:
+          value: NPC_FarmBuilder
+        spawnPointId:
+          value: NPC_FarmBuilder
+        questId:
+          value: Daily_Veg
+    - rid: 9209226077287219211
+      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
+      data:
+        npcId:
+          value: HeadGuard
+        spawnPointId:
+          value: NPC_HeadGuard
+        questId:
+          value: Daily_Horns
+    - rid: 9209226077287219212
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 9209226077287219213
+        winCondition:
+          rid: 9209226123114184704
+        winActions:
+        - rid: 9209226123114184705
+        loseCondition:
+          rid: 9209226077287219216
+        loseActions: []
+    - rid: 9209226077287219213
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_HeadGuard
+        message: Hey, there are these creatures around! It's time to teach them a
+          lesson.
+        questId:
+          value: Daily_Horns
+    - rid: 9209226077287219216
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 9209226077287219217
+      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Daily_Horns_Early
+    - rid: 9209226077287219218
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 9209226077287219219
+        winCondition:
+          rid: 9209226123114184706
+        winActions:
+        - rid: 9209226123114184707
+        loseCondition:
+          rid: 9209226077287219222
+        loseActions: []
+    - rid: 9209226077287219219
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_FarmBuilder
+        message: ' Wow! That''s a great harvest. See you tomorrow!'
+        questId:
+          value: Daily_Veg
+    - rid: 9209226077287219222
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 9209226077287219223
+      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Daily_Veg_Early
+    - rid: 9209226123114184704
+      type: {class: HasEnoughResourcesConditionConfig, ns: L2Farm.Scripts.Conditions, asm: L2Farm}
+      data:
+        resourceConditions:
+        - resourceId:
+            value: Resource_Gremlin_Horns
+          neededQuantity: 1
+    - rid: 9209226123114184705
+      type: {class: SpendResourcesActionConfig, ns: L2Farm.Scripts.Actions.SpendResources, asm: L2Farm}
+      data:
+        resourceConditions:
+        - resourceId:
+            value: Resource_Gremlin_Horns
+          neededQuantity: 1
+    - rid: 9209226123114184706
+      type: {class: HasEnoughResourcesConditionConfig, ns: L2Farm.Scripts.Conditions, asm: L2Farm}
+      data:
+        resourceConditions:
+        - resourceId:
+            value: Resource_Veg
+          neededQuantity: 1
+    - rid: 9209226123114184707
+      type: {class: SpendResourcesActionConfig, ns: L2Farm.Scripts.Actions.SpendResources, asm: L2Farm}
+      data:
+        resourceConditions:
+        - resourceId:
+            value: Resource_Veg
+          neededQuantity: 1
+    - rid: 9209226123114184708
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Daily_Horns_Early
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: NPC_HeadGuard
+        questIndication:
+          value: Quest_Active
+        launchActions:
+        - rid: 9209226123114184713
+        steps:
+        - rid: 9209226123114184712
+        winActions:
+        - rid: 9209226123114184717
+        loseActions: []
+    - rid: 9209226123114184709
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Daily_Veg_Early
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: NPC_FarmBuilder
+        questIndication:
+          value: Quest_Active
+        launchActions:
+        - rid: 9209226123114184718
+        steps:
+        - rid: 9209226123114184719
+        winActions:
+        - rid: 9209226123114184723
+        loseActions: []
+    - rid: 9209226123114184712
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 9209226123114184714
+        winCondition:
+          rid: 9209226123114184715
+        winActions: []
+        loseCondition:
+          rid: 9209226123114184716
+        loseActions: []
+    - rid: 9209226123114184713
+      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
+      data:
+        npcId:
+          value: HeadGuard
+        spawnPointId:
+          value: NPC_HeadGuard
+        questId:
+          value: Daily_Horns_Early
+    - rid: 9209226123114184714
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_HeadGuard
+        message: That's all for today. I'll be waiting for you again tomorrow.
+        questId:
+          value: Daily_Horns_Early
+    - rid: 9209226123114184715
+      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 9209226123114184716
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 9209226123114184717
+      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Daily_Horns_Early
+    - rid: 9209226123114184718
+      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
+      data:
+        npcId:
+          value: NPC_FarmBuilder
+        spawnPointId:
+          value: NPC_FarmBuilder
+        questId:
+          value: Daily_Veg_Early
+    - rid: 9209226123114184719
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 9209226123114184720
+        winCondition:
+          rid: 9209226123114184721
+        winActions: []
+        loseCondition:
+          rid: 9209226123114184722
+        loseActions: []
+    - rid: 9209226123114184720
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_FarmBuilder
+        message: That's all for today. I'll be waiting for you again tomorrow.
+        questId:
+          value: Daily_Veg_Early
+    - rid: 9209226123114184721
+      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 9209226123114184722
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 9209226123114184723
+      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Daily_Veg_Early
