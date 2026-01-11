@@ -34,3 +34,6 @@ MonoBehaviour:
   - id: Production_Ore
     icon: {fileID: 21300000, guid: a514f4c6b63a44b4f9c8b57fd8668f25, type: 3}
     color: {r: 0, g: 0.5882353, b: 1, a: 1}
+  - id: Production_Meat
+    icon: {fileID: 21300000, guid: 11511e60c13864d79a68ffaf9c859351, type: 3}
+    color: {r: 0, g: 0.5882353, b: 1, a: 1}

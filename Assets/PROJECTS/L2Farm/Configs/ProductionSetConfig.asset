@@ -37,3 +37,9 @@ MonoBehaviour:
       value: Sawmill
     finishQuest:
       value: Ore_Production_Finished
+  - id: Farm_Production_Meat
+    timeToProduceInSeconds: 10
+    buildingId:
+      value: Farm
+    finishQuest:
+      value: Meat_Production_Finish

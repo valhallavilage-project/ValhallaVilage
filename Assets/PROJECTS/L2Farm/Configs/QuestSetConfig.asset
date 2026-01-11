@@ -44,11 +44,13 @@ MonoBehaviour:
   - rid: 7520422080207912985
   - rid: 9209225786981613568
   - rid: 9209225786981613569
-  - rid: 9209225786981613570
   - rid: 9209226077287219203
   - rid: 9209226077287219204
   - rid: 9209226123114184708
   - rid: 9209226123114184709
+  - rid: 9209226123114184730
+  - rid: 9209226123114184740
+  - rid: 9209226123114184750
   references:
     version: 2
     RefIds:
@@ -2547,19 +2549,6 @@ MonoBehaviour:
         steps: []
         winActions: []
         loseActions: []
-    - rid: 9209225786981613570
-      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
-      data:
-        id: Meat_Production_Finish
-        proceedAfterLaunch: 0
-        targetSpawnPoint:
-          value: 
-        questIndication:
-          value: 
-        launchActions: []
-        steps: []
-        winActions: []
-        loseActions: []
     - rid: 9209225853358047232
       type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
       data:
@@ -2991,3 +2980,199 @@ MonoBehaviour:
       data:
         questId:
           value: Daily_Veg_Early
+    - rid: 9209226123114184730
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Meat_Production
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: NPC_Farmer
+        questIndication:
+          value: Production_Meat
+        launchActions:
+        - rid: 9209226123114184731
+        steps:
+        - rid: 9209226123114184732
+        winActions:
+        - rid: 9209226123114184737
+        loseActions: []
+    - rid: 9209226123114184731
+      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
+      data:
+        npcId:
+          value: Farmer
+        spawnPointId:
+          value: NPC_Farmer
+        questId:
+          value: Meat_Production
+    - rid: 9209226123114184732
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 9209226123114184733
+        winCondition:
+          rid: 9209226123114184734
+        winActions:
+        - rid: 9209226123114184735
+        loseCondition:
+          rid: 9209226123114184736
+        loseActions: []
+    - rid: 9209226123114184733
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_Farmer
+        message: Bring me some wheat, and I will prepare fresh meat for you.
+        questId:
+          value: Meat_Production
+    - rid: 9209226123114184734
+      type: {class: HasEnoughResourcesConditionConfig, ns: L2Farm.Scripts.Conditions, asm: L2Farm}
+      data:
+        resourceConditions:
+        - resourceId:
+            value: Resource_Wheat
+          neededQuantity: 1
+    - rid: 9209226123114184735
+      type: {class: SpendResourcesActionConfig, ns: L2Farm.Scripts.Actions.SpendResources, asm: L2Farm}
+      data:
+        resourceConditions:
+        - resourceId:
+            value: Resource_Wheat
+          neededQuantity: 1
+    - rid: 9209226123114184736
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data:
+    - rid: 9209226123114184737
+      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Meat_Production_Start
+    - rid: 9209226123114184740
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Meat_Production_Start
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: NPC_Farmer
+        questIndication:
+          value: Production_Meat
+        launchActions:
+        - rid: 9209226123114184741
+        - rid: 9209226123114184742
+        steps:
+        - rid: 9209226123114184743
+        winActions: []
+        loseActions: []
+    - rid: 9209226123114184741
+      type: {class: StartProductionActionConfig, ns: L2Farm.Features.ResourceProduction.Actions, asm: L2Farm}
+      data:
+        productionId:
+          value: Farm_Production_Meat
+    - rid: 9209226123114184742
+      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
+      data:
+        npcId:
+          value: Farmer
+        spawnPointId:
+          value: NPC_Farmer
+        questId:
+          value: Meat_Production_Start
+    - rid: 9209226123114184743
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 9209226123114184744
+        winCondition:
+          rid: 9209226123114184745
+        winActions: []
+        loseCondition:
+          rid: 9209226123114184746
+        loseActions: []
+    - rid: 9209226123114184744
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_Farmer
+        message: Great wheat! Give me a moment to prepare the meat.
+        questId:
+          value: Meat_Production_Start
+    - rid: 9209226123114184745
+      type: {class: ProductionCompletedConditionConfig, ns: L2Farm.Scripts.Conditions, asm: L2Farm}
+      data:
+        _production:
+          value: Farm_Production_Meat
+    - rid: 9209226123114184746
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data:
+    - rid: 9209226123114184750
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Meat_Production_Finish
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: NPC_Farmer
+        questIndication:
+          value: Quest_Ready
+        launchActions:
+        - rid: 9209226123114184751
+        - rid: 9209226123114184752
+        steps:
+        - rid: 9209226123114184753
+        winActions:
+        - rid: 9209226123114184758
+        loseActions: []
+    - rid: 9209226123114184751
+      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
+      data:
+        npcId:
+          value: Farmer
+        spawnPointId:
+          value: NPC_Farmer
+        questId:
+          value: Meat_Production_Finish
+    - rid: 9209226123114184752
+      type: {class: LoseQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Meat_Production_Start
+    - rid: 9209226123114184753
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 9209226123114184754
+        winCondition:
+          rid: 9209226123114184755
+        winActions:
+        - rid: 9209226123114184756
+        loseCondition:
+          rid: 9209226123114184757
+        loseActions: []
+    - rid: 9209226123114184754
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_Farmer
+        message: Here is your fresh meat! Come back anytime with more wheat.
+        questId:
+          value: Meat_Production_Finish
+    - rid: 9209226123114184755
+      type: {class: GiveResourcesConditionConfig, ns: L2Farm.Scripts, asm: L2Farm}
+      data:
+        _resourceConditions:
+        - resourceId:
+            value: Resource_Meat
+          neededQuantity: 10
+    - rid: 9209226123114184756
+      type: {class: GiveResourceActionConfig, ns: L2Farm.Features.ResourceProduction.GiveResources, asm: L2Farm}
+      data:
+        resourceId:
+          value: Resource_Meat
+        amount: 10
+    - rid: 9209226123114184757
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data:
+    - rid: 9209226123114184758
+      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Meat_Production
