@@ -28,7 +28,9 @@ MonoBehaviour:
   - rid: 4482425896350515240
   - rid: 9209226049766555651
   - rid: 4482425896350515225
+  - rid: 6081402538210623503
   - rid: 4482425896350515215
+  - rid: 6081402584740134912
   - rid: 4482425896350515210
   - rid: 1309964326185730048
   - rid: 3322170452733329468
@@ -42,8 +44,6 @@ MonoBehaviour:
   - rid: 7520422080207912983
   - rid: 7520422080207912984
   - rid: 7520422080207912985
-  - rid: 9209225786981613568
-  - rid: 9209225786981613569
   - rid: 9209226077287219203
   - rid: 9209226077287219204
   - rid: 9209226123114184708
@@ -51,6 +51,9 @@ MonoBehaviour:
   - rid: 9209226123114184730
   - rid: 9209226123114184740
   - rid: 9209226123114184750
+  - rid: 6081402394585858053
+  - rid: 6081402394585858054
+  - rid: 6081402394585858055
   references:
     version: 2
     RefIds:
@@ -1133,7 +1136,7 @@ MonoBehaviour:
     - rid: 4482425896350515210
       type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
       data:
-        id: Build_Ambar
+        id: Build_HeroFarm
         proceedAfterLaunch: 0
         targetSpawnPoint:
           value: NPC_Valentine
@@ -1177,41 +1180,29 @@ MonoBehaviour:
         id: Build_Bakery
         proceedAfterLaunch: 0
         targetSpawnPoint:
-          value: NPC_Valentine
+          value: NPC_Toma
         questIndication:
-          value: 
-        launchActions: []
+          value: Quest_Active
+        launchActions:
+        - rid: 6081402584740134913
         steps:
         - rid: 4482425896350515216
+        - rid: 6081402584740134917
+        - rid: 6081402584740134918
         winActions:
-        - rid: 4482425896350515217
+        - rid: 6081402584740134926
         loseActions: []
     - rid: 4482425896350515216
       type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
       data:
         stepAction:
-          rid: 4482425896350515219
+          rid: 6081402584740134914
         winCondition:
-          rid: -2
+          rid: 6081402584740134915
         winActions: []
         loseCondition:
-          rid: -2
+          rid: 6081402584740134916
         loseActions: []
-    - rid: 4482425896350515217
-      type: {class: UpgradeBuildingActionConfig, ns: L2Farm.Features.Buildings.Actions, asm: Assembly-CSharp}
-      data:
-        buildingId:
-          value: Bakery
-    - rid: 4482425896350515219
-      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: Assembly-CSharp}
-      data:
-        speaker:
-          value: NPC_Valentine
-        message: "Great! You\u2019ve been a huge help. Now we have enough resources
-          to rebuild Grandpa\u2019s house."
-        questId:
-          value: Tutorial_1_Build_Home
-        stepIndexWithResourceCondition: -1
     - rid: 4482425896350515220
       type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
       data:
@@ -1247,41 +1238,29 @@ MonoBehaviour:
         id: Build_Fishing
         proceedAfterLaunch: 0
         targetSpawnPoint:
-          value: NPC_Valentine
+          value: NPC_Fisher
         questIndication:
-          value: 
-        launchActions: []
+          value: Quest_Active
+        launchActions:
+        - rid: 6081402538210623488
         steps:
         - rid: 4482425896350515226
+        - rid: 6081402538210623492
+        - rid: 6081402538210623493
         winActions:
-        - rid: 4482425896350515227
+        - rid: 6081402538210623501
         loseActions: []
     - rid: 4482425896350515226
       type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
       data:
         stepAction:
-          rid: 4482425896350515229
+          rid: 6081402538210623489
         winCondition:
-          rid: -2
+          rid: 6081402538210623490
         winActions: []
         loseCondition:
-          rid: -2
+          rid: 6081402538210623491
         loseActions: []
-    - rid: 4482425896350515227
-      type: {class: UpgradeBuildingActionConfig, ns: L2Farm.Features.Buildings.Actions, asm: Assembly-CSharp}
-      data:
-        buildingId:
-          value: Fishing
-    - rid: 4482425896350515229
-      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: Assembly-CSharp}
-      data:
-        speaker:
-          value: NPC_Valentine
-        message: "Great! You\u2019ve been a huge help. Now we have enough resources
-          to rebuild Grandpa\u2019s house."
-        questId:
-          value: Tutorial_1_Build_Home
-        stepIndexWithResourceCondition: -1
     - rid: 4482425896350515230
       type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
       data:
@@ -1351,11 +1330,12 @@ MonoBehaviour:
         targetSpawnPoint:
           value: NPC_Pushkin
         questIndication:
-          value: Quest_Ready
+          value: Quest_Active
         launchActions:
         - rid: 9209225853358047234
         steps:
         - rid: 4482425896350515241
+        - rid: 6081402394585858048
         - rid: 9209225853358047237
         winActions:
         - rid: 9209226049766555650
@@ -1376,6 +1356,578 @@ MonoBehaviour:
       data:
         questId:
           value: Tutorial_2
+    - rid: 6081402394585858048
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 6081402394585858049
+        winCondition:
+          rid: 6081402394585858050
+        winActions: []
+        loseCondition:
+          rid: 6081402394585858051
+        loseActions: []
+    - rid: 6081402394585858049
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: MC
+        message: Okay, I'm hoping you can help me with the metalworking when we're
+          done.
+        questId:
+          value: Build_Smithy
+    - rid: 6081402394585858050
+      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 6081402394585858051
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 6081402394585858053
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Ingot_Production
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: NPC_Pushkin
+        questIndication:
+          value: Production_Ingot
+        launchActions:
+        - rid: 6081402584740134935
+        steps:
+        - rid: 6081402584740134936
+        winActions:
+        - rid: 6081402584740134941
+        loseActions: []
+    - rid: 6081402394585858054
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Ingot_Production_Start
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: NPC_Pushkin
+        questIndication:
+          value: Quest_Ready
+        launchActions:
+        - rid: 6081402605718208513
+        - rid: 6081402605718208514
+        steps:
+        - rid: 6081402605718208515
+        winActions: []
+        loseActions: []
+    - rid: 6081402394585858055
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Ingot_Production_Finish
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: NPC_Pushkin
+        questIndication:
+          value: Quest_Ready
+        launchActions:
+        - rid: 6081402605718208519
+        - rid: 6081402605718208520
+        steps:
+        - rid: 6081402605718208521
+        winActions:
+        - rid: 6081402605718208526
+        loseActions: []
+    - rid: 6081402538210623488
+      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
+      data:
+        npcId:
+          value: Fisher
+        spawnPointId:
+          value: NPC_Fisher
+        questId:
+          value: Build_Fishing
+    - rid: 6081402538210623489
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_Fisher
+        message: Hi, I see you're a fisherman! But I can't help you right now. I
+          need to take care of my house...
+        questId:
+          value: Build_Fishing
+    - rid: 6081402538210623490
+      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 6081402538210623491
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 6081402538210623492
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 6081402538210623494
+        winCondition:
+          rid: 6081402538210623495
+        winActions: []
+        loseCondition:
+          rid: 6081402538210623496
+        loseActions: []
+    - rid: 6081402538210623493
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 6081402538210623497
+        winCondition:
+          rid: 6081402538210623498
+        winActions:
+        - rid: 6081402538210623499
+        loseCondition:
+          rid: 6081402538210623500
+        loseActions: []
+    - rid: 6081402538210623494
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: MC
+        message: Oh, come on, I'll try to help you too.
+        questId:
+          value: Build_Fishing
+    - rid: 6081402538210623495
+      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 6081402538210623496
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 6081402538210623497
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_Fisher
+        message: Look, this is what I need!
+        questId:
+          value: Build_Fishing
+    - rid: 6081402538210623498
+      type: {class: HasEnoughResourcesConditionConfig, ns: L2Farm.Scripts.Conditions, asm: L2Farm}
+      data:
+        resourceConditions:
+        - resourceId:
+            value: Resource_Ore_Silver
+          neededQuantity: 1
+        - resourceId:
+            value: Resource_Ingot_Silver
+          neededQuantity: 1
+        - resourceId:
+            value: Resource_Stone
+          neededQuantity: 1
+        - resourceId:
+            value: Resource_Wood
+          neededQuantity: 1
+        - resourceId:
+            value: Resource_Planks
+          neededQuantity: 1
+    - rid: 6081402538210623499
+      type: {class: SpendResourcesActionConfig, ns: L2Farm.Scripts.Actions.SpendResources, asm: L2Farm}
+      data:
+        resourceConditions:
+        - resourceId:
+            value: Resource_Ore_Silver
+          neededQuantity: 1
+        - resourceId:
+            value: Resource_Ingot_Silver
+          neededQuantity: 1
+        - resourceId:
+            value: Resource_Stone
+          neededQuantity: 1
+        - resourceId:
+            value: Resource_Wood
+          neededQuantity: 1
+        - resourceId:
+            value: Resource_Planks
+          neededQuantity: 1
+    - rid: 6081402538210623500
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 6081402538210623501
+      type: {class: StartBuildingActionConfig, ns: L2Farm.Features.Buildings.Actions, asm: L2Farm}
+      data:
+        buildingId:
+          value: Fishing
+    - rid: 6081402538210623503
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Build_Fishing_Finish
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: NPC_Fisher
+        questIndication:
+          value: Quest_Ready
+        launchActions:
+        - rid: 6081402555840856064
+        steps:
+        - rid: 6081402555840856065
+        winActions:
+        - rid: 6081402555840856069
+        - rid: 6081402555840856070
+        loseActions: []
+    - rid: 6081402555840856064
+      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
+      data:
+        npcId:
+          value: Fisher
+        spawnPointId:
+          value: NPC_Fisher
+        questId:
+          value: Build_Fishing_Finish
+    - rid: 6081402555840856065
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 6081402555840856066
+        winCondition:
+          rid: 6081402555840856067
+        winActions: []
+        loseCondition:
+          rid: 6081402555840856068
+        loseActions: []
+    - rid: 6081402555840856066
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_Fisher
+        message: Finally, the mosquitoes won't bother me anymore! Thank you.
+        questId:
+          value: Build_Fishing_Finish
+    - rid: 6081402555840856067
+      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 6081402555840856068
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 6081402555840856069
+      type: {class: FinishBuildingActionConfig, ns: L2Farm.Features.Buildings.Actions, asm: L2Farm}
+      data:
+        buildingId:
+          value: Fishing
+    - rid: 6081402555840856070
+      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Build_Bakery
+    - rid: 6081402584740134912
+      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        id: Build_Bakery_Finish
+        proceedAfterLaunch: 0
+        targetSpawnPoint:
+          value: NPC_Toma
+        questIndication:
+          value: Quest_Ready
+        launchActions:
+        - rid: 6081402584740134928
+        steps:
+        - rid: 6081402584740134929
+        winActions:
+        - rid: 6081402584740134933
+        - rid: 6081402584740134934
+        loseActions: []
+    - rid: 6081402584740134913
+      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
+      data:
+        npcId:
+          value: Toma
+        spawnPointId:
+          value: NPC_Toma
+        questId:
+          value: Build_Bakery
+    - rid: 6081402584740134914
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_Toma
+        message: Good day, traveler. Will you help me restore my bakery?
+        questId:
+          value: Build_Bakery
+    - rid: 6081402584740134915
+      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 6081402584740134916
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 6081402584740134917
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 6081402584740134919
+        winCondition:
+          rid: 6081402584740134920
+        winActions: []
+        loseCondition:
+          rid: 6081402584740134921
+        loseActions: []
+    - rid: 6081402584740134918
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 6081402584740134922
+        winCondition:
+          rid: 6081402584740134923
+        winActions:
+        - rid: 6081402584740134924
+        loseCondition:
+          rid: 6081402584740134925
+        loseActions: []
+    - rid: 6081402584740134919
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: MC
+        message: Yes, what resources do you need?
+        questId:
+          value: Build_Bakery
+    - rid: 6081402584740134920
+      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 6081402584740134921
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 6081402584740134922
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_Toma
+        message: Bring me these resources, I think they're enough.
+        questId:
+          value: Build_Smithy
+    - rid: 6081402584740134923
+      type: {class: HasEnoughResourcesConditionConfig, ns: L2Farm.Scripts.Conditions, asm: L2Farm}
+      data:
+        resourceConditions:
+        - resourceId:
+            value: Resource_Ingot_Silver
+          neededQuantity: 1
+        - resourceId:
+            value: Resource_Ore_Silver
+          neededQuantity: 1
+        - resourceId:
+            value: Resource_Wheat
+          neededQuantity: 1
+        - resourceId:
+            value: Resource_Veg
+          neededQuantity: 1
+    - rid: 6081402584740134924
+      type: {class: SpendResourcesActionConfig, ns: L2Farm.Scripts.Actions.SpendResources, asm: L2Farm}
+      data:
+        resourceConditions:
+        - resourceId:
+            value: Resource_Ingot_Silver
+          neededQuantity: 1
+        - resourceId:
+            value: Resource_Ore_Silver
+          neededQuantity: 1
+        - resourceId:
+            value: Resource_Wheat
+          neededQuantity: 1
+        - resourceId:
+            value: Resource_Veg
+          neededQuantity: 1
+    - rid: 6081402584740134925
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 6081402584740134926
+      type: {class: StartBuildingActionConfig, ns: L2Farm.Features.Buildings.Actions, asm: L2Farm}
+      data:
+        buildingId:
+          value: Bakery
+    - rid: 6081402584740134928
+      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
+      data:
+        npcId:
+          value: Toma
+        spawnPointId:
+          value: NPC_Toma
+        questId:
+          value: Build_Bakery_Finish
+    - rid: 6081402584740134929
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 6081402584740134930
+        winCondition:
+          rid: 6081402584740134931
+        winActions: []
+        loseCondition:
+          rid: 6081402584740134932
+        loseActions: []
+    - rid: 6081402584740134930
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_Toma
+        message: Great! Now I can make delicious bread! Thank you.
+        questId:
+          value: Build_Bakery_Finish
+    - rid: 6081402584740134931
+      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 6081402584740134932
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 6081402584740134933
+      type: {class: FinishBuildingActionConfig, ns: L2Farm.Features.Buildings.Actions, asm: L2Farm}
+      data:
+        buildingId:
+          value: Bakery
+    - rid: 6081402584740134934
+      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Build_HeroFarm
+    - rid: 6081402584740134935
+      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
+      data:
+        npcId:
+          value: Pushkin
+        spawnPointId:
+          value: NPC_Pushkin
+        questId:
+          value: Ingot_Production
+    - rid: 6081402584740134936
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 6081402584740134937
+        winCondition:
+          rid: 6081402584740134938
+        winActions:
+        - rid: 6081402584740134939
+        loseCondition:
+          rid: 6081402584740134940
+        loseActions: []
+    - rid: 6081402584740134937
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_Pushkin
+        message: Bring me the ore, and I'll make ingots out of it.
+        questId:
+          value: Ingot_Production
+    - rid: 6081402584740134938
+      type: {class: HasEnoughResourcesConditionConfig, ns: L2Farm.Scripts.Conditions, asm: L2Farm}
+      data:
+        resourceConditions:
+        - resourceId:
+            value: Resource_Ore_Silver
+          neededQuantity: 1
+    - rid: 6081402584740134939
+      type: {class: SpendResourcesActionConfig, ns: L2Farm.Scripts.Actions.SpendResources, asm: L2Farm}
+      data:
+        resourceConditions:
+        - resourceId:
+            value: Resource_Ore_Silver
+          neededQuantity: 1
+    - rid: 6081402584740134940
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 6081402584740134941
+      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Ingot_Production_Start
+    - rid: 6081402605718208513
+      type: {class: StartProductionActionConfig, ns: L2Farm.Features.ResourceProduction.Actions, asm: L2Farm}
+      data:
+        productionId:
+          value: Smithy_Production_Ingot
+    - rid: 6081402605718208514
+      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
+      data:
+        npcId:
+          value: Pushkin
+        spawnPointId:
+          value: NPC_Pushkin
+        questId:
+          value: Ingot_Production_Start
+    - rid: 6081402605718208515
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 6081402605718208516
+        winCondition:
+          rid: 6081402605718208517
+        winActions: []
+        loseCondition:
+          rid: 6081402605718208518
+        loseActions: []
+    - rid: 6081402605718208516
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_Pushkin
+        message: Wow, what ore. Give me some time to heat up the furnace
+        questId:
+          value: Ingot_Production_Start
+    - rid: 6081402605718208517
+      type: {class: ProductionCompletedConditionConfig, ns: L2Farm.Scripts.Conditions, asm: L2Farm}
+      data:
+        _production:
+          value: 
+    - rid: 6081402605718208518
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 6081402605718208519
+      type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
+      data:
+        npcId:
+          value: Pushkin
+        spawnPointId:
+          value: NPC_Pushkin
+        questId:
+          value: Ingot_Production_Finish
+    - rid: 6081402605718208520
+      type: {class: LoseQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Ingot_Production_Start
+    - rid: 6081402605718208521
+      type: {class: QuestStepConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
+      data:
+        stepAction:
+          rid: 6081402605718208522
+        winCondition:
+          rid: 6081402605718208523
+        winActions:
+        - rid: 6081402605718208524
+        loseCondition:
+          rid: 6081402605718208525
+        loseActions: []
+    - rid: 6081402605718208522
+      type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
+      data:
+        speaker:
+          value: NPC_Pushkin
+        message: Look what I've made. Great steel!
+        questId:
+          value: Ingot_Production_Finish
+    - rid: 6081402605718208523
+      type: {class: GiveResourcesConditionConfig, ns: L2Farm.Scripts, asm: L2Farm}
+      data:
+        _resourceConditions:
+        - resourceId:
+            value: Resource_Ingot_Silver
+          neededQuantity: 10
+    - rid: 6081402605718208524
+      type: {class: GiveResourceActionConfig, ns: L2Farm.Features.ResourceProduction.GiveResources, asm: L2Farm}
+      data:
+        resourceId:
+          value: Resource_Ingot_Silver
+        amount: 10
+    - rid: 6081402605718208525
+      type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
+      data: 
+    - rid: 6081402605718208526
+      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Ingot_Production
+    - rid: 6081402605718208527
+      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
+      data:
+        questId:
+          value: Ingot_Production
     - rid: 7520422070541090816
       type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
       data:
@@ -2523,32 +3075,6 @@ MonoBehaviour:
     - rid: 8603986450289000449
       type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
       data: 
-    - rid: 9209225786981613568
-      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
-      data:
-        id: Meat_Production
-        proceedAfterLaunch: 0
-        targetSpawnPoint:
-          value: 
-        questIndication:
-          value: 
-        launchActions: []
-        steps: []
-        winActions: []
-        loseActions: []
-    - rid: 9209225786981613569
-      type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
-      data:
-        id: Meat_Production_Start
-        proceedAfterLaunch: 0
-        targetSpawnPoint:
-          value: 
-        questIndication:
-          value: 
-        launchActions: []
-        steps: []
-        winActions: []
-        loseActions: []
     - rid: 9209225853358047232
       type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
       data:
@@ -2585,9 +3111,8 @@ MonoBehaviour:
       type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
       data:
         speaker:
-          value: MC
-        message: Okay, I'm hoping you can help me with the metalworking when we're
-          done.
+          value: NPC_Pushkin
+        message: Super, you can build a forge!
         questId:
           value: Build_Smithy
     - rid: 9209225853358047239
@@ -2646,7 +3171,7 @@ MonoBehaviour:
         winActions:
         - rid: 9209226049766555657
         - rid: 9209226049766555658
-        - rid: 9209226049766555659
+        - rid: 6081402605718208527
         loseActions: []
     - rid: 9209226049766555652
       type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
@@ -2694,11 +3219,6 @@ MonoBehaviour:
       data:
         questId:
           value: Build_Fishing
-    - rid: 9209226049766555659
-      type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
-      data:
-        questId:
-          value: Build_Bakery
     - rid: 9209226077287219201
       type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
       data:
@@ -2986,7 +3506,7 @@ MonoBehaviour:
         id: Meat_Production
         proceedAfterLaunch: 0
         targetSpawnPoint:
-          value: NPC_Farmer
+          value: NPC_Cooper
         questIndication:
           value: Production_Meat
         launchActions:
@@ -3000,9 +3520,9 @@ MonoBehaviour:
       type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
       data:
         npcId:
-          value: Farmer
+          value: Cooper
         spawnPointId:
-          value: NPC_Farmer
+          value: NPC_Cooper
         questId:
           value: Meat_Production
     - rid: 9209226123114184732
@@ -3021,7 +3541,7 @@ MonoBehaviour:
       type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
       data:
         speaker:
-          value: NPC_Farmer
+          value: NPC_Cooper
         message: Bring me some wheat, and I will prepare fresh meat for you.
         questId:
           value: Meat_Production
@@ -3041,7 +3561,7 @@ MonoBehaviour:
           neededQuantity: 1
     - rid: 9209226123114184736
       type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
-      data:
+      data: 
     - rid: 9209226123114184737
       type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
       data:
@@ -3053,7 +3573,7 @@ MonoBehaviour:
         id: Meat_Production_Start
         proceedAfterLaunch: 0
         targetSpawnPoint:
-          value: NPC_Farmer
+          value: NPC_Cooper
         questIndication:
           value: Production_Meat
         launchActions:
@@ -3072,9 +3592,9 @@ MonoBehaviour:
       type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
       data:
         npcId:
-          value: Farmer
+          value: Cooper
         spawnPointId:
-          value: NPC_Farmer
+          value: NPC_Cooper
         questId:
           value: Meat_Production_Start
     - rid: 9209226123114184743
@@ -3092,7 +3612,7 @@ MonoBehaviour:
       type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
       data:
         speaker:
-          value: NPC_Farmer
+          value: NPC_Cooper
         message: Great wheat! Give me a moment to prepare the meat.
         questId:
           value: Meat_Production_Start
@@ -3103,14 +3623,14 @@ MonoBehaviour:
           value: Farm_Production_Meat
     - rid: 9209226123114184746
       type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
-      data:
+      data: 
     - rid: 9209226123114184750
       type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
       data:
         id: Meat_Production_Finish
         proceedAfterLaunch: 0
         targetSpawnPoint:
-          value: NPC_Farmer
+          value: NPC_Cooper
         questIndication:
           value: Quest_Ready
         launchActions:
@@ -3125,9 +3645,9 @@ MonoBehaviour:
       type: {class: SpawnNPCActionConfig, ns: L2Farm.Scripts.Actions, asm: L2Farm}
       data:
         npcId:
-          value: Farmer
+          value: Cooper
         spawnPointId:
-          value: NPC_Farmer
+          value: NPC_Cooper
         questId:
           value: Meat_Production_Finish
     - rid: 9209226123114184752
@@ -3151,7 +3671,7 @@ MonoBehaviour:
       type: {class: ShowMonologActionConfig, ns: L2Farm.Features.SimpleMonolog, asm: L2Farm}
       data:
         speaker:
-          value: NPC_Farmer
+          value: NPC_Cooper
         message: Here is your fresh meat! Come back anytime with more wheat.
         questId:
           value: Meat_Production_Finish
@@ -3170,7 +3690,7 @@ MonoBehaviour:
         amount: 10
     - rid: 9209226123114184757
       type: {class: FalseConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
-      data:
+      data: 
     - rid: 9209226123114184758
       type: {class: LaunchQuestActionConfig, ns: CrossProject.Core.Actions.Implementations, asm: CrossProject.Core}
       data:

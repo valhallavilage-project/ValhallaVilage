@@ -40,12 +40,12 @@ MonoBehaviour:
     assetIdBroken: Bakery_Broken
     assetIdReady: Bakery_Ready
     spawnReadyCondition:
-      rid: 3322170452733329449
+      rid: 6081402584740134927
     buildingVFXScale: 1
     buildingVFXOffset: {x: 0, y: 0, z: 0}
     timeToBuildInSeconds: 60
     questToLaunchOnComplete:
-      value: 
+      value: Build_Bakery_Finish
     completeBuildingXpReward: 400
     buildingSound:
       _clip: {fileID: 8300000, guid: bcaf169ff2afcff4a8f2c9daed529fdb, type: 3}
@@ -78,16 +78,16 @@ MonoBehaviour:
     assetIdBroken: Fishing_Broken
     assetIdReady: Fishing_Ready
     spawnReadyCondition:
-      rid: 4482425896350515245
+      rid: 6081402538210623502
     buildingVFXScale: 1
     buildingVFXOffset: {x: 0, y: 0, z: 0}
     timeToBuildInSeconds: 60
     questToLaunchOnComplete:
-      value: 
+      value: Build_Fishing_Finish
     completeBuildingXpReward: 400
     buildingSound:
-      _clip: {fileID: 0}
-      _isLoop: 0
+      _clip: {fileID: 8300000, guid: bcaf169ff2afcff4a8f2c9daed529fdb, type: 3}
+      _isLoop: 1
       _isStopPreviousClip: 0
   - id: House
     sceneId:
@@ -154,12 +154,12 @@ MonoBehaviour:
     assetIdBroken: Smithy_Broken
     assetIdReady: Smithy_Ready
     spawnReadyCondition:
-      rid: 4482425896350515246
+      rid: 6081402394585858052
     buildingVFXScale: 1
     buildingVFXOffset: {x: 0, y: 0, z: 0}
     timeToBuildInSeconds: 60
     questToLaunchOnComplete:
-      value: Build_Smithy
+      value: Build_Smithy_Finish
     completeBuildingXpReward: 400
     buildingSound:
       _clip: {fileID: 8300000, guid: bcaf169ff2afcff4a8f2c9daed529fdb, type: 3}
@@ -168,16 +168,11 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
     - rid: 1309964340451868699
       type: {class: QuestCompletedConditionConfig, ns: L2Farm.Scripts.Conditions.QuestCompleted, asm: L2Farm}
       data:
         questId:
           value: Build_Mill
-    - rid: 3322170452733329449
-      type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
-      data: 
     - rid: 3322170452733329450
       type: {class: TrueConditionConfig, ns: CrossProject.Core.Conditions.ConditionsImplementations, asm: CrossProject.Core}
       data: 
@@ -186,16 +181,21 @@ MonoBehaviour:
       data:
         questId:
           value: Tutorial_1_Build_Home
-    - rid: 4482425896350515245
-      type: {class: QuestCompletedConditionConfig, ns: L2Farm.Scripts.Conditions.QuestCompleted, asm: Assembly-CSharp}
+    - rid: 6081402394585858052
+      type: {class: QuestCompletedConditionConfig, ns: L2Farm.Scripts.Conditions.QuestCompleted, asm: L2Farm}
       data:
         questId:
-          value: Build_Ambar
-    - rid: 4482425896350515246
-      type: {class: QuestCompletedConditionConfig, ns: L2Farm.Scripts.Conditions.QuestCompleted, asm: Assembly-CSharp}
+          value: Build_Smithy_Finish
+    - rid: 6081402538210623502
+      type: {class: QuestCompletedConditionConfig, ns: L2Farm.Scripts.Conditions.QuestCompleted, asm: L2Farm}
       data:
         questId:
-          value: Build_Bakery
+          value: Build_Fishing_Finish
+    - rid: 6081402584740134927
+      type: {class: QuestCompletedConditionConfig, ns: L2Farm.Scripts.Conditions.QuestCompleted, asm: L2Farm}
+      data:
+        questId:
+          value: Build_Bakery_Finish
     - rid: 7520422080207913023
       type: {class: QuestCompletedConditionConfig, ns: L2Farm.Scripts.Conditions.QuestCompleted, asm: L2Farm}
       data:

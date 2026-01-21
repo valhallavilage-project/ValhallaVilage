@@ -43,3 +43,9 @@ MonoBehaviour:
       value: Farm
     finishQuest:
       value: Meat_Production_Finish
+  - id: Smithy_Production_Ingot
+    timeToProduceInSeconds: 10
+    buildingId:
+      value: Smithy
+    finishQuest:
+      value: Ingot_Production_Finish
