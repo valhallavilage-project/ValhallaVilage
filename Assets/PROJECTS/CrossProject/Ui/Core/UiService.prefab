@@ -391,6 +391,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: LoadingScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 1605135204763009382, guid: f2941698882374db4b0cd41b452d64d9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6783480294454836391, guid: f2941698882374db4b0cd41b452d64d9, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -535,7 +543,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1735924352384366284, guid: 96a7aac49a3f44cb1bc16902a3ec01e9, type: 3}
       propertyPath: m_Size
-      value: 0.81333333
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2145856398458841924, guid: 96a7aac49a3f44cb1bc16902a3ec01e9, type: 3}
       propertyPath: m_AnchorMax.x
@@ -549,9 +557,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: DailyServerScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 2791604175821642586, guid: 96a7aac49a3f44cb1bc16902a3ec01e9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3769927806132394875, guid: 96a7aac49a3f44cb1bc16902a3ec01e9, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3769927806132394875, guid: 96a7aac49a3f44cb1bc16902a3ec01e9, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3769927806132394875, guid: 96a7aac49a3f44cb1bc16902a3ec01e9, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6113993138864806390, guid: 96a7aac49a3f44cb1bc16902a3ec01e9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 0.000030517578
       objectReference: {fileID: 0}
     - target: {fileID: 8271663535179301352, guid: 96a7aac49a3f44cb1bc16902a3ec01e9, type: 3}
       propertyPath: m_Pivot.x

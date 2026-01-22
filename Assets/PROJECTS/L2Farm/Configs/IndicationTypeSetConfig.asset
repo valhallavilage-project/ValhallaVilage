@@ -34,3 +34,21 @@ MonoBehaviour:
   - id: Production_Ore
     icon: {fileID: 21300000, guid: a514f4c6b63a44b4f9c8b57fd8668f25, type: 3}
     color: {r: 0, g: 0.5882353, b: 1, a: 1}
+  - id: Production_Meat
+    icon: {fileID: 21300000, guid: 11511e60c13864d79a68ffaf9c859351, type: 3}
+    color: {r: 0, g: 0.5882353, b: 1, a: 1}
+  - id: Production_Ingot
+    icon: {fileID: 21300000, guid: 3e266bf2f51d14493944ca6a5182dce1, type: 3}
+    color: {r: 0, g: 0.5882353, b: 1, a: 1}
+  - id: Production_Fishing
+    icon: {fileID: -1153086338, guid: a03e9228371be9449a97a937850924ca, type: 3}
+    color: {r: 0, g: 0.5882353, b: 1, a: 1}
+  - id: Production_Bread
+    icon: {fileID: 21300000, guid: fbb91ff0a5a304ca6b8b5592fb760bd0, type: 3}
+    color: {r: 0, g: 0.5882353, b: 1, a: 1}
+  - id: Daily_Horns
+    icon: {fileID: -2144125701, guid: a03e9228371be9449a97a937850924ca, type: 3}
+    color: {r: 0.033241354, g: 0.7830189, b: 0.29075786, a: 1}
+  - id: Daily_Veg
+    icon: {fileID: 21300000, guid: 3937c5d97f8fd4282b5c2dbbc7fee096, type: 3}
+    color: {r: 0.03137255, g: 0.7843138, b: 0.2901961, a: 1}
