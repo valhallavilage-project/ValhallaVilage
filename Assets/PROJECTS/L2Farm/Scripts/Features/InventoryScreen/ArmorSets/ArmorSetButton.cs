@@ -21,8 +21,13 @@ namespace L2Farm
         {
             _mainCharacterFacade = mainCharacterFacade;
             _armorSetService = armorSetChangeHandler;
-            
-            _currentSetConfig = _armorSetConfigs.Configs.First(c => c.ArmorSetType == _armorSet);
+
+            _currentSetConfig = _armorSetConfigs.Configs.FirstOrDefault(c => c.ArmorSetType == _armorSet);
+            if (_currentSetConfig == null)
+            {
+                Debug.LogError($"[ArmorSetButton] Armor set config not found: {_armorSet}");
+                return;
+            }
         }
 
         private void OnEnable()

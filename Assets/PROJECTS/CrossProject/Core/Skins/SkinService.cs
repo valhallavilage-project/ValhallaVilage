@@ -43,7 +43,13 @@ namespace CrossProject.Core.Skins
             if (part.IsObtained(skinId))
                 return;
 
-            var config = _skinSetConfig.items.First(x => new SkinId(x.id) == skinId);
+            var config = _skinSetConfig.items.FirstOrDefault(x => new SkinId(x.id) == skinId);
+            if (config == null)
+            {
+                Debug.LogError($"[SkinService] Skin config not found: {skinId}");
+                return;
+            }
+
             if (!part.obtainedSkins.ContainsKey(config.owner))
                 part.obtainedSkins.Add(config.owner, new CharacterSkinState());
             part.obtainedSkins[config.owner].ids.Add(skinId);

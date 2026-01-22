@@ -48,8 +48,14 @@ namespace L2Farm.Features.ResourceProduction
             await UniTask.WaitUntil(() => IsInitialized);
 
             Debug.Log($"[{nameof(ProductionService)}] : start production : {productionId}");
-            
-            var productionConfig = _productionSetConfig.productionConfigs.First(x => x.id == productionId);
+
+            var productionConfig = _productionSetConfig.productionConfigs.FirstOrDefault(x => x.id == productionId);
+            if (productionConfig == null)
+            {
+                Debug.LogError($"[ProductionService] Production config not found: {productionId}");
+                return;
+            }
+
             var part = _gameStateManager.State.Get<ProductionPart>();
 
             if (!part.requests.ContainsKey(productionId))

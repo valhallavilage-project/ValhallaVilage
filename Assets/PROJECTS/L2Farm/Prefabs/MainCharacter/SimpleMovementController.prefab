@@ -630,7 +630,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -728,29 +728,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 4072498806787465068}
   _walkSound:
-    _clip: {fileID: 8300000, guid: 58f814dece952654a854979983b986cc, type: 3}
+    _clip: {fileID: 8300000, guid: ee4733b6ecb325b45a30367d8709e5d8, type: 3}
     _isLoop: 1
     _isStopPreviousClip: 0
+    _animationCycleDuration: 0.6
   _attackSound:
     _clip: {fileID: 8300000, guid: 09169f7b24f0a6045bb1f22b6cfd69c5, type: 3}
     _isLoop: 0
     _isStopPreviousClip: 1
+    _animationCycleDuration: 0
   _deathSound:
     _clip: {fileID: 8300000, guid: 1b55c8fc93be9ad4abd2eab9716a1dd4, type: 3}
     _isLoop: 0
     _isStopPreviousClip: 1
+    _animationCycleDuration: 0
   _gatherSound:
     _clip: {fileID: 8300000, guid: 6932401b7799b49148afe5a1c005360d, type: 3}
     _isLoop: 1
     _isStopPreviousClip: 1
+    _animationCycleDuration: 0.5
   _axeSound:
     _clip: {fileID: 8300000, guid: ce103ad419467de46a3596592c08686a, type: 3}
     _isLoop: 1
     _isStopPreviousClip: 0
+    _animationCycleDuration: 1.5
   _pickAxeSound:
     _clip: {fileID: 8300000, guid: 1bc981490a0eb804787218979ba995ac, type: 3}
     _isLoop: 1
     _isStopPreviousClip: 0
+    _animationCycleDuration: 1.7
   _attackSoundOffset: 0.3
 --- !u!1 &4124864569335157055
 GameObject:

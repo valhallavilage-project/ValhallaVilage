@@ -90,8 +90,19 @@ namespace L2Farm.Features
         {
             if (config.launchActions.FirstOrDefault(a => a is SpawnNPCActionConfig) is SpawnNPCActionConfig npcAction)
             {
-                var characterId = _npcConfig.items.First(npc => npc.id == npcAction.npcId).characterId;
-                var characterConfig = _charactersConfig.items.First(ch => ch.id == characterId);
+                var npcConfig = _npcConfig.items.FirstOrDefault(npc => npc.id == npcAction.npcId);
+                if (npcConfig == null)
+                {
+                    _npcImage.sprite = _npcStubImage;
+                    return;
+                }
+
+                var characterConfig = _charactersConfig.items.FirstOrDefault(ch => ch.id == npcConfig.characterId);
+                if (characterConfig == null)
+                {
+                    _npcImage.sprite = _npcStubImage;
+                    return;
+                }
 
                 _npcImage.sprite = characterConfig.portrait;
             }

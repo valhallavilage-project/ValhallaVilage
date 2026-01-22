@@ -1056,6 +1056,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SimpleMovementController
       objectReference: {fileID: 0}
+    - target: {fileID: 2506694413427514584, guid: ee21f75578ed54a8093a1605511cf5d1, type: 3}
+      propertyPath: _walkSound._animationCycleDuration
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5147039471713634415, guid: ee21f75578ed54a8093a1605511cf5d1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 265

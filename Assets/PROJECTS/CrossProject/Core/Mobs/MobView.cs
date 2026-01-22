@@ -2,6 +2,7 @@ using CrossProject.Core.Pooling;
 using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.AI;
 using VContainer;
 
 namespace CrossProject.Core
@@ -11,6 +12,7 @@ namespace CrossProject.Core
         [SerializeField] [ReadOnly] private MobState _state;
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private GameObject _spawnFx;
+        [SerializeField] private NavMeshAgent _navMeshAgent;
         
 
         private MobsSpawnPoint _spawnPoint;
@@ -27,6 +29,14 @@ namespace CrossProject.Core
         private IAgroArea _agroArea;
 
         public bool IsAvailableToGet { get; private set; }
+
+        private void Awake()
+        {
+            if (_navMeshAgent == null)
+            {
+                _navMeshAgent = GetComponent<NavMeshAgent>();
+            }
+        }
 
         [Inject]
         public void AddDependencies(IMobStateMachine stateMachine, IMobPerUpdateData perUpdateData,
@@ -95,6 +105,13 @@ namespace CrossProject.Core
             _spawnPoint = spawnPoint;
             _roamArea.Init(spawnPoint.RoamZone, _config.RoamingMinPathLength);
             _agroArea.Init(spawnPoint.AgroZone);
+
+            // Warp NavMeshAgent to current position after spawn point binding
+            // This ensures agent is on NavMesh after position was set
+            if (_navMeshAgent != null && _navMeshAgent.isActiveAndEnabled)
+            {
+                _navMeshAgent.Warp(transform.position);
+            }
         }
 
         private void MobDie()

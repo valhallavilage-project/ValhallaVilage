@@ -41,7 +41,12 @@ namespace L2Farm
         {
             _currentState = state;
 
-            var data = _data.First(i => i.State == state);
+            var data = _data.FirstOrDefault(i => i.State == state);
+            if (data.Equals(default(GardenBedStateData)))
+            {
+                Debug.LogError($"[GardenBedInteractiveObject] Data not found for state: {state}");
+                return;
+            }
 
             buttonSprite = data.Image;
             animation = data.InteractionType;

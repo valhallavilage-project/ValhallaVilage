@@ -69,9 +69,11 @@ namespace L2Farm
             {
                 foreach (var offerId in offersStatePart.DailyOffers)
                 {
-                    var configOffer = _offersConfig.Offers.First(o => o.Id == offerId);
-
-                    offers.Add(configOffer);
+                    var configOffer = _offersConfig.Offers.FirstOrDefault(o => o.Id == offerId);
+                    if (configOffer != null)
+                    {
+                        offers.Add(configOffer);
+                    }
                 }
             }
 

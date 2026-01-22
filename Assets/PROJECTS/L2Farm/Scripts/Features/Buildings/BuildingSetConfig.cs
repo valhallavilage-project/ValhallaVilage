@@ -15,9 +15,17 @@ namespace L2Farm.Features.Buildings
     {
         public List<BuildingConfig> items = new();
 
-        public int GetSecondsFor(BuildingId buildingId) => items.First(x => x.id == buildingId).timeToBuildInSeconds;
+        public int GetSecondsFor(BuildingId buildingId)
+        {
+            var building = items.FirstOrDefault(x => x.id == buildingId);
+            return building?.timeToBuildInSeconds ?? 60;
+        }
 
-        public QuestId GetQuestFor(BuildingId buildingId) => items.First(x => x.id == buildingId).questToLaunchOnComplete;
+        public QuestId GetQuestFor(BuildingId buildingId)
+        {
+            var building = items.FirstOrDefault(x => x.id == buildingId);
+            return building?.questToLaunchOnComplete;
+        }
     }
 
     [Serializable]

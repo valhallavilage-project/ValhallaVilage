@@ -22,7 +22,12 @@ namespace CrossProject.Core
 
         public PotionInfo GetPotion(PotionType potionType)
         {
-            return _potions.First(p => p.PotionType == potionType);
+            var potion = _potions.FirstOrDefault(p => p.PotionType == potionType);
+            if (potion.Equals(default(PotionInfo)))
+            {
+                Debug.LogError($"[PotionsConfig] Potion not found: {potionType}");
+            }
+            return potion;
         }
     }
 }

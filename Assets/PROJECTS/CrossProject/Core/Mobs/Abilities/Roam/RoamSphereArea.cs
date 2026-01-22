@@ -1,9 +1,13 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace CrossProject.Core
 {
     public class RoamSphereArea : IRoamArea
     {
+        private const int MaxNavMeshSampleAttempts = 10;
+        private const float NavMeshSampleRadius = 5f;
+
         private SphereCollider _area;
 
         public float MinRoamPathLength { get; private set; }
@@ -26,9 +30,28 @@ namespace CrossProject.Core
 
         public Vector3 GetPointInside()
         {
-            var randomPoint = Random.insideUnitCircle * _area.radius;
-        
-            return _area.transform.position + new Vector3(randomPoint.x, 0, randomPoint.y);
+            var center = _area.transform.position;
+            var radius = _area.radius * _area.transform.lossyScale.x;
+
+            for (var i = 0; i < MaxNavMeshSampleAttempts; i++)
+            {
+                var randomPoint = Random.insideUnitCircle * radius;
+                var point = center + new Vector3(randomPoint.x, 0, randomPoint.y);
+
+                // Sample NavMesh to get valid walkable position
+                if (NavMesh.SamplePosition(point, out var hit, NavMeshSampleRadius, NavMesh.AllAreas))
+                {
+                    return hit.position;
+                }
+            }
+
+            // Fallback: return center sampled on NavMesh
+            if (NavMesh.SamplePosition(center, out var centerHit, NavMeshSampleRadius * 2, NavMesh.AllAreas))
+            {
+                return centerHit.position;
+            }
+
+            return center;
         }
     }
 }

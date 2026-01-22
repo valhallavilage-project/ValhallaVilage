@@ -14,7 +14,15 @@ namespace CrossProject.Core.Skins
         public List<SkinConfig> items = new();
 
         public SkinConfig GetDefaultSkinFor(CharacterId characterId)
-            => items.First(x => x.owner == characterId && x.isDefaultSkin);
+        {
+            var defaultSkin = items.FirstOrDefault(x => x.owner == characterId && x.isDefaultSkin);
+            if (defaultSkin == null)
+            {
+                Debug.LogWarning($"[SkinSetConfig] Default skin not found for: {characterId}, returning first skin");
+                return items.FirstOrDefault(x => x.owner == characterId);
+            }
+            return defaultSkin;
+        }
     }
 
     [Serializable]

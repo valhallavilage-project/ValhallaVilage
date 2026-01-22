@@ -45,7 +45,11 @@ namespace CrossProject.Core
             {
                 if (currentAnimationData.Transitions is { Length: > 0 } && currentAnimationData.Transitions.Any(t => t.To.Equals(state)))
                 {
-                    transitionTime = currentAnimationData.Transitions.First(t => t.To.Equals(state)).DurationPercent;
+                    var transition = currentAnimationData.Transitions.FirstOrDefault(t => t.To.Equals(state));
+                    if (!transition.Equals(default(AnimationTransitionData<TStateType>)))
+                    {
+                        transitionTime = transition.DurationPercent;
+                    }
                 }
             }
 

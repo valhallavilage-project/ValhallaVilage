@@ -45,19 +45,71 @@ namespace CrossProject.Ui.Implementations.InteractButton
             IsInitialized = true;
         }
 
-        private async UniTask GetInteraction(CancellationToken cancellationToken)
+        private async UniTaskVoid GetInteraction(CancellationToken cancellationToken)
         {
-            if (!_interactionHandler.Closest.Value.CanInteract() || _interactionHandler.IsBlocked)
+            // If interaction or movement is in progress, cancel it
+            if (_interactionHandler.IsInteractionInProcess || _interactionHandler.IsMovingToTarget)
+            {
+                CancelCurrentInteraction();
+                return;
+            }
+
+            if (_interactionHandler.Closest.Value == null ||
+                !_interactionHandler.Closest.Value.CanInteract() ||
+                _interactionHandler.IsBlocked)
                 return;
 
+            _interactionHandler.ResetCancellation();
+            _interactionHandler.IsMovingToTarget = true;
             _interactionHandler.AddBlock(GetType());
-            _joystickController.AddBlock(GetType());
+            // Don't block joystick - allow it to cancel interaction
             _simpleMovementController.AddBlock(GetType());
-            await _simpleMovementController.MoveTo(_interactionHandler.Closest.Value.transform.position, cancellationToken, _interactionHandler.Closest.Value.interactionDistance);
-            await _interactionHandler.QueueInteraction();
+
+            try
+            {
+                // Use combined cancellation token
+                using var linkedCts = CancellationTokenSource.CreateLinkedTokenSource(
+                    cancellationToken, _interactionHandler.CancellationToken);
+
+                var cancelled = await _simpleMovementController.MoveTo(
+                    _interactionHandler.Closest.Value.transform.position,
+                    linkedCts.Token,
+                    _interactionHandler.Closest.Value.interactionDistance)
+                    .SuppressCancellationThrow();
+
+                _interactionHandler.IsMovingToTarget = false;
+
+                // Check if cancelled during movement
+                if (cancelled || _interactionHandler.IsCancelled)
+                    return;
+
+                await _interactionHandler.QueueInteraction();
+            }
+            finally
+            {
+                _interactionHandler.IsMovingToTarget = false;
+                _interactionHandler.RemoveBlock(GetType());
+                _simpleMovementController.RemoveBlock(GetType());
+            }
+        }
+
+        private void CancelCurrentInteraction()
+        {
+            _cts?.Cancel();
+            _cts?.Dispose();
+            _interactionHandler.CancelInteraction();
             _interactionHandler.RemoveBlock(GetType());
-            _joystickController.RemoveBlock(GetType());
             _simpleMovementController.RemoveBlock(GetType());
+
+            // Recreate CTS and rebind button model so it can be clicked again
+            _cts = new CancellationTokenSource();
+            if (_interactionHandler.Closest.Value != null)
+            {
+                var model = new InteractButtonModel(
+                    _interactionHandler.Closest.Value.buttonSprite,
+                    () => GetInteraction(_cts.Token));
+                _view.BindModel(model);
+            }
         }
 
         private void UpdateButtonModel()
@@ -71,7 +123,7 @@ namespace CrossProject.Ui.Implementations.InteractButton
 
             Debug.Log($"[Interactions] {_interactionHandler.Closest.Value.name} ");
             _cts = new CancellationTokenSource();
-            var model = new InteractButtonModel(_interactionHandler.Closest.Value.buttonSprite, () => GetInteraction(_cts.Token).Forget());
+            var model = new InteractButtonModel(_interactionHandler.Closest.Value.buttonSprite, () => GetInteraction(_cts.Token));
             _view.BindModel(model);
         }
 

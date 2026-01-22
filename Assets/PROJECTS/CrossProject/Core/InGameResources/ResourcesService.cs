@@ -74,7 +74,8 @@ namespace CrossProject.Core.InGameResources
 
         public Sprite GetSprite(ResourceId id)
         {
-            return _resourceSetConfig.items.First(x => id == new ResourceId(x.id))?.icon;
+            var resourceConfig = _resourceSetConfig.items.FirstOrDefault(x => id == new ResourceId(x.id));
+            return resourceConfig?.icon;
         }
     }
 }

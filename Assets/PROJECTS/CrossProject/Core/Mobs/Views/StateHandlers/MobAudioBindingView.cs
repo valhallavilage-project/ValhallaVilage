@@ -45,11 +45,25 @@ namespace CrossProject.Core
         {
             if (!_data.ContainsKey(nextState))
             {
+                _audioService.Stop();
                 return;
             }
-            
+
             var data = _data[nextState];
-            
+
+            if (data.IsEmpty)
+            {
+                _audioService.Stop();
+                return;
+            }
+
+            // Skip looped sounds (footsteps) - they cause audio chaos when many mobs are nearby
+            // Keep only one-shot sounds like attacks, death, etc.
+            if (data.IsLoop)
+            {
+                return;
+            }
+
             _audioService.Play(data);
         }
     }

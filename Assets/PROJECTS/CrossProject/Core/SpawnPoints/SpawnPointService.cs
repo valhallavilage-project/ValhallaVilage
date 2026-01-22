@@ -29,26 +29,26 @@ namespace CrossProject.Core.SpawnPoints
 
         public Vector3 GetPosition(SpawnPointId id)
         {
-            try
+            var spawnPoint = _spawnPointSetConfig.items.FirstOrDefault(x => id == x.id);
+            if (spawnPoint == null)
             {
-                return _spawnPointSetConfig
-                    .items
-                    .First(x => id == x.id)
-                    .position;
+                Debug.LogError($"[SpawnPointService] Spawn point not found: {id}; Total configs: {_spawnPointSetConfig.items.Count}");
+                return Vector3.zero;
             }
-            catch (Exception e)
-            {
-                Debug.LogError($"Failed to find spawn point with id : {id}; Total Config : {_spawnPointSetConfig.items.Count}");
-                throw;
-            }
+
+            return spawnPoint.position;
         }
 
         public Vector3 GetEulerAngles(SpawnPointId id)
         {
-            return _spawnPointSetConfig
-                .items
-                .First(x => id == x.id)
-                .eulerAngles;
+            var spawnPoint = _spawnPointSetConfig.items.FirstOrDefault(x => id == x.id);
+            if (spawnPoint == null)
+            {
+                Debug.LogError($"[SpawnPointService] Spawn point not found for angles: {id}");
+                return Vector3.zero;
+            }
+
+            return spawnPoint.eulerAngles;
         }
     }
 }

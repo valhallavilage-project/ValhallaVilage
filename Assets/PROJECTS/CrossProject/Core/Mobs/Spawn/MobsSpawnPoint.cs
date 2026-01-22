@@ -1,6 +1,7 @@
 using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AI;
 using VContainer;
 using Random = UnityEngine.Random;
 
@@ -74,9 +75,20 @@ namespace CrossProject.Core
             var randomPos = transform.position + Random.insideUnitSphere * _spawnRadius;
             randomPos.y = transform.position.y;
 
+            // Find valid NavMesh position for spawning
+            if (!NavMesh.SamplePosition(randomPos, out var navHit, _spawnRadius, NavMesh.AllAreas))
+            {
+                // No valid NavMesh position found, try spawner origin
+                if (!NavMesh.SamplePosition(transform.position, out navHit, _spawnRadius * 2f, NavMesh.AllAreas))
+                {
+                    Debug.LogWarning($"[MobsSpawnPoint] No valid NavMesh position found near {transform.position}");
+                    return;
+                }
+            }
+
             var mobComponent = _pool.Get();
 
-            mobComponent.transform.position = randomPos;
+            mobComponent.transform.position = navHit.position;
             mobComponent.transform.parent = transform;
 
             mobComponent.BindSpawnPoint(this);

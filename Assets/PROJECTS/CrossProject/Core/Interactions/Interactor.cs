@@ -116,7 +116,26 @@ namespace CrossProject.Core.Interactions
 
         private async UniTask Interact(bool _)
         {
-            var animationName = _interactionHandler.Closest.Value.animation;
+            if (_interactionHandler.Closest.Value == null)
+            {
+                _interactionHandler.IsInteractionInProcess = false;
+                return;
+            }
+
+            var interactionTarget = _interactionHandler.Closest.Value;
+            var animationName = interactionTarget.animation;
+
+            // Fix: Rotate player to face the interaction object before starting animation
+            var targetPosition = interactionTarget.transform.position;
+            var direction = (targetPosition - transform.position);
+            direction.y = 0; // Keep rotation on horizontal plane only
+
+            if (direction.sqrMagnitude > 0.01f) // Only rotate if not too close
+            {
+                var targetRotation = Quaternion.LookRotation(direction);
+                // Rotate player transform (parent of Interactor)
+                transform.parent.rotation = Quaternion.Slerp(transform.parent.rotation, targetRotation, 1f);
+            }
 
             if (animationName != InteractionType.Talk)
             {
@@ -128,34 +147,48 @@ namespace CrossProject.Core.Interactions
 
             if (animationName is InteractionType.Chop or InteractionType.Gather or InteractionType.Pickaxe)
             {
-                resourceData = _interactionHandler.Closest.Value as IResourceData;
+                resourceData = interactionTarget as IResourceData;
             }
 
-            await _interactionHandler.Closest.Value.Interaction();
+            var cancelled = await interactionTarget.Interaction(_interactionHandler.CancellationToken)
+                .SuppressCancellationThrow();
 
+            // Check if cancelled - don't give rewards
+            if (cancelled || _interactionHandler.IsCancelled)
+            {
+                StopAnimation(animationName);
+                _interactionHandler.IsInteractionInProcess = false;
+                return;
+            }
+
+            // Only give rewards if interaction completed successfully
             if (animationName is InteractionType.Chop or InteractionType.Gather or InteractionType.Pickaxe
                 && resourceData != null)
             {
                 _energyHandler.Spend(resourceData.EnergyRequired);
             }
 
-            if (_interactionHandler.Closest.Value is IExperienceData experienceGiver)
+            if (interactionTarget is IExperienceData experienceGiver)
             {
                 _experienceHandler.GainXp(experienceGiver.PerformedTaskExperience);
             }
 
             if (animationName != InteractionType.Attack)
             {
-                _interactionHandler.Closest.Value.Deselect();
+                interactionTarget.Deselect();
             }
 
+            StopAnimation(animationName);
+            _interactionHandler.IsInteractionInProcess = false;
+        }
+
+        private void StopAnimation(InteractionType animationName)
+        {
             if (animationName != InteractionType.Talk)
             {
                 _playerSkinProvider.CurrentSkin.Animator.SetBool(animationName.ToString(), false);
                 _interactionHandler.FinishInteraction(animationName);
             }
-
-            _interactionHandler.IsInteractionInProcess = false;
         }
     }
 }

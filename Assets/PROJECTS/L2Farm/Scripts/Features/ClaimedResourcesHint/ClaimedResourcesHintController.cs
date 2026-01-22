@@ -34,6 +34,12 @@ namespace L2Farm.Features.ClaimerResourcesHint
                 return;
             }
 
+            // Only show positive numbers (collecting), skip negative (spending)
+            if (data.amount < 0)
+            {
+                return;
+            }
+
             _view.Spawn(_resourcesService.GetSprite(data.id), data.amount);
         }
 

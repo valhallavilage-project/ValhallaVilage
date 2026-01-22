@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using CrossProject.Core.Interactions;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -13,17 +14,22 @@ namespace CrossProject.Core
         IReadOnlyAsyncReactiveProperty<AbstractInteractiveObject> Closest { get; }
         IReadOnlyAsyncReactiveProperty<bool> InteractionQueued { get; }
         bool IsInteractionInProcess { get; set; }
+        bool IsMovingToTarget { get; set; }
+        bool IsCancelled { get; }
+        CancellationToken CancellationToken { get; }
 
         void StartInteraction(InteractionType interaction);
         void FinishInteraction(InteractionType interaction);
         void SetClosestObject(AbstractInteractiveObject closest);
         UniTask QueueInteraction();
+        void CancelInteraction();
+        void ResetCancellation();
     }
 
     public class InteractionHandler : IInteractionHandler
     {
         private readonly HashSet<Type> _blockers = new();
-        private bool _isInteractionInProcess;
+        private CancellationTokenSource _cts = new();
 
         private readonly AsyncReactiveProperty<InteractionType> _interactionStarted = new(default);
         private readonly AsyncReactiveProperty<InteractionType> _interactionFinished = new(default);
@@ -37,6 +43,9 @@ namespace CrossProject.Core
 
         public bool IsBlocked => _blockers.Count > 0;
         public bool IsInteractionInProcess { get; set; }
+        public bool IsMovingToTarget { get; set; }
+        public bool IsCancelled { get; private set; }
+        public CancellationToken CancellationToken => _cts.Token;
 
         public void StartInteraction(InteractionType interaction)
         {
@@ -77,6 +86,33 @@ namespace CrossProject.Core
             _interactionQueued.Value = true;
 
             await UniTask.WaitWhile(() => IsInteractionInProcess);
+        }
+
+        public void CancelInteraction()
+        {
+            if (!IsInteractionInProcess && !IsMovingToTarget)
+                return;
+
+            IsCancelled = true;
+            try
+            {
+                _cts?.Cancel();
+            }
+            catch { }
+            IsInteractionInProcess = false;
+            IsMovingToTarget = false;
+            Debug.Log("[InteractionHandler] Interaction cancelled");
+        }
+
+        public void ResetCancellation()
+        {
+            IsCancelled = false;
+            try
+            {
+                _cts?.Dispose();
+            }
+            catch { }
+            _cts = new CancellationTokenSource();
         }
     }
 }

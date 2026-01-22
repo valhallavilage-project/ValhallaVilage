@@ -51,7 +51,9 @@ namespace L2Farm.Features.ResourceHolder
 
         protected override async UniTask AfterInteraction()
         {
-            _resourcesService.SetNewResourceValue(content.Resource, content.Amount);
+            // Fix: Use ChangeResource to ADD resources, not SetNewResourceValue
+            // SetNewResourceValue was causing negative numbers bug
+            _resourcesService.ChangeResource(content.Resource, content.Amount);
 
             DOTween.Kill(this);
             await viewRoot.transform.DOScale(new Vector3(1.5f, 1.5f, 1.5f), 0.2f);
