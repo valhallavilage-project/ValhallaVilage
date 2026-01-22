@@ -41,7 +41,11 @@ namespace L2Farm
 
         private void Close()
         {
+            if (_tradeScreen == null)
+                return;
+
             _uiService.Close(_tradeScreen);
+            _tradeScreen = null;
         }
 
         public async UniTask Initialize()
