@@ -3237,7 +3237,7 @@ MonoBehaviour:
         targetSpawnPoint:
           value: NPC_HeadGuard
         questIndication:
-          value: Quest_Active
+          value: Daily_Horns
         launchActions:
         - rid: 9209226077287219211
         steps:
@@ -3253,7 +3253,7 @@ MonoBehaviour:
         targetSpawnPoint:
           value: NPC_FarmBuilder
         questIndication:
-          value: Quest_Active
+          value: Daily_Veg
         launchActions:
         - rid: 9209226077287219209
         steps:
