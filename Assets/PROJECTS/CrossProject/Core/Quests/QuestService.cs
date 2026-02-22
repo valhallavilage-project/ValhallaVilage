@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using CrossProject.Core;
 using CrossProject.Core.Actions;
 using CrossProject.Core.Conditions;
 using CrossProject.Core.SaveLoad;
@@ -25,6 +26,7 @@ namespace CrossProject.Core.Quests
         private readonly Dictionary<QuestId, int> _launchedQuests = new();
 
         public bool IsInitialized { get; private set; }
+        public bool IsGuest { get; set; }
 
         public event System.Action<QuestId> OnQuestLaunch;
         public event System.Action<QuestId, int> OnQuestProceed;
@@ -71,6 +73,11 @@ namespace CrossProject.Core.Quests
             {
                 Debug.LogError($"[{nameof(QuestService)}] : Trying to Launch quest with id NULL");
 
+                return false;
+            }
+
+            if (IsGuest && (id == "Daily_Horns" || id == "Daily_Veg" || id == "Daily_Horns_Early" || id == "Daily_Veg_Early"))
+            {
                 return false;
             }
 

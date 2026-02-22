@@ -48,6 +48,7 @@ namespace CrossProject.Ui.Core
         }
 
         public LogInData LogInData => logInScreen.LogInData;
+        public bool IsGuest => logInScreen.IsGuest;
 
         public void ApplySafeAreaTo(RectTransform rectTransform, bool left = true, bool top = true, bool right = true, bool bottom = true)
         {

@@ -61,6 +61,7 @@ namespace CrossProject.Core
         private PlayerDailyTaskCheck _playerDailyTaskCheck;
 
         public bool IsInitialized { get; private set; }
+        public bool IsGuest { get; private set; }
 
         private bool isActive;
 
@@ -76,8 +77,10 @@ namespace CrossProject.Core
             DontDestroyOnLoad(this);
         }
 
-        public void Activate()
+        public void Activate(bool isGuest = false)
         {
+            IsGuest = isGuest;
+            _questService.IsGuest = isGuest;
             isActive = true;
         }
 
@@ -87,6 +90,11 @@ namespace CrossProject.Core
             while (!isActive || !_questService.IsInitialized)
             {
                 await UniTask.Yield();
+            }
+
+            if (IsGuest)
+            {
+                return;
             }
             
             _questService.OnQuestWin += (QuestId questId) =>

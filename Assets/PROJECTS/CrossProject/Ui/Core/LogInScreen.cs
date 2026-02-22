@@ -29,9 +29,11 @@ namespace CrossProject.Ui.Core
         [SerializeField] private TMP_InputField logInField;
         [SerializeField] private TMP_InputField passwordField;
         [SerializeField] private Button logInButton;
+        [SerializeField] private Button skipButton;
         [SerializeField] private CanvasGroup logInGroup;
 
         public LogInData LogInData { get; private set; }
+        public bool IsGuest { get; private set; }
 
         public event Action OnLoginedIn;
 
@@ -45,11 +47,25 @@ namespace CrossProject.Ui.Core
                     logInGroup.interactable = false;
                 }
             });
+            
+            skipButton.onClick.AddListener(() =>
+            {
+                IsGuest = true;
+                LogInData = new LogInData { email = "guest", password = "guest", serverId = "guest" };
+                logInGroup.interactable = false;
+            });
         }
 
         public async UniTask<bool> LogIn()
         {
             LogInData = await GetLogInData();
+            if (IsGuest)
+            {
+                Close(true);
+                serverService.Activate(true);
+                return true;
+            }
+            
             bool success = await TryToLogIn();
 
             while(!success)
@@ -67,7 +83,7 @@ namespace CrossProject.Ui.Core
                 PlayerPrefs.SetString("Password", LogInData.password);
                 PlayerPrefs.SetString("ServerId", LogInData.serverId);
                 Close(true);
-                serverService.Activate();
+                serverService.Activate(IsGuest);
             }
             return success;
         }
