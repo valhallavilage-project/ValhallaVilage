@@ -93,6 +93,12 @@ namespace CrossProject.Core.SimpleMovement
 
         public void Tick()
         {
+            if (_skipTickTimer > 0)
+            {
+                _skipTickTimer -= Time.deltaTime;
+                return;
+            }
+
             if (IsBlocked)
                 return;
 
@@ -233,6 +239,27 @@ namespace CrossProject.Core.SimpleMovement
         private bool IsOwnCollider(Collider collider)
         {
             return collider.transform.IsChildOf(_transform) || collider.transform == _transform;
+        }
+
+        private float _skipTickTimer;
+
+        public void Warp(Vector3 position)
+        {
+            _skipTickTimer = 0.5f;
+
+            _playerNavMeshAgent.enabled = false;
+            _transform.position = position;
+            _lastPosition = position;
+            _currentVelocity = Vector3.zero;
+            
+            if (LocalAccessCurrentSkin != null && LocalAccessCurrentSkin.Animator != null)
+            {
+                LocalAccessCurrentSkin.Animator.SetFloat(Speed, 0);
+            }
+
+            _playerNavMeshAgent.enabled = true;
+            _playerNavMeshAgent.Warp(position);
+            _playerNavMeshAgent.nextPosition = position;
         }
 
         public async UniTask MoveTo(Vector3 target, CancellationToken cancellationToken, float targetDistance = 1)

@@ -24,7 +24,7 @@ namespace CrossProject.Core
 
         public void Revive(Vector3 position)
         {
-            _healthHandler.Restore(_healthHandler.MaxHealth.Value / 2);
+            _healthHandler.Restore(_healthHandler.MaxHealth.Value);
 
             _revived.Value = position;
         }

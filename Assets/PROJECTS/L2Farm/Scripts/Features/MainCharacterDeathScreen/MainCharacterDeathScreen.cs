@@ -10,7 +10,7 @@ namespace L2Farm.Features
 
         protected override void OnBind()
         {
-            _reviveButton.SetUniqueCallback(Model.Close);
+            _reviveButton.onClick.RemoveAllListeners();
             _reviveButton.onClick.AddListener(ReviveMainCharacter);
         }
 

@@ -1,3 +1,4 @@
+using CrossProject.Core.SimpleMovement;
 using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Linq;
 using UnityEngine;
@@ -13,15 +14,17 @@ namespace CrossProject.Core
         private IReviveAbility _reviveAbility;
         private IDieAbility _dieAbility;
         private IHealthHandler _healthHandler;
+        private SimpleMovementController _simpleMovementController;
 
         [Inject]
-        private void AddDependencies(IReviveAbility reviveAbility, IDieAbility dieAbility, IHealthHandler healthHandler)
+        private void AddDependencies(IReviveAbility reviveAbility, IDieAbility dieAbility, IHealthHandler healthHandler,
+            SimpleMovementController simpleMovementController)
         {
             _dieAbility = dieAbility;
             _healthHandler = healthHandler;
+            _simpleMovementController = simpleMovementController;
             
             healthHandler.Health.WithoutCurrent().ForEachAsync(HealthChanged, gameObject.GetCancellationTokenOnDestroy()).Forget();
-            reviveAbility.Revived.WithoutCurrent().ForEachAsync(Revive, gameObject.GetCancellationTokenOnDestroy()).Forget();
         }
 
         private void HealthChanged(float _)
@@ -30,11 +33,6 @@ namespace CrossProject.Core
             {
                 _dieAbility.BeginToDie();
             }
-        }
-
-        private void Revive(Vector3 position)
-        {
-            _navMeshAgent.Warp(position);
         }
     }
 }

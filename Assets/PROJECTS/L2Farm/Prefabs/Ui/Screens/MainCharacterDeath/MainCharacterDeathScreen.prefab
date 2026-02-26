@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 8234403772458465763}
   - component: {fileID: 2323498892019635682}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Button_Respawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -5,7 +5,7 @@ namespace CrossProject.Core
 {
     public interface IMainCharacterReviveGlobalHandler
     {
-        IReadOnlyAsyncReactiveProperty<bool> Revived { get; }
+        IReadOnlyAsyncReactiveProperty<Invoker> Revived { get; }
         Transform RevivePoint { get; }
 
         void Revive();
@@ -14,19 +14,49 @@ namespace CrossProject.Core
 
     public class MainCharacterGlobalReviveHandler : IMainCharacterReviveGlobalHandler
     {
-        private readonly AsyncReactiveProperty<bool> _revived = new(default);
-        public Transform RevivePoint { get; private set; }
+        private readonly AsyncReactiveProperty<Invoker> _revived = new(default);
+        private Transform _revivePoint;
 
-        public IReadOnlyAsyncReactiveProperty<bool> Revived => _revived;
+        public Transform RevivePoint
+        {
+            get
+            {
+                if (_revivePoint == null)
+                {
+                    var allObjects = GameObject.FindObjectsByType<GameObject>(FindObjectsSortMode.None);
+                    foreach (var go in allObjects)
+                    {
+                        if (go.name == "RevivePoint" || go.name == "Respawn")
+                        {
+                            // Проверяем, что это не часть префаба игрока
+                            if (go.GetComponentInParent<SimpleMovement.SimpleMovementController>() == null)
+                            {
+                                _revivePoint = go.transform;
+                                return _revivePoint;
+                            }
+                        }
+                    }
+
+                    var dummy = new GameObject("RevivePoint_Permanent_Fallback");
+                    dummy.transform.position = new Vector3(93.11f, 0f, -100.17f);
+                    _revivePoint = dummy.transform;
+                }
+                return _revivePoint;
+            }
+            private set => _revivePoint = value;
+        }
+
+        public IReadOnlyAsyncReactiveProperty<Invoker> Revived => _revived;
 
         public void InitRevivePoint(Transform revivePoint)
         {
+            Debug.Log($"[MainCharacterGlobalReviveHandler] InitRevivePoint set to: {revivePoint.name} at {revivePoint.position}");
             RevivePoint = revivePoint;
         }
 
         public void Revive()
         {
-            _revived.Value = true;
+            _revived.Invoke();
         }
     }
 }
