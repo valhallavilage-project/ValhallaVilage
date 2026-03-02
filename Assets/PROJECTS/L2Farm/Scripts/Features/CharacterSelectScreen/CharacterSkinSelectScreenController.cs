@@ -41,6 +41,8 @@ namespace PROJECTS.L2Farm.Scripts.CharacterSkinSelect
 
         public async UniTask Initialize()
         {
+            await UniTask.WaitUntil(() => _uiService.IsLoggedIn);
+
             bool hasState = _gameStateManager.State.TryGet<ObtainedCharactersPart>(out var obtainedCharactersPart) && obtainedCharactersPart.ObtainedCharacters.Count > 0;
             if (hasState)
             {
@@ -62,7 +64,17 @@ namespace PROJECTS.L2Farm.Scripts.CharacterSkinSelect
                 return;
             }
 
-            _view = await _uiService.TryOpen(GetModel()) as CharacterSelectScreen;
+            var tcs = new UniTaskCompletionSource();
+            var model = GetModel();
+            var originalClose = model.Close;
+            model.Close = () =>
+            {
+                originalClose?.Invoke();
+                tcs.TrySetResult();
+            };
+
+            _view = await _uiService.TryOpen(model) as CharacterSelectScreen;
+            await tcs.Task;
             IsInitialized = true;
         }
 

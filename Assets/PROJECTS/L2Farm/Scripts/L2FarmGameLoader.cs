@@ -15,6 +15,7 @@ namespace L2Farm.Scripts
     {
         private readonly UiService _uiService;
         private readonly ScenesService _scenesService;
+        private readonly PROJECTS.L2Farm.Scripts.CharacterSkinSelect.CharacterSkinSelectScreenController _characterSkinSelectScreenController;
         private readonly IObjectResolver _resolver;
 
         public bool IsInitialized { get; private set; }
@@ -22,10 +23,12 @@ namespace L2Farm.Scripts
         public L2FarmGameLoader(
             UiService uiService,
             ScenesService scenesService,
+            PROJECTS.L2Farm.Scripts.CharacterSkinSelect.CharacterSkinSelectScreenController characterSkinSelectScreenController,
             IObjectResolver resolver)
         {
             _uiService = uiService;
             _scenesService = scenesService;
+            _characterSkinSelectScreenController = characterSkinSelectScreenController;
             _resolver = resolver;
         }
 
@@ -48,6 +51,8 @@ namespace L2Farm.Scripts
             #endif
 
             bool success = await _uiService.LogIn();
+
+            await UniTask.WaitUntil(() => _characterSkinSelectScreenController.IsInitialized);
 
             _uiService.Load(PrepareGameLoad()).Forget();
             IsInitialized = true;

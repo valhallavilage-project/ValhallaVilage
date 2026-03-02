@@ -49,6 +49,7 @@ namespace CrossProject.Ui.Core
 
         public LogInData LogInData => logInScreen.LogInData;
         public bool IsGuest => logInScreen.IsGuest;
+        public bool IsLoggedIn { get; private set; }
 
         public void ApplySafeAreaTo(RectTransform rectTransform, bool left = true, bool top = true, bool right = true, bool bottom = true)
         {
@@ -117,7 +118,8 @@ namespace CrossProject.Ui.Core
 
         public async UniTask<bool> LogIn()
         {
-            return await logInScreen.LogIn();
+            IsLoggedIn = await logInScreen.LogIn();
+            return IsLoggedIn;
         }
 
         public async UniTask Load(IReadOnlyList<UniTask> tasks)
