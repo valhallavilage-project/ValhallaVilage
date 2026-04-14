@@ -61,11 +61,22 @@ namespace CrossProject.Ui.Core
 
         public async UniTask<string> GetCode()
         {
+            Debug.Log("[2FA] GetCode called");
             _result = null;
             _isDone = false;
-            codeField.text = "";
+
+            if (codeField != null)
+                codeField.text = "";
+            else
+                Debug.LogError("[2FA] codeField is NULL!");
+
             SetStatus("Код отправлен на вашу почту");
+
+            transform.SetAsLastSibling();
             gameObject.SetActive(true);
+
+            var logPath = System.IO.Path.Combine(Application.persistentDataPath, "2fa_popup_state.txt");
+            System.IO.File.WriteAllText(logPath, $"Popup activated. activeSelf={gameObject.activeSelf} activeInHierarchy={gameObject.activeInHierarchy} codeField={(codeField != null)} submit={(submitButton != null)} cancel={(cancelButton != null)}");
 
             while (!_isDone)
             {

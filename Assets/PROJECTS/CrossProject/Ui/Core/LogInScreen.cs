@@ -116,11 +116,8 @@ namespace CrossProject.Ui.Core
         private void Open()
         {
             LogInData = null;
-            logInField.text = "";
-            passwordField.text = "";
             logInGroup.interactable = true;
             logInGroup.gameObject.SetActive(true);
-            SetStatus("");
         }
 
         private void Close(bool full)
@@ -172,19 +169,42 @@ namespace CrossProject.Ui.Core
         }
 
 
+        private static UnityWebRequest CreateFormUrlEncodedRequest(string url, System.Collections.Generic.Dictionary<string, string> fields)
+        {
+            var bodyBuilder = new System.Text.StringBuilder();
+            bool first = true;
+            foreach (var kv in fields)
+            {
+                if (!first) bodyBuilder.Append('&');
+                bodyBuilder.Append(UnityWebRequest.EscapeURL(kv.Key));
+                bodyBuilder.Append('=');
+                bodyBuilder.Append(UnityWebRequest.EscapeURL(kv.Value ?? string.Empty));
+                first = false;
+            }
+
+            var bodyBytes = System.Text.Encoding.UTF8.GetBytes(bodyBuilder.ToString());
+            var request = new UnityWebRequest(url, "POST");
+            request.uploadHandler = new UploadHandlerRaw(bodyBytes);
+            request.downloadHandler = new DownloadHandlerBuffer();
+            request.SetRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            request.SetRequestHeader("Accept", "application/json");
+            return request;
+        }
+
         private async UniTask<bool> TryToLogIn()
         {
             SetStatus("Подключение к серверу...");
 
-            WWWForm form = new WWWForm();
-            form.AddField("launcher_key", launcherKey);
-            form.AddField("type_login", "email");
-            form.AddField("email", LogInData.email);
-            form.AddField("password", LogInData.password);
-            form.AddField("sid", LogInData.serverId);
+            var fields = new System.Collections.Generic.Dictionary<string, string>
+            {
+                { "launcher_key", launcherKey },
+                { "type_login", "email" },
+                { "email", LogInData.email },
+                { "password", LogInData.password },
+                { "sid", LogInData.serverId }
+            };
 
-            using var request = UnityWebRequest.Post(ServerService.MainURL + "signin", form);
-            request.SetRequestHeader("Accept", "application/json");
+            using var request = CreateFormUrlEncodedRequest(ServerService.MainURL + "signin", fields);
 
             await request.SendWebRequest().ToUniTask();
 
@@ -284,15 +304,19 @@ namespace CrossProject.Ui.Core
 
         private async UniTask<bool> SendTwoFaCode(string method)
         {
-            WWWForm form = new WWWForm();
-            form.AddField("launcher_key", launcherKey);
-            form.AddField("login", LogInData.email);
-            form.AddField("method", method);
+            var fields = new System.Collections.Generic.Dictionary<string, string>
+            {
+                { "launcher_key", launcherKey },
+                { "login", LogInData.email },
+                { "method", method }
+            };
 
-            using var request = UnityWebRequest.Post(ServerService.MainURL + "send_2fa_confirm_code", form);
-            request.SetRequestHeader("Accept", "application/json");
+            using var request = CreateFormUrlEncodedRequest(ServerService.MainURL + "send_2fa_confirm_code", fields);
 
             await request.SendWebRequest().ToUniTask();
+
+            var logPath = System.IO.Path.Combine(Application.persistentDataPath, "send_2fa_response.txt");
+            System.IO.File.WriteAllText(logPath, $"HTTP {request.responseCode}\nResult: {request.result}\nError: {request.error}\n{request.downloadHandler.text}");
 
             if (request.result != UnityWebRequest.Result.Success)
             {
@@ -315,15 +339,16 @@ namespace CrossProject.Ui.Core
 
         private async UniTask<bool> TryToLoginWith2FA(string authToken, string method, string code)
         {
-            WWWForm form = new WWWForm();
-            form.AddField("launcher_key", launcherKey);
-            form.AddField("auth_token", authToken);
-            form.AddField("login", LogInData.email);
-            form.AddField("code", code);
-            form.AddField("method", method);
+            var fields = new System.Collections.Generic.Dictionary<string, string>
+            {
+                { "launcher_key", launcherKey },
+                { "auth_token", authToken },
+                { "login", LogInData.email },
+                { "code", code },
+                { "method", method }
+            };
 
-            using var request = UnityWebRequest.Post(ServerService.MainURL + "login_with_2fa_code", form);
-            request.SetRequestHeader("Accept", "application/json");
+            using var request = CreateFormUrlEncodedRequest(ServerService.MainURL + "login_with_2fa_code", fields);
 
             await request.SendWebRequest().ToUniTask();
 
