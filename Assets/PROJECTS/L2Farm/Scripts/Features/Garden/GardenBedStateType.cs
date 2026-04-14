@@ -4,6 +4,10 @@ namespace L2Farm
     {
         Deactivated,
         Overgrown,
-        Clean
+        Clean,
+        Empty,
+        Planting,
+        Growing,
+        Ready
     }
 }

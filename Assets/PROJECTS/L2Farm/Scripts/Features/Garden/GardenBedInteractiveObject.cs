@@ -25,12 +25,16 @@ namespace L2Farm
         [SerializeField] private List<GardenBedStateData> _data;
         
         private readonly AsyncReactiveProperty<Invoker> _tryClear = new(default);
+        private readonly AsyncReactiveProperty<Invoker> _onInteracted = new(default);
         private GardenBedStateType _currentState;
         
         public IReadOnlyAsyncReactiveProperty<Invoker> TryClear => _tryClear;
+        public IReadOnlyAsyncReactiveProperty<Invoker> OnInteracted => _onInteracted;
 
         protected override async UniTask AfterInteraction()
         {
+            _onInteracted.Invoke();
+
             if (_currentState == GardenBedStateType.Overgrown)
             {
                 _tryClear.Invoke();
