@@ -59,8 +59,6 @@ namespace L2Farm
 
                 time = timeLeft;
             }
-            
-            _resourcesService.DecreaseResourceValue(new ResourceId("Resource_TimePotion"));
         }
 
         public void Dispose()

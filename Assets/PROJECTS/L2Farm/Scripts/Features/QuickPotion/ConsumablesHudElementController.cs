@@ -15,7 +15,8 @@ namespace L2Farm
         private readonly UiService _uiService;
         private readonly GameStateManager _gameStateManager;
         private readonly IMainCharacterGlobalPotionConsumeHandler _mainCharacterPotionConsumeHandler;
-        
+        private readonly IResourcesService _resourcesService;
+
         private readonly CancellationTokenSource _disposeCts = new();
         private ConsumablesHudElement _view;
         private ResourceContentPart _resources;
@@ -28,6 +29,7 @@ namespace L2Farm
             _uiService = uiService;
             _gameStateManager = gameStateManager;
             _mainCharacterPotionConsumeHandler = mainCharacterPotionConsumeHandler;
+            _resourcesService = resourcesService;
 
             resourcesService.ResourceChanged.WithoutCurrent().ForEachAsync(ResourcesChanged, _disposeCts.Token).Forget();
         }
@@ -51,38 +53,27 @@ namespace L2Farm
 
         private void HealClicked(bool _)
         {
-            if (_resources.Resources.TryGetValue((ResourceId)"Resource_HealPotion", out var potionsCount))
-            {
-                if (potionsCount > 0)
-                {
-                    _mainCharacterPotionConsumeHandler.ConsumePotion(PotionType.Health);
-                    _view.HealPotionConsumed();
-                }
-            }
+            Consume((ResourceId)"Resource_HealPotion", PotionType.Health, _view.HealPotionConsumed);
         }
 
         private void EnergyClicked(bool _)
         {
-            if (_resources.Resources.TryGetValue((ResourceId)"Resource_EnergyPotion", out var potionsCount))
-            {
-                if (potionsCount > 0)
-                {
-                    _mainCharacterPotionConsumeHandler.ConsumePotion(PotionType.Energy);
-                    _view.ConsumeEnergyPotion();
-                }
-            }
+            Consume((ResourceId)"Resource_EnergyPotion", PotionType.Energy, _view.ConsumeEnergyPotion);
         }
 
         private void TimeClicked(bool _)
         {
-            if (_resources.Resources.TryGetValue((ResourceId)"Resource_TimePotion", out var potionsCount))
-            {
-                if (potionsCount > 0)
-                {
-                    _mainCharacterPotionConsumeHandler.ConsumePotion(PotionType.Time);
-                    _view.ConsumeTimePotion();
-                }
-            }
+            Consume((ResourceId)"Resource_TimePotion", PotionType.Time, _view.ConsumeTimePotion);
+        }
+
+        private void Consume(ResourceId resourceId, PotionType type, Action onViewRefresh)
+        {
+            if (!_resources.Resources.TryGetValue(resourceId, out var count) || count <= 0)
+                return;
+
+            _mainCharacterPotionConsumeHandler.ConsumePotion(type);
+            _resourcesService.ChangeResource(resourceId, -1);
+            onViewRefresh?.Invoke();
         }
 
         private void ResourcesChanged((ResourceId id, int amount) resourceValue)

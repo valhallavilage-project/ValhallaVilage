@@ -79,20 +79,11 @@ namespace CrossProject.Core
             {
                 case PotionType.Health:
                     _healthHandler.Restore(potionValue);
-                    Consume((ResourceId)"Resource_HealPotion");
-
                     break;
                 case PotionType.Energy:
                     _energyHandler.Restore(potionValue);
-                    Consume((ResourceId)"Resource_EnergyPotion");
-
                     break;
             }
-        }
-
-        private void Consume(ResourceId resource)
-        {
-            _resourcesService.DecreaseResourceValue(resource);
         }
 
         private void GardenBedCleared()
