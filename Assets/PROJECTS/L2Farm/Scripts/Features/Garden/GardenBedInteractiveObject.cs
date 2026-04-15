@@ -33,27 +33,33 @@ namespace L2Farm
 
         protected override async UniTask AfterInteraction()
         {
+            Debug.Log($"[GardenBedInteractiveObject:{name}] AfterInteraction state={_currentState}");
+
             _onInteracted.Invoke();
 
             if (_currentState == GardenBedStateType.Overgrown)
             {
+                Debug.Log($"[GardenBedInteractiveObject:{name}] Invoking _tryClear");
                 _tryClear.Invoke();
             }
         }
 
         public void SetState(GardenBedStateType state)
         {
+            Debug.Log($"[GardenBedInteractiveObject:{name}] SetState -> {state}");
             _currentState = state;
+
+            // Use Gather animation for all garden interactions (same as Interactive_Bush)
+            animation = InteractionType.Gather;
 
             var data = _data.FirstOrDefault(i => i.State == state);
             if (data.Equals(default(GardenBedStateData)))
             {
-                Debug.LogError($"[GardenBedInteractiveObject] Data not found for state: {state}");
+                Debug.LogWarning($"[GardenBedInteractiveObject:{name}] Data not found for state: {state}, keeping previous sprite");
                 return;
             }
 
             buttonSprite = data.Image;
-            animation = data.InteractionType;
         }
     }
 }

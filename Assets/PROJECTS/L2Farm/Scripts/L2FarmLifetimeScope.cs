@@ -29,7 +29,7 @@ using L2Farm.Features.QuestIndication;
 using L2Farm.Features.ResourceProduction;
 using L2Farm.Features.ResourceProduction.Actions;
 using L2Farm.Features.ResourceProduction.GiveResources;
-using L2Farm.Features.ShopScreen;
+using L2Farm.Features.Shop;
 using L2Farm.Features.SimpleMonolog;
 using L2Farm.Scripts.Actions;
 using L2Farm.Scripts.Actions.SpendResources;

@@ -77,6 +77,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 95df2a15f3f6c234daf5cd4d25de84ba
+    m_Address: ShopScreen
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 96be9fe5542bb4d9fab0afaf7fa0b501
     m_Address: InventoryButton
     m_ReadOnly: 0

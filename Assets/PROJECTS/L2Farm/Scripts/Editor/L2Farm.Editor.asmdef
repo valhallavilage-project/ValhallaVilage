@@ -4,7 +4,11 @@
     "references": [
         "GUID:ce2fc14371b22ea4e87e5e51ce91295f",
         "GUID:ba3d232eb13d74dc58639a52e4a2037b",
-        "GUID:778bfbdf06d514684b7acb72a7430751"
+        "GUID:778bfbdf06d514684b7acb72a7430751",
+        "Unity.TextMeshPro",
+        "CrossProject.Ui.Core",
+        "Unity.Addressables",
+        "Unity.Addressables.Editor"
     ],
     "includePlatforms": [
         "Editor"

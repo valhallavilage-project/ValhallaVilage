@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8676d842be34d59a81f1f628344f41c, type: 3}
   m_Name: GardenConfig
   m_EditorClassIdentifier: 
-  _gardenBedClearEnergy: 50
+  _gardenBedClearEnergy: 25

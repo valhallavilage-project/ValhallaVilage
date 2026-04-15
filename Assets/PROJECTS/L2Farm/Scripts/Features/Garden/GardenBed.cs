@@ -17,6 +17,10 @@ namespace L2Farm
         [Header("Identity")]
         [SerializeField] private string _id;
         [SerializeField] private GardenConfig _gardenConfig;
+        [Tooltip("If set, this state is used on first run (when no save data exists). Useful for test beds to skip activation.")]
+        [SerializeField] private GardenBedStateType _initialStateIfNoSave = GardenBedStateType.Deactivated;
+        [Tooltip("If true, always reset to _initialStateIfNoSave on every Play start (ignores saved state). For testing.")]
+        [SerializeField] private bool _forceInitialStateEveryStart = false;
 
         [Header("Interaction")]
         [SerializeField] private GardenBedInteractiveObject _interactiveObject;
@@ -26,11 +30,17 @@ namespace L2Farm
         [Header("Farming Settings")]
         [SerializeField] private float _growthTimeHours = 6f;
         [SerializeField] private float _decayTimeHours = 15f;
+        [Tooltip("If > 0, overrides _growthTimeHours (used for testing)")]
+        [SerializeField] private float _growthTimeSecondsOverride = 0f;
+        [Tooltip("If > 0, overrides _decayTimeHours (used for testing)")]
+        [SerializeField] private float _decayTimeSecondsOverride = 0f;
         [SerializeField] private string _seedsResourceId = "Resource_Seeds";
         [SerializeField] private int _seedsRequiredCount = 50;
         [SerializeField] private string _harvestResourceId = "Resource_TomatoSeeds";
         [SerializeField] private int _harvestCount = 20;
         [SerializeField] private float _plantingDurationSeconds = 3f;
+        [Tooltip("If true, decayed plot becomes Overgrown (requires cleaning again). If false, becomes Empty.")]
+        [SerializeField] private bool _decayBecomesOvergrown = true;
 
         [Header("Visuals")]
         [SerializeField] private GameObject _overgrow;
@@ -83,11 +93,44 @@ namespace L2Farm
 
         private void Start()
         {
+            AutoLinkModels();
+
             _gardenStatePart = _gameStateManager.State.Get<GardenStatePart>();
+
+            bool hadSavedState = _gardenStatePart.DetailedStates.ContainsKey(_id);
+
             _detailedState = _gardenStatePart.GetDetailedState(_id);
+
+            bool shouldForceInitial = _forceInitialStateEveryStart
+                || (!hadSavedState && _initialStateIfNoSave != GardenBedStateType.Deactivated);
+
+            if (shouldForceInitial)
+            {
+                _detailedState.State = _initialStateIfNoSave;
+                _detailedState.StartTimeTicks = 0;
+                _detailedState.FinishTimeTicks = 0;
+                _gardenStatePart.UpdateGardenBedState(_id, _initialStateIfNoSave);
+                Debug.Log($"[GardenBed:{_id}] Force initial state to {_initialStateIfNoSave}");
+            }
+
             _currentState = _detailedState.State;
 
             RefreshVisuals();
+        }
+
+        private void AutoLinkModels()
+        {
+            if (_emptyModel == null)   _emptyModel   = transform.Find("Garden_Empty")?.gameObject;
+            if (_growingModel == null) _growingModel = transform.Find("Garden_Growing")?.gameObject;
+            if (_readyModel == null)   _readyModel   = transform.Find("Garden_Ready")?.gameObject;
+            if (_overgrow == null)     _overgrow     = transform.Find("Leafs_pile_big")?.gameObject;
+            if (_statusText == null)
+            {
+                var statusGo = transform.Find("StatusText");
+                if (statusGo != null) _statusText = statusGo.GetComponent<TextMeshPro>();
+            }
+
+            Debug.Log($"[GardenBed:{_id}] AutoLinkModels: overgrow={(_overgrow!=null)} empty={(_emptyModel!=null)} growing={(_growingModel!=null)} ready={(_readyModel!=null)} status={(_statusText!=null)}");
         }
 
         private void OnInteracted()
@@ -110,9 +153,25 @@ namespace L2Farm
 
         private void TryToClearGardenBed()
         {
-            if (_currentState != GardenBedStateType.Overgrown) return;
+            Debug.Log($"[GardenBed:{_id}] TryToClearGardenBed state={_currentState} facade={(_mainCharacterGlobalFacade != null)} popup={(_confirmPopupOpenHandler != null)} config={(_gardenConfig != null)}");
 
-            if (_mainCharacterGlobalFacade.CurrentEnergy.Value >= _gardenConfig.GardenBedClearEnergy)
+            if (_currentState != GardenBedStateType.Overgrown)
+            {
+                Debug.LogWarning($"[GardenBed:{_id}] Cannot clear - state is not Overgrown ({_currentState})");
+                return;
+            }
+
+            if (_mainCharacterGlobalFacade == null || _confirmPopupOpenHandler == null || _gardenConfig == null)
+            {
+                Debug.LogError($"[GardenBed:{_id}] Null dependency: facade={_mainCharacterGlobalFacade}, popup={_confirmPopupOpenHandler}, config={_gardenConfig}");
+                return;
+            }
+
+            var currentEnergy = _mainCharacterGlobalFacade.CurrentEnergy.Value;
+            var required = _gardenConfig.GardenBedClearEnergy;
+            Debug.Log($"[GardenBed:{_id}] Energy={currentEnergy} required={required}");
+
+            if (currentEnergy >= required)
             {
                 _clearGardenBedResultCts = new CancellationTokenSource();
                 var linkedTokenSource = CancellationTokenSource.CreateLinkedTokenSource(_clearGardenBedResultCts.Token, gameObject.GetCancellationTokenOnDestroy());
@@ -120,10 +179,12 @@ namespace L2Farm
                 _confirmPopupOpenHandler.PopupResult.WithoutCurrent().ForEachAsync(ClearPopupResultSet, linkedTokenSource.Token).Forget();
 
                 _confirmPopupOpenHandler.Open(new ConfirmPopupData(string.Format(_clearGardenText, _gardenConfig.GardenBedClearEnergy), ConfirmPopupButtonsType.YesNo));
+                Debug.Log($"[GardenBed:{_id}] Confirm popup opened");
             }
             else
             {
                 _confirmPopupOpenHandler.Open(new ConfirmPopupData(_notEnoughEnergyText, ConfirmPopupButtonsType.Ok));
+                Debug.Log($"[GardenBed:{_id}] Not enough energy popup opened");
             }
         }
 
@@ -154,13 +215,16 @@ namespace L2Farm
         {
             var seedsId = new ResourceId(_seedsResourceId);
             var currentSeeds = _gameStateManager.State.Get<ResourceContentPart>().Get(seedsId);
+            Debug.Log($"[GardenBed:{_id}] TryPlant currentSeeds={currentSeeds} required={_seedsRequiredCount}");
 
             if (currentSeeds >= _seedsRequiredCount)
             {
+                Debug.Log($"[GardenBed:{_id}] Enough seeds, starting planting...");
                 StartPlanting().Forget();
             }
             else
             {
+                Debug.Log($"[GardenBed:{_id}] Not enough seeds");
                 ShowTemporaryStatus(_notEnoughSeedsText).Forget();
             }
         }
@@ -176,15 +240,30 @@ namespace L2Farm
 
             await UniTask.Delay(TimeSpan.FromSeconds(_plantingDurationSeconds), cancellationToken: gameObject.GetCancellationTokenOnDestroy());
 
+            Debug.Log($"[GardenBed:{_id}] Consuming {_seedsRequiredCount} {_seedsResourceId}");
             _resourcesService.ChangeResource(new ResourceId(_seedsResourceId), -_seedsRequiredCount);
 
             _detailedState.StartTimeTicks = DateTime.UtcNow.Ticks;
-            _detailedState.FinishTimeTicks = DateTime.UtcNow.AddHours(_growthTimeHours).Ticks;
+            _detailedState.FinishTimeTicks = DateTime.UtcNow.Add(GetGrowthDuration()).Ticks;
             _detailedState.ResourceId = _harvestResourceId;
             _detailedState.Amount = _harvestCount;
 
             _isInteracting = false;
             ChangeState(GardenBedStateType.Growing);
+        }
+
+        private TimeSpan GetGrowthDuration()
+        {
+            return _growthTimeSecondsOverride > 0
+                ? TimeSpan.FromSeconds(_growthTimeSecondsOverride)
+                : TimeSpan.FromHours(_growthTimeHours);
+        }
+
+        private TimeSpan GetDecayDuration()
+        {
+            return _decayTimeSecondsOverride > 0
+                ? TimeSpan.FromSeconds(_decayTimeSecondsOverride)
+                : TimeSpan.FromHours(_decayTimeHours);
         }
 
         private void Harvest()
@@ -200,6 +279,13 @@ namespace L2Farm
             ChangeState(GardenBedStateType.Empty);
         }
 
+        private void DecayPlot()
+        {
+            _detailedState.StartTimeTicks = 0;
+            _detailedState.FinishTimeTicks = 0;
+            ChangeState(_decayBecomesOvergrown ? GardenBedStateType.Overgrown : GardenBedStateType.Empty);
+        }
+
         private void Update()
         {
             if (_isInteracting) return;
@@ -212,7 +298,7 @@ namespace L2Farm
                 if (now >= finish)
                 {
                     _detailedState.StartTimeTicks = now.Ticks; // Decay start
-                    _detailedState.FinishTimeTicks = now.AddHours(_decayTimeHours).Ticks;
+                    _detailedState.FinishTimeTicks = now.Add(GetDecayDuration()).Ticks;
                     ChangeState(GardenBedStateType.Ready);
                 }
                 else
@@ -227,7 +313,7 @@ namespace L2Farm
 
                 if (now >= decayFinish)
                 {
-                    ResetPlot();
+                    DecayPlot();
                 }
                 else
                 {

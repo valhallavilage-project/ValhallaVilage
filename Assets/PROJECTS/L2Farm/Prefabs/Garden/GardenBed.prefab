@@ -83,9 +83,27 @@ MonoBehaviour:
   _id: GardenBed_1
   _gardenConfig: {fileID: 11400000, guid: 2daab8d6c8fc92244a4fa235a648b2f1, type: 2}
   _interactiveObject: {fileID: 7271594378443014327}
-  _overgrow: {fileID: 8896100805827445638}
   _notEnoughEnergyText: Not enough energy to clear the garden bed
   _clearGardenText: It will cost you {0} energy to clear the garden bed. Do you agree?
+  _growthTimeHours: 4
+  _decayTimeHours: 6
+  _growthTimeSecondsOverride: 0
+  _decayTimeSecondsOverride: 0
+  _seedsResourceId: Resource_Seeds
+  _seedsRequiredCount: 50
+  _harvestResourceId: Resource_TomatoSeeds
+  _harvestCount: 20
+  _plantingDurationSeconds: 3
+  _decayBecomesOvergrown: 1
+  _overgrow: {fileID: 8896100805827445638}
+  _emptyModel: {fileID: 0}
+  _growingModel: {fileID: 0}
+  _readyModel: {fileID: 0}
+  _statusText: {fileID: 0}
+  _notEnoughSeedsText: "\u041D\u0435\u0434\u043E\u0441\u0442\u0430\u0442\u043E\u0447\u043D\u043E
+    \u0441\u0435\u043C\u044F\u043D"
+  _readyText: "\u0413\u043E\u0442\u043E\u0432\u043E"
+  _plantingText: "\u041F\u043E\u0441\u0430\u0434\u043A\u0430..."
 --- !u!114 &7690635365180279593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -391,6 +409,68 @@ Transform:
   - {fileID: 6542654802616813837}
   m_Father: {fileID: 4615236064271739823}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &791390482490299582
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4615236064271739823}
+    m_Modifications:
+    - target: {fileID: 6004967606092142570, guid: ba024befa7db654429d10683c8faba0b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.11999512
+      objectReference: {fileID: 0}
+    - target: {fileID: 6004967606092142570, guid: ba024befa7db654429d10683c8faba0b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 6004967606092142570, guid: ba024befa7db654429d10683c8faba0b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.13000488
+      objectReference: {fileID: 0}
+    - target: {fileID: 6004967606092142570, guid: ba024befa7db654429d10683c8faba0b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071067
+      objectReference: {fileID: 0}
+    - target: {fileID: 6004967606092142570, guid: ba024befa7db654429d10683c8faba0b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6004967606092142570, guid: ba024befa7db654429d10683c8faba0b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6004967606092142570, guid: ba024befa7db654429d10683c8faba0b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6004967606092142570, guid: ba024befa7db654429d10683c8faba0b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6004967606092142570, guid: ba024befa7db654429d10683c8faba0b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6004967606092142570, guid: ba024befa7db654429d10683c8faba0b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6349581331129290064, guid: ba024befa7db654429d10683c8faba0b, type: 3}
+      propertyPath: m_Name
+      value: Garden
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ba024befa7db654429d10683c8faba0b, type: 3}
+--- !u!4 &6462238080390398804 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6004967606092142570, guid: ba024befa7db654429d10683c8faba0b, type: 3}
+  m_PrefabInstance: {fileID: 791390482490299582}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2517109135535378917
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -532,84 +612,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1830d762f6964bc78f7a50dee6c5c2ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &6783760479351301311
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 4615236064271739823}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 8bf649df509789944bf64be4845a03a5, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 466.274
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 8bf649df509789944bf64be4845a03a5, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 466.274
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 8bf649df509789944bf64be4845a03a5, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 466.274
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 8bf649df509789944bf64be4845a03a5, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.11999512
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 8bf649df509789944bf64be4845a03a5, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.02
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 8bf649df509789944bf64be4845a03a5, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.13000488
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 8bf649df509789944bf64be4845a03a5, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071067
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 8bf649df509789944bf64be4845a03a5, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 8bf649df509789944bf64be4845a03a5, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 8bf649df509789944bf64be4845a03a5, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 8bf649df509789944bf64be4845a03a5, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 8bf649df509789944bf64be4845a03a5, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 8bf649df509789944bf64be4845a03a5, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -7511558181221131132, guid: 8bf649df509789944bf64be4845a03a5, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 03fb352331c36f84b86b4019f6c6448f, type: 2}
-    - target: {fileID: 919132149155446097, guid: 8bf649df509789944bf64be4845a03a5, type: 3}
-      propertyPath: m_Name
-      value: Garden
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 8bf649df509789944bf64be4845a03a5, type: 3}
---- !u!4 &6462238080390398804 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8bf649df509789944bf64be4845a03a5, type: 3}
-  m_PrefabInstance: {fileID: 6783760479351301311}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8011925786597023322
 PrefabInstance:
   m_ObjectHideFlags: 0

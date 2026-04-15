@@ -13,7 +13,7 @@ namespace CrossProject.Core.Interactions
         public InteractionType animation;
 
         [SerializeField] protected GameObject viewRoot;
-        [SerializeField] private GameObject highLight;
+        [SerializeField] protected GameObject highLight;
 
         protected bool isBusy;
 
@@ -34,12 +34,12 @@ namespace CrossProject.Core.Interactions
 
         public virtual void Select()
         {
-            highLight.SetActive(true);
+            if (highLight != null) highLight.SetActive(true);
         }
 
         public virtual void Deselect()
         {
-            highLight.SetActive(false);
+            if (highLight != null) highLight.SetActive(false);
         }
 
         protected abstract UniTask AfterInteraction();

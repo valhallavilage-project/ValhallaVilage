@@ -1,6 +1,6 @@
 using CrossProject.Ui.Core;
 
-namespace L2Farm.Features.ShopScreen
+namespace L2Farm.Features.Shop
 {
     public class ShopButtonModel : HudButtonModel
     {
