@@ -118,7 +118,9 @@ namespace CrossProject.Ui.Core
 
         public async UniTask<bool> LogIn()
         {
+            Debug.Log("[SkipFlow] UiService.LogIn: calling logInScreen.LogIn()");
             IsLoggedIn = await logInScreen.LogIn();
+            Debug.Log($"[SkipFlow] UiService.LogIn: logInScreen.LogIn returned {IsLoggedIn}");
             return IsLoggedIn;
         }
 

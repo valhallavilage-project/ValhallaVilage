@@ -3381,15 +3381,15 @@ MonoBehaviour:
       data:
         resourceConditions:
         - resourceId:
-            value: Resource_Veg
-          neededQuantity: 1
+            value: Resource_TomatoSeeds
+          neededQuantity: 60
     - rid: 9209226123114184707
       type: {class: SpendResourcesActionConfig, ns: L2Farm.Scripts.Actions.SpendResources, asm: L2Farm}
       data:
         resourceConditions:
         - resourceId:
-            value: Resource_Veg
-          neededQuantity: 1
+            value: Resource_TomatoSeeds
+          neededQuantity: 60
     - rid: 9209226123114184708
       type: {class: QuestConfig, ns: CrossProject.Core.Quests, asm: CrossProject.Core}
       data:

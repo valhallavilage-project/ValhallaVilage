@@ -12,7 +12,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: WatchTowerGames
+  companyName: ValhallaAge
   productName: Valhalla Village
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -40,7 +40,7 @@ PlayerSettings:
     width: 1
     height: 1
   m_SplashScreenLogos:
-  - logo: {fileID: 21300000, guid: 884da5d57ed95419bb14d862aa64a2f4, type: 3}
+  - logo: {fileID: 21300000, guid: 58877015b7dee49f2aca76a246947e4d, type: 3}
     duration: 2
   - logo: {fileID: 10404, guid: 0000000000000000f000000000000000, type: 0}
     duration: 2
@@ -145,7 +145,7 @@ PlayerSettings:
   loadStoreDebugModeEnabled: 0
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
-  bundleVersion: 0.0.3
+  bundleVersion: 0.9.1
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -167,7 +167,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.WatchTowerGames.ValhallaVillage
+    Android: com.ValhallaAge.ValhallaVillage
     Standalone: com.WatchTowerGames.Valhalla-Village
     iPhone: com.WatchTowerGames.Valhalla-Village
   buildNumber:
@@ -176,9 +176,9 @@ PlayerSettings:
     iPhone: 0
     tvOS: 0
   overrideDefaultApplicationIdentifier: 0
-  AndroidBundleVersionCode: 1
-  AndroidMinSdkVersion: 31
-  AndroidTargetSdkVersion: 0
+  AndroidBundleVersionCode: 13
+  AndroidMinSdkVersion: 26
+  AndroidTargetSdkVersion: 35
   AndroidPreferredInstallLocation: 1
   aotOptions: 
   stripEngineCode: 1
@@ -273,8 +273,8 @@ PlayerSettings:
   AndroidTargetDevices: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: 
-  AndroidKeyaliasName: 
+  AndroidKeystoreName: E:/Project/L2/Dezz2323/user.keystore
+  AndroidKeyaliasName: artem
   AndroidEnableArmv9SecurityFeatures: 0
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
@@ -282,7 +282,7 @@ PlayerSettings:
   AndroidEnableTango: 0
   androidEnableBanner: 1
   androidUseLowAccuracyLocation: 0
-  androidUseCustomKeystore: 0
+  androidUseCustomKeystore: 1
   m_AndroidBanners:
   - width: 320
     height: 180
@@ -902,6 +902,7 @@ PlayerSettings:
   il2cppCompilerConfiguration: {}
   il2cppCodeGeneration: {}
   managedStrippingLevel:
+    Android: 3
     EmbeddedLinux: 1
     GameCoreScarlett: 1
     GameCoreXboxOne: 1

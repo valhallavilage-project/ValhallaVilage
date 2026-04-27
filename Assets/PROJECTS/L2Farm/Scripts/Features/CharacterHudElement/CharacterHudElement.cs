@@ -25,7 +25,7 @@ namespace L2Farm.Scripts.CharacterHudElement
 
         private void Start()
         {
-            Injector.Instance.Inject(this);
+            Injector.Instance?.Inject(this);
         }
 
         [Inject]

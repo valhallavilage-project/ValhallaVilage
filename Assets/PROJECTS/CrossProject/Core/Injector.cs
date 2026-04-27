@@ -29,6 +29,11 @@ namespace CrossProject.Core
 
         public void Inject<TComponent>(TComponent component) where TComponent : MonoBehaviour
         {
+            if (_objectResolver == null)
+            {
+                Debug.LogWarning($"[Injector] Inject called before DI was constructed. Target: {(component != null ? component.gameObject.name : "null")}");
+                return;
+            }
             _objectResolver.Inject(component);
         }
     }

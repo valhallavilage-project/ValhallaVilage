@@ -51,6 +51,8 @@ namespace CrossProject.Ui.Core
 
         private void Awake()
         {
+            ServerService.EnsureApiResolvedAsync().Forget();
+
             if (twoFactorAuthPopup == null)
                 twoFactorAuthPopup = GetComponentInChildren<TwoFactorAuthPopup>(true);
 
@@ -82,11 +84,15 @@ namespace CrossProject.Ui.Core
 
         public async UniTask<bool> LogIn()
         {
+            Debug.Log("[SkipFlow] LogInScreen.LogIn: waiting for GetLogInData()");
             LogInData = await GetLogInData();
+            Debug.Log($"[SkipFlow] LogInScreen.LogIn: got LogInData, IsGuest={IsGuest}");
             if (IsGuest)
             {
                 Close(true);
+                Debug.Log("[SkipFlow] LogInScreen.LogIn: screen closed, calling Activate(true)");
                 serverService.Activate(true);
+                Debug.Log("[SkipFlow] LogInScreen.LogIn: Activate done, returning true");
                 return true;
             }
 
@@ -194,6 +200,7 @@ namespace CrossProject.Ui.Core
         private async UniTask<bool> TryToLogIn()
         {
             SetStatus("Подключение к серверу...");
+            await ServerService.EnsureApiResolvedAsync();
 
             var fields = new System.Collections.Generic.Dictionary<string, string>
             {
@@ -304,6 +311,8 @@ namespace CrossProject.Ui.Core
 
         private async UniTask<bool> SendTwoFaCode(string method)
         {
+            await ServerService.EnsureApiResolvedAsync();
+
             var fields = new System.Collections.Generic.Dictionary<string, string>
             {
                 { "launcher_key", launcherKey },
@@ -339,6 +348,8 @@ namespace CrossProject.Ui.Core
 
         private async UniTask<bool> TryToLoginWith2FA(string authToken, string method, string code)
         {
+            await ServerService.EnsureApiResolvedAsync();
+
             var fields = new System.Collections.Generic.Dictionary<string, string>
             {
                 { "launcher_key", launcherKey },

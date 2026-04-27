@@ -5,6 +5,7 @@ using CrossProject.Core.SaveLoad;
 using CrossProject.Core.Skins;
 using CrossProject.Ui.Core;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using VContainer.Unity;
 
 namespace PROJECTS.L2Farm.Scripts.CharacterSkinSelect
@@ -41,9 +42,12 @@ namespace PROJECTS.L2Farm.Scripts.CharacterSkinSelect
 
         public async UniTask Initialize()
         {
+            Debug.Log("[SkipFlow] CharacterSkinSelectScreenController.Initialize: waiting for IsLoggedIn");
             await UniTask.WaitUntil(() => _uiService.IsLoggedIn);
+            Debug.Log("[SkipFlow] CharacterSkinSelectScreenController: IsLoggedIn=true, checking save state");
 
             bool hasState = _gameStateManager.State.TryGet<ObtainedCharactersPart>(out var obtainedCharactersPart) && obtainedCharactersPart.ObtainedCharacters.Count > 0;
+            Debug.Log($"[SkipFlow] CharacterSkinSelectScreenController: hasState={hasState}");
             if (hasState)
             {
                 var currentCharacter = obtainedCharactersPart.CurrentCharacterId;
@@ -51,19 +55,23 @@ namespace PROJECTS.L2Farm.Scripts.CharacterSkinSelect
 
                 _gameStateManager.State.TryGet<ObtainedSkinsPart>(out var obtainedSkinsPart);
                 var currentSkin = obtainedSkinsPart.obtainedSkins[currentCharacter].currentSkinId;
+                Debug.Log($"[SkipFlow] CharacterSkinSelectScreenController: selecting skin {currentSkin}");
                 await _skinService.Select(currentSkin);
-                
+                Debug.Log("[SkipFlow] CharacterSkinSelectScreenController: skin selected");
+
                 _gameStateManager.State.TryGet<WornArmorSet>(out var wornArmorSetPart);
 
                 if (wornArmorSetPart != null)
                 {
                     _mainCharacterGlobalArmorSetChangeHandler.ChangeSet(wornArmorSetPart.ArmorSet);
                 }
-                
+
                 IsInitialized = true;
+                Debug.Log("[SkipFlow] CharacterSkinSelectScreenController.Initialize: done (hasState path)");
                 return;
             }
 
+            Debug.Log("[SkipFlow] CharacterSkinSelectScreenController: opening CharacterSelectScreen via TryOpen");
             var tcs = new UniTaskCompletionSource();
             var model = GetModel();
             var originalClose = model.Close;
@@ -74,8 +82,10 @@ namespace PROJECTS.L2Farm.Scripts.CharacterSkinSelect
             };
 
             _view = await _uiService.TryOpen(model) as CharacterSelectScreen;
+            Debug.Log($"[SkipFlow] CharacterSkinSelectScreenController: TryOpen returned view={(_view != null ? "ok" : "null")}");
             await tcs.Task;
             IsInitialized = true;
+            Debug.Log("[SkipFlow] CharacterSkinSelectScreenController.Initialize: done (select path)");
         }
 
         private CharacterSelectScreenModel GetModel()

@@ -1,97 +1,117 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 
 public class OpenValkaRegistration : MonoBehaviour
 {
-    [Header("Ссылка для перехода")]
-    [Tooltip("Ссылка на страницу регистрации")]
-    [SerializeField] private string targetURL = "https://site-1.valka.fans/ru/sign-up";
+    private static readonly string[] RegistrationHosts =
+    {
+        "https://site-1.valka.fans",
+        "https://site-2.valka.fans",
+        "https://site-3.valka.fans"
+    };
 
-    [Header("Настройки визуала")]
+    private const string RegistrationPath = "/ru/sign-up";
+
+    [Header("Appearance")]
     [SerializeField] private bool changeButtonText = true;
-    [SerializeField] private string customButtonText = "Присоединиться";
+    [SerializeField] private string customButtonText = "Р РµРіРёСЃС‚СЂР°С†РёСЏ";
     [SerializeField] private Color normalColor = Color.white;
     [SerializeField] private Color hoverColor = new Color(0.9f, 0.9f, 0.9f, 1f);
 
     private Button button;
+    private static string _resolvedUrl;
+    private static bool _opening;
 
-    void Awake()
-    {
-        InitializeButton();
-    }
-
-    void InitializeButton()
+    private void Awake()
     {
         button = GetComponent<Button>();
-
         if (button == null)
         {
-            Debug.LogError("Нет компонента Button на объекте: " + gameObject.name);
+            Debug.LogError("[Registration] Button component missing on: " + gameObject.name);
             enabled = false;
             return;
         }
 
-        // Настраиваем обработчик клика
-        button.onClick.AddListener(OpenRegistrationPage);
+        button.onClick.AddListener(OnClicked);
 
-        // Настраиваем текст кнопки
         if (changeButtonText)
         {
-            Text textComponent = button.GetComponentInChildren<Text>();
+            var textComponent = button.GetComponentInChildren<Text>();
             if (textComponent != null)
-            {
-                textComponent.text = string.IsNullOrEmpty(customButtonText)
-                    ? "Регистрация"
-                    : customButtonText;
-            }
+                textComponent.text = string.IsNullOrEmpty(customButtonText) ? "Р РµРіРёСЃС‚СЂР°С†РёСЏ" : customButtonText;
         }
 
-        // Настраиваем цвета (если это обычная кнопка)
-        ColorBlock colors = button.colors;
+        var colors = button.colors;
         colors.normalColor = normalColor;
         colors.highlightedColor = hoverColor;
         button.colors = colors;
-
-        Debug.Log($"Кнопка инициализирована. URL: {targetURL}");
     }
 
-    void OpenRegistrationPage()
+    private void OnClicked()
     {
-        if (string.IsNullOrEmpty(targetURL))
-        {
-            Debug.LogError("URL не установлен!");
-            return;
-        }
-
-        // Проверяем, что ссылка начинается с http:// или https://
-        if (!targetURL.StartsWith("http://") && !targetURL.StartsWith("https://"))
-        {
-            Debug.LogWarning("URL может быть неполным. Добавляю https://");
-            targetURL = "https://" + targetURL;
-        }
-
-        Debug.Log($"Переход по ссылке: {targetURL}");
-        Application.OpenURL(targetURL);
+        if (_opening) return;
+        OpenRegistrationAsync().Forget();
     }
 
-    // Метод для смены URL во время выполнения (опционально)
-    public void SetNewURL(string newURL)
+    private static async UniTask OpenRegistrationAsync()
     {
-        targetURL = newURL;
-        Debug.Log($"URL изменен на: {newURL}");
+        _opening = true;
+        try
+        {
+            if (!string.IsNullOrEmpty(_resolvedUrl))
+            {
+                Debug.Log($"[Registration] Opening cached URL: {_resolvedUrl}");
+                Application.OpenURL(_resolvedUrl);
+                return;
+            }
+
+            foreach (var host in RegistrationHosts)
+            {
+                if (await IsAlive(host))
+                {
+                    _resolvedUrl = host + RegistrationPath;
+                    Debug.Log($"[Registration] Selected: {_resolvedUrl}");
+                    Application.OpenURL(_resolvedUrl);
+                    return;
+                }
+                Debug.LogWarning($"[Registration] Host unreachable: {host}");
+            }
+
+            _resolvedUrl = RegistrationHosts[0] + RegistrationPath;
+            Debug.LogError($"[Registration] All hosts failed, falling back to: {_resolvedUrl}");
+            Application.OpenURL(_resolvedUrl);
+        }
+        finally
+        {
+            _opening = false;
+        }
     }
 
-    void OnDestroy()
+    private static async UniTask<bool> IsAlive(string url)
+    {
+        try
+        {
+            using var req = UnityWebRequest.Head(url);
+            req.timeout = 5;
+            await req.SendWebRequest().ToUniTask();
+            return req.responseCode > 0;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    private void OnDestroy()
     {
         if (button != null)
-        {
-            button.onClick.RemoveListener(OpenRegistrationPage);
-        }
+            button.onClick.RemoveListener(OnClicked);
     }
 
-    // Для отладки в редакторе
 #if UNITY_EDITOR
-    void OnValidate()
+    private void OnValidate()
     {
         if (button == null)
             button = GetComponent<Button>();

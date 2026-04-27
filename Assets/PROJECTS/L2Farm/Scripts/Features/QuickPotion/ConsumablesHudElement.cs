@@ -16,12 +16,16 @@ namespace L2Farm
         [SerializeField] private TMP_Text _energyPotionsAmount;
         [SerializeField] private Button _timeButton;
         [SerializeField] private TMP_Text _timePotionsAmount;
+        [SerializeField] private Button _fertilizerButton;
+        [SerializeField] private TMP_Text _fertilizerAmount;
 
         private void Awake()
         {
             _healButton.OnClickAsAsyncEnumerable().ForEachAsync(_ => Model.ConsumeHealPotion(), gameObject.GetCancellationTokenOnDestroy()).Forget();
             _energyButton.OnClickAsAsyncEnumerable().ForEachAsync(_ => Model.ConsumeEnergyPotion(), gameObject.GetCancellationTokenOnDestroy()).Forget();
             _timeButton.OnClickAsAsyncEnumerable().ForEachAsync(_ => Model.ConsumeTimePotion(), gameObject.GetCancellationTokenOnDestroy()).Forget();
+            if (_fertilizerButton != null)
+                _fertilizerButton.OnClickAsAsyncEnumerable().ForEachAsync(_ => Model.ConsumeFertilizer(), gameObject.GetCancellationTokenOnDestroy()).Forget();
         }
 
         protected override void OnBind()
@@ -36,6 +40,7 @@ namespace L2Farm
             UpdateResourceText(_healPotionsAmount, "Resource_HealPotion");
             UpdateResourceText(_energyPotionsAmount, "Resource_EnergyPotion");
             UpdateResourceText(_timePotionsAmount, "Resource_TimePotion");
+            UpdateResourceText(_fertilizerAmount, "Resource_Fertilizer");
         }
 
         public void HealPotionConsumed()
@@ -53,8 +58,14 @@ namespace L2Farm
             UpdateResourceText(_timePotionsAmount, "Resource_TimePotion");
         }
 
+        public void FertilizerConsumed()
+        {
+            UpdateResourceText(_fertilizerAmount, "Resource_Fertilizer");
+        }
+
         private void UpdateResourceText(TMP_Text textRender, string resourceId)
         {
+            if (textRender == null) return;
             textRender.text = Model.Resources.Get((ResourceId)resourceId).ToString();
         }
     }

@@ -23,6 +23,7 @@ using L2Farm.Features.Buildings;
 using L2Farm.Features.Buildings.Actions;
 using L2Farm.Features.ClaimerResourcesHint;
 using L2Farm.Features.DayNight;
+using L2Farm.Features.Garden;
 using L2Farm.Features.InventoryScreen;
 using L2Farm.Features.NPC;
 using L2Farm.Features.QuestIndication;
@@ -262,6 +263,7 @@ namespace L2Farm.Scripts
             builder.Register<TimerCreator>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<TimersHandler>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<TimePotionConsumeHandler>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<FertilizerConsumeHandler>(Lifetime.Singleton).AsImplementedInterfaces();
             
             builder.Register<AudioSettings>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<MobsSpawnsService>(Lifetime.Singleton).AsImplementedInterfaces();

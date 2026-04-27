@@ -34,7 +34,13 @@ namespace L2Farm.Features.NPC
             _questId = id;
             _questService = questService;
             _questService.OnQuestWin += HandleCurrentQuestWin;
-            _marker.Setup(id, _questService);
+            Debug.Log($"[DailyDebug][NPCInteractive {gameObject.name}] SetQuest id={id} _marker={(_marker != null ? _marker.name : "NULL")}");
+            if (_marker == null)
+            {
+                _marker = GetComponentInChildren<NpcQuestMarker>(true);
+                Debug.Log($"[DailyDebug][NPCInteractive {gameObject.name}] _marker resolved from children: {(_marker != null ? _marker.name : "STILL NULL")}");
+            }
+            _marker?.Setup(id, _questService);
         }
 
         private void HandleCurrentQuestWin(QuestId id)

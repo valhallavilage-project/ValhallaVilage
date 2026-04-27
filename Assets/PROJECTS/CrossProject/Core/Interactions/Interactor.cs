@@ -69,6 +69,9 @@ namespace CrossProject.Core.Interactions
 
         private void FixedUpdate()
         {
+            if (_interactionHandler == null)
+                return;
+
             if (_interactionHandler.IsBlocked)
                 return;
 

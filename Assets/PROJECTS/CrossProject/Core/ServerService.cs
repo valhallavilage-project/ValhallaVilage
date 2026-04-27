@@ -53,7 +53,19 @@ namespace CrossProject.Core
         [SerializeField] private string launcherKey;
         [SerializeField] private DailyIdToName[] dailyIdToNames;
 
-        public const string MainURL = "https://site-1.valka.fans/app/";
+        private static readonly string[] ApiCandidates =
+        {
+            "https://api.glb.vlh-app.net/app/",
+            "https://api.vlh-app.net/app/",
+            "https://api.wesper.in/app/",
+            "https://site-1.valka.fans/app/"
+        };
+
+        private static string _mainUrl = ApiCandidates[0];
+        private static bool _apiResolved;
+        private static bool _apiResolving;
+
+        public static string MainURL => _mainUrl;
 
         public const string ServerId = "13";
 
@@ -82,6 +94,63 @@ namespace CrossProject.Core
             IsGuest = isGuest;
             _questService.IsGuest = isGuest;
             isActive = true;
+
+            if (!isGuest)
+                EnsureApiResolvedAsync().Forget();
+        }
+
+        public static async UniTask EnsureApiResolvedAsync()
+        {
+            if (_apiResolved) return;
+
+            if (_apiResolving)
+            {
+                await UniTask.WaitUntil(() => _apiResolved);
+                return;
+            }
+
+            _apiResolving = true;
+            try
+            {
+                await ResolveMainUrlAsync();
+            }
+            finally
+            {
+                _apiResolved = true;
+                _apiResolving = false;
+            }
+        }
+
+        private static async UniTask ResolveMainUrlAsync()
+        {
+            foreach (var candidate in ApiCandidates)
+            {
+                if (await IsAlive(candidate))
+                {
+                    _mainUrl = candidate;
+                    Debug.Log($"[ApiEndpoint] Selected: {candidate}");
+                    return;
+                }
+                Debug.LogWarning($"[ApiEndpoint] Candidate unreachable: {candidate}");
+            }
+
+            _mainUrl = ApiCandidates[0];
+            Debug.LogError($"[ApiEndpoint] All candidates failed, falling back to: {_mainUrl}");
+        }
+
+        private static async UniTask<bool> IsAlive(string baseUrl)
+        {
+            try
+            {
+                using var req = UnityWebRequest.Head(baseUrl);
+                req.timeout = 5;
+                await req.SendWebRequest().ToUniTask();
+                return req.responseCode > 0;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public async UniTask Initialize()
@@ -153,21 +222,29 @@ namespace CrossProject.Core
             if (dailyInfo != null && dailyInfo.daily_tasks != null)
             {
                 DailyTasks[] dailyTasks = dailyInfo.daily_tasks;
+                Debug.Log($"[DailyDebug] Server returned {dailyTasks.Length} daily tasks");
                 foreach (var dailyTask in dailyTasks)
                 {
+                    Debug.Log($"[DailyDebug]   id={dailyTask.id} key={dailyTask.key} completed_today={dailyTask.completed_today}");
                     if (!dailyTask.completed_today)
                     {
                         foreach (var item in dailyIdToNames)
                         {
                             if (dailyTask.id == item.id)
                             {
+                                Debug.Log($"[DailyDebug]   -> mapping to quest {item.name}, ForceLose({item.name}_Early) + TryLaunch({item.name})");
                                 await _questService.ForceLose(new QuestId(item.name + "_Early"));
-                                await _questService.TryLaunch(new QuestId(item.name));
+                                var launched = await _questService.TryLaunch(new QuestId(item.name));
+                                Debug.Log($"[DailyDebug]   TryLaunch({item.name}) returned {launched}");
                                 break;
                             }
                         }
                     }
                 }
+            }
+            else
+            {
+                Debug.LogWarning("[DailyDebug] DailyInfo empty or daily_tasks null.");
             }
         }
 
@@ -175,6 +252,8 @@ namespace CrossProject.Core
         {
             if (dailyInfo.server_list.Length > 0)
             {
+                await EnsureApiResolvedAsync();
+
                 WWWForm form = new WWWForm();
                 form.AddField("launcher_key", launcherKey);
                 form.AddField("id", dailyTask.id);
@@ -207,6 +286,8 @@ namespace CrossProject.Core
 
         private async UniTask<DailyInfo> TryToGetDailyTasks()
         {
+            await EnsureApiResolvedAsync();
+
             using var request = UnityWebRequest.Get(MainURL + "daily_tasks?launcher_key=" + launcherKey);
             request.SetRequestHeader("Accept", "application/json");
 

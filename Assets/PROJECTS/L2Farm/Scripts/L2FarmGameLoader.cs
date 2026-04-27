@@ -44,18 +44,24 @@ namespace L2Farm.Scripts
 
         public async UniTask Initialize()
         {
+            Debug.Log("[SkipFlow] L2FarmGameLoader.Initialize: start");
             #if !DISABLE_SRDEBUGGER
             _resolver
                 .Resolve<IEnumerable<ICheatOptions>>()
                 .ForEach(x => SRDebug.Instance.AddOptionContainer(x));
             #endif
 
+            Debug.Log("[SkipFlow] L2FarmGameLoader: awaiting _uiService.LogIn()");
             bool success = await _uiService.LogIn();
+            Debug.Log($"[SkipFlow] L2FarmGameLoader: LogIn returned {success}");
 
+            Debug.Log("[SkipFlow] L2FarmGameLoader: waiting for CharacterSkinSelectScreenController.IsInitialized");
             await UniTask.WaitUntil(() => _characterSkinSelectScreenController.IsInitialized);
+            Debug.Log("[SkipFlow] L2FarmGameLoader: CharacterSkinSelectScreenController initialized, kicking off Load");
 
             _uiService.Load(PrepareGameLoad()).Forget();
             IsInitialized = true;
+            Debug.Log("[SkipFlow] L2FarmGameLoader.Initialize: done");
         }
     }
 }

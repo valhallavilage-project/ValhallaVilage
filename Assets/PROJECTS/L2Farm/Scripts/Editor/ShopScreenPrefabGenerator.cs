@@ -69,9 +69,10 @@ namespace L2Farm.Editor
 
             var shop = root.AddComponent<ShopScreen>();
 
-            var heal = CreateItem(items.transform, "HealItem", ShopItemType.HealPotion, "Зелье лечения");
-            var energy = CreateItem(items.transform, "EnergyItem", ShopItemType.EnergyPotion, "Зелье энергии");
-            var time = CreateItem(items.transform, "TimeItem", ShopItemType.TimePotion, "Зелье времени");
+            var heal = CreateItem(items.transform, "HealItem", ShopItemType.HealPotion, "Зелье лечения", "299 ₽");
+            var energy = CreateItem(items.transform, "EnergyItem", ShopItemType.EnergyPotion, "Зелье энергии", "299 ₽");
+            var time = CreateItem(items.transform, "TimeItem", ShopItemType.TimePotion, "Зелье времени", "299 ₽");
+            var fertilizer = CreateItem(items.transform, "FertilizerItem", ShopItemType.Fertilizer, "Удобрение", "150 ₽");
 
             var closeGo = CreateChild(panel.transform, "CloseButton", out var closeRt);
             closeRt.anchorMin = new Vector2(1f, 1f);
@@ -93,10 +94,11 @@ namespace L2Farm.Editor
             var shopSo = new SerializedObject(shop);
             shopSo.FindProperty("_closeButton").objectReferenceValue = closeBtn;
             var itemsProp = shopSo.FindProperty("_items");
-            itemsProp.arraySize = 3;
+            itemsProp.arraySize = 4;
             itemsProp.GetArrayElementAtIndex(0).objectReferenceValue = heal;
             itemsProp.GetArrayElementAtIndex(1).objectReferenceValue = energy;
             itemsProp.GetArrayElementAtIndex(2).objectReferenceValue = time;
+            itemsProp.GetArrayElementAtIndex(3).objectReferenceValue = fertilizer;
             shopSo.ApplyModifiedProperties();
 
             var prefab = PrefabUtility.SaveAsPrefabAsset(root, PrefabPath);
@@ -129,12 +131,12 @@ namespace L2Farm.Editor
             AssetDatabase.SaveAssets();
         }
 
-        private static ShopItemView CreateItem(Transform parent, string objectName, ShopItemType type, string titleText)
+        private static ShopItemView CreateItem(Transform parent, string objectName, ShopItemType type, string titleText, string priceText)
         {
             var go = new GameObject(objectName, typeof(RectTransform), typeof(Image));
             go.transform.SetParent(parent, false);
             var rt = go.GetComponent<RectTransform>();
-            rt.sizeDelta = new Vector2(260f, 460f);
+            rt.sizeDelta = new Vector2(210f, 460f);
             var bg = go.GetComponent<Image>();
             bg.color = new Color(0.22f, 0.16f, 0.1f, 1f);
 
@@ -167,7 +169,7 @@ namespace L2Farm.Editor
 
             var priceGo = CreateChild(go.transform, "Price", out _);
             var priceTm = priceGo.AddComponent<TextMeshProUGUI>();
-            priceTm.text = "299 ₽";
+            priceTm.text = priceText;
             priceTm.alignment = TextAlignmentOptions.Center;
             priceTm.fontSize = 34;
             priceTm.color = new Color(1f, 0.85f, 0.3f);

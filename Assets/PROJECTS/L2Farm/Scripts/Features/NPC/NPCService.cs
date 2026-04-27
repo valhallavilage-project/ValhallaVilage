@@ -57,6 +57,8 @@ namespace L2Farm.Features.NPC
                 return;
             }
 
+            Debug.Log($"[DailyDebug][NPCService] SpawnNPC id={id} spawnPointId={spawnPointId} questId={questId}");
+
             if (!_npcs.TryGetValue(id, out var pair) || pair.spawnPointId != spawnPointId)
             {
                 if (pair.instance != null)
@@ -64,24 +66,31 @@ namespace L2Farm.Features.NPC
                 var spawnPointPosition = _spawnPointService.GetPosition(spawnPointId);
                 var spawnPointRotation = _spawnPointService.GetEulerAngles(spawnPointId);
                 var instance = Object.Instantiate(config.prefab, spawnPointPosition, Quaternion.Euler(spawnPointRotation));
-                var component = instance.GetComponent<NPCInteractiveObject>();
+                var component = instance.GetComponent<NPCInteractiveObject>()
+                                ?? instance.GetComponentInChildren<NPCInteractiveObject>(true);
+                if (component == null)
+                {
+                    Debug.LogError($"[{nameof(NPCService)}] : NPC prefab for {id} has no NPCInteractiveObject component.");
+                    Object.Destroy(instance);
+                    return;
+                }
+                Debug.Log($"[DailyDebug][NPCService] Instantiated {id}, NPCInteractiveObject found on {(component.gameObject == instance ? "root" : "child")}");
                 component.SetQuest(questId, _questService, _actionService);
                 _npcs[id] = (spawnPointId, component);
-                //Debug.Log($"[{nameof(NPCService)}] : Spawned NPC with id : {id} at {spawnPointId} with quest :{questId}.");
                 return;
             }
 
             if (pair.instance.CurrentQuestId != questId)
             {
+                Debug.Log($"[DailyDebug][NPCService] Updating quest for existing {id}: {pair.instance.CurrentQuestId} -> {questId}");
                 pair.instance.SetQuest(questId, _questService, _actionService);
-                Debug.Log($"[{nameof(NPCService)}] : Updated quest for {id} at {spawnPointId} with : {questId}.");
             }
         }
 
         public void DespawnNPC(NPCId id)
         {
             var npc = _npcs[id].instance;
-            Object.Destroy(npc.gameObject);
+            Object.Destroy(npc.transform.root.gameObject);
             _npcs.Remove(id);
             Debug.Log($"[{nameof(NPCService)}] : Despawned {id}");
         }

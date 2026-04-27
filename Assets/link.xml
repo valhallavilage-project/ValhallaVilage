@@ -1,0 +1,13 @@
+<linker>
+  <assembly fullname="L2Farm" preserve="all"/>
+  <assembly fullname="CrossProject.Core" preserve="all"/>
+  <assembly fullname="CrossProject.Ui.Core" preserve="all"/>
+  <assembly fullname="CrossProject.Ui.Implementations" preserve="all"/>
+  <assembly fullname="VContainer" preserve="all"/>
+  <assembly fullname="UniTask" preserve="all"/>
+  <assembly fullname="UniTask.Linq" preserve="all"/>
+  <assembly fullname="Newtonsoft.Json" preserve="all"/>
+  <assembly fullname="mscorlib">
+    <type fullname="System.Runtime.Serialization.*" preserve="all"/>
+  </assembly>
+</linker>

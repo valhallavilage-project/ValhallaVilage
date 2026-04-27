@@ -4,6 +4,7 @@ namespace L2Farm.Features.Shop
     {
         HealPotion,
         EnergyPotion,
-        TimePotion
+        TimePotion,
+        Fertilizer
     }
 }

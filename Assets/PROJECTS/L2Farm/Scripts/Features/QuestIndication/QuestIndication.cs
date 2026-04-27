@@ -22,7 +22,7 @@ namespace L2Farm.Features.QuestIndication
 
         private void Start()
         {
-            Injector.Instance.Inject(this);
+            Injector.Instance?.Inject(this);
         }
 
         [Inject]

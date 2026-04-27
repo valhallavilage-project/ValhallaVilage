@@ -10,10 +10,12 @@ namespace L2Farm
         private readonly AsyncReactiveProperty<bool> _healClicked = new(default);
         private readonly AsyncReactiveProperty<bool> _energyClicked = new(default);
         private readonly AsyncReactiveProperty<bool> _timeClicked = new(default);
+        private readonly AsyncReactiveProperty<bool> _fertilizerClicked = new(default);
 
         public IReadOnlyAsyncReactiveProperty<bool> HealClicked => _healClicked;
         public IReadOnlyAsyncReactiveProperty<bool> EnergyClicked => _energyClicked;
         public IReadOnlyAsyncReactiveProperty<bool> TimeClicked => _timeClicked;
+        public IReadOnlyAsyncReactiveProperty<bool> FertilizerClicked => _fertilizerClicked;
         public ResourceContentPart Resources { get; set; }
 
         public void ConsumeHealPotion()
@@ -29,6 +31,11 @@ namespace L2Farm
         public void ConsumeTimePotion()
         {
             _timeClicked.Value = true;
+        }
+
+        public void ConsumeFertilizer()
+        {
+            _fertilizerClicked.Value = true;
         }
     }
 }

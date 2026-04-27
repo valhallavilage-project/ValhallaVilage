@@ -49,7 +49,7 @@ namespace L2Farm.Features.Shop
                 BuyRequested = OnBuyRequested,
                 IconResolver = type => _resourcesService.GetSprite(GetResourceId(type)),
                 TitleResolver = GetItemName,
-                PriceResolver = _ => "299 ₽"
+                PriceResolver = GetItemPrice
             }) as ShopScreen;
         }
 
@@ -87,7 +87,14 @@ namespace L2Farm.Features.Shop
             ShopItemType.HealPotion => "Зелье лечения",
             ShopItemType.EnergyPotion => "Зелье энергии",
             ShopItemType.TimePotion => "Зелье времени",
+            ShopItemType.Fertilizer => "Удобрение",
             _ => type.ToString()
+        };
+
+        private static string GetItemPrice(ShopItemType type) => type switch
+        {
+            ShopItemType.Fertilizer => "150 ₽",
+            _ => "299 ₽"
         };
 
         private static ResourceId GetResourceId(ShopItemType type) => type switch
@@ -95,6 +102,7 @@ namespace L2Farm.Features.Shop
             ShopItemType.HealPotion => (ResourceId)"Resource_HealPotion",
             ShopItemType.EnergyPotion => (ResourceId)"Resource_EnergyPotion",
             ShopItemType.TimePotion => (ResourceId)"Resource_TimePotion",
+            ShopItemType.Fertilizer => (ResourceId)"Resource_Fertilizer",
             _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
         };
 
